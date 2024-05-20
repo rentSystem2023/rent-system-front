@@ -1,5 +1,5 @@
 // description : URL PATH
-export const MAIN_PATH = 'main';
+export const MAIN_PATH = '/main';
 export const SNS_PATH = '/sns/:accessToken/:expires';
 
 export const AUTH_PATH = '/authentication';
@@ -16,6 +16,9 @@ export const RESERVATION_PATH = '/reservation';
 export const RESERVATION_MY_LIST_PATH = 'mylist';
 export const RESERVATION_MY_DETAIL_PATH = ':reservationCode';
 export const RESERVATION_LIST_PATH = 'list';
+
+export const RESERVATION_INQURY_PATH = 'inqury';
+export const RESERVATION_INQURY_DETAIL_PATH = 'inqury-detail';
 
 export const NOTICE_PATH = '/notice';
 export const NOTICE_WRITE_PATH = 'regist';
@@ -43,6 +46,11 @@ export const USER_DETAIL_ABSOLUTE_PATH = (userId : number) => `${USER_LIST_ABSOL
 export const RESERVATION_MY_LIST_ABSOLUTE_PATH = `${RESERVATION_PATH}/${RESERVATION_MY_LIST_PATH}`;
 export const RESERVATION_MY_DETAIL_ABSOLUTE_PATH = (reservationCode : string) => `${RESERVATION_MY_LIST_ABSOLUTE_PATH}/${reservationCode}`;
 export const RESERVATION_LIST_ABSOLUTE_PATH = `${RESERVATION_PATH}/${RESERVATION_LIST_PATH}`;
+
+export const RESERVATION_SEARCH_ABSOLUTE_PATH = (address : string , reservationStart : string , reservationEnd : string ) => `${RESERVATION_PATH}/address=${address}&reservationStart=${reservationStart}&reservationEnd=${reservationEnd}`;
+export const RESERVATION_SEARCH_CAR_ABSOLUTE_PATH = (carName : string ) => `${RESERVATION_SEARCH_ABSOLUTE_PATH}&carName=${carName}`;
+export const RESERVATION_INQURY_ABSOLUTE_PATH = (carCode : number, insuranceType : string) => `${RESERVATION_PATH}/${RESERVATION_INQURY_PATH}/${RESERVATION_SEARCH_ABSOLUTE_PATH}&carCode=${carCode}&insuranceType=${insuranceType}`;
+export const RESERVATION_INQURY_DETAIL_ABSOLUTE_PATH = (companyCarCode : number , insuranceType : string) => `${RESERVATION_PATH}/${RESERVATION_INQURY_DETAIL_PATH}/${RESERVATION_SEARCH_ABSOLUTE_PATH}&companyCarCode=${companyCarCode}&insuranceType=${insuranceType}`;
 
 export const NOTICE_WRITE_ABSOLUTE_PATH = `${NOTICE_PATH}/${NOTICE_WRITE_PATH}`;
 export const NOTICE_ABSOLUTE_DETAIL_PATH = (registNumber : number) => `${NOTICE_WRITE_ABSOLUTE_PATH}/${registNumber}`;
