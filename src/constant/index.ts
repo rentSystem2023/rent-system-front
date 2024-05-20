@@ -26,8 +26,8 @@ export const SEARCH_NOTICE_LIST_URL = `${SERVER_API_URL}/list/search`;
 export const GET_NOTICE_URL = `${SERVER_API_URL}/list/{registNumber}`;
 export const INCREASE_NOTICE_VIEW_COUNT_URL = `${SERVER_API_URL}/{registNumber}/increase-view-count`;
 
-export const WRITE_NOTICE_URL = `${SERVER_API_URL}/regist`;
-export const MODIFY_NOTICE_URL = `${SERVER_API_URL}/list/{registNumber}`;
+export const POST_REGIST_NOTICE_URL = `${SERVER_API_URL}/regist`;
+export const POST_MODIFY_NOTICE_URL = `${SERVER_API_URL}/list/{registNumber}`;
 export const DELETE_NOTICE_URL = `${SERVER_API_URL}/{registNumber}`;
 
 // description: Q&A URL
@@ -58,8 +58,8 @@ export const MAKE_RESERVATION_URL = `${SERVER_API_URL}/search/{companyCarCode}`;
 // description: COMPANY URL
 export const GET_COMPANY_LIST_URL = `${SERVER_API_URL}/list`;
 export const SEARCH_COMPANY_LIST_URL = `${SERVER_API_URL}/list/search`;
-export const REGISTER_COMPANY_URL = `${SERVER_API_URL}/regist`;
-export const MODIFY_COMPANY_URL = `${SERVER_API_URL}/list/{companyCode}`;
+export const POST_REGISTER_COMPANY_URL = `${SERVER_API_URL}/regist`;
+export const PATCH_MODIFY_COMPANY_URL = `${SERVER_API_URL}/list/{companyCode}`;
 
 
 // description : Navigation URL PATH 
