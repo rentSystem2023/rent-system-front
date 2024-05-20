@@ -10,7 +10,7 @@ export interface PostRegistcompanyRequestDto {
 }
 
 // description: 업체 수정하기 Response Body DTO
-export interface PatchcompanyRequestDto {
+export interface PatchModifyCompanyRequestDto {
     rentCompany : string;
     address : string;
     owner : string;
