@@ -8,23 +8,23 @@ export interface GetSignInUserResponseDto extends ResponseDto{
     userRole: string;
 }
 
-// description: 나의 정보 불러오기 Response Body DTO
-export interface GetInformationResponseDto extends ResponseDto{
-    nickName: string;
+// description: 내 정보 불러오기 Response Body DTO
+export interface GetMyInfoResponseDto extends ResponseDto{
     userId: string;
     userPassword: string;
-    telnumber: string;
+    nickName: string;
     userEmail: string;
-    joinDate: Date;
     userRole: String;
+    joinPath: String;
+    joinDate: Date;
 }
 
-// description: 유저  리스트 불러오기 Response Body DTO
+// description: 유저 리스트 불러오기 Response Body DTO
 export interface GetUserListResponseDto extends ResponseDto {
     boardList: UserListItem[];
 }
 
-// description: 유저  검색 리스트 불러오기 Response Body DTO
-export interface GetUserSearchListResponseDto extends ResponseDto{
+// description: 유저 검색 리스트 불러오기 Response Body DTO
+export interface GetSearchUserListResponseDto extends ResponseDto{
     boardList: UserListItem[];
 }
