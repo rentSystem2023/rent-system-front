@@ -9,7 +9,7 @@ export const SIGN_UP_PATH = 'sign-up';
 export const USER_PATH = '/user';
 export const USER_INFO_PATH = 'information';
 export const USER_UPDATE_PATH = 'modify';
-export const USER_LIST_PATH = '/list';
+export const USER_LIST_PATH = 'list';
 export const USER_DETAIL_PATH = ':userId';
 
 export const RESERVATION_PATH = '/reservation';
@@ -40,7 +40,7 @@ export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 
 export const USER_INFO_ABSOLUTE_PATH = `${USER_PATH}/${USER_INFO_PATH}`;
 export const USER_INFO_MODIFY_ABSOLUTE_PATH = `${USER_INFO_ABSOLUTE_PATH}/${USER_UPDATE_PATH}`;
-export const USER_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_LIST_PATH}`;
+export const USER_LIST_ABSOLUTE_PATH = `${USER_PATH}/${USER_LIST_PATH}`;
 export const USER_DETAIL_ABSOLUTE_PATH = (userId : number) => `${USER_LIST_ABSOLUTE_PATH}/${userId}`;
 
 export const RESERVATION_MY_LIST_ABSOLUTE_PATH = `${RESERVATION_PATH}/${RESERVATION_MY_LIST_PATH}`;
