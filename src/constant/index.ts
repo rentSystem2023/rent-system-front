@@ -1,5 +1,5 @@
 // description : URL PATH
-export const MAIN_PATH = '/main';
+export const MAIN_PATH = '/rentcar';
 export const SNS_PATH = '/sns/:accessToken/:expires';
 
 export const AUTH_PATH = '/authentication';
