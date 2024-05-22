@@ -1,4 +1,28 @@
-export interface BoardListItem {
+export interface UserListItem {
+    userId: string;
+    userName: string;
+    userEmail: string;
+    joinDate: string;
+}
+
+export interface CompanyListItem{
+    companyCode : number;
+    rentCompany : string;
+    address : string;
+    owner : string;
+    companyTelnumber : string;
+    registDate : string;
+    companyRule : string;
+}
+
+export interface noticeListItem{
+    registNumber : number;
+    title : string;
+    writeDatetime : string;
+    viewCount : number;
+}
+
+export interface QnaListItem {
     receptionNumber: number;
     status: boolean;
     title: string;
@@ -7,12 +31,14 @@ export interface BoardListItem {
     viewCount: number;
 };
 
-export interface UserListItem {
-    userId: string;
-    userName: string;
-    userEmail: string;
-    joinDate: string;
-}
+export interface QnaMyListItem {
+    receptionNumber: number;
+    status: boolean;
+    title: string;
+    writerId:string;
+    writeDatetime: string;
+    viewCount: number;
+};
 
 export interface PopularCarListItem {
     carImageUrl: string;
@@ -41,20 +67,4 @@ export interface ReservationListItem{
     reservationDate : string;
     reservationState : string;
     reservationPeriod : string;
-}
-
-export interface CompanyListItem{
-    companyCode : string;
-    rentCompany : string;
-    address : string;
-    owner : string;
-    companyTelnumber : string;
-    registDate : string;
-}
-
-export interface noticeListItem{
-    registNumber : number;
-    title : string;
-    writeDatetime : string;
-    viewCount : number;
 }
