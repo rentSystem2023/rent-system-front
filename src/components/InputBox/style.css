@@ -1,0 +1,29 @@
+.search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.input-box {
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    padding: 8px 16px;
+    width: 168px;
+
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.list-search-input {
+    border: none;
+    outline: none;
+    background: none;
+
+    width: 100%;
+
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(64, 64, 64, 1);
+}
