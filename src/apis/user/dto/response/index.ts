@@ -9,7 +9,7 @@ export interface GetSignInUserResponseDto extends ResponseDto{
 }
 
 // description: 나의 정보 불러오기 Response Body DTO
-export interface GetinformationResponseDto extends ResponseDto{
+export interface GetInformationResponseDto extends ResponseDto{
     nickName: string;
     userId: string;
     userPassword: string;
