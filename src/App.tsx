@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { MAIN_PATH, USER_LIST_ABSOLUTE_PATH, USER_LIST_PATH } from './constant';
 import ServiceContainer from './layouts/ServiceContainer';
-import UserContainer from './views/user';
 
 function App() {
   return (
