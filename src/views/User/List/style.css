@@ -1,5 +1,9 @@
 #user-list-wrapper {
-    flex-direction: row;
+    display: grid;
+    grid-template: 
+        "logo topbar" 77px
+        "sidenav main" minmax(944px, auto)
+        / 257px minmax(1182px, 1fr);
 }
 
 .side-navigation-container {

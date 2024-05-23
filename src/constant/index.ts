@@ -55,10 +55,10 @@ export const NOTICE_WRITE_ABSOLUTE_PATH = `${NOTICE_PATH}/${NOTICE_WRITE_PATH}`;
 export const NOTICE_ABSOLUTE_DETAIL_PATH = (registNumber : number) => `${NOTICE_WRITE_ABSOLUTE_PATH}/${registNumber}`;
 export const NOTICE_ABSOLUTE_UPDATE_PATH = (registNumber : number) => `${NOTICE_WRITE_ABSOLUTE_PATH}/update/${registNumber}`;
 
-export const QNA_LIST_ABSOLUTE_PATH = `${QNA_PATH}/${QNA_LIST_PATH}`;
-export const QNA_WRITE_ABSOLUTE_PATH = `${QNA_PATH}/${QNA_WRITE_PATH}`;
-export const QNA_DETAIL_ABSOLUTE_PATH = (receptionNumber : number) => `${QNA_LIST_ABSOLUTE_PATH}/${receptionNumber}`
-export const QNA_UPDATE_ABSOLUTE_PATH = (receptionNumber : number) => `${QNA_LIST_ABSOLUTE_PATH}/update/${receptionNumber}`;
+export const QNA_LIST_ABSOLUTE_PATH = `${MAIN_ABSOLUTE_PATH}/${QNA_PATH}/${QNA_LIST_PATH}`;
+export const QNA_WRITE_ABSOLUTE_PATH = `${MAIN_ABSOLUTE_PATH}/${QNA_PATH}/${QNA_WRITE_PATH}`;
+export const QNA_DETAIL_ABSOLUTE_PATH = (receptionNumber : number) => `${MAIN_ABSOLUTE_PATH}/${QNA_LIST_ABSOLUTE_PATH}/${receptionNumber}`
+export const QNA_UPDATE_ABSOLUTE_PATH = (receptionNumber : number) => `${MAIN_ABSOLUTE_PATH}/${QNA_LIST_ABSOLUTE_PATH}/update/${receptionNumber}`;
 
 // description : 도메인 URL
 export const SERVER_DOMAIN_URL = 'http://localhost:4000';
