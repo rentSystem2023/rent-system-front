@@ -1,9 +1,36 @@
-#qna-list-wrapper {
-    margin:  0 auto;
-    max-width: 1136px;
+#user-list-wrapper{
+    display: grid;
+    grid-template: 
+        "sidenav main" minmax(1344px, auto)
+        / 257px minmax(1182px, 1fr);
+}
+
+.side-navigation-container {
+    grid-area: sidenav;
+    padding: 16px 25px;
+
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    
+    border-right: 1px solid rgba(233, 236, 239, 1);  
+}
+
+.side-navigation-item {
+    border-radius: 6px;
+    padding: 8px 24px;
+
+    display: flex;
+
+    align-items: center;
     gap: 16px;
+
+    color: rgba(138, 146, 166, 1);
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;  
 }
 
 .qna-list-top {
@@ -51,7 +78,7 @@
 .qna-list-table-th {
     display: flex;
     align-items: center;
-    gap: 95px;
+    gap: 45px;
     padding: 15px 24px;
 
     font-size: 16px;
@@ -86,8 +113,19 @@
     width: 56px;
 }
 
+/* 상태 */
 .qna-list-table-status {
+    width: 80px;
+}
+
+/* 유형 */
+.qna-list-table-category {
     width: 45px;
+}
+
+/* 노출 여부 */
+.qna-list-table-exposure {
+    width: 80px;
 }
 
 .qna-list-table-title {
@@ -127,7 +165,7 @@
     width: 40px;
     height: 40px;
 
-    background-image: url('../../../../assets/image/page-left.png');
+    /* background-image: url('../../../../assets/image/page-left.png'); */
     background-size: 100% 100%;
 
     cursor: pointer;
@@ -136,8 +174,8 @@
 .qna-list-page-right {
     width: 40px;
     height: 40px;
-
-    background-image: url('../../../../assets/image/page-right.png');
+/* 
+    background-image: url('../../../../assets/image/page-right.png'); */
     background-size: 100% 100%;
 
     cursor: pointer;
