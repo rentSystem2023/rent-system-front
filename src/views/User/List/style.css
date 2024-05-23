@@ -1,18 +1,19 @@
 #user-list-wrapper {
     display: grid;
     grid-template: 
-        "logo topbar" 77px
         "sidenav main" minmax(944px, auto)
         / 257px minmax(1182px, 1fr);
 }
 
 .side-navigation-container {
     grid-area: sidenav;
-    padding: 16px 12px;
+    padding: 16px 25px;
 
     display: flex;
     flex-direction: column;
     gap: 10px;
+    
+    border-right: 1px solid rgba(233, 236, 239, 1);  
 }
 
 .side-navigation-item {
@@ -20,10 +21,16 @@
     padding: 8px 24px;
 
     display: flex;
+
     align-items: center;
     gap: 16px;
 
     color: rgba(138, 146, 166, 1);
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;  
 }
 
 .side-navigation-item:hover {
@@ -32,43 +39,44 @@
 }
 
 .side-navigation-item.active {
-    background-color: rgba(58, 87, 232, 1);
+    background-color: rgba(138, 146, 166, 1);
     color: rgba(255, 255, 255, 1);
 }
 
-/* .side-navigation-icon {
+.side-navigation-icon {
     width: 24px;
     height: 24px;
     background-size: 100% 100%;
-} */
+}
 
-/* .side-navigation-icon.chart {
-    background-image: url('../../assets/image/chart-fill-icon.png');
+.side-navigation-icon.person {
+    background-image: url('../../../assets/image/person.png');
 }
     
-.active > .side-navigation-icon.chart {
-        background-image: url('../../assets/image/chart-icon.png');
+.active > .side-navigation-icon.person {
+        background-image: url('../../../assets/image/person.png');
 }
-    
-.side-navigation-icon.pie {
-    background-image: url('../../assets/image/pie-icon.png');
-}
-    
-.active > .side-navigation-icon.pie {
-    background-image: url('../../assets/image/pie-fill-icon.png');
-}
-    
-.side-navigation-icon.edit {
-    background-image: url('../../assets/image/edit-icon.png');
-}
-    
-.active > .side-navigation-icon.edit {
-    background-image: url('../../assets/image/edit-fill-icon.png');
-} */
 
-.side-navigation-title {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.side-navigation-icon.office {
+    background-image: url('../../../assets/image/office.png');
+}
+    
+.active > .side-navigation-icon.office {
+        background-image: url('../../../assets/image/office.png');
+}
+    
+.side-navigation-icon.check {
+    background-image: url('../../../assets/image/check.png');
+}
+    
+.active > .side-navigation-icon.check {
+    background-image: url('../../../assets/image/check.png');
+}
+    
+.side-navigation-icon.board {
+    background-image: url('../../../assets/image/board.png');
+}
+    
+.active > .side-navigation-icon.board {
+    background-image: url('../../../assets/image/board.png');
 }
