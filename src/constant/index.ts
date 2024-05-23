@@ -118,8 +118,8 @@ export const GET_USER_QNA_LIST_SEARCH_URL = `${SERVER_QNA_MODULE_URL}/myList/sea
 export const GET_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/list`;
 export const GET_QNA_LIST_SEARCH_URL = `${SERVER_API_URL}/list/search`;
 export const GET_QNA_DETAIL_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/list/${receptionNumber}`;
-export const QNA_REGIST_URL = `${SERVER_QNA_MODULE_URL}/regist`;
-export const QNA_REGIST_DETAIL_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/regist/${receptionNumber}`;
+export const POST_QNA_REGIST_REQUEST_URL = `${SERVER_QNA_MODULE_URL}/regist`;
+export const GET_QNA_REGIST_DETAIL_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/regist/${receptionNumber}`;
 export const INCREASE_QNA_VIEW_COUNT_URL = (receptionNumber: number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/increase-view-count`;
 
 export const POST_COMMENT_REQUEST_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/admin-comment`;
