@@ -5,16 +5,25 @@ import ServiceContainer from 'src/layouts/ServiceContainer';
 function SideBar () {
     return (
         <>
+            <div id="user-list-wrapper">
             <div className="side-navigation-container">
-                <div>
-                    <div className="side-navigation-item">지역 평균</div>
+                <div className="side-navigation-item">
+                    <div className="side-navigation-icon person"></div>
+                    <div className="side-navigation-item-title">회원 관리</div>
                 </div>
-                <div>
-                    <div className="side-navigation-item">비율 계산</div>
+                <div className="side-navigation-item">
+                    <div className="side-navigation-icon office"></div>
+                    <div className="side-navigation-item-title">업체 관리</div>
                 </div>
-                <div>
-                    <div className="side-navigation-item">Q&A 게시판</div>
+                <div className="side-navigation-item">
+                    <div className="side-navigation-icon check"></div>
+                    <div className="side-navigation-item-title">예약 관리</div>
                 </div>
+                <div className="side-navigation-item">
+                    <div className="side-navigation-icon board"></div>
+                    <div className="side-navigation-item-title">게시물 관리</div>
+                </div>
+            </div>
             </div>
         </>
     )

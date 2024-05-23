@@ -21,6 +21,7 @@ export const RESERVATION_INQURY_PATH = 'inqury';
 export const RESERVATION_INQURY_DETAIL_PATH = 'inqury-detail';
 
 export const NOTICE_PATH = 'notice';
+export const NOTICE_LIST = 'list'
 export const NOTICE_WRITE_PATH = 'regist';
 export const NOTICE_DETAIL_PATH = ':registNumber';
 export const NOTICE_UPDATE_PATH = 'update/:registNumber';
@@ -51,6 +52,7 @@ export const RESERVATION_SEARCH_ABSOLUTE_PATH = `${MAIN_PATH}`;
 export const RESERVATION_INQURY_ABSOLUTE_PATH = `${RESERVATION_SEARCH_ABSOLUTE_PATH}/${RESERVATION_INQURY_PATH}`;
 export const RESERVATION_INQURY_DETAIL_ABSOLUTE_PATH = `${RESERVATION_SEARCH_ABSOLUTE_PATH}/${RESERVATION_INQURY_DETAIL_PATH}`;
 
+export const NOTICE_LIST_ABSOLUTE_PATH = `${MAIN_ABSOLUTE_PATH}/${NOTICE_PATH}/${NOTICE_LIST}`
 export const NOTICE_WRITE_ABSOLUTE_PATH = `${NOTICE_PATH}/${NOTICE_WRITE_PATH}`;
 export const NOTICE_ABSOLUTE_DETAIL_PATH = (registNumber : number) => `${NOTICE_WRITE_ABSOLUTE_PATH}/${registNumber}`;
 export const NOTICE_ABSOLUTE_UPDATE_PATH = (registNumber : number) => `${NOTICE_WRITE_ABSOLUTE_PATH}/update/${registNumber}`;
@@ -117,7 +119,7 @@ export const GET_USER_QNA_LIST_SEARCH_URL = `${SERVER_QNA_MODULE_URL}/myList/sea
 
 export const GET_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/list`;
 export const GET_QNA_LIST_SEARCH_URL = `${SERVER_API_URL}/list/search`;
-export const GET_QNA_DETAIL_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/list/${receptionNumber}`;
+export const PUT_QNA_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/list/${receptionNumber}`;
 export const POST_QNA_REGIST_REQUEST_URL = `${SERVER_QNA_MODULE_URL}/regist`;
 export const GET_QNA_REGIST_DETAIL_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/regist/${receptionNumber}`;
 export const INCREASE_QNA_VIEW_COUNT_URL = (receptionNumber: number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/increase-view-count`;
