@@ -2,17 +2,17 @@
 export const MAIN_PATH = '/rentcar';
 export const SNS_PATH = '/sns/:accessToken/:expires';
 
-export const AUTH_PATH = '/authentication';
+export const AUTH_PATH = 'authentication';
 export const SIGN_IN_PATH = 'sign-in';
 export const SIGN_UP_PATH = 'sign-up';
 
-export const USER_PATH = '/user';
+export const USER_PATH = 'user';
 export const USER_INFO_PATH = 'information';
 export const USER_UPDATE_PATH = 'modify';
 export const USER_LIST_PATH = 'list';
 export const USER_DETAIL_PATH = ':userId';
 
-export const RESERVATION_PATH = '/reservation';
+export const RESERVATION_PATH = 'reservation';
 export const RESERVATION_MY_LIST_PATH = 'mylist';
 export const RESERVATION_MY_DETAIL_PATH = ':reservationCode';
 export const RESERVATION_LIST_PATH = 'list';
@@ -20,12 +20,12 @@ export const RESERVATION_LIST_PATH = 'list';
 export const RESERVATION_INQURY_PATH = 'inqury';
 export const RESERVATION_INQURY_DETAIL_PATH = 'inqury-detail';
 
-export const NOTICE_PATH = '/notice';
+export const NOTICE_PATH = 'notice';
 export const NOTICE_WRITE_PATH = 'regist';
 export const NOTICE_DETAIL_PATH = ':registNumber';
 export const NOTICE_UPDATE_PATH = 'update/:registNumber';
 
-export const QNA_PATH = '/qna';
+export const QNA_PATH = 'qna';
 export const QNA_LIST_PATH = 'list';
 export const QNA_WRITE_PATH = 'regist';
 export const QNA_DETAIL_PATH = ':receptionNumber';
@@ -40,7 +40,7 @@ export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 
 export const USER_INFO_ABSOLUTE_PATH = `${USER_PATH}/${USER_INFO_PATH}`;
 export const USER_INFO_MODIFY_ABSOLUTE_PATH = `${USER_INFO_ABSOLUTE_PATH}/${USER_UPDATE_PATH}`;
-export const USER_LIST_ABSOLUTE_PATH = `${USER_PATH}/${USER_LIST_PATH}`;
+export const USER_LIST_ABSOLUTE_PATH = `${MAIN_ABSOLUTE_PATH}/${USER_PATH}/${USER_LIST_PATH}`;
 export const USER_DETAIL_ABSOLUTE_PATH = (userId : number) => `${USER_LIST_ABSOLUTE_PATH}/${userId}`;
 
 export const RESERVATION_MY_LIST_ABSOLUTE_PATH = `${RESERVATION_PATH}/${RESERVATION_MY_LIST_PATH}`;
