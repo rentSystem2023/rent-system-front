@@ -20,3 +20,12 @@ export interface PutQnaRequestDto {
     imageUrl: string;
     publicState: boolean;
 }
+
+export interface PostQnaCommentRequestDto {
+    comment : string;
+}
+
+export interface PutQnaRequestDto {
+    title: string;
+    contents: string;
+}
