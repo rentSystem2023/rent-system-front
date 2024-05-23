@@ -10,7 +10,6 @@ import QnAContainer from './layouts/QnAContainer';
 function App() {
   return (
   <Routes>
-    <Route path={MAIN_PATH} element={<ServiceContainer/>} />
     <Route path={QNA_PATH} element={<QnAContainer />}>
       <Route path={QNA_LIST_PATH} element={<QnaList/>} />
     </Route>
