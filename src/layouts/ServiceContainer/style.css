@@ -1,8 +1,7 @@
 #wrapper {
     display: grid;
     grid-template: 
-        "logo topbar" 77px
-        "main main" minmax(944px, auto)
+        "logo topbar" minmax(77px, auto)
         / 257px minmax(1182px, 1fr);
 }
 
