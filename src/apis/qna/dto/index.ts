@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_QNA_LIST_SEARCH_URL, GET_QNA_LIST_URL, GET_QNA_REGIST_DETAIL_URL, INCREASE_QNA_VIEW_COUNT_URL, POST_COMMENT_REQUEST_URL, POST_QNA_REGIST_REQUEST_URL, PUT_QNA_URL } from "src/constant";
+import { GET_QNA_LIST_SEARCH_URL, GET_QNA_LIST_URL, GET_QNA_DETAIL_URL, INCREASE_QNA_VIEW_COUNT_URL, POST_COMMENT_REQUEST_URL, POST_QNA_REGIST_URL, PUT_QNA_REGIST_URL } from "src/constant";
 
 import ResponseDto from "src/apis/response.dto";
 import {  PostQnaBoardRequestDto, PostQnaCommentRequestDto, PostQnaRequestDto } from "./request";
@@ -9,7 +9,7 @@ import { bearerAuthorization, requestErrorHandler, requestHandler } from "src/ap
 
 // function : Q&A 작성 API 함수 
 export const PostBoardRequest = async(requestBody: PostQnaBoardRequestDto, accessToken: string) => {
-    const result = await axios.post(POST_QNA_REGIST_REQUEST_URL, requestBody,bearerAuthorization(accessToken))
+    const result = await axios.post(POST_QNA_REGIST_URL, requestBody,bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;
@@ -43,7 +43,7 @@ export const getSearchBoardListRequest = async(word:string, accessToken:string) 
 
 // function : Q&A 게시물 불러오기 API 함수
 export const getBoardRequest = async(receptionNumber:number, accessToken:string) => {
-    const result = await axios.get(GET_QNA_REGIST_DETAIL_URL(receptionNumber),bearerAuthorization(accessToken))
+    const result = await axios.get(GET_QNA_DETAIL_URL(receptionNumber),bearerAuthorization(accessToken))
     .then(requestHandler<GetQnaBoardResponseDto>)
     .catch(requestErrorHandler);
     return result;
@@ -51,7 +51,7 @@ export const getBoardRequest = async(receptionNumber:number, accessToken:string)
 
 // function : Q&A 게시물 수정 API 함수
 export const postBoardRequest = async(receptionNumber: number , requestBody: PostQnaRequestDto , accessToken:string) =>{
-    const result = await axios.put(PUT_QNA_URL(receptionNumber), requestBody, bearerAuthorization(accessToken))
+    const result = await axios.put(PUT_QNA_REGIST_URL(receptionNumber), requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;
