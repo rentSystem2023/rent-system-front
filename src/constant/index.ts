@@ -131,3 +131,7 @@ export const GET_COMPANY_LIST_URL = `${SERVER_COMPANY_MODULE}/list`;
 export const GET_COMPANY_LIST_SEARCH_URL = `${SERVER_COMPANY_MODULE}/list/search`;
 export const REGIST_COMPANY_URL = `${SERVER_COMPANY_MODULE}/regist`;
 export const REGIST_COMPANY_DETAIL_URL = (companyCode : number) => `${SERVER_API_URL}/list/${companyCode}`;
+
+//description: PAGE
+export const COUNT_PER_PAGE = 10; 
+export const COUNT_PER_SECTION = 10; 
