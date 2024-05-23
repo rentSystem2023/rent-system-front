@@ -1,11 +1,14 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import { getSearchBoardListRequest } from 'src/apis/qna/dto';
 import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/qna/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH, QNA_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import useUserStore from 'src/stores/user.store';
 import { QnaListItem } from 'src/types';
+import './style.css'
+import ServiceContainer from 'src/layouts/ServiceContainer';
 
 //                    component                    //
 function ListItem ({ 
@@ -176,29 +179,33 @@ export default function QnaList() {
       if (!searchWord) return;
       if (!cookies.accessToken) return;
 
-  //     getSearchBoardListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-  // };
+      getSearchBoardListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+  };
 
   //                    effect                    //
-  // useEffect(() => {
-  //     if (!cookies.accessToken) return;
-  //     getSearchBoardListRequest(searchWord,cookies.accessToken).then(getSearchBoardListResponse);
-  // }, [isToggleOn]);
+  useEffect(() => {
+      if (!cookies.accessToken) return;
+      getSearchBoardListRequest(searchWord,cookies.accessToken).then(getSearchBoardListResponse);
+  }, [isToggleOn]);
 
-  // useEffect(() => {
-  //     if (!boardList.length) return;
-  //     changePage(boardList, totalLenght);
-  // }, [currentPage]);
+  useEffect(() => {
+      if (!qnaList.length) return;
+      changePage(qnaList, totalLenght);
+  }, [currentPage]);
 
-  // useEffect(() => {
-  //     if (!boardList.length) return;
-  //     changeSection(totalPage);
-  // }, [currentSection]);
+  useEffect(() => {
+      if (!qnaList.length) return;
+      changeSection(totalPage);
+  }, [currentSection]);
   
   //                    render                    //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
+    <div>
+  <ServiceContainer/>
+  <div style={{ display: 'flex' }}>
+  <SideBar/>
       <div id='qna-list-wrapper'>
           <div className='qna-list-top'>
               <div className='qna-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
@@ -214,12 +221,14 @@ export default function QnaList() {
           </div>
           <div className='qna-list-table'>
               <div className='qna-list-table-th'>
-                  <div className='qna-list-table-reception-number'>접수번호</div>
-                  <div className='qna-list-table-status'>상태</div>
+                  <div className='qna-list-table-reception-number'>순번</div>
+                  <div className='qna-list-table-write-date'>작성일</div>
                   <div className='qna-list-table-title'>제목</div>
                   <div className='qna-list-table-writer-id'>작성자</div>
-                  <div className='qna-list-table-write-date'>작성일</div>
                   <div className='qna-list-table-viewcount'>조회수</div>
+                  <div className='qna-list-table-category'>유형</div>
+                  <div className='qna-list-table-exposure'>노출 여부</div>
+                  <div className='qna-list-table-status'>상태</div>
               </div>
               {viewList.map(item => <ListItem {...item} />)}
           </div>
@@ -244,7 +253,52 @@ export default function QnaList() {
               </div>
           </div>
       </div>
+      </div>
+    </div>
   );
-  
+
   }
+
+  
+function SideBar () {
+  return (
+      <>
+          <div id="user-list-wrapper">
+          <div className="side-navigation-container">
+              <div className="side-navigation-item">
+                  <div className="side-navigation-icon person"></div>
+                  <div className="side-navigation-item-title">회원 관리</div>
+              </div>
+              <div className="side-navigation-item">
+                  <div className="side-navigation-icon office"></div>
+                  <div className="side-navigation-item-title">업체 관리</div>
+              </div>
+              <div className="side-navigation-item">
+                  <div className="side-navigation-icon check"></div>
+                  <div className="side-navigation-item-title">예약 관리</div>
+              </div>
+              <div className="side-navigation-item">
+                  <div className="side-navigation-icon board"></div>
+                  <div className="side-navigation-item-title">게시물 관리</div>
+              </div>
+              
+          </div>
+          </div>
+      </>
+  )
+
+  
 }
+<div>
+    <ServiceContainer/>
+    <div id="user-list-wrapper">
+        <div className="sidenav">
+            <SideBar/>
+            <div className="main">
+            <div className='qna-list-wrapper'>
+            </div>
+        </div>
+        </div>
+
+    </div>
+</div>
