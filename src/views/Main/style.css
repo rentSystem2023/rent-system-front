@@ -1,0 +1,8 @@
+#main-wrapper{
+    display: flex;
+    gap: 24px;
+
+    margin: 0 auto;
+    width: 1182px;
+    min-height: 800px;
+}
