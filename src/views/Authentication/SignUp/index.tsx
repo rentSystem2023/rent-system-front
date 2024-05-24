@@ -300,30 +300,32 @@ export default function SignUp() {
 
     return (
         <div id="authentication-wrapper">
-            <div className="authentication-title h1">
-                회원가입
-            </div>
-            <div className="authentication-contents">
-                <SnsContainer title="SNS 회원가입" />
-                <div className="short-divider"></div>
-                <div className="authentication-input-container">
-                    
-                    <InputBox label="아이디" type="text" value={id} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} buttonTitle="중복 확인" buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
-
-                    <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-
-                    <InputBox label="비밀번호 확인" type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
-
-                    <InputBox label="닉네임" type="text" value={nickName} placeholder="닉네임을 입력해주세요" onChangeHandler={ onNickNameChangeHandler } message={nickNameMessage} error />
-
-                    <InputBox label="이메일" type="text" value={email} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
-
-                    {isEmailCheck && 
-                    <InputBox label="인증번호" type="text" value={authNumber} placeholder="인증번호 4자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
-
+            <div className="authentication-full">
+                <div className="authentication-title h1">
+                    회원가입
                 </div>
-                <div className="authentication-button-container">
-                    <div className={signUpButtonClass} onClick={onSignUpButtonClickHandler}>가입하기</div>
+                <div className="authentication-contents">
+                    <SnsContainer title="SNS 회원가입" />
+                    <div className="short-divider"></div>
+                    <div className="authentication-input-container">
+                        
+                        <InputBox label="아이디" type="text" value={id} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} buttonTitle="중복 확인" buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
+
+                        <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
+
+                        <InputBox label="비밀번호 확인" type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+
+                        <InputBox label="닉네임" type="text" value={nickName} placeholder="닉네임을 입력해주세요" onChangeHandler={ onNickNameChangeHandler } message={nickNameMessage} error />
+
+                        <InputBox label="이메일" type="text" value={email} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
+
+                        {isEmailCheck && 
+                        <InputBox label="인증번호" type="text" value={authNumber} placeholder="인증번호 4자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
+
+                    </div>
+                    <div className="authentication-button-container">
+                        <div className={signUpButtonClass} onClick={onSignUpButtonClickHandler}>가입하기</div>
+                    </div>
                 </div>
             </div>
         </div>

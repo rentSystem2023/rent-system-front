@@ -1,12 +1,22 @@
 #authentication-wrapper {
     display: flex;
-    width: 100%;
-    height: 100vh;
-    min-height: 1024px;
+    flex-direction: column;
+}
+
+.authentication-full {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    margin: 100px auto;
 }
 
 .authentication-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: rgba(64, 64, 64, 1);
+
 }
 
 .authentication-contents {
@@ -14,8 +24,6 @@
     flex-direction: column;
     align-items: center;
     gap: 24px;
-
-    width: 100%;
 }
 
 .authentication-input-container {
@@ -31,15 +39,20 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    
 
-    width: 100%;
 }
 
 .other-authentication-button-container {
     display: flex;
-
+    justify-content: space-around;
     gap: 14px;
     font-size: small;
+}
+
+.moving-find-id-password {
+    display: flex;
+    flex-direction: row;
 }
 
 .authentication-sns-container {

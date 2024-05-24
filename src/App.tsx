@@ -8,6 +8,8 @@ import QnAContainer from './layouts/QnAContainer';
 import { useCookies } from 'react-cookie';
 import { useEffect } from 'react';
 import Main from './views/Main';
+import SignIn from './views/Authentication/SignIn';
+import SignUp from './views/Authentication/SignUp';
 
 function Index() {
   
@@ -39,8 +41,8 @@ function App() {
       <Route index element={<Main/>}/>
 
       <Route path={AUTH_PATH}>
-        <Route path={SIGN_IN_PATH}/>
-        <Route path={SIGN_UP_PATH}/>
+        <Route path={SIGN_IN_PATH} element={<SignIn/>}/>
+        <Route path={SIGN_UP_PATH} element={<SignUp/>}/>
       </Route>
 
       <Route path={USER_PATH}>

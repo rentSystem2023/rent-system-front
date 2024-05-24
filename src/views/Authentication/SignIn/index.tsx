@@ -155,24 +155,26 @@ export default function SignIn() {
     return (
 
         <div id="authentication-wrapper">
-            <div className="authentication-title h1">로그인</div>
-            <div className="authentication-contents">
-                <div className="authentication-input-container">
-                    <InputBox label="아이디" type="text" value={id} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} />
-                    <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onkeydownhandler={onPasswordKeydownHandler} message={message} error />
-                </div>
-                <div className="authentication-button-container">
-                    <div className="primary-button full-width" onClick={onSignInButtonClickHandler}>로그인</div>
-                </div>
-                <div className="other-authentication-button-container">
-                    <div className="moving-find-id-password">
-                        <div className="moving-find-id" onClick={ onFindIdButtonClickHandler }>아이디</div>
-                        <div className="moving-find-password" onClick={ onFindPasswordButtonClickHandler }>/비밀번호 찾기</div>
+            <div className="authentication-full">
+                <div className="authentication-title h1">로그인</div>
+                <div className="authentication-contents">
+                    <div className="authentication-input-container">
+                        <InputBox label="아이디" type="text" value={id} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} />
+                        <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onkeydownhandler={onPasswordKeydownHandler} message={message} error />
                     </div>
-                    <div className="moving-sign-up" onClick={onLinkClickHandler}>회원가입</div>
+                    <div className="authentication-button-container">
+                        <div className="primary-button" onClick={onSignInButtonClickHandler}>로그인</div>
+                    </div>
+                    <div className="other-authentication-button-container">
+                        <div className="moving-find-id-password">
+                            <div className="moving-find-id" onClick={ onFindIdButtonClickHandler }>아이디</div>
+                            <div className="moving-find-password" onClick={ onFindPasswordButtonClickHandler }>/비밀번호 찾기</div>
+                        </div>
+                        <div className="moving-sign-up" onClick={onLinkClickHandler}>회원가입</div>
+                    </div>
+                    <div className="short-divider"></div>
+                    <SnsContainer title="SNS 로그인" />
                 </div>
-                <div className="short-divider"></div>
-                <SnsContainer title="SNS 로그인" />
             </div>
         </div>
     );
