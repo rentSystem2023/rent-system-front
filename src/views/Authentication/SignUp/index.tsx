@@ -293,7 +293,7 @@ export default function SignUp() {
 
     return (
         <div id="authentication-wrapper">
-            <div className="authentication-full">
+            <div className="authentication-full-sign-up">
                 <div className="authentication-title h1">
                     회원가입
                 </div>
