@@ -149,9 +149,9 @@ export const SERVER_RESERVATION_MODULE_URL = `${SERVER_API_URL}/reservation`;
 // 마이페이지 예약 내역 URL
 export const GET_MY_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/mylist`;
 // 마이페이지 예약 상세 내역 URL
-export const GET_MY_RESERVATION_DETAIL_URL = (reservationCode : string) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
+export const GET_MY_RESERVATION_DETAIL_URL = (reservationCode : number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
 // 마이페이지 예약 취소 URL
-export const PATCH_MY_RESERVATION_DETAIL_URL = (reservationCode : string) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
+export const PATCH_MY_RESERVATION_DETAIL_URL = (reservationCode : number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
 
 // 차량 검색, 예약 모듈 URL 다시 점검 필요함
 // 인기 차량 리스트, 차량 검색 결과 URL
@@ -178,13 +178,13 @@ export const NOTICE_LIST_SEARCH_URL = `${SERVER_NOTICE_MODULE_URL}/list/search`;
 // 공지사항 게시물 상세 URL
 export const GET_NOTICE_DETAIL_URL = (registNumber : number) => `${GET_NOTICE_LIST_URL}/${registNumber}`;
 // 공지사항 게시물 조회수 증가 URL
-export const INCREASE_NOTICE_VIEW_COUNT_URL = (registNumber : number ) => `${SERVER_API_URL}/${registNumber}/increase-view-count`;
+export const INCREASE_NOTICE_VIEW_COUNT_URL = (registNumber : number ) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/increase-view-count`;
 // 공지사항 게시물 작성 URL
 export const POST_NOTICE_REQUESURL = `${SERVER_NOTICE_MODULE_URL}/regist`;
 // 공지사항 게시물 수정 URL
-export const PUT_NOTICE_REGIST_URL = (registNumber : number) => `${GET_NOTICE_LIST_URL}/${registNumber}/modify`;
+export const PUT_NOTICE_REGIST_URL = (registNumber : number) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/modify`;
 // 공지사항 게시물 삭제 URL
-export const DELETE_NOTICE_URL = (registNumber : number) => `${GET_NOTICE_LIST_URL}/${registNumber}`
+export const DELETE_NOTICE_URL = (registNumber : number) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/delete`;
 
 // description: Q&A MODULE
 export const SERVER_QNA_MODULE_URL = `${SERVER_API_URL}/qna`;
@@ -194,9 +194,9 @@ export const GET_MY_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/myList`;
 // 마이페이지 Q&A 목록 검색 URL
 export const GET_MY_QNA_LIST_SEARCH_URL = `${GET_MY_QNA_LIST_URL}/search`;
 // 마이페이지 Q&A 게시물 삭제 URL
-export const DELETE_QNA_LIST_URL = (receptionNumber: number) => `${GET_MY_QNA_LIST_URL}/${receptionNumber}`;
+export const DELETE_QNA_LIST_URL = (receptionNumber: number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/delete`;
 // Q&A 게시물 수정 URL
-export const PUT_QNA_REGIST_URL = (receptionNumber: number) => `${GET_MY_QNA_LIST_URL}/${receptionNumber}`;
+export const PUT_QNA_REGIST_URL = (receptionNumber: number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/modify`;
 
 // Q&A 전체 게시물 리스트 URL
 export const GET_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/list`;
@@ -210,10 +210,10 @@ export const POST_QNA_REGIST_URL = `${SERVER_QNA_MODULE_URL}/regist`;
 export const INCREASE_QNA_VIEW_COUNT_URL = (receptionNumber: number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/increase-view-count`;
 
 // Q&A 답변 URL
-export const POST_COMMENT_REQUEST_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/admin-comment`;
+export const POST_COMMENT_REQUEST_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/comment`;
 
 // description: COMPANY MODULE
-export const SERVER_COMPANY_MODULE = `${SERVER_API_URL}/company'`;
+export const SERVER_COMPANY_MODULE = `${SERVER_API_URL}/company`;
 
 // 업체 정보 전체 리스트 URL
 export const GET_COMPANY_LIST_URL = `${SERVER_COMPANY_MODULE}/list`;
