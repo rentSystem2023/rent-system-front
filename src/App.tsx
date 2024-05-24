@@ -3,7 +3,7 @@ import './App.css';
 import { AUTH_PATH, COMPANY_LIST_PATH, COMPANY_PATH, COMPANY_REGIST_PATH, COMPANY_UPDATE_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, NOTICE_DETAIL_PATH, NOTICE_LIST, NOTICE_PATH, NOTICE_REGIST_PATH, NOTICE_UPDATE_PATH, QNA_DETAIL_PATH, QNA_LIST_ABSOLUTE_PATH, QNA_LIST_PATH, QNA_MY_LIST_PATH, QNA_PATH, QNA_REGIST_PATH, QNA_UPDATE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, USER_DETAIL_PATH, USER_INFO_PATH, USER_LIST_ABSOLUTE_PATH, USER_LIST_PATH, USER_PATH, USER_UPDATE_PATH } from './constant';
 import ServiceContainer from './layouts/ServiceContainer';
 import UserList from './views/User/List';
-import QnaList from './views/Board/qna';
+import QnaList from './views/Board/qna/QnaList';
 import QnAContainer from './layouts/QnAContainer';
 import { useCookies } from 'react-cookie';
 import { useEffect } from 'react';

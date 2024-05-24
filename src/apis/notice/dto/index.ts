@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import { GET_QNA_LIST_SEARCH_URL, GET_QNA_LIST_URL, GET_QNA_DETAIL_URL, INCREASE_QNA_VIEW_COUNT_URL, POST_COMMENT_REQUEST_URL, POST_QNA_REGIST_URL, PUT_QNA_REGIST_URL, DELETE_QNA_LIST_URL } from "src/constant";
 
 import ResponseDto from "src/apis/response.dto";
-import {  PostQnaBoardRequestDto, PostQnaCommentRequestDto,  } from "./request";
-import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardListResponseDto } from "./response";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "src/apis";
+import { DELETE_QNA_LIST_URL, GET_MY_QNA_LIST_SEARCH_URL, GET_QNA_DETAIL_URL, GET_QNA_LIST_URL, INCREASE_QNA_VIEW_COUNT_URL, POST_COMMENT_REQUEST_URL, POST_QNA_REGIST_URL, PUT_QNA_REGIST_URL } from "src/constant";
+import { PostQnaBoardRequestDto, PutQnaRequestDto } from "src/apis/qna/dto/request";
+import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardListResponseDto } from "src/apis/qna/dto/response";
 
 // function : Q&A 작성 API 함수 
 export const PostBoardRequest = async(requestBody: PostQnaBoardRequestDto, accessToken: string) => {
@@ -16,11 +16,11 @@ export const PostBoardRequest = async(requestBody: PostQnaBoardRequestDto, acces
 }
 
 // function : Q&A 답글 작성 API 함수
-export const PostCommentRequest = async(receptionNumber: number | string, requestBody: PostQnaCommentRequestDto, accessToken:string) => {
+export const PostCommentRequest = async(receptionNumber: number | string, requestBody: PostQnaBoardRequestDto, accessToken:string) => {
     const result = await axios.post(POST_COMMENT_REQUEST_URL(receptionNumber),requestBody,bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
-    return result;  
+    return result;
 }
 
 
@@ -35,7 +35,7 @@ export const getBoardListRequest = async(accessToken: string) => { // 토큰을 
 // function : Q&A 검색 리스트 불러오기 API 함수
 export const getSearchBoardListRequest = async(word:string, accessToken:string) => { //searchWord 먼저 받고 ,accessToken 받기
     const config = {...bearerAuthorization(accessToken), params: {word}} // params 속성 추가해서 수정함.
-    const result = await axios.get(GET_QNA_LIST_SEARCH_URL,config)
+    const result = await axios.get(GET_MY_QNA_LIST_SEARCH_URL,config)
     .then(requestHandler<GetSearchQnaBoardListResponseDto>) // 성공
     .catch(requestErrorHandler); // 실패
     return result;
@@ -50,7 +50,7 @@ export const getBoardRequest = async(receptionNumber:number | string, accessToke
 }
 
 // function : Q&A 게시물 수정 API 함수
-export const postBoardRequest = async(receptionNumber: number | string , requestBody: PostQnaBoardRequestDto , accessToken:string) =>{
+export const putBoardRequest = async(receptionNumber: number | string, requestBody: PutQnaRequestDto , accessToken:string) =>{
     const result = await axios.put(PUT_QNA_REGIST_URL(receptionNumber), requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
@@ -58,7 +58,7 @@ export const postBoardRequest = async(receptionNumber: number | string , request
 }
 
 // function : Q&A 게시물 조회수 증가 API 함수
-export const increaseViewCountRequest = async (receptionNumber: number | string , accessToken: string) => {
+export const increaseViewCountRequest = async (receptionNumber: number | string, accessToken: string) => {
     const result = await axios.patch(INCREASE_QNA_VIEW_COUNT_URL(receptionNumber), {}, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);

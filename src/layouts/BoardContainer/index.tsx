@@ -1,7 +1,7 @@
 import React from 'react'
 import ServiceContainer from '../ServiceContainer';
 import './style.css'
-import QnaList from 'src/views/Board/qna';
+import QnaList from 'src/views/Board/qna/QnaList';
 import { Outlet } from 'react-router-dom';
 
 function SideBar () {
