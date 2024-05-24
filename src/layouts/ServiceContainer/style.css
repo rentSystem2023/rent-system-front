@@ -56,11 +56,3 @@
     cursor: pointer;
     opacity: 0.85;
 }
-
-.main-container{
-    grid-area : main;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
