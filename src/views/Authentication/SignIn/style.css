@@ -1,19 +1,23 @@
 #authentication-wrapper {
-    /* display: flex; */
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
 }
 
 .authentication-full {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    background-color: antiquewhite;
+    width: 300px;
+    margin: auto;
 }
 
 .authentication-title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: rgba(64, 64, 64, 1);
 
+    color: rgba(64, 64, 64, 1);
 }
 
 .authentication-contents {
@@ -21,13 +25,15 @@
     flex-direction: column;
     align-items: center;
     gap: 24px;
+
+    width: 100%;
 }
 
 .authentication-input-container {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding: 20px;
+
     width: 300px;
 }
 
@@ -35,8 +41,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    
+    /* gap: 16px; */
+    width: 100%;
 
 }
 
