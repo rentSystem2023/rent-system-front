@@ -50,7 +50,7 @@ function App() {
           <Route path={USER_UPDATE_PATH}/>
         </Route>
         <Route path={USER_LIST_PATH}>
-          <Route path={USER_DETAIL_PATH}></Route>
+          <Route path={USER_DETAIL_PATH}/>
         </Route>
       </Route>
 
