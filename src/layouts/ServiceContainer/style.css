@@ -1,8 +1,9 @@
 #wrapper {
     display: grid;
     grid-template: 
-        "logo topbar" minmax(77px, auto)
-        / 257px minmax(1182px, 1fr);
+    "logo topbar" 77px
+    "main main" minmax(944px, auto)
+    / 257px minmax(1182px, 1fr);
 }
 
 .logo-container {
@@ -55,4 +56,10 @@
 .board-button:hover {
     cursor: pointer;
     opacity: 0.85;
+}
+
+.main-container {
+    grid-area: main;
+    padding: 24px;
+    min-width: 1182px;
 }
