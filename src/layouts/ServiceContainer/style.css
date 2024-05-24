@@ -60,6 +60,5 @@
 
 .main-container {
     grid-area: main;
-    padding: 24px;
     min-width: 1182px;
 }
