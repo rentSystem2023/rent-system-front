@@ -8,9 +8,8 @@
 .authentication-full {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 600px;
-    margin: 100px auto;
+    margin: auto;
 }
 
 .authentication-title {
