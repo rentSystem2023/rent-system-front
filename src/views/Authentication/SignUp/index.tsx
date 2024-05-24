@@ -7,7 +7,7 @@ import { IdCheckRequest, emailAuthCheckRequest, emailAuthRequest, signUpRequest 
 import ResponseDto from "src/apis/response.dto";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { SIGN_IN_PATH, SIGN_UP_PATH } from "src/constant";
+import { SIGN_IN_ABSOLUTE_PATH, SIGN_UP_PATH } from "src/constant";
 
 //                    component                    //
 export function Sns () {
@@ -285,7 +285,7 @@ export default function SignUp() {
         
         signUpRequest(requestBody).then(signUpResponse);
 
-        navigator(SIGN_IN_PATH);
+        navigator(SIGN_IN_ABSOLUTE_PATH);
 
     };
 
