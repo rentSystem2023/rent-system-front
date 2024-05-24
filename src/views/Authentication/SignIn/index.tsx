@@ -8,7 +8,7 @@ import ResponseDto from "src/apis/response.dto";
 import { SignInResponseDto } from "src/apis/auth/dto/response";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { SIGN_IN_PATH, MAIN_PATH, AUTH_PATH } from "src/constant";
+import { SIGN_IN_PATH, MAIN_PATH, SIGN_UP_ABSOLUTE_PATH } from "src/constant";
 
 //                    component                    //
 export function Sns () {
@@ -33,8 +33,6 @@ export function Sns () {
     return <></>;
 }
 
-//                    type                    //
-type AuthPage = 'sign-in' | 'sign-up';
 
 //                    interface                    //
 interface SnsContainerProps {
@@ -61,17 +59,9 @@ function SnsContainer({ title }: SnsContainerProps) {
     );
 }
 
-//                    interface                    //
-interface Props {
-    onLinkClickHandler: () => void
-}
-
 
 //                    component                    //
 export default function SignIn() {
-
-    //                    state                    //
-    const [page, setPage] = useState<AuthPage>('sign-in');
 
     //                    state                    //
     const [cookies, setCookie] = useCookies();
@@ -143,11 +133,10 @@ export default function SignIn() {
 
     }
 
-    //                    event handler                    //
-    const onLinkClickHandler = () => {
-        if (page === 'sign-in') setPage('sign-up');
-        else setPage('sign-in');
-    };
+    const onSignUpButtonClickHandler = () => {
+        navigator(SIGN_UP_ABSOLUTE_PATH);
+    }
+    
 
     //                    render                    //
     return (
@@ -168,7 +157,7 @@ export default function SignIn() {
                             <div className="moving-find-id" onClick={ onFindIdButtonClickHandler }>아이디</div>
                             <div className="moving-find-password" onClick={ onFindPasswordButtonClickHandler }>/비밀번호 찾기</div>
                         </div>
-                        <div className="moving-sign-up" onClick={onLinkClickHandler}>회원가입</div>
+                        <div className="moving-sign-up" onClick={ onSignUpButtonClickHandler }>회원가입</div>
                     </div>
                     <div className="short-divider"></div>
                     <SnsContainer title="SNS 로그인" />
