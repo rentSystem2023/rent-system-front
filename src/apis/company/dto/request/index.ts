@@ -10,6 +10,11 @@ export interface PostCompanyRequestDto {
     companyRule : string;
 }
 
+// 댓글
+export interface PostCommentRequestDto {
+    comment : string;
+}
+
 // description: 업체 수정하기 Response Body DTO
 export interface PutCompanyRequestDto {
     companyCode : number;
