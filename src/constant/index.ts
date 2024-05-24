@@ -91,7 +91,7 @@ export const QNA_REGIST_ABSOLUTE_PATH = `${QNA_PATH}/${QNA_REGIST_PATH}`;
 // Q&A 게시물 상세보기 URL
 export const QNA_DETAIL_ABSOLUTE_PATH = (receptionNumber : number) => `${QNA_LIST_ABSOLUTE_PATH}/${receptionNumber}`
 // Q&A 게시물 수정하기 URL
-export const QNA_UPDATE_ABSOLUTE_PATH = (receptionNumber : number) => `${QNA_LIST_ABSOLUTE_PATH}/update/${receptionNumber}`;
+export const QNA_UPDATE_ABSOLUTE_PATH = (receptionNumber : number | string) => `${QNA_LIST_ABSOLUTE_PATH}/update/${receptionNumber}`;
 // 마이페이지 Q&A 리스트 불러오기 URL
 export const QNA_MY_LIST_ABSOLUTE_PATH = `${QNA_PATH}/${QNA_MY_LIST_PATH}`;
 
@@ -194,23 +194,23 @@ export const GET_MY_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/myList`;
 // 마이페이지 Q&A 목록 검색 URL
 export const GET_MY_QNA_LIST_SEARCH_URL = `${GET_MY_QNA_LIST_URL}/search`;
 // 마이페이지 Q&A 게시물 삭제 URL
-export const DELETE_QNA_LIST_URL = (receptionNumber: number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/delete`;
+export const DELETE_QNA_LIST_URL = (receptionNumber: number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/delete`;
 // Q&A 게시물 수정 URL
-export const PUT_QNA_REGIST_URL = (receptionNumber: number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/modify`;
+export const PUT_QNA_REGIST_URL = (receptionNumber: number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/modify`;
 
 // Q&A 전체 게시물 리스트 URL
 export const GET_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/list`;
 // Q&A 게시물 검색 리스트 URL
 export const GET_QNA_LIST_SEARCH_URL = `${GET_QNA_LIST_URL}/search`;
 // Q&A 게시물 상세 URL
-export const GET_QNA_DETAIL_URL = (receptionNumber : number) => `${GET_QNA_LIST_URL}/${receptionNumber}`;
+export const GET_QNA_DETAIL_URL = (receptionNumber : number | string) => `${GET_QNA_LIST_URL}/${receptionNumber}`;
 // Q&A 게시물 작성 URL
 export const POST_QNA_REGIST_URL = `${SERVER_QNA_MODULE_URL}/regist`;
 // Q&A 게시물 조회수 증가 URL
-export const INCREASE_QNA_VIEW_COUNT_URL = (receptionNumber: number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/increase-view-count`;
+export const INCREASE_QNA_VIEW_COUNT_URL = (receptionNumber: number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/increase-view-count`;
 
 // Q&A 답변 URL
-export const POST_COMMENT_REQUEST_URL = (receptionNumber : number) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/comment`;
+export const POST_COMMENT_REQUEST_URL = (receptionNumber : number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/comment`;
 
 // description: COMPANY MODULE
 export const SERVER_COMPANY_MODULE = `${SERVER_API_URL}/company`;
