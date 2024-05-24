@@ -20,11 +20,9 @@ function Index() {
   useEffect(() => {
     const accessToken = cookies.accessToken;
 
-    if(accessToken) { // 로그인이 되어있는 상태
+    if(!accessToken) { // 로그인이 안되어있는 상태
       navigator(MAIN_ABSOLUTE_PATH);
-    } else { // 로그인이 안되어있는 상태
-      navigator(MAIN_ABSOLUTE_PATH);
-    }
+    } 
 
   }, []);
   
@@ -35,7 +33,7 @@ function Index() {
 function App() {
   return (
   <Routes>
-    <Route index element={<Index/>} />
+    <Route index element={<Index/>}/>
     <Route path={MAIN_PATH} element={<ServiceContainer/>}/>
     <Route path={QNA_PATH} element={<QnAContainer />}>
       <Route path={QNA_LIST_PATH} element={<QnaList/>} />
