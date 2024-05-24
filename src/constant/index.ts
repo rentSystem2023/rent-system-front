@@ -106,21 +106,21 @@ export const COMPANY_UPDATE_ABSOLUTE_PATH = (companyCode : number) => `${MAIN_PA
 export const SERVER_DOMAIN_URL = 'http://localhost:4000';
 
 // description: API URL PATH 
-export const SERVER_API_URL = `${MAIN_PATH}/${SERVER_DOMAIN_URL}/api/rentcar`;
+export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/rentcar`;
 
 // description: AUTH MODULE
-export const SERVER_AUTH_MODULE_URL = `${MAIN_PATH}/${SERVER_API_URL}/auth`;
+export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
 
 // 로그인 URL
-export const POST_SIGN_IN_REQUEST_URL = `${MAIN_PATH}/${SERVER_AUTH_MODULE_URL}/sign-in`;
+export const POST_SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-in`;
 // 아이디 중복 확인 URL
-export const POST_ID_CHECK_REQUEST_URL = `${MAIN_PATH}/${SERVER_AUTH_MODULE_URL}/id-check`;
+export const POST_ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
 // 이메일 인증 번호 URL
-export const POST_EMAIL_AUTH_REQUEST_URL = `${MAIN_PATH}/${SERVER_AUTH_MODULE_URL}/email-auth`;
+export const POST_EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth`;
 // 이메일 인증 확인 URL
-export const POST_EMAIL_AUTH_CHECK_REQUEST_URL = `${MAIN_PATH}/${SERVER_AUTH_MODULE_URL}/email-auth-check`;
+export const POST_EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth-check`;
 // 회원가입 URL
-export const POST_SIGN_UP_REQUEST_URL = `${MAIN_PATH}/${SERVER_AUTH_MODULE_URL}/sign-up`;
+export const POST_SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-up`;
 
 // description: USER MODULE
 export const SERVER_USER_MODULE_URL = `${MAIN_PATH}/${SERVER_API_URL}/user`;
