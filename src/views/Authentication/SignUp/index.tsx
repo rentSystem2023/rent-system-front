@@ -84,7 +84,6 @@ export default function SignUp() {
     const [isIdCheck, setIdCheck] = useState<boolean>(false);
     const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
     const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
-    const [isNickNameCheck, setNickNameCheck] = useState<boolean>(false);
     const [isEmailCheck, setEmailCheck] = useState<boolean>(false);
     const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
 
@@ -99,7 +98,7 @@ export default function SignUp() {
     const [isEmailError, setEmailError] = useState<boolean>(false);
     const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
 
-    const isSignUpActive = isIdCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqualPassword && isNickNameCheck;
+    const isSignUpActive = isIdCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqualPassword;
     const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
 
     //                    function                    //
@@ -172,8 +171,6 @@ export default function SignUp() {
             alert(message);
             return;
         }
-        navigator(SIGN_IN_PATH);
-
     };
 
     //                    event handler                    //
@@ -223,7 +220,6 @@ export default function SignUp() {
     const onNickNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setNickName(value);
-        setNickNameCheck(false);
         setNickNameMessage('');
     }
 
@@ -278,6 +274,7 @@ export default function SignUp() {
         };
         emailAuthCheckRequest(requestBody).then(emailAuthCheckResponse);
     };
+    
 
     const onSignUpButtonClickHandler = () => {
         if(!isSignUpActive) return;
@@ -289,11 +286,15 @@ export default function SignUp() {
         const requestBody: SignUpRequestDto = {
             userId: id,
             userPassword: password,
-            nickName: "",
+            nickName: nickName,
             userEmail: email,
             authNumber,
         }
+        
         signUpRequest(requestBody).then(signUpResponse);
+        
+        navigator(SIGN_IN_PATH);
+
     };
 
     //                    render                    //
@@ -324,7 +325,7 @@ export default function SignUp() {
 
                     </div>
                     <div className="authentication-button-container">
-                        <div className={signUpButtonClass} onClick={onSignUpButtonClickHandler}>가입하기</div>
+                        <div className={signUpButtonClass} onClick={ onSignUpButtonClickHandler }>가입하기</div>
                     </div>
                 </div>
             </div>

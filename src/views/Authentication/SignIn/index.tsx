@@ -8,7 +8,7 @@ import ResponseDto from "src/apis/response.dto";
 import { SignInResponseDto } from "src/apis/auth/dto/response";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { SIGN_IN_PATH, MAIN_PATH } from "src/constant";
+import { SIGN_IN_PATH, MAIN_PATH, AUTH_PATH } from "src/constant";
 
 //                    component                    //
 export function Sns () {
@@ -148,8 +148,6 @@ export default function SignIn() {
         if (page === 'sign-in') setPage('sign-up');
         else setPage('sign-in');
     };
-    
-    
 
     //                    render                    //
     return (
