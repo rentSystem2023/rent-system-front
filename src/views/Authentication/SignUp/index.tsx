@@ -32,9 +32,6 @@ export function Sns () {
     return <></>;
 }
 
-//                    type                    //
-type AuthPage = 'sign-in' | 'sign-up';
-
 //                    interface                    //
 interface SnsContainerProps {
     title: string;
@@ -59,12 +56,6 @@ function SnsContainer({ title }: SnsContainerProps) {
         </div>
     );
 }
-
-//                    interface                    //
-interface Props {
-    onLinkClickHandler: () => void
-}
-
 
 //                    component                    //
 export default function SignUp() {
@@ -154,8 +145,6 @@ export default function SignUp() {
 
     };
 
-    const navigator = useNavigate();
-
     const signUpResponse = (result: ResponseDto | null) => {
 
         const message = 
@@ -171,6 +160,7 @@ export default function SignUp() {
             alert(message);
             return;
         }
+
     };
 
     //                    event handler                    //
@@ -275,8 +265,10 @@ export default function SignUp() {
         emailAuthCheckRequest(requestBody).then(emailAuthCheckResponse);
     };
     
+    const navigator = useNavigate();
 
     const onSignUpButtonClickHandler = () => {
+
         if(!isSignUpActive) return;
         if(!id || !password || !passwordCheck || !nickName ||  !email || !authNumber) {
             alert('모든 내용을 입력해주세요.');
@@ -292,7 +284,7 @@ export default function SignUp() {
         }
         
         signUpRequest(requestBody).then(signUpResponse);
-        
+
         navigator(SIGN_IN_PATH);
 
     };
