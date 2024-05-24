@@ -1,6 +1,5 @@
 import React from 'react'
 import "./style.css";
-import ServiceContainer from 'src/layouts/ServiceContainer';
 
 function SideBar () {
     return (
@@ -29,7 +28,7 @@ function SideBar () {
     )
 }
 
-export default function UserList() {
+export default function AdminContainer() {
     return (
         <div>
             <SideBar/>

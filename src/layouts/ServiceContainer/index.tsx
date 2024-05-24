@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import "./style.css";
 
+// TODO: 로그인, 회원가입에 아이콘 넣어야함
 function TopBar() {
     return (
         <>
