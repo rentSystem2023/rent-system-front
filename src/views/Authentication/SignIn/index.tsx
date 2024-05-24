@@ -1,0 +1,179 @@
+import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import "./style.css";
+
+import InputBox from "src/components/Inputbox";
+import { SignInRequestDto } from "src/apis/auth/dto/request";
+import { SignInRequest } from "src/apis/auth";
+import ResponseDto from "src/apis/response.dto";
+import { SignInResponseDto } from "src/apis/auth/dto/response";
+import { useCookies } from "react-cookie";
+import { useNavigate, useParams } from "react-router";
+import { SIGN_IN_PATH, MAIN_PATH } from "src/constant";
+
+//                    component                    //
+export function Sns () {
+
+    //                    state                    //
+    const { accessToken, expires } = useParams();
+    const [cookies, setCookie] = useCookies();
+
+    //                    function                    //
+    const navigator = useNavigate();
+
+    //                    effect                    //
+    useEffect(() => {
+        if (!accessToken || !expires) return;
+        const expiration = new Date(Date.now() + (Number(expires) * 1000));
+        setCookie('accessToken', accessToken, { path: '/', expires: expiration });
+
+        navigator(SIGN_IN_PATH);
+    }, []);
+
+    //                    render                    //
+    return <></>;
+}
+
+//                    type                    //
+type AuthPage = 'sign-in' | 'sign-up';
+
+//                    interface                    //
+interface SnsContainerProps {
+    title: string;
+}
+
+//                    component                    //
+function SnsContainer({ title }: SnsContainerProps) {
+
+    //                    event handler                    //
+    const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
+        window.location.href = 'http://localhost:4000/api/rentcar/auth/oauth2/' + type;
+    };
+
+    //                    render                    //
+    return (
+        <div className="authentication-sns-container">
+            <div className="sns-container-title label">{title}</div>
+            <div className="sns-button-container">
+                <div className="sns-button kakao-button" onClick={() => onSnsButtonClickHandler('kakao')}></div>
+                <div className="sns-button naver-button" onClick={() => onSnsButtonClickHandler('naver')}></div>
+            </div>
+        </div>
+    );
+}
+
+//                    interface                    //
+interface Props {
+    onLinkClickHandler: () => void
+}
+
+
+//                    component                    //
+export default function SignIn() {
+
+    //                    state                    //
+    const [page, setPage] = useState<AuthPage>('sign-in');
+
+    //                    state                    //
+    const [cookies, setCookie] = useCookies();
+
+    const [id, setId] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
+    const [message, setMessage] = useState<string>('');
+
+    //                    function                    //
+    const navigator = useNavigate();
+
+    const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
+
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' : 
+            result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
+            result.code === 'TF' ? '서버에 문제가 있습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        setMessage(message);
+
+        const isSuccess = result && result.code === 'SU';
+        if (!isSuccess) return;
+
+        const { accessToken, expires } = result as SignInResponseDto;
+        const expiration = new Date(Date.now() + (expires * 1000));
+        setCookie('accessToken', accessToken, { path: '/', expires: expiration });
+
+        navigator(MAIN_PATH);
+    };
+
+    //                    event handler                    //
+    const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setId(event.target.value);
+        setMessage('');
+    };
+
+    const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value);
+        setMessage('');
+    };
+
+    const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key !== 'Enter') return;
+        onSignInButtonClickHandler();
+    };
+
+    const onSignInButtonClickHandler = () => {
+        
+        if (!id || !password) {
+            setMessage('아이디와 비밀번호를 모두 입력하세요.');
+            return;
+        }
+
+        const requestBody: SignInRequestDto = {
+            userId: id,
+            userPassword: password
+        }
+        SignInRequest(requestBody).then(signInResponse);
+        
+    };
+
+    const onFindIdButtonClickHandler = () => {
+
+    }
+
+    const onFindPasswordButtonClickHandler = () => {
+
+    }
+
+    //                    event handler                    //
+    const onLinkClickHandler = () => {
+        if (page === 'sign-in') setPage('sign-up');
+        else setPage('sign-in');
+    };
+    
+    
+
+    //                    render                    //
+    return (
+
+        <div id="authentication-wrapper">
+            <div className="authentication-title h1">로그인</div>
+            <div className="authentication-contents">
+                <div className="authentication-input-container">
+                    <InputBox label="아이디" type="text" value={id} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} />
+                    <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onkeydownhandler={onPasswordKeydownHandler} message={message} error />
+                </div>
+                <div className="authentication-button-container">
+                    <div className="primary-button full-width" onClick={onSignInButtonClickHandler}>로그인</div>
+                </div>
+                <div className="other-authentication-button-container">
+                    <div className="moving-find-id-password">
+                        <div className="moving-find-id" onClick={ onFindIdButtonClickHandler }>아이디</div>
+                        <div className="moving-find-password" onClick={ onFindPasswordButtonClickHandler }>/비밀번호 찾기</div>
+                    </div>
+                    <div className="moving-sign-up" onClick={onLinkClickHandler}>회원가입</div>
+                </div>
+                <div className="short-divider"></div>
+                <SnsContainer title="SNS 로그인" />
+            </div>
+        </div>
+    );
+}

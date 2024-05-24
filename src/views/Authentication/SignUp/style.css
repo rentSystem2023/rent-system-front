@@ -5,29 +5,6 @@
     min-height: 1024px;
 }
 
-.authentication-image-box {
-    min-width: 830px;
-    background-size: cover;
-}
-
-.authentication-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    flex-grow: 1;
-    min-width: 610px;
-}
-
-.authentication-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-
-    width: 380px;
-}
-
 .authentication-title {
     color: rgba(64, 64, 64, 1);
 }
@@ -53,9 +30,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-
     width: 100%;
+
 }
 
 .authentication-sns-container {
@@ -66,9 +42,11 @@
 }
 
 .kakao-button {
-    background-image: url('../../assets/image/kakao-button.png');
+    background-image: url('../../../assets/image/kakao-button.png');
 }
 
 .naver-button {
-    background-image: url('../../assets/image/naver-button.png');
+    background-image: url('../../../assets/image/naver-button.png');
 }
+
+
