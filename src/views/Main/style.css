@@ -1,8 +1,37 @@
-#main-wrapper{
+#main-page-wrapper{
     display: flex;
-    gap: 24px;
+    flex-direction: column;
+}
 
-    margin: 0 auto;
-    width: 1182px;
-    min-height: 800px;
+.main-container-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.top-image {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 500px; 
+    background-size: cover; 
+    background-position: 55% 58%; 
+}
+.top-image.jeju {
+    background-image: url('../../assets/jejuImage/jejuSea.jpg');
+}
+
+.container-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.search-box{
+
+}
+
+.popular-car-box{
+
 }
