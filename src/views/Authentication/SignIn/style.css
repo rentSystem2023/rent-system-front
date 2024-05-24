@@ -1,12 +1,10 @@
 #authentication-wrapper {
     display: flex;
-    flex-direction: column;
 }
 
 .authentication-full {
     display: flex;
     flex-direction: column;
-
 }
 
 .authentication-title {
