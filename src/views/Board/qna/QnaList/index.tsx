@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getSearchBoardListRequest } from 'src/apis/qna/dto';
 import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/qna/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH, QNA_REGIST_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH,  QNA_REGIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { QnaListItem } from 'src/types';
 import './style.css'
@@ -216,13 +216,13 @@ export default function QnaList() {
           <div className='qna-list-top'>
               <div className='qna-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
               <div className='qna-list-top-right'>
-                    {loginUserRole === 'ROLE_USER' ? 
+                    {/* {loginUserRole === 'ROLE_USER' ?  */}
                     <div className='primary-button' onClick={onWriteButtonClickHandler}>글쓰기</div> :
                     <>
                     <div className={toggleClass} onClick={onToggleClickHandler}></div>
                     <div className='qna-list-top-admin-text'>미완료 보기</div>
                     </>
-}
+{/* } */}
               </div>
           </div>
           <div className='qna-list-table'>
