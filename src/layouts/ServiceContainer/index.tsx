@@ -34,8 +34,7 @@ function BottomBar() {
     export default function ServiceContainer() {
     return (
         <div id="wrapper">
-        <TopBar
-        />
+        <TopBar/>
         <div className="main-container">
             <Outlet />
         </div>
