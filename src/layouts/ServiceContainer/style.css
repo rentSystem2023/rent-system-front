@@ -2,8 +2,8 @@
     display: grid;
     grid-template: 
     "logo topbar" 77px
-    "main main" minmax(944px, auto)
-    / 257px minmax(1182px, 1fr);
+    "main main" 900px
+    "bottom bottom" 300px;
 }
 
 .logo-container {
@@ -61,4 +61,20 @@
 .main-container {
     grid-area: main;
     min-width: 1182px;
+}
+
+.bottom-container{
+    grid-area: bottom;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+    background-color: rgba(233, 236, 239, 1);
+
+    font-size: 15px;
+    font-style: normal;
+
+    color: rgba(64, 64, 64, 1);
 }
