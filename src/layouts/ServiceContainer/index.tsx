@@ -18,15 +18,28 @@ function TopBar() {
         </div>
         </>
     );
-    }
+}
+
+// TODO: 하단바에 넣을 내용 정해야함
+function BottomBar() {
+    return(
+        <>
+        <div className="bottom-container">
+            <div>하단바</div>
+        </div>
+        </>
+    );
+}
 
     export default function ServiceContainer() {
     return (
         <div id="wrapper">
-        <TopBar />
+        <TopBar
+        />
         <div className="main-container">
             <Outlet />
         </div>
+        <BottomBar/>
         </div>
     );
 }
