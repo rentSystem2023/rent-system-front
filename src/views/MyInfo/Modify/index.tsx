@@ -215,9 +215,9 @@ export default function MyInfoModify() {
 
                         <div className='information-joindate'>가입날짜</div>
                     </div>
-                    <div className='information-button'>
+                    <div className='information-modify-button'>
                         <div className={ myInfoModifyButtonClass } onClick={ onModifyButtonClickHandler }>수정하기</div>
-                        <div className='information-delete-button' onClick={ onDeleteButtonClickHandler } >삭제하기</div>
+                        <div className='information-delete-button' onClick={ onDeleteButtonClickHandler } >탈퇴하기</div>
                     </div>
                 </div>
             </div>
