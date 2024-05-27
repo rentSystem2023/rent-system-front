@@ -2,11 +2,13 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css'
 import { useUserStore } from 'src/stores';
 import { useNavigate } from 'react-router';
-import { AUTH_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { PostBoardRequestDto } from 'src/apis/board/dto/request';
-import { PostBoardRequest } from 'src/apis/board';
+import {  QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { PostQnaBoardRequestDto, PostQnaRequestDto, PutQnaRequestDto } from 'src/apis/qna/dto/request';
+import {  } from 'src/apis/qna/dto/request';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
+import { PostQnaRequest } from 'src/apis/qna/dto';
+
 
 
 
@@ -60,12 +62,13 @@ export default function QnAWrite() {
         if (!title.trim() || !contents.trim()) return; // 비어있으면 return
         if (!cookies.accessToken) return;
 
-        const requestBody: PostBoardRequestDto= {
+        const requestBody: PostQnaBoardRequestDto= {
             title,
             contents
+
         }
 
-        PostBoardRequest(requestBody,cookies.accessToken).then(postBoardResponse);
+        PostQnaRequest(requestBody,cookies.accessToken).then(postBoardResponse);
 
     };
 
