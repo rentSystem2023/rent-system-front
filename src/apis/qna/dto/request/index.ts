@@ -9,6 +9,7 @@ export interface PostQnaBoardRequestDto {
 
 // description: Q&A 게시물 답글 작성하기 Request Body DTO //
 export interface PostQnaRequestDto {
+    title: string;
     comment : string;
 }
 

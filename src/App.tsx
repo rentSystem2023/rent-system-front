@@ -64,8 +64,9 @@ function App() {
       </Route>
 
       <Route path={QNA_PATH} element={<QnAContainer />}>
-        <Route path={QNA_LIST_PATH} element={<QnaList/>}>
-        <Route path={QNA_DETAIL_PATH} element={<QnaDetail />} />
+        <Route path={QNA_LIST_PATH}>
+          <Route index element={<QnaList/>}/>
+          <Route path={QNA_DETAIL_PATH} element={<QnaDetail />} />
           <Route path={QNA_UPDATE_PATH}/>
         </Route>
         <Route path={QNA_REGIST_PATH}/>
