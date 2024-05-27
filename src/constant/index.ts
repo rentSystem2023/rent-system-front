@@ -85,7 +85,7 @@ export const NOTICE_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${NOTICE_PATH}/${NOTICE
 export const NOTICE_ABSOLUTE_UPDATE_PATH = (registNumber : number) => `${MAIN_PATH}/${NOTICE_PATH}/update/${registNumber}`;
 
 // Q&A 리스트 불러오기 URL
-export const QNA_LIST_ABSOLUTE_PATH = `/${QNA_PATH}/${QNA_LIST_PATH}`;
+export const QNA_LIST_ABSOLUTE_PATH = `${QNA_PATH}/${QNA_LIST_PATH}`;
 // Q&A 게시물 작성하기 URL
 export const QNA_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${QNA_PATH}/${QNA_REGIST_PATH}`;
 // Q&A 게시물 상세보기 URL
