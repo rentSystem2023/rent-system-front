@@ -1,0 +1,45 @@
+#information-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+}
+
+.information-main {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: auto;
+}
+
+.information-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(64, 64, 64, 1);
+}
+
+.information-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    border-radius: auto;
+    width: 100%;
+}
+
+.information-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    width: 100%;
+}
+
+.information-button {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+

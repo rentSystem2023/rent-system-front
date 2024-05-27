@@ -115,6 +115,8 @@ export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
 export const POST_SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-in`;
 // 아이디 중복 확인 URL
 export const POST_ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
+// 닉네임 중복 확인 URL
+export const POST_NICKNAME_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/nickname-check`;
 // 이메일 인증 번호 URL
 export const POST_EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth`;
 // 이메일 인증 확인 URL
