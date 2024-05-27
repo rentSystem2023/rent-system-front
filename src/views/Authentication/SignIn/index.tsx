@@ -44,7 +44,7 @@ function SnsContainer({ title }: SnsContainerProps) {
 
     //                    event handler                    //
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-        window.location.href = 'http://localhost:4000/api/rentcar/auth/oauth2/' + type;
+        window.location.href = 'http://localhost:3000/rentcar/auth/oauth2/' + type;
     };
 
     //                    render                    //
@@ -150,12 +150,12 @@ export default function SignIn() {
                         <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onkeydownhandler={onPasswordKeydownHandler} message={message} error />
                     </div>
                     <div className="authentication-button-container">
-                        <div className="primary-button" onClick={onSignInButtonClickHandler}>로그인</div>
+                        <div className="primary-button" onClick={onSignInButtonClickHandler}full-width >로그인</div>
                     </div>
                     <div className="other-authentication-button-container">
                         <div className="moving-find-id-password">
-                            <div className="moving-find-id" onClick={ onFindIdButtonClickHandler }>아이디</div>
-                            <div className="moving-find-password" onClick={ onFindPasswordButtonClickHandler }>/비밀번호 찾기</div>
+                            <div className="moving-find-id" onClick={ onFindIdButtonClickHandler }>아이디/</div>
+                            <div className="moving-find-password" onClick={ onFindPasswordButtonClickHandler }>비밀번호 찾기</div>
                         </div>
                         <div className="moving-sign-up" onClick={ onSignUpButtonClickHandler }>회원가입</div>
                     </div>

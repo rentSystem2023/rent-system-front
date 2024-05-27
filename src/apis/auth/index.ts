@@ -3,6 +3,7 @@ import {
     POST_EMAIL_AUTH_REQUEST_URL,
     POST_EMAIL_AUTH_CHECK_REQUEST_URL,
     POST_ID_CHECK_REQUEST_URL,
+    POST_NICKNAME_CHECK_REQUEST_URL,
     POST_SIGN_UP_REQUEST_URL,
     POST_SIGN_IN_REQUEST_URL,
 } from "src/constant";
@@ -10,6 +11,7 @@ import {
     EmailAuthCheckRequestDto,
     EmailAuthRequestDto,
     IdCheckRequestDto,
+    NickNameCheckRequestDto,
     SignInRequestDto,
     SignUpRequestDto,
 } from "./dto/request";
@@ -34,6 +36,15 @@ export const IdCheckRequest = async (requestBody: IdCheckRequestDto) => {
         .catch(requestErrorHandler);
     return result;
 };
+
+// function: 닉네임 중복 확인 API 함수
+export const NickNameCheckRequest = async (requestBody: NickNameCheckRequestDto) => {
+    const result = await axios
+        .post(POST_NICKNAME_CHECK_REQUEST_URL, requestBody)
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+}
 
 // function: 이메일 인증 API 함수
 export const emailAuthRequest = async (requestBody: EmailAuthRequestDto) => {
