@@ -8,7 +8,7 @@ import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardLi
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "src/apis";
 
 // function : Q&A 작성 API 함수 
-export const PostBoardRequest = async(requestBody: PostQnaBoardRequestDto, accessToken: string) => {
+export const PostQnaRequest = async(requestBody: PostQnaBoardRequestDto, accessToken: string) => {
     const result = await axios.post(POST_QNA_REGIST_URL, requestBody,bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
