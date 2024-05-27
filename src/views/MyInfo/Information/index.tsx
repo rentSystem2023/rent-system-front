@@ -5,13 +5,22 @@ import ResponseDto from 'src/apis/response.dto';
 import { USER_INFO_MODIFY_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
+import { useUserStore } from 'src/stores';
 
 //                    component                    //
 export default function MyInfo() {
 
     //                    state                    //
     const [cookies, setCookie] = useCookies();
-
+    const { 
+        loginNickName, setLoginNickName,
+        loginUserId, setLoginUserId,
+        loginUserPassword, setLoginUserPassword,
+        userEmail, setUserEmail,
+        authNumber, setAuthNumber,
+        loginUserRole, setLoginUserRole,
+        joinDate, setJoinDate
+        } = useUserStore();
 
 
     //                    function                    //
@@ -35,6 +44,7 @@ export default function MyInfo() {
                 <div className='information-title h1'>내 정보</div>
                 <div className='information-contents'>
                     <div className='information-container'>
+                        
                         <div className='information-nickname'>닉네임</div>
                         <div className='information-id'>아이디</div>
                         <div className='information-password'>비밀번호</div>
