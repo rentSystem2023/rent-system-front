@@ -1,9 +1,11 @@
 #wrapper {
     display: grid;
-    grid-template: 
-    "logo topbar" 77px
-    "main main" 900px
-    "bottom bottom" 300px;
+    grid-template-columns: 257px minmax(1182px, 1fr);
+    grid-template-rows: 80px minmax(944px, auto) 300px;
+    grid-template-areas:
+        "logo topbar"
+        "main main"
+        "footer footer";
 }
 
 .logo-container {
@@ -64,13 +66,12 @@
 }
 
 .bottom-container{
-    grid-area: bottom;
+    grid-area: footer;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-size: cover;
     background-color: rgba(233, 236, 239, 1);
 
     font-size: 15px;
