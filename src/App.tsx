@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import Main from './views/Main';
 import SignIn from './views/Authentication/SignIn';
 import SignUp from './views/Authentication/SignUp';
+import QnaDetail from './views/Board/qna/QnaDetail';
 
 function Index() {
   
@@ -64,7 +65,7 @@ function App() {
 
       <Route path={QNA_PATH} element={<QnAContainer />}>
         <Route path={QNA_LIST_PATH} element={<QnaList/>}>
-          <Route path={QNA_DETAIL_PATH}/>
+          <Route path={QNA_DETAIL_PATH} element={<QnaDetail/>}/>
           <Route path={QNA_UPDATE_PATH}/>
         </Route>
         <Route path={QNA_REGIST_PATH}/>

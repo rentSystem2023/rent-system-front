@@ -24,11 +24,13 @@ export interface noticeListItem{
 
 export interface QnaListItem {
     receptionNumber: number;
-    status: boolean;
-    title: string;
-    writerId:string;
-    writeDatetime: string;
-    viewCount: number;
+    writeDatetime : string;
+    title : string;
+    writerId : string;
+    viewCount : number;
+    category : string;
+    publicState : boolean;
+    status : string;
 };
 
 export interface QnaMyListItem {
