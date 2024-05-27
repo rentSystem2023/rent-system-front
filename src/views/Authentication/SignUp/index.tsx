@@ -67,6 +67,7 @@ export default function SignUp() {
     const [nickName, setNickName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
+    // const [setJoinPath, setSnsId] = useState<String>('');
 
     const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
     const [nickNameButtonStatus, setNickNameButtonStatus] = useState<boolean>(false);
