@@ -9,20 +9,20 @@ export const SIGN_UP_PATH = 'sign-up';
 export const USER_PATH = 'user';
 export const USER_INFO_PATH = 'information';
 export const USER_UPDATE_PATH = 'modify';
-export const USER_LIST_PATH = 'list';
+export const USER_LIST_PATH = 'admin/list';
 export const USER_DETAIL_PATH = ':userId';
 
 export const RESERVATION_PATH = 'reservation';
 export const RESERVATION_MY_LIST_PATH = 'mylist';
 export const RESERVATION_MY_DETAIL_PATH = ':reservationCode';
-export const RESERVATION_LIST_PATH = 'list';
+export const RESERVATION_LIST_PATH = 'admin/list';
 
 export const RESERVATION_INSURANCE_PATH = 'insurance';
 export const RESERVATION_INQURY_INSURANCE_PATH = 'insurance-detail';
 
 export const NOTICE_PATH = 'notice';
 export const NOTICE_LIST = 'list'
-export const NOTICE_REGIST_PATH = 'regist';
+export const NOTICE_REGIST_PATH = 'admin/regist';
 export const NOTICE_DETAIL_PATH = ':registNumber';
 export const NOTICE_UPDATE_PATH = 'update/:registNumber';
 
@@ -33,10 +33,26 @@ export const QNA_DETAIL_PATH = ':receptionNumber';
 export const QNA_UPDATE_PATH = 'update/:receptionNumber';
 export const QNA_MY_LIST_PATH = 'myList';
 
+//! 사용하지 않음 !//
 export const COMPANY_PATH = 'company';
-export const COMPANY_LIST_PATH = 'list';
+export const COMPANY_LIST_PATH = 'admin/list';
 export const COMPANY_REGIST_PATH = 'regist';
 export const COMPANY_UPDATE_PATH = 'update/:companyCode';
+//! 사용하지 않음 !//
+
+export const ADMIN_PATH = 'admin';
+export const ADMIN_USER_PATH = 'user';
+export const ADMIN_USER_DETAIL_PATH = ':userId';
+export const ADMIN_COMPANY_PATH = 'company';
+export const ADMIN_COMPANY_REGIST_PATH = 'regist';
+export const ADMIN_COMPANY_UPDATE_PATH = 'update/:companyCode';
+export const ADMIN_RESERVATION_PATH = 'reservation';
+export const ADMIN_RESERVATION_UPDATE_PATH = 'update/:reservationCode';
+export const ADMIN_BOARD_PATH = 'board';
+export const ADMIN_BOARD_NOTICE_PATH = 'notice';
+export const ADMIN_BOARD_NOTICE_WRITE_PATH = 'write';
+export const ADMIN_BOARD_NOTICE_UPDATE_PATH = 'update/:registNumber';
+export const ADMIN_BOARD_QNA_PATH = 'qna';
 
 //description : Navigation 절대 URL PATH
 // rentcar 메인 URL
@@ -101,6 +117,9 @@ export const COMPANY_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${COMPANY_PATH}/${COMPAN
 export const COMPANY_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${COMPANY_PATH}/${COMPANY_REGIST_PATH}`;
 // 업체 정보 수정하기 URL
 export const COMPANY_UPDATE_ABSOLUTE_PATH = (companyCode : number) => `${MAIN_PATH}/${COMPANY_PATH}/update/${companyCode}`;
+
+export const ADMIN_USER_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_USER_PATH}`
+export const ADMIN_BOARD_NOTICE_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_BOARD_PATH}/${ADMIN_BOARD_NOTICE_PATH}`;
 
 // description : 도메인 URL
 export const SERVER_DOMAIN_URL = 'http://localhost:4000';
