@@ -19,12 +19,23 @@ export interface GetMyInfoResponseDto extends ResponseDto{
     joinDate: Date;
 }
 
+// description: 내 정보 수정 Response Body DTO
+export interface PatchUserRequestDto extends ResponseDto {
+    userId: string;
+    userPassword: string;
+    nickName: string;
+    userEmail: string;
+    userRole: String;
+    joinPath: String;
+    joinDate: Date;
+}
+
 // description: 유저 리스트 불러오기 Response Body DTO
 export interface GetUserListResponseDto extends ResponseDto {
     boardList: UserListItem[];
 }
 
 // description: 유저 검색 리스트 불러오기 Response Body DTO
-export interface GetSearchUserListResponseDto extends ResponseDto{
+export interface GetSearchUserListResponseDto extends ResponseDto {
     boardList: UserListItem[];
 }

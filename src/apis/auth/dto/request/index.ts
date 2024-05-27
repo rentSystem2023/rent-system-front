@@ -9,6 +9,11 @@ export interface IdCheckRequestDto {
     userId: string;
 }
 
+// description: 닉네임 중복확인 Request Body DTO 
+export interface NickNameCheckRequestDto {
+    nickName: string;
+}
+
 // description: 이메일 인증 Request Body DTO 
 export interface EmailAuthRequestDto {
     userEmail: string;
