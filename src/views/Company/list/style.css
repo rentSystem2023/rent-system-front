@@ -1,0 +1,239 @@
+
+#company-list-wrapper{
+    display: grid;
+    grid-template: 
+    "sidenav main" minmax(1344px, auto)
+    / 257px minmax(1182px, 1fr);
+}
+
+.company-list-wrapper {
+    padding: 60px;
+}
+
+.company-list-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 12px;
+}
+
+.company-list-size-text {
+    font-size: 16px;
+    font-weight: 400;
+
+    color: rgba(138, 146, 166, 1);
+}
+
+.company-list-size-text .emphasis {
+    color: rgba(64, 64, 64, 1);
+}
+
+.company-list-top-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.company-list-top-admin-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.company-list-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 8px;
+
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.company-list-table-th {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    padding: 15px 24px;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.company-list-table-tr {
+    display: flex;
+    align-items: center;
+    gap: 95px;
+
+    border-top: 1px solid rgba(238, 238, 238, 1);
+    padding: 15px 24px;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.company-list-table-tr:hover{
+    cursor: pointer;
+    background-color: rgba(238, 238, 238, 0.2);
+}
+
+/* 체크 */
+.company-list-table-check {
+    width: 30px;
+}
+
+/* 순번 */
+.company-list-table-list-number {
+    width: 30px;
+}
+
+/* 고유번호 */
+.company-list-table-comapny-code {
+    width: 60px;
+}
+
+/* 업체명 */
+.company-list-table-company-name {
+    width: 250px;
+}
+
+/* 주소 */
+.company-list-table-company-address {
+    width: 250px;
+}
+
+/* 담당자 */
+.company-list-table-company-owner{
+    width: 60px;
+}
+
+/* 연락처 */
+.company-list-table-company-telnumber {
+    width: 60px;
+}
+
+/* 등록일 */
+.company-list-table-company-date {
+    width: 60px;
+}
+
+.company-list-table-title {
+    width: 349px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.company-list-table-writer-id {
+    width: 67px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.company-list-table-write-date {
+    width: 54px;
+}
+
+.company-list-table-viewcount {
+    width: 42px;
+}
+
+
+.company-list-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+}
+
+.company-list-pagenation {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.company-list-page-left {
+    width: 40px;
+    height: 40px;
+
+    /* background-image: url('../../../../assets/image/page-left.png'); */
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.company-list-page-right {
+    width: 40px;
+    height: 40px;
+/* 
+    background-image: url('../../../../assets/image/page-right.png'); */
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.company-list-page-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.company-list-page {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    color: rgba(138, 146, 166, 1);
+
+    cursor: pointer;
+}
+
+.company-list-page-active {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    color: rgba(64, 64, 64, 1);
+
+    cursor: default;
+}
+
+.company-list-search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.company-list-search-input-box {
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    padding: 8px 16px;
+    width: 168px;
+
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.company-list-search-input {
+    border: none;
+    outline: none;
+    background: none;
+
+    width: 100%;
+
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(64, 64, 64, 1);
+}
