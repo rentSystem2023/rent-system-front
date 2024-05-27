@@ -11,6 +11,8 @@ import Main from './views/Main';
 import SignIn from './views/Authentication/SignIn';
 import SignUp from './views/Authentication/SignUp';
 import QnaDetail from './views/Board/qna/QnaDetail';
+import MyInfo from './views/MyInfo/Information';
+import MyInfoModify from './views/MyInfo/Modify';
 
 function Index() {
   
@@ -48,7 +50,8 @@ function App() {
 
       <Route path={USER_PATH}>
         <Route path={USER_INFO_PATH}>
-          <Route path={USER_UPDATE_PATH}/>
+          <Route index element={<MyInfo/>}/>
+          <Route path={USER_UPDATE_PATH} element={<MyInfoModify/>}/>
         </Route>
         <Route path={USER_LIST_PATH}>
           <Route path={USER_DETAIL_PATH}/>
