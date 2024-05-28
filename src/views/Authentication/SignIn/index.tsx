@@ -134,7 +134,7 @@ export default function SignIn() {
     return (
 
         <div id="authentication-wrapper">
-            <div className="authentication-full">
+            <div className="authentication-sign-in">
                 <div className="title-text">로그인</div>
                 <div className="authentication-contents">
                     <div className="authentication-input-container">

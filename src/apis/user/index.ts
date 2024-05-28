@@ -1,10 +1,17 @@
 import axios from "axios";
-import { GET_MY_INFO_URL, PATCH_MODIFY_MY_INFO_URL, POST_EMAIL_AUTH_CHECK_REQUEST_URL, POST_EMAIL_AUTH_REQUEST_URL } from "src/constant";
+import { GET_MY_INFO_URL, GET_SIGN_IN_USER_REQUEST_URL, PATCH_MODIFY_MY_INFO_URL, POST_EMAIL_AUTH_CHECK_REQUEST_URL, POST_EMAIL_AUTH_REQUEST_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, PatchMyInfoRequestDto } from "./dto/request";
-import { GetMyInfoResponseDto, PatchMyInfoResponseDto } from "./dto/response";
+import { GetMyInfoResponseDto, GetSignInUserResponseDto, PatchMyInfoResponseDto } from "./dto/response";
 
+// function: 로그인 유저 정보 불러오기 API 함수
+export const getSignInUserRequest = async (accessToken: string) => {
+    const result = await axios.get(GET_SIGN_IN_USER_REQUEST_URL, bearerAuthorization(accessToken))
+        .then(requestHandler<GetSignInUserResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
 
 // function: 이메일 인증 API 함수
 export const emailAuthRequest = async (requestBody: EmailAuthRequestDto) => {
