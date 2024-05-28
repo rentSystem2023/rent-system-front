@@ -4,15 +4,14 @@
     margin: 20px auto;
 }
 
-.authentication-full {
+.authentication-sign-in {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 300px;
     margin: auto;
     padding: 30px;
-    /* border: black 1px solid; */
-    background-color: rgb(204, 225, 238);
+    /* border: gray 1px solid; */
 }
 
 .authentication-title {
