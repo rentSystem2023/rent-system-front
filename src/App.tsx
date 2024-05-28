@@ -145,8 +145,8 @@ function App() {
 
         {/* // route : 마이 페이지 */}
         <Route path={USER_PATH} element={<UserContainer />}>
-          <Route index element={<>내 정보</>} />
-          <Route path={USER_UPDATE_PATH} element={<>내 정보 수정</>} />
+          <Route index element={<MyInfo />} />
+          <Route path={USER_UPDATE_PATH} element={<MyInfoModify />} />
           <Route path={USER_RESERVATION_PATH} element={<>예약내역</>} />
           <Route path={USER_QNA_PATH} element={<>문의내역</>} />
         </Route>
