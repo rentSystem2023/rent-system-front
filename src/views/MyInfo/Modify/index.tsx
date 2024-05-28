@@ -1,19 +1,26 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import ResponseDto from 'src/apis/response.dto';
-import { emailAuthCheckRequest, emailAuthRequest, myInfoModifyRequest } from 'src/apis/user';
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, MyInfoModifyRequestDto } from 'src/apis/user/dto/request';
+import { emailAuthCheckRequest, emailAuthRequest, patchMyInfoRequest } from 'src/apis/user';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, PatchMyInfoRequestDto } from 'src/apis/user/dto/request';
+import { PatchMyInfoResponseDto } from 'src/apis/user/dto/response';
 import InputBox from 'src/components/Inputbox';
-import { USER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
 
 //                    component                    //
 export default function MyInfoModify() {
 
     //                    state                    //
+    const [cookies] = useCookies();
+    const [nickName, setNickName] = useState<string>('');
+    const [userId, setUserId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordCheck, setPasswordCheck] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
+    const [joinDate, setJoinDate] = useState<string>('');
+    const [status, setStatus] = useState<string>('');
 
     const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
     const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
@@ -32,9 +39,11 @@ export default function MyInfoModify() {
 
     const isMyInfoModifyActive = isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqualPassword;
 
-    const myInfoModifyButtonClass = `${isMyInfoModifyActive ? 'primary' : 'disable'}-button full-width`;
 
     //                    function                    //
+    const navigator = useNavigate();
+
+    
     const emailAuthResponse = (result: ResponseDto | null) => {
 
         const emailMessage = 
@@ -70,7 +79,7 @@ export default function MyInfoModify() {
 
     };
 
-    const myInfoModifyResponse = (result: ResponseDto | null) => {
+    const patchMyInfoResponse = (result: PatchMyInfoResponseDto | ResponseDto | null) => {
 
         const message = 
             !result ? '서버에 문제가 있습니다.' :
@@ -86,10 +95,11 @@ export default function MyInfoModify() {
             return;
         }
 
+        navigator(MAIN_ABSOLUTE_PATH);
+
     };
 
     //                    event handler                    //
-    const navigator = useNavigate();
 
     const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
@@ -170,7 +180,7 @@ export default function MyInfoModify() {
         emailAuthCheckRequest(requestBody).then(emailAuthCheckResponse);
     };
 
-    const onModifyButtonClickHandler = () => {
+    const onPatchButtonClickHandler = () => {
 
         if(!isMyInfoModifyActive) return;
         if(!password || !passwordCheck || !email || !authNumber) {
@@ -178,14 +188,13 @@ export default function MyInfoModify() {
             return;
         }
 
-        const requestBody: MyInfoModifyRequestDto = {
+        const requestBody: PatchMyInfoRequestDto = {
             userPassword: password,
             userEmail: email,
             authNumber,
         }
         
-        myInfoModifyRequest(requestBody).then(myInfoModifyResponse);
-
+        patchMyInfoRequest(requestBody).then(patchMyInfoResponse);
         navigator(USER_INFO_ABSOLUTE_PATH);
     }
 
@@ -194,29 +203,38 @@ export default function MyInfoModify() {
 
     }
 
+    //                  effect                      //
+    useEffect (() => {
+        if (!cookies.accessToken) return;
+        patchMyInfoRequest(cookies.accessToken).then(patchMyInfoResponse);
+    }, []);
+
 
   return (
     <div id='information-wrapper'>
             <div className='information-main'>
-                <div className='information-title h1'>내 정보</div>
+                <div className='information-title h1'>내 정보 수정</div>
                 <div className='information-contents'>
                     <div className='information-container'>
-                        <div className='information-nickname'>닉네임</div>
-                        <div className='information-id'>아이디</div>
+                        <div className='information-input-title'>닉네임</div>
+                        <input className='input' type="text" value={nickName} readOnly />
+                        <div className='information-input-title'>아이디</div>
+                        <input className='input' type="text" value={userId} readOnly />
 
                         <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
 
                         <InputBox label="비밀번호 확인" type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
 
-                        <InputBox label="이메일" type="text" value={email} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
+                        <InputBox label="이메일" type="text" value={email} placeholder={ email } onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
 
                         {isEmailCheck && 
                         <InputBox label="인증번호" type="text" value={authNumber} placeholder="인증번호 4자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
 
-                        <div className='information-joindate'>가입날짜</div>
+                        <div className='information-input-title'>가입날짜</div>
+                        <div className='information-joindate-input'>{ joinDate }</div>
                     </div>
                     <div className='information-modify-button'>
-                        <div className={ myInfoModifyButtonClass } onClick={ onModifyButtonClickHandler }>수정하기</div>
+                        <div className='primary-button' onClick={ onPatchButtonClickHandler }>수정하기</div>
                         <div className='information-delete-button' onClick={ onDeleteButtonClickHandler } >탈퇴하기</div>
                     </div>
                 </div>
