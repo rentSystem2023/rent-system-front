@@ -1,37 +1,18 @@
-import { create } from 'zustand';
+import { create } from "zustand"; // domain X
 
 interface UserStore {
-    loginNickName: string,
-    setLoginNickName: (LoginNickName: string) => void;
     loginUserId: string,
-    setLoginUserId: (loginUserId: string) => void;
-    loginUserPassword: string,
-    setLoginUserPassword: (loginUserPassword: string) => void;
-    userEmail: string,
-    setUserEmail: (UserEmail: string) => void;
-    authNumber: string,
-    setAuthNumber: (authNumber: string) => void;
+    setLoginUserId: (loginUserId: string) => void,
     loginUserRole: string,
-    setLoginUserRole: (loginUserRole: string) => void; //함수로 지정
-    joinDate: string,
-    setJoinDate: (JoinDate: string) => void;
+    setLoginUserRole: (loginUserRole: string) => void, 
 }
 
 const useUserStore = create<UserStore>(set => ({
-    loginNickName: '',
-    setLoginNickName: (loginNickName: string) => set(state => ({...state, loginNickName})),
+    // 객체
     loginUserId: '',
-    setLoginUserId: (loginUserId: string) => set(state => ({...state, loginUserId})),
-    loginUserPassword: '',
-    setLoginUserPassword: (loginUserPassword: string) => set(state  => ({...state, loginUserPassword})),
-    userEmail: '',
-    setUserEmail: (userEmail: string) => set(state => ({...state, userEmail})),
-    authNumber: '',
-    setAuthNumber: (authNumber: string) => set(state => ({ ...state, authNumber})),
+    setLoginUserId: (loginUserId: string) => set(state => ({ ...state, loginUserId })),
     loginUserRole: '',
-    setLoginUserRole: (loginUserRole: string) => set(state => ({ ...state, loginUserRole })),
-    joinDate: '',
-    setJoinDate: (joinDate: string) => set(state => ({...state, joinDate})),
+    setLoginUserRole: (loginUserRole: string) => set(state => ({ ...state, loginUserRole }))
 }));
 
 export default useUserStore;
