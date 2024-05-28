@@ -2,9 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import ResponseDto from 'src/apis/response.dto';
-import { emailAuthCheckRequest, emailAuthRequest, patchMyInfoRequest } from 'src/apis/user';
+import { emailAuthCheckRequest, emailAuthRequest, getMyInfoRequest, patchMyInfoRequest } from 'src/apis/user';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, PatchMyInfoRequestDto } from 'src/apis/user/dto/request';
-import { PatchMyInfoResponseDto } from 'src/apis/user/dto/response';
+import { GetMyInfoResponseDto, PatchMyInfoResponseDto } from 'src/apis/user/dto/response';
 import InputBox from 'src/components/Inputbox';
 import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
 
@@ -21,6 +21,7 @@ export default function MyInfoModify() {
     const [authNumber, setAuthNumber] = useState<string>('');
     const [joinDate, setJoinDate] = useState<string>('');
     const [status, setStatus] = useState<string>('');
+    const [userRole, setUserRole] = useState<String>('');
 
     const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
     const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
@@ -42,6 +43,32 @@ export default function MyInfoModify() {
 
     //                    function                    //
     const navigator = useNavigate();
+
+    const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            if (result?.code === 'AF') {
+                navigator(MAIN_ABSOLUTE_PATH);
+                return;
+            }
+            navigator(USER_INFO_ABSOLUTE_PATH);
+            return;
+        }
+
+        if (!cookies.accessToken) return;
+        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+
+        setNickName(nickName);
+        setUserId(userId);
+        setJoinDate(joinDate);
+        setUserRole(userRole);
+
+    };
 
     
     const emailAuthResponse = (result: ResponseDto | null) => {
@@ -84,7 +111,6 @@ export default function MyInfoModify() {
         const message = 
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
-            result.code === 'DI' ? '이미 사용중인 아이디입니다.' :
             result.code === 'DE' ? '중복된 이메일입니다.' :
             result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
@@ -220,7 +246,7 @@ export default function MyInfoModify() {
                         <div className='information-input-title'>닉네임</div>
                         <input className='input' type="text" value={ nickName } />
                         <div className='information-input-title'>아이디</div>
-                        <input className='input' type="text" value={userId} readOnly />
+                        <input className='input' type="text" value={ userId } readOnly />
 
                         <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
 
