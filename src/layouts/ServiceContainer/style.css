@@ -26,6 +26,11 @@
     color: rgba(64, 64, 64, 1);
 }
 
+.logo-container:hover{
+    cursor: pointer;
+    opacity: 0.85;
+}
+
 .top-bar-container {
     grid-area: topbar;
 
@@ -40,7 +45,7 @@
     padding: 0 24px;
 }
 
-.board-button {
+.top-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +60,7 @@
     color: rgba(64, 64, 64, 1);
 }
 
-.board-button:hover {
+.top-button:hover {
     cursor: pointer;
     opacity: 0.85;
 }
