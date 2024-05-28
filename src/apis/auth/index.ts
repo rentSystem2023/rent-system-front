@@ -6,10 +6,12 @@ import {
     POST_NICKNAME_CHECK_REQUEST_URL,
     POST_SIGN_UP_REQUEST_URL,
     POST_SIGN_IN_REQUEST_URL,
+    POST_FIND_ID_REQUEST_URL,
 } from "src/constant";
 import {
     EmailAuthCheckRequestDto,
     EmailAuthRequestDto,
+    FindIdRequestDto,
     IdCheckRequestDto,
     NickNameCheckRequestDto,
     SignInRequestDto,
@@ -74,3 +76,12 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
         .catch(requestErrorHandler);
     return result;
 };
+
+// function: 아이디 찾기 API 함수
+export const findIdRequest = async (requestBody: FindIdRequestDto) => {
+    const result = await axios
+        .post(POST_FIND_ID_REQUEST_URL, requestBody)
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+}
