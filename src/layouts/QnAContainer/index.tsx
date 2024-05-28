@@ -8,10 +8,10 @@ export default function QnAContainer() {
 
   return (
     <div>
-        { loginUserRole === 'ROLE_ADMIN' ?
+        {/* { loginUserRole === 'ROLE_ADMIN' ?
         <div>관리자</div> :
         <div>사용자</div>
-        }
+        } */}
         <Outlet />
     </div>
   )

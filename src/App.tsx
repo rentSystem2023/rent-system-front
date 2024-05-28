@@ -55,6 +55,7 @@ import MyInfo from "./views/MyInfo/Information";
 import MyInfoModify from "./views/MyInfo/Modify";
 import AdminContainer from "./layouts/AdminContainer";
 import UserContainer from "./layouts/UserContainer";
+import QnAWrite from "./views/Board/qna/QnaWrite";
 
 //          component:  //
 function Index() {
@@ -159,9 +160,9 @@ function App() {
 
         {/* // route : Q&A 페이지 */}
         <Route path={QNA_PATH} element={<QnAContainer />}>
-          <Route index element={<>Q&A 리스트</>} />
-          <Route path={QNA_DETAIL_PATH} element={<>Q&A 상세</>} />
-          <Route path={QNA_REGIST_PATH} element={<>Q&A 작성</>} />
+          <Route index element={<QnaList/>} />
+          <Route path={QNA_DETAIL_PATH} element={<QnaDetail/>} />
+          <Route path={QNA_REGIST_PATH} element={<QnAWrite/>} />
           <Route path={QNA_UPDATE_PATH} element={<>Q&A 수정</>} />
         </Route>
 
