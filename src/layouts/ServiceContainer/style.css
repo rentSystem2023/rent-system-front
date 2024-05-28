@@ -42,7 +42,7 @@
 .top-bar-button {
     display: flex;
     align-items: center;
-    padding: 0 24px;
+    padding: 0 20px;
 }
 
 .top-button {
@@ -50,14 +50,58 @@
     justify-content: center;
     align-items: center;
 
-    padding: 8px 24px;
+    padding: 8px 12px;
 
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 550;
     line-height: 173%;
 
     color: rgba(64, 64, 64, 1);
+}
+
+.sign-in-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top-bar-role{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: 173%;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.user-mypage-button{
+    height: 37px;
+    width: 37px;
+    background-position: 55% 58%;
+}
+.user-mypage-button.person{
+    background-image: url('../../assets/image/login-icon.png');
+}
+.user-button:hover{
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+.logout-button{
+    background-color: rgba(238, 238, 238, 1);
+    border-radius: 8px;
+    padding: 5px 15px 5px;
+}
+
+.logout-button:hover{
+    cursor: pointer;
+    opacity: 0.85;
 }
 
 .top-button:hover {
