@@ -5,10 +5,6 @@ import { MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, 
 
 type Path = '로고' | '공지사항' | '문의사항' | '로그인' | '회원가입' | '';
 
-interface Props {
-    path: Path;
-}
-
 // TODO: 로그인, 회원가입에 아이콘 넣어야함
 function TopBar() {
 
