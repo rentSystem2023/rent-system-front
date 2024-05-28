@@ -3,8 +3,6 @@ import "./style.css";
 import { useEffect, useState } from "react";
 import { AUTH_FIND_PASSWORD_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH } from "src/constant";
 
-type Path = '로고' | '공지사항' | '문의사항' | '로그인' | '회원가입' | '';
-
 // TODO: 로그인, 회원가입에 아이콘 넣어야함
 function TopBar() {
 

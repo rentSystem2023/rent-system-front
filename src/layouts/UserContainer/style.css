@@ -9,9 +9,9 @@
     grid-area: main;
 }
 
-.side-navigation-container {
+.user-side-navigation-container {
     grid-area: sidenav;
-    padding: 16px 25px;
+    padding: 250px 20px;
 
     display: flex;
     flex-direction: column;
@@ -20,12 +20,11 @@
     border-right: none;  
 }
 
-.side-navigation-item {
+.user-side-navigation-item {
     border-radius: 6px;
     padding: 8px 24px;
 
     display: flex;
-
     align-items: center;
     gap: 16px;
 
@@ -37,50 +36,55 @@
     line-height: normal;  
 }
 
-.side-navigation-item:hover {
+.user-side-navigation-item:hover {
     cursor: pointer;
     opacity: 0.85;
 }
 
-.side-navigation-item.active {
+.user-side-navigation-item.active {
     background-color: rgba(138, 146, 166, 1);
     color: rgba(255, 255, 255, 1);
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;  
 }
 
-.side-navigation-icon {
+.user-side-navigation-icon {
     width: 24px;
     height: 24px;
     background-size: 100% 100%;
 }
-/* 
-.side-navigation-icon.person {
+
+.user-side-navigation-icon.person {
     background-image: url('../../assets/image/person.png');
 }
     
-.active > .side-navigation-icon.person {
+.active > .user-side-navigation-icon.person {
         background-image: url('../../assets/image/person.png');
 }
 
-.side-navigation-icon.office {
-    background-image: url('../../assets/image/office.png');
+.user-side-navigation-icon.car {
+    background-image: url('../../assets/image/car.png');
 }
     
-.active > .side-navigation-icon.office {
-        background-image: url('../../assets/image/office.png');
+.active > .user-side-navigation-icon.car {
+        background-image: url('../../assets/image/car.png');
 }
     
-.side-navigation-icon.check {
+.user-side-navigation-icon.check {
     background-image: url('../../assets/image/check.png');
 }
     
-.active > .side-navigation-icon.check {
+.active > .user-side-navigation-icon.check {
     background-image: url('../../assets/image/check.png');
 }
     
-.side-navigation-icon.board {
+.user-side-navigation-icon.board {
     background-image: url('../../assets/image/board.png');
 }
     
-.active > .side-navigation-icon.board {
+.active > .user-side-navigation-icon.board {
     background-image: url('../../assets/image/board.png');
-} */
+}

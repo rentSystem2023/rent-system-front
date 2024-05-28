@@ -172,7 +172,7 @@ function App() {
           <Route index element={<AdminUserIndex />} />
           {/* // route : 관리자 - 회원관리 페이지 */}
           <Route path={ADMIN_USER_PATH}>
-            <Route index element={<div style={{ backgroundColor: 'red' }}>asdasd</div>} />
+            <Route index element={<>회원관리 리스트</>} />
             <Route path={ADMIN_USER_DETAIL_PATH} element={<>회원 상세 보기</>} />
           </Route>
 
