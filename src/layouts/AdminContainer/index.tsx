@@ -1,8 +1,14 @@
 import React from 'react'
 import "./style.css";
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+
+type Path = '회원 관리' | '업체 관리' | '예약 관리' | '게시물 관리' | ''; 
 
 function SideBar () {
+
+    const navigator = useNavigate();
+    
+
     return (
         <div className="side-navigation-container">
             <div className="side-navigation-item">

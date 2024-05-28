@@ -1,113 +1,139 @@
-// description : URL PATH
+// constant : URL PATH //
+// description: 메인 페이지 URL //
 export const MAIN_PATH = '/rentcar';
+
+// description: 인증 페이지 URL //
+export const AUTH_PATH = 'auth';
+export const AUTH_SIGN_IN_PATH = 'sign-in';
+export const AUTH_SIGN_UP_PATH = 'sign-up';
+export const AUTH_FIND_ID_PATH = 'find-id';
+export const AUTH_FIND_PASSWORD_PATH = 'find-password';
 export const SNS_PATH = '/sns/:accessToken/:expires';
 
-export const AUTH_PATH = 'auth';
-export const SIGN_IN_PATH = 'sign-in';
-export const SIGN_UP_PATH = 'sign-up';
-
-export const USER_PATH = 'user';
-export const USER_INFO_PATH = 'information';
-export const USER_UPDATE_PATH = 'modify';
-
+// description: 예약 페이지 URL //
 export const RESERVATION_PATH = 'reservation';
-export const RESERVATION_MY_LIST_PATH = 'mylist';
-export const RESERVATION_MY_DETAIL_PATH = ':reservationCode';
+export const RESERVATION_CAR_PATH = 'car';
+export const RESERVATION_COMPANY_PATH = 'company';
+export const RESERVATION_REQUEST_PATH = 'request';
 
-export const RESERVATION_INSURANCE_PATH = 'insurance';
-export const RESERVATION_INQURY_INSURANCE_PATH = 'insurance-detail';
+// description: 마이 페이지 URL //
+export const USER_PATH = 'user';
+export const USER_UPDATE_PATH = 'update';
+export const USER_RESERVATION_PATH = 'reservation';
+export const USER_QNA_PATH = 'qna';
 
+// description: 공지사항 페이지 URL //
 export const NOTICE_PATH = 'notice';
 export const NOTICE_LIST = 'list'
 export const NOTICE_DETAIL_PATH = ':registNumber';
 
+// description: Q&A 페이지 URL //
 export const QNA_PATH = 'qna';
 export const QNA_LIST_PATH = 'list';
-export const QNA_REGIST_PATH = 'regist';
 export const QNA_DETAIL_PATH = ':receptionNumber';
+export const QNA_REGIST_PATH = 'regist';
 export const QNA_UPDATE_PATH = 'update/:receptionNumber';
-export const QNA_MY_LIST_PATH = 'myList';
 
+// description: ADMIN URL //
 export const ADMIN_PATH = 'admin';
+
 export const ADMIN_USER_PATH = 'user';
 export const ADMIN_USER_DETAIL_PATH = ':userId';
+
 export const ADMIN_COMPANY_PATH = 'company';
 export const ADMIN_COMPANY_REGIST_PATH = 'regist';
 export const ADMIN_COMPANY_UPDATE_PATH = 'update/:companyCode';
+
 export const ADMIN_RESERVATION_PATH = 'reservation';
 export const ADMIN_RESERVATION_UPDATE_PATH = ':reservationCode';
+
 export const ADMIN_BOARD_PATH = 'board';
 export const ADMIN_BOARD_NOTICE_PATH = 'notice';
-export const ADMIN_BOARD_NOTICE_WRITE_PATH = 'write';
+export const ADMIN_BOARD_NOTICE_REGIST_PATH = 'regist';
 export const ADMIN_BOARD_NOTICE_UPDATE_PATH = 'update/:registNumber';
 export const ADMIN_BOARD_QNA_PATH = 'qna';
 
-//description : Navigation 절대 URL PATH
-// rentcar 메인 URL
+// constant : Navigation 절대 URL PATH //
+// description: 메인 페이지 절대 URL //
 export const MAIN_ABSOLUTE_PATH = MAIN_PATH;
 
-// 로그인 URL
-export const SIGN_IN_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${SIGN_IN_PATH}`;
-// 회원가입 URL
-export const SIGN_UP_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${SIGN_UP_PATH}`;
+// description: 인증 //
+// description: 회원가입 페이지 절대 URL //
+export const AUTH_SIGN_UP_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_SIGN_UP_PATH}`;
+// description: 로그인 페이지 절대 URL //
+export const AUTH_SIGN_IN_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_SIGN_IN_PATH}`;
+// description: 아이디 찾기 페이지 절대 URL //
+export const AUTH_FIND_ID_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND_ID_PATH}`;
+// description: 비밀번호 찾기 페이지 절대 URL //
+export const AUTH_FIND_PASSWORD_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND_PASSWORD_PATH}`;
 
-// 마이페이지 내 정보보기 URL
-export const USER_INFO_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_INFO_PATH}`;
-// 마이페이지 내 정보 수정, 탈퇴 URL
-export const USER_INFO_MODIFY_ABSOLUTE_PATH = `${USER_INFO_ABSOLUTE_PATH}/${USER_UPDATE_PATH}`;
-// 관리자페이지 회원 정보 불러오기 URL
-export const ADMIN_USER_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_USER_PATH}`;
-// 관리자페이지 회원 상세 정보 불러오기, 회원 정보 삭제 URL
-export const ADMIN_USER_DETAIL_ABSOLUTE_PATH = (userId : number) => `${ADMIN_USER_LIST_ABSOLUTE_PATH}/${userId}`;
+// description: 예약 //
+// description: 차량 선택 페이지 절대 URL //
+export const RESERVATION_CAR_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/${RESERVATION_CAR_PATH}`;
+// description: 업체 선택 페이지 절대 URL //
+export const RESERVATION_COMPANY_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/${RESERVATION_COMPANY_PATH}`;
+// description: 예약 신청 페이지 절대 URL //
+export const RESERVATION_REQUEST_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/${RESERVATION_REQUEST_PATH}`;
 
-// 마이페이지 예약 내역 보기 URL
-export const RESERVATION_MY_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/${RESERVATION_MY_LIST_PATH}`;
-// 마이페이지 예약 상세 내역 보기, 예약 취소하기 URL
-export const RESERVATION_MY_DETAIL_ABSOLUTE_PATH = (reservationCode : number) => `${RESERVATION_MY_LIST_ABSOLUTE_PATH}/${reservationCode}`;
-// 관리자페이지 예약 목록 리스트 불러오기 URL
-export const ADMIN_RESERVATION_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_RESERVATION_PATH}`;
-// 관리자페이지 예약 목록 상세 정보 불러오기 URL
-export const ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH = (reservationCode : number) => `${ADMIN_RESERVATION_LIST_ABSOLUTE_PATH}/${reservationCode}`;
+// description: 유저 //
+// description: 내 정보 페이지 절대 URL //
+export const USER_INFO_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}`;
+// description: 내 정보 수정 페이지 절대 URL //
+export const USER_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_UPDATE_PATH}`;
+// description: 예약 내역 페이지 절대 URL //
+export const USER_RESERVATION_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_RESERVATION_PATH}`;
+// description: 문의 내역 페이지 절대 URL //
+export const USER_QNA_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_QNA_PATH}`;
 
-// 차량 검색, 예약과 관련된 URL 페이지 구현 시, 다시 점검해야함
-// 인기 차량 리스트, 차량 검색 결과 불러오기 URL 
-export const RESERVATION_SEARCH_ABSOLUTE_PATH = `${MAIN_PATH}/`;
-// 보험별 가격 검색 결과 불러오기 URL
-export const RESERVATION_INQURY_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_INSURANCE_PATH}`;
-// 보험별 가격 검색 결과 상세 불러오기 URL
-export const RESERVATION_INQURY_DETAIL_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_INQURY_INSURANCE_PATH}`;
-// 예약하기 URL ..........??
-export const RESERVATION_ABSOLUTE_PATH = ``;
+// description: 공지사항 //
+// description: 공지사항 리스트 페이지 절대 URL //
+export const NOTICE_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${NOTICE_PATH}`;
+// description: 공지사항 상세 페이지 절대 URL //
+export const NOTICE_DETAIL_ABSOLUTE_PATH = (registNumber: string | number) => `${MAIN_PATH}/${NOTICE_PATH}/${registNumber}`;
 
-// 공지사항 리스트 불러오기 URL
-export const NOTICE_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${NOTICE_PATH}/${NOTICE_LIST}`
-// 공지사항 게시물 불러오기 URL
-export const NOTICE_ABSOLUTE_DETAIL_PATH = (registNumber : number) => `${MAIN_PATH}/${NOTICE_LIST_ABSOLUTE_PATH}/${registNumber}`;
-// 관리자페이지 공지사항 리스트 불러오기 URL
-export const ADMIN_BOARD_NOTICE_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_BOARD_PATH}/${ADMIN_BOARD_NOTICE_PATH}`;
-// 관리자페이지 공지사항 작성하기 URL
-export const ADMIN_BOARD_NOTICE_WRITE_ABSOLUTE_PATH = `${ADMIN_BOARD_NOTICE_ABSOLUTE_PATH}/${ADMIN_BOARD_NOTICE_WRITE_PATH}`;
-// 공지사항 게시물 수정하기 URL
-export const ADMIN_NOTICE_ABSOLUTE_UPDATE_PATH = (registNumber : number) => `${MAIN_PATH}/${NOTICE_PATH}/update/${registNumber}`;
-
-// Q&A 리스트 불러오기 URL
-export const QNA_LIST_ABSOLUTE_PATH = `${QNA_PATH}/${QNA_LIST_PATH}`;
-// Q&A 게시물 작성하기 URL
+// description: Q&A //
+// description: Q&A 리스트 페이지 절대 URL //
+export const QNA_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${QNA_PATH}`;
+// description: Q&A 작성 페이지 절대 URL //
 export const QNA_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${QNA_PATH}/${QNA_REGIST_PATH}`;
-// Q&A 게시물 상세보기 URL
-export const QNA_DETAIL_ABSOLUTE_PATH = (receptionNumber : number|string) => `${MAIN_PATH}/${QNA_LIST_ABSOLUTE_PATH}/${receptionNumber}`
-// Q&A 게시물 수정하기 URL
-export const QNA_UPDATE_ABSOLUTE_PATH = (receptionNumber : number | string) => `${MAIN_PATH}/${QNA_LIST_ABSOLUTE_PATH}/update/${receptionNumber}`;
-// 마이페이지 Q&A 리스트 불러오기 URL
-export const QNA_MY_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${QNA_PATH}/${QNA_MY_LIST_PATH}`;
+// description: Q&A 상세 페이지 절대 URL //
+export const QNA_DETAIL_ABSOLUTE_PATH = (receptionNumber: string | number) => `${MAIN_PATH}/${QNA_PATH}/${receptionNumber}`;
+// description: Q&A 수정 페이지 절대 URL //
+export const QNA_UPDATE_ABSOLUTE_PATH = (receptionNumber: string | number) => `${MAIN_PATH}/${QNA_PATH}/update/${receptionNumber}`;
 
-// 업체 리스트 불러오기 URL
-export const COMPANY_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}`;
-// 업체 등록하기 URL
-export const COMPANY_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_REGIST_PATH}`;
-// 업체 정보 수정하기 URL
-export const COMPANY_UPDATE_ABSOLUTE_PATH = (companyCode : number) => `${MAIN_PATH}/${ADMIN_PATH}/update/${companyCode}`;
 
+// description: 관리자 - 회원 관리 //
+// description: 회원 리스트 페이지 절대 URL //
+export const ADMIN_USER_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_USER_PATH}`;
+// description: 회원 상세보기 페이지 절대 URL //
+export const ADMIN_USER_DETAIL_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_USER_PATH}/${userId}`;
+
+// description: 관리자 - 업체 관리 //
+// description: 업체 리스트 페이지 절대 URL //
+export const ADMIN_COMPANY_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}`;
+// description: 업체 등록 페이지 절대 URL //
+export const ADMIN_COMPANY_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_REGIST_PATH}`;
+// description: 업체 수정 페이지 절대 URL //
+export const ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_UPDATE_PATH}`;
+
+// description: 관리자 - 예약 관리 //
+// description: 예약 리스트 페이지 절대 URL //
+export const ADMIN_RESERVATION_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_RESERVATION_PATH}`;
+// description: 예약 수정 페이지 절대 URL //
+export const ADMIN_RESERVATION_UPDATE_ABSOLUTE_PATH = (reservationCode: string | number) => `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_RESERVATION_PATH}/update/${reservationCode}`;
+
+// description: 관리자 - 게시물 관리 - 공지사항 //
+// description: 공지사항 리스트 페이지 절대 URL //
+export const ADMIN_NOTICE_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_BOARD_PATH}/${ADMIN_BOARD_NOTICE_PATH}`;
+// description: 공지사항 작성 페이지 절대 URL //
+export const ADMIN_NOTICE_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_BOARD_PATH}/${ADMIN_BOARD_NOTICE_PATH}/${ADMIN_BOARD_NOTICE_REGIST_PATH}`;
+// description: 공지사항 수정 페이지 절대 URL //
+export const ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH = (registNumber: string | number) => `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_BOARD_PATH}/${ADMIN_BOARD_NOTICE_PATH}/update/${registNumber}`;
+
+// description: 관리자 - 게시물 관리 - Q&A //
+export const ADMIN_QNA_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_BOARD_PATH}/${ADMIN_BOARD_QNA_PATH}`;
+
+// constant : SERVER URL //
 // description : 도메인 URL
 export const SERVER_DOMAIN_URL = 'http://localhost:4000';
 
