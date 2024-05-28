@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH, USER_INFO_MODIFY_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH, USER_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { getMyInfoRequest } from 'src/apis/user';
@@ -53,7 +53,7 @@ export default function MyInfo() {
 
     //                    event handler                    //
     const onModifyButtonClickHandler = () => {
-        navigator(USER_INFO_MODIFY_ABSOLUTE_PATH);
+        navigator(USER_UPDATE_ABSOLUTE_PATH);
     }
 
     

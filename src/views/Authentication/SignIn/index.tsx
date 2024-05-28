@@ -8,7 +8,7 @@ import ResponseDto from "src/apis/response.dto";
 import { SignInResponseDto } from "src/apis/auth/dto/response";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { SIGN_IN_PATH, MAIN_PATH, SIGN_UP_ABSOLUTE_PATH } from "src/constant";
+import { AUTH_SIGN_IN_PATH, MAIN_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH } from "src/constant";
 
 //                    component                    //
 export function Sns () {
@@ -26,7 +26,7 @@ export function Sns () {
         const expiration = new Date(Date.now() + (Number(expires) * 1000));
         setCookie('accessToken', accessToken, { path: '/', expires: expiration });
 
-        navigator(SIGN_IN_PATH);
+        navigator(AUTH_SIGN_IN_PATH);
     }, []);
 
     //                    render                    //
@@ -134,7 +134,7 @@ export default function SignIn() {
     }
 
     const onSignUpButtonClickHandler = () => {
-        navigator(SIGN_UP_ABSOLUTE_PATH);
+        navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
     }
     
 

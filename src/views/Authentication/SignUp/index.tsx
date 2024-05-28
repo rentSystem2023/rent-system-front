@@ -7,7 +7,7 @@ import { IdCheckRequest, NickNameCheckRequest, emailAuthCheckRequest, emailAuthR
 import ResponseDto from "src/apis/response.dto";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { SIGN_IN_ABSOLUTE_PATH, SIGN_UP_PATH } from "src/constant";
+import { AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_PATH } from "src/constant";
 import useAuthStore from "src/stores/auth.store";
 import { useSearchParams } from "react-router-dom";
 
@@ -282,7 +282,7 @@ export default function SignUp() {
     const snsId = searchParam.get('snsId');
     if (snsId) setSnsId(snsId);
 
-        navigator(SIGN_IN_ABSOLUTE_PATH);
+        navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 
     };
 
