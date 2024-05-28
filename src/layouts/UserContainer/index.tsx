@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { USER_INFO_ABSOLUTE_PATH, USER_QNA_ABSOLUTE_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 
-function UserSideBar() {
+type Path = '내 정보' | '예약 내역' | '문의 내역' | '' ;
+
+interface Props {
+  path: Path;
+}
+
+function UserSideBar({ path } : Props) {
+
+  const myInfoClass = `user-side-navigation-item${path === '내 정보' ? ' active' : ''}`;
+  const reservationClass = `user-side-navigation-item${path === '예약 내역' ? ' active' : ''}`;
+  const boardClass = `user-side-navigation-item${path === '문의 내역' ? ' active' : ''}`;
 
   const navigator = useNavigate();
-  const { pathname } = useLocation();
 
   const onUserClickHandler = () => navigator(USER_INFO_ABSOLUTE_PATH);
   const onReservationClickHandler = () => navigator(USER_RESERVATION_ABSOLUTE_PATH);
@@ -14,27 +23,40 @@ function UserSideBar() {
 
 
   return(
-    <div className="side-navigation-container">
-            <div className="side-navigation-item">
-                <div className="side-navigation-icon person"></div>
-                <div className="side-navigation-item-title" onClick={onUserClickHandler}>내 정보</div>
+    <div className="user-side-navigation-container">
+            <div className={myInfoClass} onClick={onUserClickHandler}>
+                <div className="user-side-navigation-icon person"></div>
+                <div className="user-side-navigation-item-title" >내 정보</div>
             </div>
-            <div className="side-navigation-item">
-                <div className="side-navigation-icon office"></div>
-                <div className="side-navigation-item-title" onClick={onReservationClickHandler}>예약 내역</div>
+            <div className={reservationClass} onClick={onReservationClickHandler}>
+                <div className="user-side-navigation-icon car"></div>
+                <div className="user-side-navigation-item-title">예약 내역</div>
             </div>
-            <div className="side-navigation-item">
-                <div className="side-navigation-icon board"></div>
-                <div className="side-navigation-item-title" onClick={onBoardClickHandler}>문의 내역</div>
+            <div className={boardClass} onClick={onBoardClickHandler}>
+                <div className="user-side-navigation-icon board"></div>
+                <div className="user-side-navigation-item-title">문의 내역</div>
             </div>
         </div>
   );
 }
 
 export default function UserContainer() {
+
+  const { pathname } = useLocation();
+  const [path, setPath] = useState<Path>('');
+
+  useEffect(() => {
+    const path = 
+        pathname === USER_INFO_ABSOLUTE_PATH ? '내 정보' :
+        pathname === USER_RESERVATION_ABSOLUTE_PATH ? '예약 내역' :
+        pathname === USER_QNA_ABSOLUTE_PATH ? '문의 내역' : '';
+
+    setPath(path);
+}, [pathname]);
+
   return (
     <div id="user-wrapper">
-      <UserSideBar />
+      <UserSideBar path={path} />
       <div id="user-main">
         <Outlet/>
       </div>
