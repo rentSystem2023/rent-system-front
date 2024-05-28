@@ -2,12 +2,15 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    
 }
 
 .qna-write-top {
     display: flex;
     align-items: center;
     gap: 12px;
+
+
 }
 
 .qna-write-title-box {
@@ -20,6 +23,80 @@
     padding: 8px 16px;
 
     background-color: rgba(255, 255, 255, 1);
+}
+
+.preview {
+    .preview-image {
+        width: 400px;
+        height: 400px;
+
+    }
+}
+
+.qna-category-box{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.public-state-toggle {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 5px;
+}
+
+.qna-category-select {
+    width: 150px;
+    height: 45px;
+    border-radius: 4px;
+    border: 2px solid rgb(212, 194, 194);
+
+}
+.public-state-toggle {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 5px; /* 체크박스와 텍스트 사이의 간격을 조절합니다. */
+}
+
+.qna-category-select .select {
+    width: inherit;
+    height: inherit;
+    background: transparent;
+    border: 0 none;
+    outline: 0 none;
+    padding: 0 5px;
+    position: relative;
+    z-index: 3; 
+}
+
+.qna-category-select .select option {
+    background: lightcoral;
+    color: #fff;
+    padding: 3px 0;
+    font-size: 16px;
+}
+
+.qna-category-select .icoArrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: 35px;
+    height: inherit;
+    border-left: 2px solid lightcoral;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qna-category-select .icoArrow img {
+    width: 50%;
+    transition: .3s; 
+}
+
+.qna-category-select .select:focus+.icoArrow img {
+    transform: rotate(180deg);
 }
 
 .qna-write-title-input {
