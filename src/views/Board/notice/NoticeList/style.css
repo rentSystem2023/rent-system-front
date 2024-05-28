@@ -1,0 +1,13 @@
+.title-text{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 173%;
+
+    color: rgba(64, 64, 64, 1);
+}
