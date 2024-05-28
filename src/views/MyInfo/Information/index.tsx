@@ -6,11 +6,13 @@ import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH, USER_UPDATE_ABSOLUTE_PATH 
 import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { getMyInfoRequest } from 'src/apis/user';
+import { useUserStore } from 'src/stores';
 
 //                    component                    //
 export default function MyInfo() {
 
     //                    state                    //
+    // const { loginUserId, loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [nickName, setNickName] = useState<string>('');
     const [userId, setUserId] = useState<string>('');
