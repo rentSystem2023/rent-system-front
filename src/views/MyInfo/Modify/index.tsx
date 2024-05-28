@@ -17,7 +17,8 @@ export default function MyInfoModify() {
     const [userId, setUserId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordCheck, setPasswordCheck] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
+    const [userEmail, setUserEmail] = useState<string>('');
+    // const [email, setEmail] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
     const [joinDate, setJoinDate] = useState<string>('');
     const [status, setStatus] = useState<string>('');
@@ -62,6 +63,8 @@ export default function MyInfoModify() {
 
         if (!cookies.accessToken) return;
         getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+        
+        const { nickName, userId, joinDate, userRole } = result as GetMyInfoResponseDto;
 
         setNickName(nickName);
         setUserId(userId);
@@ -69,8 +72,14 @@ export default function MyInfoModify() {
         setUserRole(userRole);
 
     };
-
     
+    //                  effect                      //
+    useEffect (() => {
+        if (!cookies.accessToken) return;
+        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+    }, []);
+    
+    // function // 
     const emailAuthResponse = (result: ResponseDto | null) => {
 
         const emailMessage = 
@@ -111,7 +120,7 @@ export default function MyInfoModify() {
         const message = 
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
-            result.code === 'DE' ? '중복된 이메일입니다.' :
+            // result.code === 'DE' ? '중복된 이메일입니다.' :
             result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
 
@@ -121,7 +130,11 @@ export default function MyInfoModify() {
             return;
         }
 
-        navigator(MAIN_ABSOLUTE_PATH);
+        if (!cookies.accessToken) return;
+        patchMyInfoRequest(cookies.accessToken).then(patchMyInfoResponse);
+
+        const {userEmail} = result as PatchMyInfoResponseDto
+        setUserEmail(userEmail);
 
     };
 
@@ -165,7 +178,7 @@ export default function MyInfoModify() {
 
     const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
-        setEmail(value);
+        setUserEmail(value);
         setEmailButtonStatus(value !== '');
         setEmailCheck(false);
         setAuthNumberCheck(false);
@@ -184,7 +197,7 @@ export default function MyInfoModify() {
         if(!emailButtonStatus) return;
 
         const emailPattern = /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
-        const isEmailPattern = emailPattern.test(email);
+        const isEmailPattern = emailPattern.test(userEmail);
         if (!isEmailPattern) {
             setEmailMessage('이메일 형식이 아닙니다.');
             setEmailError(true);
@@ -192,7 +205,7 @@ export default function MyInfoModify() {
             return;
         }
 
-        const requestBody: EmailAuthRequestDto = { userEmail: email };
+        const requestBody: EmailAuthRequestDto = { userEmail: userEmail };
         emailAuthRequest(requestBody).then(emailAuthResponse);
     };
 
@@ -201,7 +214,7 @@ export default function MyInfoModify() {
         if(!authNumber) return;
 
         const requestBody: EmailAuthCheckRequestDto = {
-            userEmail: email,
+            userEmail: userEmail,
             authNumber
         };
         emailAuthCheckRequest(requestBody).then(emailAuthCheckResponse);
@@ -210,14 +223,14 @@ export default function MyInfoModify() {
     const onPatchButtonClickHandler = () => {
 
         if(!isMyInfoModifyActive) return;
-        if(!password || !passwordCheck || !email || !authNumber) {
+        if(!password || !passwordCheck || !userEmail || !authNumber) {
             alert('모든 내용을 입력해주세요.');
             return;
         }
 
         const requestBody: PatchMyInfoRequestDto = {
             userPassword: password,
-            userEmail: email,
+            userEmail: userEmail,
             authNumber,
         }
         
@@ -234,7 +247,7 @@ export default function MyInfoModify() {
     useEffect (() => {
         if (!cookies.accessToken) return;
         patchMyInfoRequest(cookies.accessToken).then(patchMyInfoResponse);
-    }, [status]);
+    }, []);
 
 
   return (
@@ -252,7 +265,7 @@ export default function MyInfoModify() {
 
                         <InputBox label="비밀번호 확인" type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
 
-                        <InputBox label="이메일" type="text" value={email} placeholder={ email } onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
+                        <InputBox label="이메일" type="text" value={userEmail} placeholder={ userEmail } onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
 
                         {isEmailCheck && 
                         <InputBox label="인증번호" type="text" value={authNumber} placeholder="인증번호 4자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
