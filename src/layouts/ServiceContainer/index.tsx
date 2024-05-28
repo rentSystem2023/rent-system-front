@@ -52,21 +52,6 @@ function BottomBar() {
 }
 
     export default function ServiceContainer() {
-
-    const { pathname } = useLocation();
-    const [path, setPath] = useState<Path>('');
-
-    useEffect(() => {
-        const path = 
-            pathname === MAIN_ABSOLUTE_PATH ? '로고' :
-            pathname === NOTICE_LIST_ABSOLUTE_PATH ? '공지사항' :
-            pathname === QNA_LIST_ABSOLUTE_PATH ? '문의사항' :
-            pathname === AUTH_SIGN_IN_ABSOLUTE_PATH ? '로그인' :
-            pathname === AUTH_FIND_PASSWORD_ABSOLUTE_PATH ? '회원가입' : '';
-
-        setPath(path);
-    }, [pathname]);
-
     return (
         <div id="wrapper">
         <TopBar />
