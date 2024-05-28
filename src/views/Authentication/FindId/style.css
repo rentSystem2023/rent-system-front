@@ -1,0 +1,10 @@
+.authentication-sign-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    margin: auto;
+    padding: 30px;
+    /* border: black 1px solid; */
+    background-color: rgb(204, 225, 238);
+}

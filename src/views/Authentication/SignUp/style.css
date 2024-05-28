@@ -4,7 +4,7 @@
     margin: 20px auto;
 }
 
-.authentication-full-sign-up {
+.authentication-sign-up {
     display: flex;
     flex-direction: column;
     width: 400px;

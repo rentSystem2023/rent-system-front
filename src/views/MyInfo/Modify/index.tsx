@@ -121,6 +121,7 @@ export default function MyInfoModify() {
             isEqualPassword ? '' : 
             passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
         setPasswordCheckMessage(passwordCheckMessage);
+
     };
 
     const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -207,17 +208,17 @@ export default function MyInfoModify() {
     useEffect (() => {
         if (!cookies.accessToken) return;
         patchMyInfoRequest(cookies.accessToken).then(patchMyInfoResponse);
-    }, []);
+    }, [status]);
 
 
   return (
     <div id='information-wrapper'>
             <div className='information-main'>
-                <div className='information-title h1'>내 정보 수정</div>
+                <div className="title-text">내 정보 수정</div>
                 <div className='information-contents'>
                     <div className='information-container'>
                         <div className='information-input-title'>닉네임</div>
-                        <input className='input' type="text" value={nickName} readOnly />
+                        <input className='input' type="text" value={ nickName } />
                         <div className='information-input-title'>아이디</div>
                         <input className='input' type="text" value={userId} readOnly />
 
