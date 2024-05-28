@@ -1,8 +1,9 @@
 import axios from "axios";
-import { PATCH_MODIFY_MY_INFO_URL, POST_EMAIL_AUTH_CHECK_REQUEST_URL, POST_EMAIL_AUTH_REQUEST_URL } from "src/constant";
-import { requestErrorHandler, requestHandler } from "..";
+import { GET_MY_INFO_URL, PATCH_MODIFY_MY_INFO_URL, POST_EMAIL_AUTH_CHECK_REQUEST_URL, POST_EMAIL_AUTH_REQUEST_URL } from "src/constant";
+import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, MyInfoModifyRequestDto } from "./dto/request";
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, PatchMyInfoRequestDto } from "./dto/request";
+import { GetMyInfoResponseDto, PatchMyInfoResponseDto } from "./dto/response";
 
 
 // function: 이메일 인증 API 함수
@@ -25,11 +26,22 @@ export const emailAuthCheckRequest = async (
     return result;
 };
 
+// function: 내 정보 불러오기 API 함수 
+export const getMyInfoRequest = async (accessToken: string) => {
+    const result = await axios
+        .get(GET_MY_INFO_URL, bearerAuthorization(accessToken))
+        .then(requestHandler<GetMyInfoResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
 // function: 내정보 수정 API 함수
-export const myInfoModifyRequest = async (requestBody: MyInfoModifyRequestDto) => {
+export const patchMyInfoRequest = async (
+        requestBody: PatchMyInfoRequestDto
+    ) => {
     const result = await axios
         .patch(PATCH_MODIFY_MY_INFO_URL, requestBody)
-        .then(requestHandler<ResponseDto>)
+        .then(requestHandler<PatchMyInfoResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };
