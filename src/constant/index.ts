@@ -155,6 +155,8 @@ export const POST_EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth
 export const POST_EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth-check`;
 // 회원가입 URL
 export const POST_SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-up`;
+// 아이디 찾기 URL
+export const POST_FIND_ID_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/find-id`;
 
 // description: USER MODULE
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
