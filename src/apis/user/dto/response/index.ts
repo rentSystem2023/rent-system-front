@@ -10,24 +10,24 @@ export interface GetSignInUserResponseDto extends ResponseDto{
 
 // description: 내 정보 불러오기 Response Body DTO
 export interface GetMyInfoResponseDto extends ResponseDto{
+    status: boolean;
     userId: string;
-    userPassword: string;
     nickName: string;
     userEmail: string;
     userRole: String;
     joinPath: String;
-    joinDate: Date;
+    joinDate: string;
 }
 
 // description: 내 정보 수정 Response Body DTO
-export interface PatchUserRequestDto extends ResponseDto {
+export interface PatchMyInfoResponseDto extends ResponseDto {
+    status: boolean;
     userId: string;
-    userPassword: string;
     nickName: string;
     userEmail: string;
-    userRole: String;
-    joinPath: String;
-    joinDate: Date;
+    userRole: string;
+    joinPath: string;
+    joinDate: string;
 }
 
 // description: 유저 리스트 불러오기 Response Body DTO

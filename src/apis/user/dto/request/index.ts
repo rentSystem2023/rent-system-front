@@ -13,7 +13,7 @@ export interface EmailAuthCheckRequestDto {
 }
 
 // description: 내정보 수정 Request Body Dto 
-export interface MyInfoModifyRequestDto {
+export interface PatchMyInfoRequestDto {
     userPassword: string;
     userEmail: string;
     authNumber: string;
