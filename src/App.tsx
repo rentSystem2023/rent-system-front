@@ -17,20 +17,12 @@ import {
   ADMIN_USER_LIST_ABSOLUTE_PATH,
   ADMIN_USER_PATH,
   AUTH_PATH,
-  COMPANY_LIST_PATH,
-  COMPANY_PATH,
-  COMPANY_REGIST_PATH,
-  COMPANY_UPDATE_PATH,
   MAIN_ABSOLUTE_PATH,
   MAIN_PATH,
   NOTICE_DETAIL_PATH,
   NOTICE_LIST,
   NOTICE_PATH,
-  NOTICE_REGIST_PATH,
-  NOTICE_UPDATE_PATH,
-  QNA_DETAIL_ABSOLUTE_PATH,
   QNA_DETAIL_PATH,
-  QNA_LIST_ABSOLUTE_PATH,
   QNA_LIST_PATH,
   QNA_MY_LIST_PATH,
   QNA_PATH,
@@ -38,7 +30,6 @@ import {
   QNA_UPDATE_PATH,
   SIGN_IN_PATH,
   SIGN_UP_PATH,
-  USER_DETAIL_PATH,
   USER_INFO_PATH,
   USER_PATH,
   USER_UPDATE_PATH,
@@ -122,9 +113,6 @@ function App() {
             <Route index element={<MyInfo />} />
             <Route path={USER_UPDATE_PATH} element={<MyInfoModify />} />
           </Route>
-          {/* <Route path={USER_LIST_PATH}>
-          <Route index path={USER_DETAIL_PATH}/>
-        </Route> */}
         </Route>
 
         {/* // route : 공지사항 페이지 */}
@@ -132,8 +120,6 @@ function App() {
           <Route path={NOTICE_LIST}>
             <Route path={NOTICE_DETAIL_PATH} />
           </Route>
-          <Route path={NOTICE_REGIST_PATH} />
-          <Route path={NOTICE_UPDATE_PATH} />
         </Route>
 
         {/* // route : Q&A 페이지 */}
@@ -146,12 +132,6 @@ function App() {
           <Route path={QNA_REGIST_PATH} />
           <Route path={QNA_MY_LIST_PATH} />
         </Route>
-
-        {/* <Route path={COMPANY_PATH}>
-        <Route path={COMPANY_LIST_PATH}/>
-        <Route path={COMPANY_REGIST_PATH}/>
-        <Route path={COMPANY_UPDATE_PATH}/>
-      </Route> */}
 
         {/* // route : 관리자 페이지 */}
         <Route path={ADMIN_PATH} element={<AdminContainer />}>
@@ -167,12 +147,12 @@ function App() {
             <Route index element={<>업체 리스트</>} />
             <Route path={ADMIN_COMPANY_REGIST_PATH} element={<>업체 등록</>} />
             <Route path={ADMIN_COMPANY_UPDATE_PATH} element={<>업체 수정</>} />
-          </Route>
+          </Route>.
 
           {/* // route : 관리자 - 예약관리 페이지 */}
           <Route path={ADMIN_RESERVATION_PATH}>
             <Route index element={<>예약 리스트</>} />
-            <Route path={ADMIN_RESERVATION_UPDATE_PATH} element={<>예약 수정</>} />
+            <Route path={ADMIN_RESERVATION_UPDATE_PATH} element={<>예약 상세</>} />
           </Route>
 
           {/* // route : 관리자 - 게시물관리 페이지 */}
