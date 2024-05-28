@@ -67,7 +67,7 @@ export default function MyInfo() {
     return (
         <div id='information-wrapper'>
             <div className='information-main'>
-                <div className='information-title h1'>내 정보</div>
+            <div className="title-text">내 정보</div>
                 <div className='information-contents'>
                     <div className='information-container'>
                         
@@ -82,9 +82,7 @@ export default function MyInfo() {
                         <div className='information-joindate'>가입날짜</div>
                         <input className='input' type="text" value={joinDate} readOnly />
                     </div>
-                    <div className='information-button'>
-                        <div className='primary-button' onClick={ onModifyButtonClickHandler }>수정하기</div>
-                    </div>
+                        <div className='find-button' onClick={ onModifyButtonClickHandler }>수정하기</div>
                 </div>
             </div>
         </div>
