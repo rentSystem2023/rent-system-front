@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useEffect, useState } from "react";
-import { MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH } from "src/constant";
+import { AUTH_FIND_PASSWORD_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH } from "src/constant";
 
 type Path = '로고' | '공지사항' | '문의사항' | '로그인' | '회원가입' | '';
 
@@ -20,8 +20,8 @@ function TopBar() {
         
     const onNoticeClickHandler = () => navigator(NOTICE_LIST_ABSOLUTE_PATH);
     const onQnaClickHandler = () => navigator(QNA_LIST_ABSOLUTE_PATH);
-    const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
-    const onSignUpClickHandler = () => navigator(SIGN_UP_ABSOLUTE_PATH);
+    const onSignInClickHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+    const onSignUpClickHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
 
     return (
         <>
@@ -61,8 +61,8 @@ function BottomBar() {
             pathname === MAIN_ABSOLUTE_PATH ? '로고' :
             pathname === NOTICE_LIST_ABSOLUTE_PATH ? '공지사항' :
             pathname === QNA_LIST_ABSOLUTE_PATH ? '문의사항' :
-            pathname === SIGN_IN_ABSOLUTE_PATH ? '로그인' :
-            pathname === SIGN_UP_ABSOLUTE_PATH ? '회원가입' : '';
+            pathname === AUTH_SIGN_IN_ABSOLUTE_PATH ? '로그인' :
+            pathname === AUTH_FIND_PASSWORD_ABSOLUTE_PATH ? '회원가입' : '';
 
         setPath(path);
     }, [pathname]);
