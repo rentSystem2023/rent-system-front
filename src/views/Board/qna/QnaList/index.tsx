@@ -68,6 +68,8 @@ export default function QnaList() {
 
   const [searchWord, setSearchWord] = useState<string>('');
 
+  
+
   //                    function                    //
   const navigator = useNavigate();
 
@@ -150,8 +152,8 @@ export default function QnaList() {
 
   //                    event handler                    //
   const onWriteButtonClickHandler = () => {
-      if (loginUserRole !== 'ROLE_USER') return;
-      navigator(QNA_REGIST_PATH);
+    if (loginUserRole !== 'ROLE_USER') return; 
+      navigator(QNA_REGIST_ABSOLUTE_PATH);
   };
 
   const onToggleClickHandler = () => {
@@ -221,13 +223,13 @@ export default function QnaList() {
       <div className='qna-list-top'>
                 <div className='qna-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                 <div className='qna-list-top-right'>
-                    {loginUserRole !== 'ROLE_USER' ? 
+                {loginUserRole === 'ROLE_USER' ? 
                     <div className='primary-button' onClick={onWriteButtonClickHandler}>글쓰기</div> :
                     <>
-                        <div className={toggleClass} onClick={onToggleClickHandler}></div>
-                        <div className='qna-list-top-admin-text'>미완료 보기</div>
+                    <div className={toggleClass} onClick={onToggleClickHandler}></div>
+                    <div className='qna-list-top-admin-text'>미완료 보기</div>
                     </>
-                     }   
+                    }
                 </div>
           </div>
           <div className='qna-list-table'>
@@ -272,36 +274,3 @@ export default function QnaList() {
   }
 
   
-function SideBar () {
-  return (
-      <>
-          <div className="user-list-wrapper">
-          <div className="side-navigation-container">
-              <div className="side-navigation-item">
-                  <div className="side-navigation-icon person"></div>
-                  <div className="side-navigation-item-title">회원 관리</div>
-              </div>
-              <div className="side-navigation-item">
-                  <div className="side-navigation-icon office"></div>
-                  <div className="side-navigation-item-title">업체 관리</div>
-              </div>
-              <div className="side-navigation-item">
-                  <div className="side-navigation-icon check"></div>
-                  <div className="side-navigation-item-title">예약 관리</div>
-              </div>
-              <div className="side-navigation-item">
-                  <div className="side-navigation-icon board"></div>
-                  <div className="side-navigation-item-title">게시물 관리</div>
-              </div>
-          </div>
-          <div className='main'>
-            <div className='qna-list'>
-
-            </div>
-          </div>
-          </div>
-      </>
-  )
-
-  
-}

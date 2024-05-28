@@ -42,7 +42,7 @@ export const getSearchBoardListRequest = async(word:string, accessToken:string) 
 }
 
 // function : Q&A 게시물 불러오기 API 함수
-export const getBoardRequest = async(receptionNumber:number | string, accessToken:string) => {
+export const getnoticeRequest = async(receptionNumber:number | string, accessToken:string) => {
     const result = await axios.get(GET_QNA_DETAIL_URL(receptionNumber),bearerAuthorization(accessToken))
     .then(requestHandler<GetQnaBoardResponseDto>)
     .catch(requestErrorHandler);
