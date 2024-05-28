@@ -9,18 +9,17 @@
     grid-area: main;
 }
 
-.side-navigation-container {
+.admin-side-navigation-container {
     grid-area: sidenav;
-    padding: 16px 25px;
 
     display: flex;
     flex-direction: column;
     gap: 10px;
     
-    border-right: 1px solid rgba(233, 236, 239, 1);  
+    border-right: 1px solid rgba(233, 236, 239, 1);
 }
 
-.side-navigation-item {
+.admin-side-navigation-item {
     border-radius: 6px;
     padding: 8px 24px;
 
@@ -37,50 +36,50 @@
     line-height: normal;  
 }
 
-.side-navigation-item:hover {
+.admin-side-navigation-item:hover {
     cursor: pointer;
     opacity: 0.85;
 }
 
-.side-navigation-item.active {
+.admin-side-navigation-item.active {
     background-color: rgba(138, 146, 166, 1);
     color: rgba(255, 255, 255, 1);
 }
 
-.side-navigation-icon {
+.admin-side-navigation-icon {
     width: 24px;
     height: 24px;
     background-size: 100% 100%;
 }
 
-.side-navigation-icon.person {
+.admin-side-navigation-icon.person {
     background-image: url('../../assets/image/person.png');
 }
     
-.active > .side-navigation-icon.person {
+.active > .admin-side-navigation-icon.person {
         background-image: url('../../assets/image/person.png');
 }
 
-.side-navigation-icon.office {
+.admin-side-navigation-icon.office {
     background-image: url('../../assets/image/office.png');
 }
     
-.active > .side-navigation-icon.office {
+.active > .admin-side-navigation-icon.office {
         background-image: url('../../assets/image/office.png');
 }
     
-.side-navigation-icon.check {
+.admin-side-navigation-icon.check {
     background-image: url('../../assets/image/check.png');
 }
     
-.active > .side-navigation-icon.check {
+.active > .admin-side-navigation-icon.check {
     background-image: url('../../assets/image/check.png');
 }
     
-.side-navigation-icon.board {
+.admin-side-navigation-icon.board {
     background-image: url('../../assets/image/board.png');
 }
     
-.active > .side-navigation-icon.board {
+.active > .admin-side-navigation-icon.board {
     background-image: url('../../assets/image/board.png');
 }
