@@ -8,66 +8,27 @@ import ResponseDto from "src/apis/response.dto";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
 import { SIGN_IN_ABSOLUTE_PATH, SIGN_UP_PATH } from "src/constant";
+import useAuthStore from "src/stores/auth.store";
+import { useSearchParams } from "react-router-dom";
 
-//                    component                    //
-export function Sns () {
-
-    //                    state                    //
-    const { accessToken, expires } = useParams();
-    const [cookies, setCookie] = useCookies();
-
-    //                    function                    //
-    const navigator = useNavigate();
-
-    //                    effect                    //
-    useEffect(() => {
-        if (!accessToken || !expires) return;
-        const expiration = new Date(Date.now() + (Number(expires) * 1000));
-        setCookie('accessToken', accessToken, { path: '/', expires: expiration });
-
-        navigator(SIGN_UP_PATH);
-    }, []);
-
-    //                    render                    //
-    return <></>;
-}
-
-//                    interface                    //
-interface SnsContainerProps {
-    title: string;
-}
-
-//                    component                    //
-function SnsContainer({ title }: SnsContainerProps) {
-
-    //                    event handler                    //
-    const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-        window.location.href = 'http://localhost:3000/api/rentcar/auth/oauth2/' + type;
-    };
-
-    //                    render                    //
-    return (
-        <div className="authentication-sns-container">
-            <div className="sns-container-title label">{title}</div>
-            <div className="sns-button-container">
-                <div className="sns-button kakao-button" onClick={() => onSnsButtonClickHandler('kakao')}></div>
-                <div className="sns-button naver-button" onClick={() => onSnsButtonClickHandler('naver')}></div>
-            </div>
-        </div>
-    );
-}
 
 //                    component                    //
 export default function SignUp() {
 
+
     //                    state                    //
-    const [id, setId] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [searchParam, setSearchParam] = useSearchParams();
+
+    const { 
+        id, setId,
+        password, setPassword,
+        nickName, setNickName,
+        email, setEmail,
+        authNumber, setAuthNumber,
+        setJoinPath, setSnsId
+        } = useAuthStore();
+
     const [passwordCheck, setPasswordCheck] = useState<string>('');
-    const [nickName, setNickName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [authNumber, setAuthNumber] = useState<string>('');
-    // const [setJoinPath, setSnsId] = useState<String>('');
 
     const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
     const [nickNameButtonStatus, setNickNameButtonStatus] = useState<boolean>(false);
@@ -316,6 +277,11 @@ export default function SignUp() {
         
         signUpRequest(requestBody).then(signUpResponse);
 
+        const joinPath = searchParam.get('joinPath');
+    if (joinPath) setJoinPath(joinPath);
+    const snsId = searchParam.get('snsId');
+    if (snsId) setSnsId(snsId);
+
         navigator(SIGN_IN_ABSOLUTE_PATH);
 
     };
@@ -329,8 +295,6 @@ export default function SignUp() {
                     회원가입
                 </div>
                 <div className="authentication-contents">
-                    <SnsContainer title="SNS 회원가입" />
-                    <div className="short-divider"></div>
                     <div className="authentication-input-container">
                         
                         <InputBox label="아이디" type="text" value={id} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} buttonTitle="중복 확인" buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
