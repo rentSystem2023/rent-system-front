@@ -58,7 +58,7 @@ import UserContainer from "./layouts/UserContainer";
 import QnAWrite from "./views/Board/qna/QnaWrite";
 import NoticeList from "./views/Board/notice/NoticeList";
 
-//          component:  //
+//          component: root 경로 컴포넌트          //
 function Index() {
   // state
   const [cookies] = useCookies();
@@ -71,7 +71,8 @@ function Index() {
     const accessToken = cookies.accessToken;
 
     if (!accessToken) {
-      // 로그인이 안되어있는 상태
+      navigator(MAIN_ABSOLUTE_PATH);
+    } else {
       navigator(MAIN_ABSOLUTE_PATH);
     }
   }, []);
@@ -80,7 +81,7 @@ function Index() {
   return <></>;
 }
 
-//          component:  //
+//          component: 관리자 페이지 인덱스 컴포넌트          //
 function AdminUserIndex() {
 
   // function
@@ -93,7 +94,7 @@ function AdminUserIndex() {
   return <></>;
 }
 
-//          component:  //
+//          component: 관리자 페이지 게시물 관리 인덱스 컴포넌트          //
 function AdminBoardIndex() {
 
   // function
@@ -119,7 +120,7 @@ function ReservationIndex() {
   return <></>;
 }
 
-//          component:  //
+//          component: Application 컴포넌트 //
 function App() {
   return (
     <Routes>
