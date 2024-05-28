@@ -135,7 +135,7 @@ export default function SignIn() {
 
         <div id="authentication-wrapper">
             <div className="authentication-full">
-                <div className="authentication-title h1">로그인</div>
+                <div className="title-text">로그인</div>
                 <div className="authentication-contents">
                     <div className="authentication-input-container">
                         <InputBox label="아이디" type="text" value={id} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} />
