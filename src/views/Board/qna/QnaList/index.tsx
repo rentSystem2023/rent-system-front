@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getSearchBoardListRequest } from 'src/apis/qna/dto';
 import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/qna/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH,  QNA_REGIST_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH,  QNA_LIST_ABSOLUTE_PATH,  QNA_LIST_PATH,  QNA_REGIST_ABSOLUTE_PATH, QNA_REGIST_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { QnaListItem } from 'src/types';
 import './style.css'
@@ -151,7 +151,7 @@ export default function QnaList() {
   //                    event handler                    //
   const onWriteButtonClickHandler = () => {
       if (loginUserRole !== 'ROLE_USER') return;
-      navigator(QNA_REGIST_ABSOLUTE_PATH);
+      navigator(QNA_REGIST_PATH);
   };
 
   const onToggleClickHandler = () => {
@@ -181,11 +181,13 @@ export default function QnaList() {
   };
 
   const onSearchButtonClickHandler = () => {
-      if (!searchWord) return;
-      if (!cookies.accessToken) return;
-
-      getSearchBoardListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-  };
+    if (!searchWord) {
+        getSearchBoardListRequest('', cookies.accessToken).then(getSearchBoardListResponse);
+    } else {
+        if (!cookies.accessToken) return;
+        getSearchBoardListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+    }
+};
 
   //                    effect                    //
   useEffect(() => {
@@ -207,23 +209,26 @@ export default function QnaList() {
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (<div>
-           {/* <ServiceContainer /> */}
+    <div className='qna-board-text'>궁금한 사항이 있으신가요? <br></br>
+평일 09:00 ~ 18:00
+
+주말 공휴일 휴무<br></br>
+글 작성은 로그인 후 가능 합니다.</div>
     <div id='list-wrapper'>
 
       <div style={{ display: 'flex' }}> 
-      {/* <SideBar/> */}
       <div className='qna-list-wrapper'>
-          <div className='qna-list-top'>
-              <div className='qna-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
-              <div className='qna-list-top-right'>
-                    {/* {loginUserRole === 'ROLE_USER' ?  */}
+      <div className='qna-list-top'>
+                <div className='qna-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+                <div className='qna-list-top-right'>
+                    {loginUserRole !== 'ROLE_USER' ? 
                     <div className='primary-button' onClick={onWriteButtonClickHandler}>글쓰기</div> :
                     <>
-                    <div className={toggleClass} onClick={onToggleClickHandler}></div>
-                    <div className='qna-list-top-admin-text'>미완료 보기</div>
+                        <div className={toggleClass} onClick={onToggleClickHandler}></div>
+                        <div className='qna-list-top-admin-text'>미완료 보기</div>
                     </>
-{/* } */}
-              </div>
+                     }   
+                </div>
           </div>
           <div className='qna-list-table'>
               <div className='qna-list-table-th'>
