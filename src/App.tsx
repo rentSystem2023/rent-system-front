@@ -56,6 +56,7 @@ import MyInfoModify from "./views/MyInfo/Modify";
 import AdminContainer from "./layouts/AdminContainer";
 import UserContainer from "./layouts/UserContainer";
 import QnAWrite from "./views/Board/qna/QnaWrite";
+import NoticeList from "./views/Board/notice/NoticeList";
 
 //          component:  //
 function Index() {
@@ -154,7 +155,7 @@ function App() {
 
         {/* // route : 공지사항 페이지 */}
         <Route path={NOTICE_PATH}>
-          <Route index element={<>공지사항 리스트</>} />
+          <Route index element={<NoticeList/>} />
           <Route path={NOTICE_DETAIL_PATH} element={<>공지사항 상세보기</>}/>
         </Route>
 
