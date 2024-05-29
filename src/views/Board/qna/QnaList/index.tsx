@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { getSearchBoardListRequest } from 'src/apis/qna/dto';
+import { getSearchQnaListRequest } from 'src/apis/qna/dto';
 import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/qna/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH,  QNA_LIST_ABSOLUTE_PATH,  QNA_LIST_PATH,  QNA_REGIST_ABSOLUTE_PATH, QNA_REGIST_PATH } from 'src/constant';
@@ -51,6 +51,7 @@ function ListItem ({
 
 //                    component                    //
 export default function QnaList() {
+    
   //                    state                    //
   const {loginUserRole} = useUserStore();
 
@@ -184,17 +185,17 @@ export default function QnaList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) {
-        getSearchBoardListRequest('', cookies.accessToken).then(getSearchBoardListResponse);
+        getSearchQnaListRequest('', cookies.accessToken).then(getSearchBoardListResponse);
     } else {
         if (!cookies.accessToken) return;
-        getSearchBoardListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+        getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
     }
 };
 
   //                    effect                    //
   useEffect(() => {
       if (!cookies.accessToken) return;
-      getSearchBoardListRequest(searchWord,cookies.accessToken).then(getSearchBoardListResponse);
+      getSearchQnaListRequest(searchWord,cookies.accessToken).then(getSearchBoardListResponse);
   }, [isToggleOn]);
 
   useEffect(() => {
