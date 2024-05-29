@@ -258,7 +258,7 @@ export const GET_COMPANY_LIST_SEARCH_URL = `${GET_COMPANY_LIST_URL}/search`;
 // 업체 정보 등록 URL
 export const POST_COMPANY_REGIST_URL = `${SERVER_COMPANY_MODULE}/regist`;
 // 업체 정보 수정 URL
-export const PATCH_COMPANY_DETAIL_REGIST_URL = (companyCode : number) => `${SERVER_COMPANY_MODULE}/${companyCode}`;
+export const PUT_COMPANY_UPDATE_URL = (companyCode : number) => `${SERVER_COMPANY_MODULE}/${companyCode}`;
 // 업체 정보 삭제 URL
 export const DELETE_COMPANY_LIST_URL = (companyCode : number) => `${SERVER_COMPANY_MODULE}/${companyCode}`;
 

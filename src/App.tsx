@@ -57,6 +57,7 @@ import AdminContainer from "./layouts/AdminContainer";
 import UserContainer from "./layouts/UserContainer";
 import QnAWrite from "./views/Board/qna/QnaWrite";
 import NoticeList from "./views/Board/notice/NoticeList";
+import CompanyList from "./views/Company/list";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -179,7 +180,7 @@ function App() {
 
           {/* // route : 관리자 - 업체관리 페이지 */}
           <Route path={ADMIN_COMPANY_PATH}>
-            <Route index element={<>업체 리스트</>} />
+            <Route index element={<CompanyList />} />
             <Route path={ADMIN_COMPANY_REGIST_PATH} element={<>업체 등록</>} />
             <Route path={ADMIN_COMPANY_UPDATE_PATH} element={<>업체 수정</>} />
           </Route>.
