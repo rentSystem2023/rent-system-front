@@ -24,16 +24,15 @@
     padding: 8px 24px;
 
     display: flex;
-
     align-items: center;
     gap: 16px;
 
     color: rgba(138, 146, 166, 1);
 
-    font-size: 20px;
+    font-size: 19px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;  
+    line-height: normal;
 }
 
 .admin-side-navigation-item:hover {
@@ -50,6 +49,33 @@
     width: 24px;
     height: 24px;
     background-size: 100% 100%;
+}
+
+.admin-side-navigation-sub-item {
+    display: flex;
+    flex-direction: column;
+
+    color: rgba(138, 146, 166, 0.9);
+    border-radius: 6px;
+
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.admin-side-navigation-sub-item:hover{
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+.admin-side-navigation-sub-item.active {
+    background-color: rgba(138, 146, 166, 0.4);
+    color: rgba(255, 255, 255, 1);
+}
+
+.admin-side-navigation-sub-item-title {
+    padding: 10px;
 }
 
 .admin-side-navigation-icon.person {
