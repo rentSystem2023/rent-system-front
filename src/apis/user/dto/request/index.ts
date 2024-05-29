@@ -14,6 +14,7 @@ export interface EmailAuthCheckRequestDto {
 
 // description: 내정보 수정 Request Body Dto 
 export interface PatchMyInfoRequestDto {
+    // accessToken: string;
     userPassword: string;
     userEmail: string;
     authNumber: string;
