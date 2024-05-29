@@ -64,12 +64,13 @@ export default function MyInfoModify() {
         if (!cookies.accessToken) return;
         getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
         
-        const { nickName, userId, joinDate, userRole } = result as GetMyInfoResponseDto;
+        const { nickName, userId, joinDate, userRole, userEmail } = result as GetMyInfoResponseDto;
 
         setNickName(nickName);
         setUserId(userId);
         setJoinDate(joinDate);
         setUserRole(userRole);
+        setUserEmail(userEmail);
 
     };
     
@@ -231,7 +232,7 @@ export default function MyInfoModify() {
         const requestBody: PatchMyInfoRequestDto = {
             userPassword: password,
             userEmail: userEmail,
-            authNumber,
+            authNumber
         }
         
         patchMyInfoRequest(requestBody).then(patchMyInfoResponse);
@@ -257,7 +258,7 @@ export default function MyInfoModify() {
                 <div className='information-contents'>
                     <div className='information-container'>
                         <div className='information-input-title'>닉네임</div>
-                        <input className='input' type="text" value={ nickName } />
+                        <input className='input' type="text" value={ nickName }readOnly />
                         <div className='information-input-title'>아이디</div>
                         <input className='input' type="text" value={ userId } readOnly />
 
@@ -266,6 +267,8 @@ export default function MyInfoModify() {
                         <InputBox label="비밀번호 확인" type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
 
                         <InputBox label="이메일" type="text" value={userEmail} placeholder={ userEmail } onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
+                        {/* <div className='information-input-title'>이메일</div>
+                        <input className='input' type="text" value={userEmail} /> */}
 
                         {isEmailCheck && 
                         <InputBox label="인증번호" type="text" value={authNumber} placeholder="인증번호 4자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
