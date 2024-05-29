@@ -8,7 +8,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { MAIN_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, QNA_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { PostCommentRequestDto } from 'src/apis/company/dto/request';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
-import { PostCommentRequest, getBoardRequest, increaseViewCountRequest } from 'src/apis/qna/dto';
+import { PostCommentRequest, getQnaRequest, increaseViewCountRequest } from 'src/apis/qna/dto';
 import { deleteBoardRequest } from 'src/apis/notice/dto';
 import useUserStore from 'src/stores/user.store';
 
@@ -55,7 +55,7 @@ export default function QnaDetail() {
         }
 
         if (!cookies.accessToken || !receptionNumber) return;
-        getBoardRequest(receptionNumber, cookies.accessToken)
+        getQnaRequest(receptionNumber, cookies.accessToken)
             .then(getBoardResponse);
     };
 
@@ -103,7 +103,7 @@ export default function QnaDetail() {
         }
 
         if (!receptionNumber || !cookies.accessToken) return;
-        getBoardRequest(receptionNumber, cookies.accessToken).then(getBoardResponse);
+        getQnaRequest(receptionNumber, cookies.accessToken).then(getBoardResponse);
 
     };
 

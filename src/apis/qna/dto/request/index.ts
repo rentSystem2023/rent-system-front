@@ -4,6 +4,7 @@ export interface PostQnaBoardRequestDto {
     contents: string;
     category: string;
     publicState: boolean;
+    imageUrl: string | null;
 }
 
 // description: Q&A 게시물 답글 작성하기 Request Body DTO //
