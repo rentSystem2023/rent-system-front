@@ -47,5 +47,5 @@ export interface FindPasswordRequestDto {
 
 // description: 비밀번호 재설정 Request Body Dto
 export interface FindPasswordResetRequestDto {
-    userPassword: string
+    userPassword: string;
 }
