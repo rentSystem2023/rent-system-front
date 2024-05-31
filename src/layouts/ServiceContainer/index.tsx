@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { ADMIN_USER_LIST_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 import { useCookies } from "react-cookie";
-import { GetSignInUserResponseDto } from "src/apis/user/dto/response";
+import { GetMyInfoResponseDto, GetSignInUserResponseDto } from "src/apis/user/dto/response";
 import ResponseDto from "src/apis/response.dto";
-import { getSignInUserRequest } from "src/apis/user";
+import { getMyInfoRequest, getSignInUserRequest } from "src/apis/user";
 
 // TODO: 로그인, 회원가입에 아이콘 넣어야함
 function TopBar() {
+
+    const [nickName, setNickName] = useState<string>('');
 
     const navigator = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies();
@@ -65,7 +67,7 @@ function TopBar() {
             <div className="top-bar-role">
                 <div className="sign-in-wrapper">
                     <div className="user-mypage-button person"></div>
-                    <div className="user-button" onClick={onMyPageClickHandler}>{}</div>
+                    <div className="user-button" onClick={onMyPageClickHandler}>{nickName}님</div>
                 </div>
                 <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
                 
@@ -110,18 +112,8 @@ function BottomBar() {
     const [cookies] = useCookies();
     
     const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
-
-        const message = 
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            navigator(MAIN_ABSOLUTE_PATH);
-            return;
-        }
-
+        if (!result) return;
+    
         const { userId, userRole } = result as GetSignInUserResponseDto;
         setLoginUserId(userId);
         setLoginUserRole(userRole);

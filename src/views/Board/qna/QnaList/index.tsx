@@ -30,7 +30,7 @@
     //                    render                    //
     return (
         <div className='table-list-table-tr' onClick={onClickHandler}>
-            <div className='user-table-list-table-th qna'>
+            <div className='table-list-table-th qna'>
                 <div className='qna-list-table-reception-number'>{receptionNumber}</div>
                 <div className='qna-list-table-write-date'>{writeDatetime}</div>
                 <div className='qna-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
@@ -234,7 +234,7 @@
             </div>
 
             <div className='table-list-table'>
-                <div className='user-table-list-table-th qna'>
+                <div className='table-list-table-th qna'>
                     <div className='qna-list-table-reception-number'>순번</div>
                     <div className='qna-list-table-write-date'>작성일</div>
                     <div className='qna-list-table-title'>제목</div>

@@ -230,11 +230,12 @@
 
 /* 테이블 CSS */
 #table-list-wrapper{
-  margin: 20px auto;
-  max-width: 1300px;
+  margin: 20px auto;  
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100px;
+  min-width: 1300px;
 }
 
 .table-list-top {
@@ -279,20 +280,7 @@
   background-color: rgba(255, 255, 255, 1);
 }
 
-.admin-table-list-table-th {
-  display: flex;
-  align-items: center;
-  gap: 38px;
-  padding: 15px 24px;
-
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-
-  color: rgba(64, 64, 64, 1);
-}
-
-.user-table-list-table-th {
+.table-list-table-th {
   display: flex;
   align-items: center;
   padding: 15px 24px;
