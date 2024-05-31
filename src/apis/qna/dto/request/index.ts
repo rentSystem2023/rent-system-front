@@ -25,7 +25,3 @@ export interface PostQnaCommentRequestDto {
     comment : string;
 }
 
-export interface PutQnaRequestDto {
-    title: string;
-    contents: string;
-}
