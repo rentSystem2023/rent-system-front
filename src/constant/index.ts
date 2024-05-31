@@ -113,7 +113,7 @@ export const ADMIN_USER_DETAIL_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}
 // description: 업체 리스트 페이지 절대 URL //
 export const ADMIN_COMPANY_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}`;
 // description: 업체 상세 페이지 절대 URL //
-export const ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${ADMIN_COMPANY_DETAIL_PATH}`;
+export const ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH = (companyCode: number) => `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${companyCode}`;
 // description: 업체 등록 페이지 절대 URL //
 export const ADMIN_COMPANY_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${ADMIN_COMPANY_REGIST_PATH}`;
 // description: 업체 수정 페이지 절대 URL //
