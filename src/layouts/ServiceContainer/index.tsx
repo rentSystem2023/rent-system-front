@@ -20,7 +20,7 @@ function TopBar() {
 
     const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
 
-        if (!result) return;        
+        if (!result) return;
 
         const { nickName } = result as GetMyInfoResponseDto;
         setNickName(nickName);
@@ -36,7 +36,7 @@ function TopBar() {
     // 로그아웃 처리 시 원래 있던 쿠키 값을 제거
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
-        window.location.reload();
+        navigator(MAIN_ABSOLUTE_PATH);
     };
 
     const onLogoClickHandler = () => {
@@ -110,11 +110,11 @@ function BottomBar() {
     const [cookies] = useCookies();
     
     const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
-
+        if (!result) return;
+    
         const { userId, userRole } = result as GetSignInUserResponseDto;
         setLoginUserId(userId);
         setLoginUserRole(userRole);
-        
     };
 
     useEffect(() => {

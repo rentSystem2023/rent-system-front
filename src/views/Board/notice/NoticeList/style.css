@@ -1,13 +1,23 @@
-.title-text{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding: 50px;
+.user-table-list-table-th.notice{
+    gap: 200px;
+}
 
-    font-size: 50px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 173%;
+/* 순번 */
+.notice-list-table-reception-number{
+    width: 30px;
+}
 
-    color: rgba(64, 64, 64, 1);
+/* 작성일 */
+.notice-list-table-write-date{
+    width: 350px;
+}
+
+/* 제목 */
+.notice-list-table-title{
+    width: 200px;
+}
+
+/* 조회수 */
+.notice-list-table-viewcount{
+    width: 42px;
 }

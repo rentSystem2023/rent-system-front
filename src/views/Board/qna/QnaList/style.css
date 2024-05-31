@@ -1,137 +1,54 @@
-
-.qna-list-wrapper {
-    width: 80%;
-    min-height: 560px;
-    margin: 0 auto;
-    padding-top: 16px;
-}
-
-#user-list-wrapper{
-    display: block;
-    unicode-bidi: isolate;
-}
-
-.side-navigation-container {
-    grid-area: sidenav;
-    padding: 16px 25px;
-
+.qna-board-text{
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    
-    border-right: 1px solid rgba(233, 236, 239, 1);  
-}
-
-.side-navigation-item {
-    border-radius: 6px;
-    padding: 8px 24px;
-
-    display: flex;
-
+    justify-content: center;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
+    padding: 40px;
 
-    color: rgba(138, 146, 166, 1);
-
-    font-size: 20px;
-    font-style: normal;
+    font-size: 18px;
     font-weight: 400;
-    line-height: normal;  
+    line-height: 25px;
 }
 
-.qna-list-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-bottom: 20px;
+.user-table-list-table-th.qna{
+    gap: 65px;
 }
 
-.qna-list-size-text {
-    font-size: 16px;
-    font-weight: 400;
+.qna-board-image{
+    width: 75px;
+    height: 70px;
+    background-size: 100% 100%;
 
-    color: rgba(138, 146, 166, 1);
 }
 
-.qna-list-size-text .emphasis {
-    color: rgba(64, 64, 64, 1);
+.qna-board-image.help{
+    background-image: url('../../../../assets/image/help.png');
 }
 
-.qna-list-top-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.qna-list-top-admin-text {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-
-    color: rgba(64, 64, 64, 1);
-}
-
-.qna-list-table {
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    border: 1px solid rgba(238, 238, 238, 1);
-    border-radius: 8px;
-
-    background-color: rgba(255, 255, 255, 1);
-
-        /* 최소 높이를 설정 */
-        min-height: 300px; /* 원하는 높이로 설정 */
-        height: auto;
-    }
-    .qna-board-text{
-        text-align: center;
-        position: relative;
-        background: #f5f5f5;
-        padding: 40px 0;
-        
-    }
-
-.qna-list-table-th {
-    display: flex;
-    align-items: center;
-    gap: 70px;
-    padding: 15px 24px;
-
-    font-size: 16px;
-    font-weight: 900;
-    text-align: center;
-
-    color: rgba(64, 64, 64, 1);
-}
-
-.qna-list-table-tr {
-    display: flex;
-    align-items: center;
-    gap: 70px;
-    padding: 15px 24px;
-
-    font-size: 16px;
-    font-weight: 900;
-    text-align: center;
-
-    color: rgba(64, 64, 64, 1);
-}
-
-.qna-list-table-tr:hover{
-    cursor: pointer;
-    background-color: rgba(238, 238, 238, 0.2);
-}
-
+/* 순번 */
 .qna-list-table-reception-number {
-    width: 56px;
+    width: 30px;
 }
 
-/* 상태 */
-.qna-list-table-status {
+/* 작성일 */
+.qna-list-table-write-date {
+    width: 54px;
+}
+
+/* 제목 */
+.qna-list-table-title {
+    width: 345px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 작성자 */
+.qna-list-table-writer-id {
     width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* 유형 */
@@ -144,112 +61,12 @@
     width: 80px;
 }
 
-.qna-list-table-title {
-    width: 349px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+/* 상태 */
+.qna-list-table-status {
+    width: 80px;
 }
 
-.qna-list-table-writer-id {
-    width: 67px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.qna-list-table-write-date {
-    width: 54px;
-}
-
+/* 조회수 */
 .qna-list-table-viewcount {
     width: 42px;
-}
-
-
-.qna-list-bottom {
-    display: flex;
-    justify-content: space-between;
-}
-
-.qna-list-pagenation {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-.qna-list-page-left {
-    width: 40px;
-    height: 40px;
-
-    /* background-image: url('../../../../assets/image/page-left.png'); */
-    background-size: 100% 100%;
-
-    cursor: pointer;
-}
-
-.qna-list-page-right {
-    width: 40px;
-    height: 40px;
-/* 
-    background-image: url('../../../../assets/image/page-right.png'); */
-    background-size: 100% 100%;
-
-    cursor: pointer;
-}
-
-.qna-list-page-box {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.qna-list-page {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-
-    color: rgba(138, 146, 166, 1);
-
-    cursor: pointer;
-}
-
-.qna-list-page-active {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-
-    color: rgba(64, 64, 64, 1);
-
-    cursor: default;
-}
-
-.qna-list-search-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.qna-list-search-input-box {
-    border: 1px solid rgba(238, 238, 238, 1);
-    border-radius: 6px;
-    padding: 8px 16px;
-    width: 168px;
-
-    background-color: rgba(255, 255, 255, 1);
-}
-
-.qna-list-search-input {
-    border: none;
-    outline: none;
-    background: none;
-
-    width: 100%;
-
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 175%;
-
-    color: rgba(64, 64, 64, 1);
 }
