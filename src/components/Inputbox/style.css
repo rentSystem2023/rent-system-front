@@ -34,7 +34,7 @@
 }
 
 .input-label {
-    color: rgba(138, 146, 166, 1);
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .input-content-box{
@@ -47,18 +47,18 @@
 
 .input-primary-button {
     box-sizing: border-box;
-    width: 110px;
-    padding: 8px 0px;
+    width: 120px;
+    padding: 8px;
     border-radius: 6px;
 
-    background-color: rgba(58, 87, 232, 0.2);
+    background-color: rgba(0, 0, 0, 1);
 
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 175%;
+    line-height: 215%;
 
-    color: rgba(45, 66, 178, 1);
+    color: rgba(255, 255, 255, 1);
 
     text-align: center;
 }
@@ -69,8 +69,8 @@
 
 .input-disable-button {
     box-sizing: border-box;
-    width: 110px;
-    padding: 8px 0px;
+    width: 120px;
+    padding: 8px;
     border-radius: 6px;
 
     background-color: rgba(238, 238, 238, 1);
@@ -78,10 +78,12 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 175%;
+    line-height: 215%;
 
     color: rgba(138, 146, 166, 1);
 
+    display: flex;
+    justify-content: center;
     text-align: center;
 }
 
