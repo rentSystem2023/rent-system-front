@@ -3,12 +3,12 @@ import './style.css';
 
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
+import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { GetCompanyDetailResponseDto } from 'src/apis/company/dto/response';
 import { PostCompanyRequestDto } from 'src/apis/company/dto/request';
-import { getCompanyDetailRequest } from 'src/apis/company';
+import { deleteCompanyRequest, getCompanyDetailRequest } from 'src/apis/company';
 
 //                    component                    //
 export default function CompanyDetail() {
@@ -18,7 +18,7 @@ export default function CompanyDetail() {
     // const { companyCode } = useParams();
 
     const [cookies] = useCookies();
-    const [companyCode, setCompanyCode] = useState<number | string>('');
+    const [companyCode, setCompanyCode] = useState<number>(0);
     const [rentCompany, setRentCompany] = useState<string>('');
     const [address, setAddress] = useState<string>('');
     const [owner, setOwner] = useState<string>('');
@@ -34,9 +34,9 @@ export default function CompanyDetail() {
     const getCompanyDetailResponse = (result: GetCompanyDetailResponseDto | ResponseDto | null) => {
         const message =
         !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 고유번호입니다.' :
+        result.code === 'VF' ? '잘못된 업체 번호입니다.' :
         result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 고유번호입니다.' :
+        result.code === 'NC' ? '존재하지 않는 업체입니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
@@ -48,7 +48,6 @@ export default function CompanyDetail() {
         }
 
         const { companyCode, rentCompany, address, owner, companyTelnumber, registDate, companyRule } = result as GetCompanyDetailResponseDto;
-
         setCompanyCode(companyCode);
         setRentCompany(rentCompany);
         setAddress(address);
@@ -58,21 +57,41 @@ export default function CompanyDetail() {
         setCompanyRule(companyRule);
     };
 
-    const updateCompanyResponse = (result: ResponseDto | null) => {
+    const deleteBoardResponse = (result: ResponseDto | null) => {
+
         const message =
         !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '내용을 모두 입력해주세요.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
-                result.code === 'DBE' ? '서버에 문제가 있습니다' : '';
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'VF' ? '올바르지 않은 업체입니다.' :
+        result.code === 'NC' ? '존재하지 않는 업체입니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        return;
-    }
-    navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
+        if (!result || result.code !== 'SU'){
+            alert(message);
+            return;
+        }
+
+        navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
     };
 
     //                    event handler                    //
+    const onListClickHandler = () => {
+        navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
+    }
+
+    const onUpdateClickHandler = () => {
+        if (loginUserRole !== 'ROLE_ADMIN' ) return;
+        navigator(ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH(companyCode));
+    }
+
+    const onDeleteClickHandler = () => {
+        if (loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
+        const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
+        if (!isConfirm) return;
+
+        deleteCompanyRequest(companyCode, cookies.accessToken) 
+        .then(deleteBoardResponse)
+    }
 
 
     //                    effect                    //
@@ -101,6 +120,7 @@ export default function CompanyDetail() {
                         <div>{registDate}</div>
                         <div>{companyRule}</div>
                 </div>
+                <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
                 <div className='second-button'>수정</div>
                 <div className='error-button'>삭제</div>
         </div>

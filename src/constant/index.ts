@@ -117,7 +117,7 @@ export const ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH = (companyCode: number) => `${MA
 // description: 업체 등록 페이지 절대 URL //
 export const ADMIN_COMPANY_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${ADMIN_COMPANY_REGIST_PATH}`;
 // description: 업체 수정 페이지 절대 URL //
-export const ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${ADMIN_COMPANY_UPDATE_PATH}`;
+export const ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH = (companyCode: number) => `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/update/${companyCode}`;
 
 // description: 관리자 - 예약 관리 //
 // description: 예약 리스트 페이지 절대 URL //
