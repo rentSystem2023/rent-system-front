@@ -73,13 +73,13 @@ export const deleteBoardRequest = async(receptionNumber: number | string, access
     return result; // 결과 반환
 }
 
-// function : 파일 업로드 API 함수
-export const postUploadRequest = async (accessToken:string) => {
-    const result = await axios.post(POST_QNA_REGIST_URL, bearerAuthorization(accessToken))
-        .then(requestHandler<ResponseDto>) // 이거 명세서 수정되면 바꿔야함
-        .catch(requestErrorHandler)
-    return result;
-};
+// // function : 파일 업로드 API 함수
+// export const postUploadRequest = async (accessToken:string) => {
+//     const result = await axios.post(POST_QNA_REGIST_URL, bearerAuthorization(accessToken))
+//         .then(requestHandler<ResponseDto>) // 이거 명세서 수정되면 바꿔야함
+//         .catch(requestErrorHandler)
+//     return result;
+// };
 
 // //  function : 파일 불러오기 API 함수
 // export const getUserInfoRequest = async (fileName: number | string, accessToken:string) => {
