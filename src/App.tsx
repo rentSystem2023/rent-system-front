@@ -60,6 +60,8 @@ import NoticeList from "./views/Board/notice/NoticeList";
 import CompanyList from "./views/Company/list";
 import FindId from "./views/Authentication/FindId";
 import CompanyRegist from "./views/Company/regist";
+import QnaUpdate from "./views/Board/qna/QnaUpdate";
+
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -168,7 +170,7 @@ function App() {
           <Route index element={<QnaList/>} />
           <Route path={QNA_DETAIL_PATH} element={<QnaDetail/>} />
           <Route path={QNA_REGIST_PATH} element={<QnAWrite/>} />
-          <Route path={QNA_UPDATE_PATH} element={<>Q&A 수정</>} />
+          <Route path={QNA_UPDATE_PATH} element={<QnaUpdate/>} />
         </Route>
 
         {/* // route : 관리자 페이지 */}

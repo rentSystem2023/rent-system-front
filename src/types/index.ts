@@ -30,6 +30,7 @@ export interface QnaListItem {
     category : string;
     publicState : boolean;
     status : string;
+    contents : string;
 };
 
 export interface QnaMyListItem {
