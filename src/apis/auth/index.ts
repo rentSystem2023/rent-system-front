@@ -17,7 +17,7 @@ import {
     SignInRequestDto,
     SignUpRequestDto,
 } from "./dto/request";
-import { SignInResponseDto } from "./dto/response";
+import { FindIdResponseDto, SignInResponseDto } from "./dto/response";
 import ResponseDto from "../response.dto";
 import { requestErrorHandler, requestHandler } from "..";
 
@@ -81,7 +81,7 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
 export const findIdRequest = async (requestBody: FindIdRequestDto) => {
     const result = await axios
         .post(POST_FIND_ID_REQUEST_URL, requestBody)
-        .then(requestHandler<ResponseDto>)
+        .then(requestHandler<FindIdResponseDto>)
         .catch(requestErrorHandler);
     return result;
 }
