@@ -23,16 +23,14 @@ registDate
     //                    render                    //
     return (
         <div className='table-list-table-tr' >
-            <div className='admin-table-list-table-th'>
-                <div className='company-list-table-check'><input type='checkbox'/></div>
-                <div className='company-list-table-list-number'>{index}</div>
-                <div className='company-list-table-comapny-code'>{companyCode}</div>
-                <div className='company-list-table-company-name'>{rentCompany}</div>
-                <div className='company-list-table-company-address'>{address}</div>
-                <div className='company-list-table-company-owner'>{owner}</div>
-                <div className='company-list-table-company-telnumber'>{companyTelnumber}</div>
-                <div className='company-list-table-company-date'>{registDate}</div>
-            </div>
+            <div className='company-list-table-check'><input type='checkbox'/></div>
+            <div className='company-list-table-list-number'>{index}</div>
+            <div className='company-list-table-comapny-code'>{companyCode}</div>
+            <div className='company-list-table-company-name'>{rentCompany}</div>
+            <div className='company-list-table-company-address'>{address}</div>
+            <div className='company-list-table-company-owner'>{owner}</div>
+            <div className='company-list-table-company-telnumber'>{companyTelnumber}</div>
+            <div className='company-list-table-company-date'>{registDate}</div>
         </div>
     );
 
@@ -203,7 +201,7 @@ export default function CompanyList() {
             </div>
         </div>
         <div className='table-list-table'>
-            <div className='admin-table-list-table-th'>
+            <div className='table-list-table-th company'>
                 <div className='company-list-table-check'>체크</div>
                 <div className='company-list-table-list-number'>순번</div>
                 <div className='company-list-table-comapny-code'>고유번호</div>
