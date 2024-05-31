@@ -1,0 +1,66 @@
+#my-reservation-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+}
+
+.my-reservation-card {
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    gap: 10px;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 13px 25px;
+}
+
+.my-reservation-state{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 20px;
+    width: 150px;
+    height: 10px;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+
+    color:rgba(0, 0, 0, 0.7);
+}
+
+.my-reservation-info-list{
+    display: flex;
+    gap: 15px;
+}
+
+.my-reservation-car-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 20px;
+}
+
+.my-reservation-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100%;
+    gap: 15px;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 18px;
+}
