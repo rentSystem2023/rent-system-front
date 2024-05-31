@@ -7,11 +7,14 @@
 
 #user-main {
     grid-area: main;
+
+    min-width: 1182px;
+    padding: 30px;
 }
 
 .user-side-navigation-container {
     grid-area: sidenav;
-    padding: 250px 20px;
+    padding: 50px 20px;
 
     display: flex;
     flex-direction: column;

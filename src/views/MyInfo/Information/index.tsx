@@ -12,13 +12,11 @@ import { useUserStore } from 'src/stores';
 export default function MyInfo() {
 
     //                    state                    //
-    // const { loginUserId, loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [nickName, setNickName] = useState<string>('');
     const [userId, setUserId] = useState<string>('');
     const [userEmail, setUserEmail] = useState<string>('');
     const [joinDate, setJoinDate] = useState<string>('');
-    const [status, setStatus] = useState<string>('');
     const [userRole, setUserRole] = useState<String>('');
 
     //                    function                    //
@@ -67,24 +65,32 @@ export default function MyInfo() {
 
 
     return (
-        <div id='information-wrapper'>
-            <div className='information-main'>
-            <div className="title-text">내 정보</div>
+        <div id='information-wrapper'>          
+            <div className='information-main'>  
                 <div className='information-contents'>
                     <div className='information-container'>
-                        
-                        <div className='information-nickname'>닉네임</div>
-                        <input className='input' type="text" value={nickName} readOnly />
-                        <div className='information-id'>아이디</div>
-                        <input className='input' type="text" value={userId} readOnly />
-                        <div className='information-password'>비밀번호</div>
-                        <input className='input' type="text" readOnly />
-                        <div className='information-email'>이메일</div>
-                        <input className='input' type="text" value={userEmail} readOnly />
-                        <div className='information-joindate'>가입날짜</div>
-                        <input className='input' type="text" value={joinDate} readOnly />
+                        <div className='information-box'>
+                            <div className='information-title'>닉네임</div>
+                            <div className='information-value'>{nickName}</div>    
+                        </div>
+                        <div className='information-box'>
+                            <div className='information-title'>아이디</div>
+                            <div className='information-value'>{userId}</div>    
+                        </div>
+                        <div className='information-box'>
+                            <div className='information-title'>비밀번호</div>
+                            <div className='information-value'></div>    
+                        </div>
+                        <div className='information-box'>
+                            <div className='information-title'>이메일</div>
+                            <div className='information-value'>{userEmail}</div>    
+                        </div>
+                        <div className='information-box'>
+                            <div className='information-title'>가입날짜</div>
+                            <div className='information-value'>{joinDate}</div>    
+                        </div>                 
                     </div>
-                        <div className='find-button' onClick={ onModifyButtonClickHandler }>수정하기</div>
+                        <div className='information-modify-button' onClick={ onModifyButtonClickHandler }>수정하기</div>
                 </div>
             </div>
         </div>

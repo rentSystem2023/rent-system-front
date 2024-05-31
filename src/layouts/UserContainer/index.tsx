@@ -23,6 +23,8 @@ function UserSideBar({ path } : Props) {
 
 
   return(
+    <>
+    
     <div className="user-side-navigation-container">
             <div className={myInfoClass} onClick={onUserClickHandler}>
                 <div className="user-side-navigation-icon person"></div>
@@ -37,6 +39,7 @@ function UserSideBar({ path } : Props) {
                 <div className="user-side-navigation-item-title">문의 내역</div>
             </div>
         </div>
+      </>
   );
 }
 
@@ -55,11 +58,14 @@ export default function UserContainer() {
 }, [pathname]);
 
   return (
+    <>
+    <div className='title-text'>마이페이지</div>
     <div id="user-wrapper">
       <UserSideBar path={path} />
       <div id="user-main">
         <Outlet/>
       </div>
     </div>
+    </>
   )
 }
