@@ -37,7 +37,6 @@ export interface SignUpRequestDto {
 // description: 아이디 찾기 Request Body Dto
 export interface FindIdRequestDto {
     userEmail: string;
-    authNumber: string;
 }
 
 // description: 비밀번호 찾기 Request Body Dto
