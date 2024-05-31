@@ -41,6 +41,7 @@ export const ADMIN_USER_PATH = 'user';
 export const ADMIN_USER_DETAIL_PATH = ':userId';
 
 export const ADMIN_COMPANY_PATH = 'company';
+export const ADMIN_COMPANY_DETAIL_PATH = ':companyCode';
 export const ADMIN_COMPANY_REGIST_PATH = 'regist';
 export const ADMIN_COMPANY_UPDATE_PATH = 'update/:companyCode';
 
@@ -111,6 +112,8 @@ export const ADMIN_USER_DETAIL_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}
 // description: 관리자 - 업체 관리 //
 // description: 업체 리스트 페이지 절대 URL //
 export const ADMIN_COMPANY_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}`;
+// description: 업체 상세 페이지 절대 URL //
+export const ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${ADMIN_COMPANY_DETAIL_PATH}`;
 // description: 업체 등록 페이지 절대 URL //
 export const ADMIN_COMPANY_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${ADMIN_COMPANY_REGIST_PATH}`;
 // description: 업체 수정 페이지 절대 URL //
@@ -253,6 +256,8 @@ export const SERVER_COMPANY_MODULE = `${SERVER_API_URL}/company`;
 
 // 업체 정보 전체 리스트 URL
 export const GET_COMPANY_LIST_URL = `${SERVER_COMPANY_MODULE}/list`;
+// 업체 정보 상세 URL
+export const GET_COMPANY_DETAIL_URL = (companyCode : number) => `${GET_COMPANY_LIST_URL}/${companyCode}`;
 // 업체 정보 검색 리스트 URL
 export const GET_COMPANY_LIST_SEARCH_URL = `${GET_COMPANY_LIST_URL}/search`;
 // 업체 정보 등록 URL
