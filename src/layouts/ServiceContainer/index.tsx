@@ -14,12 +14,29 @@ function TopBar() {
     const navigator = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies();
     const { pathname } = useLocation();
-    const { loginUserRole } = useUserStore();
+    const { loginUserRole, setLoginUserId, setLoginUserRole } = useUserStore();
+
+    const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
+
+        if (!result) return;
+
+        const { nickName } = result as GetMyInfoResponseDto;
+        setNickName(nickName);
+
+    };
+    
+    useEffect (() => {
+        if (!cookies.accessToken) return;
+
+        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+    }, [cookies.accessToken]);
 
     // 로그아웃 처리 시 원래 있던 쿠키 값을 제거
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
-        window.location.reload();
+        setLoginUserId('');
+        setLoginUserRole('');
+        navigator(MAIN_ABSOLUTE_PATH);
     };
 
     const onLogoClickHandler = () => {
