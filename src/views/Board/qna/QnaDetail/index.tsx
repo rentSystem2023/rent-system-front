@@ -31,6 +31,7 @@ export default function QnaDetail() {
     const [status, setStatus] = useState<boolean>(false);
     const [comment, setComment] = useState<string | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
+    const [imageUrl , setImageUrl] = useState<string>('');
 
 
     //                    function                    //
@@ -77,7 +78,7 @@ export default function QnaDetail() {
             return;
         }
 
-        const { title, writerId, writeDatetime, viewCount, contents, status, comment } = result as GetQnaBoardResponseDto;
+        const { title, writerId, writeDatetime, viewCount, contents, status, comment ,imageUrl} = result as GetQnaBoardResponseDto;
         setTitle(title);
         setWriterId(writerId);
         setWriteDate(writeDatetime);
@@ -85,6 +86,7 @@ export default function QnaDetail() {
         setContents(contents);
         setStatus(status);
         setComment(comment);
+        setImageUrl(imageUrl);
     };
 
     const postCommentResponse = (result: ResponseDto | null) => {
@@ -171,6 +173,17 @@ export default function QnaDetail() {
             .then(increaseViewCountResponse);
     }, []);
 
+    
+    useEffect(() => {
+        // API 호출하여 이미지 URL 가져오기 (예시)
+        fetch('https://your-api-endpoint.com/image')
+            .then(response => response.json())
+            .then(data => setImageUrl(data.imageUrl))
+            .catch(error => console.error('Error fetching image:', error));
+    }, []);
+
+
+
     //                    render                    //
     const coverdWriterId = writerId !== '' && (writerId[0] + '*'.repeat(writerId.length - 1));
     return (
@@ -184,6 +197,7 @@ export default function QnaDetail() {
                         <div className='qna-detail-info'>작성일 {writeDate}</div>
                         <div className='qna-detail-info-divider'>{'\|'}</div>
                         <div className='qna-detail-info'>조회수 {viewCount}</div>
+                        {imageUrl && <img src={imageUrl} alt="Database Image" className="qna-image" />}
                     </div>
                 </div>
                 <div className='qna-detail-contents-box'>{contents}</div>
