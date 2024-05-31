@@ -48,26 +48,59 @@ export interface PopularCarListItem {
     carName: string;
 }
 
-export interface PriceListItem {
-    carImageUrl : string;
+export interface ReservationCarPriceListItem {
     carName : string;
+    carImageUrl : string;
     fuelType : string;
-    insuranceType : string;
+    rentCompany : string;
+    reservationCount : number;
+    carYear : string;
     normalPrice : number;
     luxuryPrice : number;
     superPrice : number;
-    carRentCompany : string;
-    reservationCount : string;
-    carYear : string;
 }
 
 export interface ReservationListItem{
     carImageUrl : string;
-    userId : string;
-    userName : string;
-    companyCode : string;
-    carNumber : string;
+    nickName : string;
     reservationDate : string;
+    reservationCode : string;
+    rentCompany : string;
+}
+
+export interface ReservationCancelListItem{
+    userId : string;
     reservationState : string;
-    reservationPeriod : string;
+}
+
+export interface ReservationCarListItem{
+    carName : string;
+    carImageUrl : string;
+    normalPrice : number;
+    luxuryPrice : number;
+    superPrice : number;
+}
+
+export interface ReservationCarPriceListItem{
+    carName : string;
+    carImageUrl : string;
+    fuelType : string;
+    rentCompany : string;
+    reservationCount : number;
+    carYear : string;
+    normalPrice : number;
+    luxuryPrice : number;
+    superPrice : number;
+}
+
+export interface ReservationUserListItem{
+    reservaionCode : string;
+    rentCompany : string;
+    carName : string;
+    carNumber : string;
+    reservationStart : string;
+    reservationEnd : string;
+    userId : string;
+    nickName : string;
+    reservationState : string;
 }
