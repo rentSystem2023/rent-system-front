@@ -160,7 +160,8 @@ export default function SignIn() {
                     </div>
                     <div className="other-authentication-button-container">
                         <div className="moving-find-id-password">
-                            <div className="moving-find-id" onClick={() => {navigator(AUTH_FIND_ID_ABSOLUTE_PATH)}}>아이디/</div>
+                            <div className="moving-find-id" onClick={() => {navigator(AUTH_FIND_ID_ABSOLUTE_PATH)}}>아이디</div>
+                            <div>{'/'}</div>
                             <div className="moving-find-password" onClick={() => {navigator(AUTH_FIND_PASSWORD_ABSOLUTE_PATH)}}>비밀번호 찾기</div>
                         </div>
                         <div className="moving-sign-up" onClick={ onSignUpButtonClickHandler }>회원가입</div>
