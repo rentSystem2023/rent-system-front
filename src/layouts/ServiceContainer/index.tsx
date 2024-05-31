@@ -14,9 +14,9 @@ function TopBar() {
     const [nickName, setNickName] = useState<string>('');
 
     const navigator = useNavigate();
-    const [cookies, removeCookie] = useCookies();
+    const [cookies, setCookie, removeCookie] = useCookies();
     const { pathname } = useLocation();
-    const { loginUserRole } = useUserStore();
+    const { loginUserRole, setLoginUserId, setLoginUserRole } = useUserStore();
 
     const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
 
@@ -36,6 +36,8 @@ function TopBar() {
     // 로그아웃 처리 시 원래 있던 쿠키 값을 제거
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
+        setLoginUserId('');
+        setLoginUserRole('');
         navigator(MAIN_ABSOLUTE_PATH);
     };
 
