@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from "./dto/response";
+import { GetCompanyDetailResponseDto, GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from "./dto/response";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import { GET_COMPANY_LIST_SEARCH_URL, GET_COMPANY_LIST_URL, POST_COMPANY_REGIST_URL, PUT_COMPANY_UPDATE_URL } from "src/constant";
 import { PostCompanyRequestDto, PutCompanyRequestDto } from "./dto/request";
@@ -25,6 +25,14 @@ export const PutCompanyRequest = async (companyCode: number, requestBody: PutCom
 export const getCompanyListRequest = async (accessToken: string) => {
     const result = await axios.get(GET_COMPANY_LIST_URL, bearerAuthorization(accessToken))
         .then(requestHandler<GetCompanyListResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
+// function: 업체 상세 불러오기 API 함수 
+export const getCompanyDetailRequest = async (accessToken: string) => {
+    const result = await axios.get(GET_COMPANY_LIST_URL, bearerAuthorization(accessToken))
+        .then(requestHandler<GetCompanyDetailResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };
