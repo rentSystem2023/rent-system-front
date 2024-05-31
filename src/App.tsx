@@ -68,6 +68,7 @@ import MyReservation from "./views/MyPage/Reservation";
 import MyQna from "./views/MyPage/Qna";
 import FindPassword from "./views/Authentication/FindPassword";
 import FindPasswordReset from "./views/Authentication/FindPasswordReset";
+import CompanyUpdate from "./views/Admin/Company/CompanyUpdate";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -194,7 +195,7 @@ return (
             <Route index element={<CompanyList />} />
             <Route path={ADMIN_COMPANY_DETAIL_PATH} element={<CompanyDetail />} />
             <Route path={ADMIN_COMPANY_REGIST_PATH} element={<CompanyRegist />} />
-            <Route path={ADMIN_COMPANY_UPDATE_PATH} element={<>업체 수정</>} />
+            <Route path={ADMIN_COMPANY_UPDATE_PATH} element={<CompanyUpdate/>} />
         </Route>.
 
         {/* // route : 관리자 - 예약관리 페이지 */}
