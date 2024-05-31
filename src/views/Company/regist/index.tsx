@@ -2,7 +2,7 @@ import React, { ChangeEvent, useRef, useState } from 'react'
 import './style.css';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { ADMIN_COMPANY_REGIST_ABSOLUTE_PATH } from 'src/constant';
+import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH } from 'src/constant';
 import { Cookies, useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { postCompanyRequest } from 'src/apis/company';
@@ -14,6 +14,7 @@ export default function CompanyRegist() {
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
+    const [companyCode, setCompanyCode] = useState<number | string>('');
     const [rentCompany, setRentCompany] = useState<string>('');
     const [address, setAddress] = useState<string>('');
     const [owner, setOwner] = useState<string>('');
@@ -34,10 +35,15 @@ export default function CompanyRegist() {
             alert(message);
             return;
         }
-        navigator(ADMIN_COMPANY_REGIST_ABSOLUTE_PATH);
+        navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
     };
 
     //                              event Handler                              //
+    const onCompanyCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        const companyCode = event.target.value;
+        setCompanyCode(companyCode)
+    };
+
     const onRentCompanyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const rentCompany = event.target.value;
         setRentCompany(rentCompany)
@@ -63,78 +69,59 @@ export default function CompanyRegist() {
         setCompanyRule(companyRule);
     };
 
-    // const onRegistButtonClickHandler = () => {
-    //     if (!Cookies.accessToken) return;
+    const onRegistButtonClickHandler = () => {
+        if (!cookies.accessToken) {
+            alert('권한이 없습니다.');
+            return;
+        }
+        if (!companyCode || !rentCompany || !address || !owner || !companyTelnumber) {
+            alert('필드를 채워주세요.');
+            return;
+        }
+        const requestBody: PostCompanyRequestDto = {
+            companyCode,
+            rentCompany,
+            address,
+            owner,
+            companyTelnumber,
+            companyRule
+        }
 
-        // const requestBody: PostCompanyRequestDto = {
-        //      companyCode,
-        //     rentCompany,
-        //     address,
-        //     owner,
-        //     companyTelnumber,
-        //     companyRule
-        // }
-
-    //     postCompanyRequest(requestBody, cookies.accessToken).then(registCompanyResponse);
-    // };
+        postCompanyRequest(requestBody, cookies.accessToken).then(registCompanyResponse);
+    };
 
 
     // Render
     return (
-        <div className="registration-container">
-            <h2>업체 등록</h2>
-            <form className="registration-form" >
-                <div className="form-group">
-                    <label htmlFor="rentCompany">업체명:</label>
-                    <input
-                      type="text"
-                      id="rentCompany"
-                      value={rentCompany}
-                      onChange={onRentCompanyChangeHandler}
-                      required
-                    />
+        <div id="registration-wrapper">
+            <div className='registration-container'>
+                <h2>업체 등록</h2>
+                <div className="registration-form-box">
+                    <label className='registration-label'>업체코드:</label>
+                    <input className="companyCode" type="text" value={companyCode} onChange={onCompanyCodeChangeHandler} required/>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="address">주소:</label>
-                    <input
-                      type="text"
-                      id="address"
-                      value={address}
-                      onChange={onAddressChangeHandler}
-                      required
-                    />
+                <div className="registration-form-box">
+                    <label className='registration-label'>업체명:</label>
+                    <input className="rentCompany" type="text" value={rentCompany} onChange={onRentCompanyChangeHandler} required/>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="owner">담당자:</label>
-                    <input
-                      type="text"
-                      id="owner"
-                      value={owner}
-                      onChange={onOwnerChangeHandler}
-                      required
-                    />
+                <div className="registration-form-box">
+                    <label className='registration-label'>주소:</label>
+                    <input className="address" type="text" value={address} onChange={onAddressChangeHandler} required />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="companyTelnumber">연락처:</label>
-                    <input
-                      type="tel"
-                      id="companyTelnumber"
-                      value={companyTelnumber}
-                      onChange={onCompanyTelnumberChangeHandler}
-                      required
-                    />
+                <div className="registration-form-box">
+                    <label className='registration-label'>담당자:</label>
+                    <input className="owner" type="text" value={owner} onChange={onOwnerChangeHandler} required />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="companyRule">영업방침:</label>
-                    <textarea
-                      id="companyRule"
-                      value={companyRule}
-                      onChange={onCompanyRuleChangeHandler}
-                      required
-                    />
+                <div className="registration-form-box">
+                    <label className='registration-label'>연락처:</label>
+                    <input className="companyTelnumber" type="text" value={companyTelnumber} onChange={onCompanyTelnumberChangeHandler} required />
                 </div>
-                <button type="submit" className="submit-button">등록</button>
-            </form>
+                <div className="registration-form-box">
+                    <label className='registration-label'>영업방침:</label>
+                    <textarea className="companyRule" value={companyRule} onChange={onCompanyRuleChangeHandler} />
+                </div>
+                <button type="submit" className="submit-button" onClick={onRegistButtonClickHandler}>등록</button>
+            </div>
         </div>
     );
   }
