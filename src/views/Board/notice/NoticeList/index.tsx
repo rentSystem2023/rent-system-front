@@ -22,7 +22,7 @@ function ListItem ({
 
     return (
         <div className='table-list-table-tr' onClick={onClickHandler}>
-            <div className='user-table-list-table-th notice'>
+            <div className='table-list-table-th notice'>
                 <div className='notice-list-table-reception-number'>{registNumber}</div>
                 <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
                 <div className='notice-list-table-write-date'>{writeDatetime}</div>
@@ -157,7 +157,7 @@ export default function NoticeList() {
             </div>
 
             <div className='table-list-table'>
-                <div className='user-table-list-table-th notice'>
+                <div className='table-list-table-th notice'>
                     <div className='notice-list-table-reception-number'>순번</div>
                     <div className='notice-list-table-title'>제목</div>
                     <div className='notice-list-table-write-date'>작성일</div>

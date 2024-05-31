@@ -2,6 +2,10 @@
     gap: 38px;
 }
 
+.table-list-table-tr.company{
+    gap: 38px;
+}
+
 /* 체크 */
 .company-list-table-check {
     width: 30px;
