@@ -36,7 +36,7 @@
                 <div className='qna-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
                 <div className='qna-list-table-writer-id'>{writerId}</div>
                 <div className='qna-list-table-category'>{category}</div>
-                <div className='qna-list-table-exposure'>{publicState}</div>
+                <div className='qna-list-table-exposure'>{publicState ? '공개' : '비공개'}</div>
                 <div className='qna-list-table-status'>
                         {status ? 
                         <div className='disable-bedge'>완료</div> :
