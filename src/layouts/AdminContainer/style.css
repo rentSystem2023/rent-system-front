@@ -7,6 +7,7 @@
 
 .admin-main {
     grid-area: main;
+    
     min-width: 1182px;
     padding: 24px;
 }
