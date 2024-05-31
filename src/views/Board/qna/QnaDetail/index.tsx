@@ -12,6 +12,7 @@ import { PostCommentRequest, getQnaRequest, increaseViewCountRequest } from 'src
 import { deleteBoardRequest } from 'src/apis/notice/dto';
 import useUserStore from 'src/stores/user.store';
 
+// 바부
 
 //                    component                    //
 export default function QnaDetail() {
