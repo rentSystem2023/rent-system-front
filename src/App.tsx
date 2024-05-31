@@ -56,13 +56,13 @@ import MyInfoModify from "./views/MyPage/MyInfo/Modify";
 import AdminContainer from "./layouts/AdminContainer";
 import UserContainer from "./layouts/UserContainer";
 import NoticeList from "./views/Board/notice/NoticeList";
-import CompanyList from "./views/Company/list";
+import CompanyList from "./views/Admin/Company/list";
 import FindId from "./views/Authentication/FindId";
-import CompanyRegist from "./views/Company/regist";
+import CompanyRegist from "./views/Admin/Company/regist";
 import QnaDetail from "./views/Board/qna/QnaDetail";
 import QnAWrite from "./views/Board/qna/QnaWrite";
 import QnaUpdate from "./views/Board/qna/QnaUpdate";
-import CompanyDetail from "./views/Company/CompanyDetail";
+import CompanyDetail from "./views/Admin/Company/CompanyDetail";
 import MyReservation from "./views/MyPage/Reservation";
 import MyQna from "./views/MyPage/Qna";
 
