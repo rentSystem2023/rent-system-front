@@ -1,3 +1,4 @@
+import { POST_FIND_PASSWORD_REQUEST_URL, PUT_FIND_PW_RESET_REQUEST_URL } from './../../constant/index';
 import axios from "axios";
 import {
     POST_EMAIL_AUTH_REQUEST_URL,
@@ -12,6 +13,8 @@ import {
     EmailAuthCheckRequestDto,
     EmailAuthRequestDto,
     FindIdRequestDto,
+    FindPasswordRequestDto,
+    FindPasswordResetRequestDto,
     IdCheckRequestDto,
     NickNameCheckRequestDto,
     SignInRequestDto,
@@ -82,6 +85,24 @@ export const findIdRequest = async (requestBody: FindIdRequestDto) => {
     const result = await axios
         .post(POST_FIND_ID_REQUEST_URL, requestBody)
         .then(requestHandler<FindIdResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+}
+
+// fundtion: 비밀번호 찾기 API 함수
+export const findPasswordRequest = async (requestBody: FindPasswordRequestDto) => {
+    const result = await axios
+        .post(POST_FIND_PASSWORD_REQUEST_URL, requestBody)
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+}
+
+// function: 비밀번호 찾기 비밀번호 재설정 API 함수
+export const findPwResetRequest = async (userId: string, requestBody: FindPasswordResetRequestDto) => {
+    const result = await axios
+    .put(PUT_FIND_PW_RESET_REQUEST_URL(userId), requestBody)
+        .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
 }
