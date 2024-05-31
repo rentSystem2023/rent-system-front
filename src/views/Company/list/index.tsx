@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { CompanyListItem } from 'src/types';
 import { useNavigate } from 'react-router';
-import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
+import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from 'src/apis/company/dto/response';
@@ -20,10 +20,15 @@ companyTelnumber,
 registDate
 }: CompanyListItem & {index: number}) {
 
+    //                    function                    //
+    const navigator = useNavigate();
+
+    //                    event handler                    //
+    const onClickHandler = () => navigator(ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH(companyCode));
+
     //                    render                    //
     return (
-        <div className='table-list-table-tr company' >
-                <div className='company-list-table-check'><input type='checkbox'/></div>
+        <div className='table-list-table-tr company' onClick={onClickHandler} >
                 <div className='company-list-table-list-number'>{index}</div>
                 <div className='company-list-table-comapny-code'>{companyCode}</div>
                 <div className='company-list-table-company-name'>{rentCompany}</div>
@@ -196,13 +201,10 @@ export default function CompanyList() {
             <div className='table-list-size-text'>전체 <span className='emphasis'>건</span> | 페이지 <span className='emphasis'></span></div>
             <div className='table-list-top-right'>
                 <div className='primary-button' onClick={onRegistButtonClickHandler}>업체등록</div>
-                <div className='second-button'>수정</div>
-                <div className='error-button'>삭제</div>
             </div>
         </div>
         <div className='table-list-table'>
             <div className='table-list-table-th company'>
-                <div className='company-list-table-check'>체크</div>
                 <div className='company-list-table-list-number'>순번</div>
                 <div className='company-list-table-comapny-code'>고유번호</div>
                 <div className='company-list-table-company-name'>업체명</div>
