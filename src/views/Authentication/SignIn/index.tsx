@@ -134,15 +134,15 @@ export default function SignIn() {
     return (
 
         <div id="authentication-wrapper">
+            <div className="title-text">로그인</div>
             <div className="authentication-sign-in">
-                <div className="title-text">로그인</div>
                 <div className="authentication-contents">
                     <div className="authentication-input-container">
                         <InputBox label="아이디" type="text" value={id} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} />
                         <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onkeydownhandler={onPasswordKeydownHandler} message={message} error />
                     </div>
                     <div className="authentication-button-container">
-                        <div className="primary-button" onClick={onSignInButtonClickHandler}full-width >로그인</div>
+                        <div className="primary-button login" onClick={onSignInButtonClickHandler}>로그인</div>
                     </div>
                     <div className="other-authentication-button-container">
                         <div className="moving-find-id-password">

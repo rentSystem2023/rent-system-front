@@ -82,7 +82,7 @@ export default function AdminContainer() {
     return (
         <div id='admin-wrapper'>
             <SideBar path={path}/>
-            <div id='admin-main'>
+            <div className='admin-main'>
                 <Outlet />
             </div>
         </div>

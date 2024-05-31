@@ -112,9 +112,9 @@ export const ADMIN_USER_DETAIL_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}
 // description: 업체 리스트 페이지 절대 URL //
 export const ADMIN_COMPANY_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}`;
 // description: 업체 등록 페이지 절대 URL //
-export const ADMIN_COMPANY_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${ADMIN_COMPANY_REGIST_PATH}`;
+export const ADMIN_COMPANY_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_REGIST_PATH}`;
 // description: 업체 수정 페이지 절대 URL //
-export const ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_PATH}/${ADMIN_COMPANY_UPDATE_PATH}`;
+export const ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_COMPANY_UPDATE_PATH}`;
 
 // description: 관리자 - 예약 관리 //
 // description: 예약 리스트 페이지 절대 URL //
@@ -212,15 +212,15 @@ export const GET_NOTICE_LIST_URL = `${SERVER_NOTICE_MODULE_URL}/list`;
 // 공지사항 검색 목록 URL
 export const NOTICE_LIST_SEARCH_URL = `${SERVER_NOTICE_MODULE_URL}/list/search`;
 // 공지사항 게시물 상세 URL
-export const GET_NOTICE_DETAIL_URL = (registNumber : number) => `${GET_NOTICE_LIST_URL}/${registNumber}`;
+export const GET_NOTICE_DETAIL_URL = (registNumber : number | string ) => `${GET_NOTICE_LIST_URL}/${registNumber}`;
 // 공지사항 게시물 조회수 증가 URL
-export const INCREASE_NOTICE_VIEW_COUNT_URL = (registNumber : number ) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/increase-view-count`;
+export const INCREASE_NOTICE_VIEW_COUNT_URL = (registNumber : number | string  ) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/increase-view-count`;
 // 공지사항 게시물 작성 URL
 export const POST_NOTICE_REQUESURL = `${SERVER_NOTICE_MODULE_URL}/regist`;
 // 공지사항 게시물 수정 URL
-export const PUT_NOTICE_REGIST_URL = (registNumber : number) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/modify`;
+export const PUT_NOTICE_REGIST_URL = (registNumber : number | string ) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/modify`;
 // 공지사항 게시물 삭제 URL
-export const DELETE_NOTICE_URL = (registNumber : number) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/delete`;
+export const DELETE_NOTICE_URL = (registNumber : number | string ) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/delete`;
 
 // description: Q&A MODULE
 export const SERVER_QNA_MODULE_URL = `${SERVER_API_URL}/qna`;
