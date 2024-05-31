@@ -29,8 +29,7 @@
 
     //                    render                    //
     return (
-        <div className='table-list-table-tr' onClick={onClickHandler}>
-            <div className='table-list-table-th qna'>
+        <div className='table-list-table-tr qna' onClick={onClickHandler}>
                 <div className='qna-list-table-reception-number'>{receptionNumber}</div>
                 <div className='qna-list-table-write-date'>{writeDatetime}</div>
                 <div className='qna-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
@@ -45,7 +44,6 @@
                 </div>
                 <div className='qna-list-table-viewcount'>{viewCount}</div>
             </div>
-        </div>
     );
 }
 
