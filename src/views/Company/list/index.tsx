@@ -138,7 +138,7 @@ export default function CompanyList() {
   
     //                    event handler                    //
     const onRegistButtonClickHandler = () => {
-        if (loginUserRole !== 'ROLE_USER') return; 
+        if (loginUserRole !== 'ROLE_ADMIN') return; 
         navigator(ADMIN_COMPANY_REGIST_ABSOLUTE_PATH);
     };
 
