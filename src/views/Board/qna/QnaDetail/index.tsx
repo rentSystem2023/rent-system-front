@@ -12,7 +12,7 @@ import { PostCommentRequest, getQnaRequest, increaseViewCountRequest } from 'src
 import { deleteBoardRequest } from 'src/apis/notice/dto';
 import useUserStore from 'src/stores/user.store';
 
-// 바부
+
 
 //                    component                    //
 export default function QnaDetail() {
@@ -207,6 +207,7 @@ export default function QnaDetail() {
                     <div className='qna-detail-comment-textarea-box'>
                         <textarea style={{ height: `${28 * commentRows}px` }} className='qna-detail-comment-textarea' placeholder='답글을 작성해주세요.' value={comment === null ? '' : comment} onChange={onCommentChangeHandler} />
                     </div>
+                    
                     <div className='primary-button' onClick={onCommentSubmitClickHandler}>답글달기</div>
                 </div>
             }

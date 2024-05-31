@@ -8,8 +8,9 @@ import { } from 'src/apis/qna/dto/request';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
 import { PostQnaRequest } from 'src/apis/qna/dto';
+import axios from 'axios';
 
-// 바부
+
 
 
 export default function QnAWrite() {
@@ -20,6 +21,15 @@ export default function QnAWrite() {
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
+
+        const fileRef = useRef<HTMLInputElement | null>(null);
+
+    const [fileUpload, setFileUpload] = useState<String>('');
+    const [filePreviews, setFilePreviews] = useState<{name: string, url: string}[]>([]);
+    const [fileRevise, setFileRevise] = useState<number | null>(null);
+
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [publicState, setPublicState] = useState<boolean>(true); // 공개 여부 상태 추가
@@ -44,6 +54,33 @@ export default function QnAWrite() {
 
     };
 
+        const uploadImage = async (file: File): Promise<string | null> => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch('http://localhost:4000/upload', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Authorization': `Bearer ${cookies.accessToken}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.url; // 서버에서 반환된 이미지 URL
+            } else {
+                alert('이미지 업로드에 실패했습니다.');
+                return null;
+            }
+        } catch (error) {
+            console.error('이미지 업로드 오류:', error);
+            alert('이미지 업로드 중 오류가 발생했습니다.');
+            return null;
+        }
+    };
+
 
     //                              event Handler                              //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -60,9 +97,17 @@ export default function QnAWrite() {
         contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
     }
 
-    const onPostButtonClickHandler = () => {
+    const onPostButtonClickHandler = async () => {
         if (!title.trim() || !contents.trim()) return; // 비어있으면 return
         if (!cookies.accessToken) return;
+
+        let imageUrl = '';
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            imageUrl = await axios.post('http://localhost:4000/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(response => response.data ? response.data : '').catch(error => '');
+        }
+        
 
         const requestBody: PostQnaBoardRequestDto = {
             title,
@@ -76,14 +121,17 @@ export default function QnAWrite() {
 
     };
 
+
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            const file = event.target.files[0];
+        const fileInput = event.target;
+        if (fileInput.files && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
             setSelectedFile(file);
             const imageUrl = URL.createObjectURL(file);
             setImageUrl(imageUrl);
         }
-    }
+    };
+
 
     const onCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         setCategory(event.target.value);
@@ -116,10 +164,10 @@ export default function QnAWrite() {
                     <input className='qna-write-title-input' placeholder='제목을 입력해 주세요' value={title} onChange={onTitleChangeHandler} />
                 </div>
                 <div className='qna-category-box'>
-                    <label className='public-state-toggle'>
-                        공개 여부:<input type="checkbox" checked={publicState} onChange={onPublicStateChangeHandler} />
+                    <div className='public-state-toggle'>
+                        공개 여부:<input type="checkbox" onChange={onPublicStateChangeHandler} />
                         {publicState ? '비공개' : '공개'}
-                    </label>
+                    </div>
                     <select value={category} onChange={onCategoryChangeHandler} className='qna-category-select'>
                         <option value="문의">문의</option>
                         <option value="건의">건의</option>
