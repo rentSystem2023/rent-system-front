@@ -58,6 +58,7 @@ import UserContainer from "./layouts/UserContainer";
 import QnAWrite from "./views/Board/qna/QnaWrite";
 import NoticeList from "./views/Board/notice/NoticeList";
 import CompanyList from "./views/Company/list";
+import FindId from "./views/Authentication/FindId";
 import CompanyRegist from "./views/Company/regist";
 
 //          component: root 경로 컴포넌트          //
@@ -136,7 +137,7 @@ function App() {
         <Route path={AUTH_PATH}>
           <Route path={AUTH_SIGN_IN_PATH} element={<SignIn />} />
           <Route path={AUTH_SIGN_UP_PATH} element={<SignUp />} />
-          <Route path={AUTH_FIND_ID_PATH} element={<>아이디 찾기</>} />
+          <Route path={AUTH_FIND_ID_PATH} element={<FindId />} />
           <Route path={AUTH_FIND_PASSWORD_PATH} element={<>비밀번호 찾기</>} />
         </Route>
 
