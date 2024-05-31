@@ -8,7 +8,7 @@ export const AUTH_SIGN_IN_PATH = 'sign-in';
 export const AUTH_SIGN_UP_PATH = 'sign-up';
 export const AUTH_FIND_ID_PATH = 'find-id';
 export const AUTH_FIND_PASSWORD_PATH = 'find-password';
-export const SNS_PATH = '/sns/:accessToken/:expires';
+export const AUTH_FIND_PW_RESET_PATH = 'find-password/:userId';
 
 // description: 예약 페이지 URL //
 export const RESERVATION_PATH = 'reservation';
@@ -67,6 +67,8 @@ export const AUTH_SIGN_IN_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_SIGN
 export const AUTH_FIND_ID_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND_ID_PATH}`;
 // description: 비밀번호 찾기 페이지 절대 URL //
 export const AUTH_FIND_PASSWORD_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND_PASSWORD_PATH}`;
+// description: 비밀번호 찾기 비번 재설정 페이지 절대 URL //
+export const AUTH_FIND_PW_RESET_ABSOLUTE_PATH =  (userId: string) => `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND_PASSWORD_PATH}/${userId}`;
 
 // description: 예약 //
 // description: 차량 선택 페이지 절대 URL //
@@ -160,6 +162,10 @@ export const POST_EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/emai
 export const POST_SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-up`;
 // 아이디 찾기 URL
 export const POST_FIND_ID_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/find-id`;
+// 비밀번호 찾기 URL
+export const POST_FIND_PASSWORD_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/find-password`;
+// 비밀번호 찾기 비번 재설정 URL
+export const PUT_FIND_PW_RESET_REQUEST_URL = (userId: string) => `${POST_FIND_PASSWORD_REQUEST_URL}/${userId}`;
 
 // description: USER MODULE
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
