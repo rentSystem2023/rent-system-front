@@ -12,6 +12,7 @@ export interface CompanyListItem{
     owner : string;
     companyTelnumber : string;
     registDate : string;
+    companyRule : string | null;
 }
 
 export interface noticeListItem{

@@ -4,8 +4,8 @@ import './style.css';
 export interface InputBoxProps {
     label: string;
     type: 'text' | 'password';
-    value: string;
-    placeholder: string;
+    value: string | number;
+    placeholder?: string;
     onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
     buttonTitle?: string;
     buttonStatus?: boolean;

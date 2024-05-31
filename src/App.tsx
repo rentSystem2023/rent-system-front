@@ -6,6 +6,7 @@ ADMIN_BOARD_NOTICE_REGIST_PATH,
 ADMIN_BOARD_NOTICE_UPDATE_PATH,
 ADMIN_BOARD_PATH,
 ADMIN_BOARD_QNA_PATH,
+ADMIN_COMPANY_DETAIL_PATH,
 ADMIN_COMPANY_PATH,
 ADMIN_COMPANY_REGIST_PATH,
 ADMIN_COMPANY_UPDATE_PATH,
@@ -61,6 +62,7 @@ import CompanyRegist from "./views/Company/regist";
 import QnaDetail from "./views/Board/qna/QnaDetail";
 import QnAWrite from "./views/Board/qna/QnaWrite";
 import QnaUpdate from "./views/Board/qna/QnaUpdate";
+import CompanyDetail from "./views/Company/CompanyDetail";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -184,6 +186,7 @@ return (
         {/* // route : 관리자 - 업체관리 페이지 */}
         <Route path={ADMIN_COMPANY_PATH}>
             <Route index element={<CompanyList />} />
+            <Route path={ADMIN_COMPANY_DETAIL_PATH} element={<CompanyDetail />} />
             <Route path={ADMIN_COMPANY_REGIST_PATH} element={<CompanyRegist />} />
             <Route path={ADMIN_COMPANY_UPDATE_PATH} element={<>업체 수정</>} />
         </Route>.
