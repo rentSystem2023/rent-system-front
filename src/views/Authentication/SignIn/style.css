@@ -66,6 +66,7 @@
 .moving-find-id-password {
     display: flex;
     flex-direction: row;
+    gap: 4px;
 }
 
 .authentication-sns-container {
