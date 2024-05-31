@@ -8,9 +8,14 @@ export interface GetCompanyListResponseDto extends ResponseDto{
 
 // description: 업체 상세 불러오기 Response Body DTO
 export interface GetCompanyDetailResponseDto extends ResponseDto{
-    companyList : CompanyListItem[];
+    companyCode : number;
+    rentCompany : string;
+    address : string;
+    owner : string;
+    companyTelnumber : string;
+    registDate : string;
+    companyRule : string | null;
 }
-
 
 // description: 업체 검색 리스트 불러오기 Response Body DTO
 export interface GetSearchCompanyListResponseDto extends ResponseDto {
