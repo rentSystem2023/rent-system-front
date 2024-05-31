@@ -180,20 +180,30 @@
         const searchWord = event.target.value;
         setSearchWord(searchWord);
     };
-
     const onSearchButtonClickHandler = () => {
-        if (!searchWord) {
-            getSearchQnaListRequest('', cookies.accessToken).then(getSearchBoardListResponse);
-        } else {
-            if (!cookies.accessToken) return;
-            getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+        // 검색어가 있는 경우
+        if (searchWord) {
+            if (cookies.accessToken) {
+                getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+            } else {
+                // 토큰이 없는 경우, 빈 문자열을 전달하여 검색
+                getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
+            }
+        }
+        // 검색어가 없는 경우
+        else {
+            // 빈 문자열을 전달하여 검색
+            getSearchQnaListRequest('', '').then(getSearchBoardListResponse);
         }
     };
-
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken) return;
-        getSearchQnaListRequest(searchWord,cookies.accessToken).then(getSearchBoardListResponse);
+        if (!cookies.accessToken) {
+            // 토큰이 없는 경우 처리
+            getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
+        } else {
+            getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+        }
     }, [isToggleOn]);
 
     useEffect(() => {
