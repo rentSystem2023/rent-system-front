@@ -22,15 +22,15 @@ registDate
 
     //                    render                    //
     return (
-        <div className='table-list-table-tr' >
-            <div className='company-list-table-check'><input type='checkbox'/></div>
-            <div className='company-list-table-list-number'>{index}</div>
-            <div className='company-list-table-comapny-code'>{companyCode}</div>
-            <div className='company-list-table-company-name'>{rentCompany}</div>
-            <div className='company-list-table-company-address'>{address}</div>
-            <div className='company-list-table-company-owner'>{owner}</div>
-            <div className='company-list-table-company-telnumber'>{companyTelnumber}</div>
-            <div className='company-list-table-company-date'>{registDate}</div>
+        <div className='table-list-table-tr company' >
+                <div className='company-list-table-check'><input type='checkbox'/></div>
+                <div className='company-list-table-list-number'>{index}</div>
+                <div className='company-list-table-comapny-code'>{companyCode}</div>
+                <div className='company-list-table-company-name'>{rentCompany}</div>
+                <div className='company-list-table-company-address'>{address}</div>
+                <div className='company-list-table-company-owner'>{owner}</div>
+                <div className='company-list-table-company-telnumber'>{companyTelnumber}</div>
+                <div className='company-list-table-company-date'>{registDate}</div>
         </div>
     );
 
