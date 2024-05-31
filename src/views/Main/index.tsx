@@ -12,7 +12,7 @@ export default function Main() {
                             <div className="search-select-item">위치선택</div>
                             <div className="search-select-item">날짜선택</div>
                         </div>
-                        <div className="search-button">차량검색</div>
+                        <div className="car-search-button">차량검색</div>
                     </div>
                     <div className="popular-car-box">
                         <div className="popular-car-card">카드</div>
