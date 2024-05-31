@@ -56,8 +56,8 @@ export default function QnaDetail() {
             return;
         }
 
-        if (!cookies.accessToken || !receptionNumber) return;
-        getQnaRequest(receptionNumber, cookies.accessToken)
+        if (!receptionNumber) return;
+        getQnaRequest(receptionNumber , cookies.accessToken)
             .then(getBoardResponse);
     };
 
@@ -105,7 +105,7 @@ export default function QnaDetail() {
             return;
         }
 
-        if (!receptionNumber || !cookies.accessToken) return;
+        if (!receptionNumber) return;
         getQnaRequest(receptionNumber, cookies.accessToken).then(getBoardResponse);
 
     };
@@ -169,11 +169,10 @@ export default function QnaDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken || !receptionNumber) return;
-        increaseViewCountRequest(receptionNumber, cookies.accessToken)
-            .then(increaseViewCountResponse);
+        if (!receptionNumber ||!cookies.accessToken) return;
+        // 토큰 없이 게시글 상세 정보를 가져오도록 수정
+        getQnaRequest(receptionNumber, cookies.accessToken).then(getBoardResponse);
     }, []);
-
     
     useEffect(() => {
         // API 호출하여 이미지 URL 가져오기 (예시)

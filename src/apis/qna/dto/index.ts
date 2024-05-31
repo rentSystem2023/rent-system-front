@@ -41,6 +41,8 @@ export const getSearchQnaListRequest = async(word:string, accessToken:string) =>
     return result;
 }
 
+// 게시물 불러올때 토큰없이 받는 작업하면됨 바로 밑에
+
 // function : Q&A 게시물 불러오기 API 함수
 export const getQnaRequest = async(receptionNumber:number | string, accessToken:string) => {
     const result = await axios.get(GET_QNA_DETAIL_URL(receptionNumber),bearerAuthorization(accessToken))
@@ -50,7 +52,7 @@ export const getQnaRequest = async(receptionNumber:number | string, accessToken:
 }
 
 // function : Q&A 게시물 수정 API 함수
-export const postQnadRequest = async(receptionNumber: number | string , requestBody: PostQnaBoardRequestDto , accessToken:string) =>{
+export const postQnaRequest = async(receptionNumber: number | string , requestBody: PostQnaBoardRequestDto , accessToken:string) =>{
     const result = await axios.put(PUT_QNA_REGIST_URL(receptionNumber), requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);

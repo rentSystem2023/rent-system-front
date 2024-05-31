@@ -23,6 +23,8 @@ export interface GetQnaBoardResponseDto extends ResponseDto {
     contents: string;
     comment: string | null;
     imageUrl: string;
+    category: string;
+    publicState: boolean;
 }
 
 // description: 마이페이지 해당 사용자의 Q&A 전체 게시물 리스트 불러오기 Response Body DTO
