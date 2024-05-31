@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
 import { PostQnaRequest } from 'src/apis/qna/dto';
 
-
+// 바부
 
 
 export default function QnAWrite() {

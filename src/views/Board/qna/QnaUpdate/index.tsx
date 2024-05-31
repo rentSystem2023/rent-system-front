@@ -12,7 +12,7 @@ import { PostQnaRequestDto, PutQnaRequestDto } from 'src/apis/qna/dto/request';
 import { putBoardRequest } from 'src/apis/notice/dto';
 import { getQnaRequest } from 'src/apis/qna/dto';
 
-
+// 바부
 
 //                    component                    //
 export default function QnaUpdate() {
