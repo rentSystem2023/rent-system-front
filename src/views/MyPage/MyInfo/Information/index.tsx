@@ -52,9 +52,18 @@ export default function MyInfo() {
 
 
     //                    event handler                    //
+    // const onPwModifyButtonClickHandler = () => {
+    //     navigator(USER_UPDATE_ABSOLUTE_PATH);
+    // }
+
+    // const onEmailModifyButtonClickHandler = () => {
+    //     navigator(USER_UPDATE_ABSOLUTE_PATH);
+    // }
+
     const onModifyButtonClickHandler = () => {
         navigator(USER_UPDATE_ABSOLUTE_PATH);
     }
+
 
     
     //                  effect                      //
@@ -79,11 +88,13 @@ export default function MyInfo() {
                         </div>
                         <div className='information-box'>
                             <div className='information-title'>비밀번호</div>
-                            <div className='information-value'></div>    
+                            <div className='information-value'></div> 
+                            {/* <div className='information-modify-button' onClick={ onPwModifyButtonClickHandler }>변경</div> */}
                         </div>
                         <div className='information-box'>
                             <div className='information-title'>이메일</div>
-                            <div className='information-value'>{userEmail}</div>    
+                            <div className='information-value'>{userEmail}</div>
+                            {/* <div className='information-modify-button' onClick={ onEmailModifyButtonClickHandler }>변경</div> */}
                         </div>
                         <div className='information-box'>
                             <div className='information-title'>가입날짜</div>

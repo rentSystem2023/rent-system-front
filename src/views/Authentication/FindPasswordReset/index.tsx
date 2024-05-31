@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react'
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { findPwResetRequest } from 'src/apis/auth';
 import { FindPasswordResetRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
@@ -11,7 +11,9 @@ import useAuthStore from 'src/stores/auth.store';
 export default function FindPasswordReset() {
 
     //                    state                    //
-    const { password, setPassword } = useAuthStore();
+    
+    const [password, setPassword] = useState<string>('');
+    const { userId } = useParams();
 
     const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
     const [passwordCheck, setPasswordCheck] = useState<string>('');
@@ -80,7 +82,7 @@ export default function FindPasswordReset() {
 
     const onFindPwResetButtonClickHandler = () => {
 
-        if(!isFindPwActive) return;
+        if(!isFindPwActive || !userId) return;
         if(!password || !passwordCheck) {
             alert('모든 내용을 입력해주세요.');
             return;
@@ -90,7 +92,7 @@ export default function FindPasswordReset() {
             userPassword: password
         };
         
-        // findPwResetRequest(requestBody).then(findPwResetResponse);
+        findPwResetRequest(userId, requestBody).then(findPwResetResponse);
 
         navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 

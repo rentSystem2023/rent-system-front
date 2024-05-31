@@ -17,16 +17,15 @@ export default function SignUp() {
 
     //                    state                    //
     const [searchParam, setSearchParam] = useSearchParams();
+    
+    const [id, setId] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [nickName, setNickName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [authNumber, setAuthNumber] = useState<string>('');
 
-    const { 
-        id, setId,
-        password, setPassword,
-        nickName, setNickName,
-        email, setEmail,
-        authNumber, setAuthNumber,
-        setJoinPath, setSnsId
-        } = useAuthStore();
-
+    const { setJoinPath, setSnsId } = useAuthStore();
+    
     const [passwordCheck, setPasswordCheck] = useState<string>('');
 
     const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
