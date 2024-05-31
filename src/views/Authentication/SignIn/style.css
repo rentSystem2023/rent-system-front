@@ -3,7 +3,6 @@
     flex-direction: column;
     margin: 20px auto;
 }
-
 .authentication-sign-in {
     display: flex;
     flex-direction: column;
@@ -12,6 +11,10 @@
     margin: auto;
     padding: 30px;
     /* border: gray 1px solid; */
+}
+
+.primary-button.login{
+    width: 100%;
 }
 
 .authentication-title {
