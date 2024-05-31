@@ -63,6 +63,8 @@ import QnaDetail from "./views/Board/qna/QnaDetail";
 import QnAWrite from "./views/Board/qna/QnaWrite";
 import QnaUpdate from "./views/Board/qna/QnaUpdate";
 import CompanyDetail from "./views/Company/CompanyDetail";
+import MyReservation from "./views/MyPage/Reservation";
+import MyQna from "./views/MyPage/Qna";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -156,8 +158,8 @@ return (
         <Route path={USER_PATH} element={<UserContainer />}>
         <Route index element={<MyInfo />} />
         <Route path={USER_UPDATE_PATH} element={<MyInfoModify />} />
-        <Route path={USER_RESERVATION_PATH} element={<>예약내역</>} />
-        <Route path={USER_QNA_PATH} element={<>문의내역</>} />
+        <Route path={USER_RESERVATION_PATH} element={<MyReservation/>} />
+        <Route path={USER_QNA_PATH} element={<MyQna/>} />
         </Route>
 
         {/* // route : 공지사항 페이지 */}
