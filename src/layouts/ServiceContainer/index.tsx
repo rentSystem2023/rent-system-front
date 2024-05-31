@@ -122,7 +122,6 @@ function BottomBar() {
     useEffect(() => {
 
         if (!cookies.accessToken) {
-            navigator(MAIN_ABSOLUTE_PATH);
             return;
         }
 
