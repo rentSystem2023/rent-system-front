@@ -19,6 +19,7 @@ ADMIN_USER_LIST_ABSOLUTE_PATH,
 ADMIN_USER_PATH,
 AUTH_FIND_ID_PATH,
 AUTH_FIND_PASSWORD_PATH,
+AUTH_FIND_PW_RESET_PATH,
 AUTH_PATH,
 AUTH_SIGN_IN_PATH,
 AUTH_SIGN_UP_PATH,
@@ -65,6 +66,8 @@ import QnaUpdate from "./views/Board/qna/QnaUpdate";
 import CompanyDetail from "./views/Admin/Company/CompanyDetail";
 import MyReservation from "./views/MyPage/Reservation";
 import MyQna from "./views/MyPage/Qna";
+import FindPassword from "./views/Authentication/FindPassword";
+import FindPasswordReset from "./views/Authentication/FindPasswordReset";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -143,7 +146,8 @@ return (
         <Route path={AUTH_SIGN_IN_PATH} element={<SignIn />} />
         <Route path={AUTH_SIGN_UP_PATH} element={<SignUp />} />
         <Route path={AUTH_FIND_ID_PATH} element={<FindId />} />
-        <Route path={AUTH_FIND_PASSWORD_PATH} element={<>비밀번호 찾기</>} />
+        <Route path={AUTH_FIND_PASSWORD_PATH} element={<FindPassword />} />
+        <Route path={AUTH_FIND_PW_RESET_PATH} element={<FindPasswordReset />} />
         </Route>
 
         {/* // route : 예약 페이지 */}
