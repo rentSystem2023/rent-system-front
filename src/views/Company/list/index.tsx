@@ -22,9 +22,9 @@ registDate
 
     //                    render                    //
     return (
-        <div className='company-list-table-tr' >
-            <div className='company-list-table-th'>
-                <div className='company-list-table-check'><input type='checkbox' /></div>
+        <div className='table-list-table-tr' >
+            <div className='admin-table-list-table-th'>
+                <div className='company-list-table-check'><input type='checkbox'/></div>
                 <div className='company-list-table-list-number'>{index}</div>
                 <div className='company-list-table-comapny-code'>{companyCode}</div>
                 <div className='company-list-table-company-name'>{rentCompany}</div>
@@ -192,54 +192,50 @@ export default function CompanyList() {
   //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
-  <div>
-  <div id='company-list-wrapper'>
-  <div style={{ display: 'flex' }}>
-  <div className='company-list-wrapper'>
-    <div className='company-list-top'>
-        <div className='company-list-size-text'>전체 <span className='emphasis'>건</span> | 페이지 <span className='emphasis'></span></div>
-        <div className='company-list-top-right'>
-              <div className='primary-button' onClick={onRegistButtonClickHandler}>업체등록</div>
-              <div className='second-button'>수정</div>
-              <div className='error-button'>삭제</div>
-        </div>
-    </div>
-    <div className='company-list-table'>
-        <div className='company-list-table-th'>
-            <div className='company-list-table-check'>체크</div>
-            <div className='company-list-table-list-number'>순번</div>
-            <div className='company-list-table-comapny-code'>고유번호</div>
-            <div className='company-list-table-company-name'>업체명</div>
-            <div className='company-list-table-company-address'>주소</div>
-            <div className='company-list-table-company-owner'>담당자</div>
-            <div className='company-list-table-company-telnumber'>연락처</div>
-            <div className='company-list-table-company-date'>등록일</div>
-        </div>
-        {viewList.map((item, index) => <ListItem key={index} index={viewList.length - index + (currentPage - 1) * COUNT_PER_PAGE} {...item} />)}
-    </div>
-    <div className='company-list-bottom'>
-        <div style={{ width: '299px' }}></div>
-        <div className='company-list-pagenation'>
-            <div className='company-list-page-left' onClick={onPreSectionClickHandler}></div>
-            <div className='company-list-page-box'>
-                {pageList.map(page => 
-                page === currentPage ?
-                <div className='company-list-page-active'>{page}</div> :
-                <div className='company-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
-                )}
+    <div>
+    <div id='table-list-wrapper'>
+        <div className='table-list-top'>
+            <div className='table-list-size-text'>전체 <span className='emphasis'>건</span> | 페이지 <span className='emphasis'></span></div>
+            <div className='table-list-top-right'>
+                <div className='primary-button' onClick={onRegistButtonClickHandler}>업체등록</div>
+                <div className='second-button'>수정</div>
+                <div className='error-button'>삭제</div>
             </div>
-            <div className='company-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        <div className='company-list-search-box'>
-            <div className='company-list-search-input-box'>
-                <input className='company-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
+        <div className='table-list-table'>
+            <div className='admin-table-list-table-th'>
+                <div className='company-list-table-check'>체크</div>
+                <div className='company-list-table-list-number'>순번</div>
+                <div className='company-list-table-comapny-code'>고유번호</div>
+                <div className='company-list-table-company-name'>업체명</div>
+                <div className='company-list-table-company-address'>주소</div>
+                <div className='company-list-table-company-owner'>담당자</div>
+                <div className='company-list-table-company-telnumber'>연락처</div>
+                <div className='company-list-table-company-date'>등록일</div>
             </div>
-            <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+            {viewList.map((item, index) => <ListItem key={index} index={viewList.length - index + (currentPage - 1) * COUNT_PER_PAGE} {...item} />)}
+        </div>
+        <div className='table-list-bottom'>
+            <div style={{ width: '299px' }}></div>
+            <div className='table-list-pagenation'>
+                <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
+                <div className='table-list-page-box'>
+                    {pageList.map(page => 
+                    page === currentPage ?
+                    <div className='table-list-page-active'>{page}</div> :
+                    <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
+                    )}
+                </div>
+                <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
+            </div>
+            <div className='table-list-search-box'>
+                <div className='table-list-search-input-box'>
+                    <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
+                </div>
+                <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+            </div>
         </div>
     </div>
-  </div>
-  </div>
-  </div>
-  </div>
-);
+    </div>
+    );
 }
