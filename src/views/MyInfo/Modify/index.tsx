@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
+import './style.css';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import ResponseDto from 'src/apis/response.dto';
@@ -251,37 +252,69 @@ export default function MyInfoModify() {
     }, []);
 
 
-  return (
-    <div id='information-wrapper'>
-            <div className='information-main'>
-                <div className="title-text">내 정보 수정</div>
-                <div className='information-contents'>
-                    <div className='information-container'>
-                        <div className='information-input-title'>닉네임</div>
-                        <input className='input' type="text" value={ nickName }readOnly />
-                        <div className='information-input-title'>아이디</div>
-                        <input className='input' type="text" value={ userId } readOnly />
-
-                        <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-
-                        <InputBox label="비밀번호 확인" type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
-
-                        <InputBox label="이메일" type="text" value={userEmail} placeholder={ userEmail } onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
-                        {/* <div className='information-input-title'>이메일</div>
-                        <input className='input' type="text" value={userEmail} /> */}
-
-                        {isEmailCheck && 
-                        <InputBox label="인증번호" type="text" value={authNumber} placeholder="인증번호 4자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
-
-                        <div className='information-input-title'>가입날짜</div>
-                        <div className='information-joindate-input'>{ joinDate }</div>
+    return (
+        <div id='information-modify-wrapper'>
+            <div className='information-modify-main'>
+                <div className='information-modify-contents'>
+                    <div className='information-box'>
+                        <div className='information-title'>닉네임</div>
+                        <div className='information-value'>{nickName}</div>    
                     </div>
-                    <div className='information-modify-button'>
-                        <div className='primary-button' onClick={ onPatchButtonClickHandler }>수정하기</div>
-                        <div className='information-delete-button' onClick={ onDeleteButtonClickHandler } >탈퇴하기</div>
+                    <div className='information-box'>
+                        <div className='information-title'>아이디</div>
+                        <div className='information-value'>{userId}</div>    
                     </div>
+                    <InputBox 
+                        label="비밀번호" 
+                        type="password" 
+                        value={password} 
+                        placeholder="비밀번호를 입력해주세요" 
+                        onChangeHandler={onPasswordChangeHandler} 
+                        message={passwordMessage} error 
+                    />
+                    <InputBox 
+                        label="비밀번호 확인" 
+                        type="password" 
+                        value={passwordCheck} 
+                        placeholder="비밀번호를 입력해주세요" 
+                        onChangeHandler={onPasswordCheckChangeHandler} 
+                        message={passwordCheckMessage} error 
+                    />
+                    <InputBox
+                        label="이메일" 
+                        type="text" 
+                        value={userEmail}
+                        placeholder={userEmail} 
+                        onChangeHandler={onEmailChangeHandler} 
+                        buttonTitle="이메일 인증"
+                        buttonStatus={emailButtonStatus} 
+                        onButtonClickHandler={onEmailButtonClickHandler} 
+                        message={emailMessage} error={isEmailError} 
+                    />
+                    {/* <div className='information-input-title'>이메일</div>
+                    <input className='input' type="text" value={userEmail} /> */}
+                    {isEmailCheck && 
+                    <InputBox 
+                        label="인증번호" 
+                        type="text" 
+                        value={authNumber} 
+                        placeholder="인증번호 4자리를 입력해주세요" 
+                        onChangeHandler={onAuthNumberChangeHandler} 
+                        buttonTitle="인증 확인" 
+                        buttonStatus={authNumberButtonStatus} 
+                        onButtonClickHandler={onAuthNumberButtonClickHandler} 
+                        message={authNumberMessage} error={isAuthNumberError} 
+                    />}
+                    <div className='information-box'>
+                        <div className='information-title'>가입날짜</div>
+                        <div className='information-value'>{joinDate}</div>    
+                    </div>
+                </div>
+                <div className='information-update-button'>
+                    <div className='primary-button modify' onClick={ onPatchButtonClickHandler }>수정하기</div>
+                    <div className='primary-button delete' onClick={ onDeleteButtonClickHandler }>탈퇴하기</div>
                 </div>
             </div>
         </div>
-  )
+    );
 }

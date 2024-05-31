@@ -1,0 +1,28 @@
+#information-modify-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+}
+
+.information-modify-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    margin: auto;
+}
+
+.information-modify-contents {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    gap: 10px;
+}
+
+.information-update-button {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    padding-top: 15px;
+}
