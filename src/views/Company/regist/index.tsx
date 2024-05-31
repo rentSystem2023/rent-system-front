@@ -7,6 +7,7 @@ import { Cookies, useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { postCompanyRequest } from 'src/apis/company';
 import { PostCompanyRequestDto } from 'src/apis/company/dto/request';
+import InputBox from 'src/components/Inputbox';
 
 export default function CompanyRegist() {
 
@@ -91,30 +92,17 @@ export default function CompanyRegist() {
     };
 
 
-    // Render
+    //                    render                    //
     return (
         <div id="registration-wrapper">
             <div className='registration-container'>
                 <h2>업체 등록</h2>
                 <div className="registration-form-box">
-                    <label className='registration-label'>업체코드:</label>
-                    <input className="companyCode" type="text" value={companyCode} onChange={onCompanyCodeChangeHandler} required/>
-                </div>
-                <div className="registration-form-box">
-                    <label className='registration-label'>업체명:</label>
-                    <input className="rentCompany" type="text" value={rentCompany} onChange={onRentCompanyChangeHandler} required/>
-                </div>
-                <div className="registration-form-box">
-                    <label className='registration-label'>주소:</label>
-                    <input className="address" type="text" value={address} onChange={onAddressChangeHandler} required />
-                </div>
-                <div className="registration-form-box">
-                    <label className='registration-label'>담당자:</label>
-                    <input className="owner" type="text" value={owner} onChange={onOwnerChangeHandler} required />
-                </div>
-                <div className="registration-form-box">
-                    <label className='registration-label'>연락처:</label>
-                    <input className="companyTelnumber" type="text" value={companyTelnumber} onChange={onCompanyTelnumberChangeHandler} required />
+                    <InputBox label="업체코드" type="text" value={companyCode} onChangeHandler={onCompanyCodeChangeHandler} />
+                    <InputBox label="업체명" type="text" value={rentCompany} onChangeHandler={onRentCompanyChangeHandler} />
+                    <InputBox label="주소" type="text" value={address} onChangeHandler={onAddressChangeHandler} />
+                    <InputBox label="담당자" type="text" value={owner} onChangeHandler={onOwnerChangeHandler} />
+                    <InputBox label="연락처" type="text" value={companyTelnumber} onChangeHandler={onCompanyTelnumberChangeHandler} />
                 </div>
                 <div className="registration-form-box">
                     <label className='registration-label'>영업방침:</label>

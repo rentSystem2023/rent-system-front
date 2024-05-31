@@ -6,6 +6,12 @@ export interface GetCompanyListResponseDto extends ResponseDto{
     companyList : CompanyListItem[];
 }
 
+// description: 업체 상세 불러오기 Response Body DTO
+export interface GetCompanyDetailResponseDto extends ResponseDto{
+    companyList : CompanyListItem[];
+}
+
+
 // description: 업체 검색 리스트 불러오기 Response Body DTO
 export interface GetSearchCompanyListResponseDto extends ResponseDto {
     companyList : CompanyListItem[];
