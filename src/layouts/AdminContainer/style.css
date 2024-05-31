@@ -2,13 +2,12 @@
     display: grid;
     grid-template: 
         "sidenav main" minmax(900px, auto)
-        / 257px minmax(1182px, 1fr);
+        / 257px minmax(1400px, 1fr);
 }
 
 .admin-main {
-    grid-area: main;    
+    grid-area: main;
     min-width: 1182px;
-    overflow-x: auto;
 }
 
 .admin-side-navigation-container {

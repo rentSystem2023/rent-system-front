@@ -54,7 +54,7 @@
     border: 1px solid rgba(255, 255, 255, 255);
     border-radius: 8px;
 }
-.search-button{
+.car-search-button{
     display: flex;
     justify-content: center;
     align-items: center;
