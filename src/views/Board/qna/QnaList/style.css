@@ -14,6 +14,10 @@
     gap: 65px;
 }
 
+.table-list-table-tr.qna{
+    gap: 65px;
+}
+
 .qna-board-image{
     width: 75px;
     height: 70px;
