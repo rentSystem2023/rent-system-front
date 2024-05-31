@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GetCompanyDetailResponseDto, GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from "./dto/response";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
-import { GET_COMPANY_LIST_SEARCH_URL, GET_COMPANY_LIST_URL, POST_COMPANY_REGIST_URL, PUT_COMPANY_UPDATE_URL } from "src/constant";
+import { DELETE_COMPANY_LIST_URL, GET_COMPANY_LIST_SEARCH_URL, GET_COMPANY_LIST_URL, POST_COMPANY_REGIST_URL, PUT_COMPANY_UPDATE_URL } from "src/constant";
 import { PostCompanyRequestDto, PutCompanyRequestDto } from "./dto/request";
 import ResponseDto from "../response.dto";
 
@@ -18,6 +18,14 @@ export const PutCompanyRequest = async (companyCode: number, requestBody: PutCom
     const result = await axios.put(PUT_COMPANY_UPDATE_URL(companyCode), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler)
+    return result;
+}
+
+// function : 업체 삭제 API 함수
+export const deleteCompanyRequest = async(companyCode: number, accessToken: string)=>{
+    const result = await axios.delete(DELETE_COMPANY_LIST_URL(companyCode),bearerAuthorization(accessToken))
+    .then(requestHandler<ResponseDto>)
+    .catch(requestErrorHandler);
     return result;
 }
 
