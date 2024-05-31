@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GetCompanyDetailResponseDto, GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from "./dto/response";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
-import { DELETE_COMPANY_LIST_URL, GET_COMPANY_LIST_SEARCH_URL, GET_COMPANY_LIST_URL, POST_COMPANY_REGIST_URL, PUT_COMPANY_UPDATE_URL } from "src/constant";
+import { DELETE_COMPANY_LIST_URL, GET_COMPANY_DETAIL_URL, GET_COMPANY_LIST_SEARCH_URL, GET_COMPANY_LIST_URL, POST_COMPANY_REGIST_URL, PUT_COMPANY_UPDATE_URL } from "src/constant";
 import { PostCompanyRequestDto, PutCompanyRequestDto } from "./dto/request";
 import ResponseDto from "../response.dto";
 
@@ -14,7 +14,7 @@ export const postCompanyRequest = async (requestBody: PostCompanyRequestDto, acc
 };
 
 // function: 업체 수정 API 함수 
-export const PutCompanyRequest = async (companyCode: number, requestBody: PutCompanyRequestDto, accessToken: string) => {
+export const PutCompanyRequest = async (companyCode: string | number, requestBody: PutCompanyRequestDto, accessToken: string) => {
     const result = await axios.put(PUT_COMPANY_UPDATE_URL(companyCode), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler)
@@ -22,7 +22,7 @@ export const PutCompanyRequest = async (companyCode: number, requestBody: PutCom
 }
 
 // function : 업체 삭제 API 함수
-export const deleteCompanyRequest = async(companyCode: number, accessToken: string)=>{
+export const deleteCompanyRequest = async(companyCode: string | number, accessToken: string)=>{
     const result = await axios.delete(DELETE_COMPANY_LIST_URL(companyCode),bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
@@ -38,8 +38,8 @@ export const getCompanyListRequest = async (accessToken: string) => {
 };
 
 // function: 업체 상세 불러오기 API 함수 
-export const getCompanyDetailRequest = async (accessToken: string) => {
-    const result = await axios.get(GET_COMPANY_LIST_URL, bearerAuthorization(accessToken))
+export const getCompanyDetailRequest = async (companyCode: string | number, accessToken: string) => {
+    const result = await axios.get(GET_COMPANY_DETAIL_URL(companyCode), bearerAuthorization(accessToken))
         .then(requestHandler<GetCompanyDetailResponseDto>)
         .catch(requestErrorHandler);
     return result;

@@ -15,10 +15,9 @@ export default function CompanyDetail() {
 
     //                    state                    //
     const { loginUserRole } = useUserStore();
-    // const { companyCode } = useParams();
+    const { companyCode } = useParams();
 
     const [cookies] = useCookies();
-    const [companyCode, setCompanyCode] = useState<number>(0);
     const [rentCompany, setRentCompany] = useState<string>('');
     const [address, setAddress] = useState<string>('');
     const [owner, setOwner] = useState<string>('');
@@ -48,7 +47,7 @@ export default function CompanyDetail() {
         }
 
         const { companyCode, rentCompany, address, owner, companyTelnumber, registDate, companyRule } = result as GetCompanyDetailResponseDto;
-        setCompanyCode(companyCode);
+        // setCompanyCode(companyCode);
         setRentCompany(rentCompany);
         setAddress(address);
         setOwner(owner);
@@ -80,12 +79,12 @@ export default function CompanyDetail() {
     }
 
     const onUpdateClickHandler = () => {
-        if (loginUserRole !== 'ROLE_ADMIN' ) return;
+        if (!companyCode || loginUserRole !== 'ROLE_ADMIN' ) return;
         navigator(ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH(companyCode));
     }
 
     const onDeleteClickHandler = () => {
-        if (loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
+        if (!companyCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
 
@@ -96,17 +95,13 @@ export default function CompanyDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken) return;
-        if (!loginUserRole) return;
-        if (loginUserRole !== 'ROLE_ADMIN') {
-            navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
-            return;
-        }
-        getCompanyDetailRequest(cookies.accessToken).then(getCompanyDetailResponse);
-    }, [loginUserRole]);
+        if (!companyCode || !cookies.accessToken) return;
+
+        getCompanyDetailRequest(companyCode, cookies.accessToken).then(getCompanyDetailResponse);
+    }, []);
 
 
-    // Render
+    //                    render                    //
     return (
     <div id="company-detail-wrapper">
         <div className='company-detail-container'>
@@ -121,8 +116,8 @@ export default function CompanyDetail() {
                         <div>{companyRule}</div>
                 </div>
                 <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
-                <div className='second-button'>수정</div>
-                <div className='error-button'>삭제</div>
+                <div className='second-button'onClick={onUpdateClickHandler}>수정</div>
+                <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
         </div>
     </div>
     );

@@ -17,7 +17,7 @@ export interface PostCommentRequestDto {
 
 // description: 업체 수정하기 Response Body DTO
 export interface PutCompanyRequestDto {
-    companyCode : number;
+    companyCode : number | string;
     rentCompany : string;
     address : string;
     owner : string;
