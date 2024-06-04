@@ -8,7 +8,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
 import { QNA_DETAIL_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PutQnaRequestDto } from 'src/apis/qna/dto/request';
-import { getQnaRequest } from 'src/apis/qna/dto';
+import { getQnaRequest, putQnaRequest } from 'src/apis/qna/dto';
 import { putBoardRequest } from 'src/apis/notice/dto';
 
 
@@ -32,7 +32,7 @@ export default function QnaUpdate() {
     //                    function                    //
     const navigator = useNavigate();
 
-    const getBoardResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
+    const getQnaResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
@@ -46,7 +46,7 @@ export default function QnaUpdate() {
             return;
         }
 
-        const { writerId, title, contents, category, publicState, status } = result as GetQnaBoardResponseDto;  // 카테고리와 퍼블릭 스테이트 포함
+        const { writerId, title, contents, category, publicState, status ,imageUrl} = result as GetQnaBoardResponseDto;  // 카테고리와 퍼블릭 스테이트 포함
         if (writerId !== loginUserId) {
             alert('권한이 없습니다.');
             navigator(QNA_LIST_ABSOLUTE_PATH);
@@ -63,9 +63,10 @@ export default function QnaUpdate() {
         setWriterId(writerId);
         setCategory(category);  // 카테고리 설정
         setPublicState(publicState);  // 퍼블릭 스테이트 설정
+        setImageUrl(imageUrl);
     };
 
-    const putBoardResponse = (result: ResponseDto | null) => {
+    const putQnaResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
@@ -82,6 +83,8 @@ export default function QnaUpdate() {
         if (!receptionNumber) return;
         navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
     };
+
+    
 
     //                    event handler                    //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -107,17 +110,47 @@ export default function QnaUpdate() {
         setPublicState(event.target.checked);
     };
 
-    const onUpdateButtonClickHandler = () => {
+
+    const onUpdateButtonClickHandler = async () => {
         if (!cookies.accessToken || !receptionNumber) return;
         if (!title.trim() || !contents.trim() || !category) return;
+    
+        let imageUrl = '';
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            try {
+                const response = await fetch('http://localhost:4000/upload', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Authorization': `Bearer ${cookies.accessToken}`
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    imageUrl = data.url;
+                } else {
+                    alert('이미지 업로드에 실패했습니다.');
+                    return;
+                }
+            } catch (error) {
+                console.error('이미지 업로드 오류:', error);
+                alert('이미지 업로드 중 오류가 발생했습니다.');
+                return;
+            }
+        }
 
-        const requestBody: PutQnaRequestDto = { title, contents, category, publicState };
-        putBoardRequest(receptionNumber, requestBody, cookies.accessToken).then(putBoardResponse);
+        
+    
+        const requestBody: PutQnaRequestDto = { title, contents, category, publicState, imageUrl };
+        putQnaRequest(receptionNumber, requestBody, cookies.accessToken).then(putQnaResponse);
     };
 
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            const file = event.target.files[0];
+        const fileInput = event.target;
+        if (fileInput.files && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
             setSelectedFile(file);
             const imageUrl = URL.createObjectURL(file);
             setImageUrl(imageUrl);
@@ -132,7 +165,7 @@ export default function QnaUpdate() {
             navigator(QNA_LIST_ABSOLUTE_PATH);
             return;
         }
-        getQnaRequest(receptionNumber, cookies.accessToken).then(getBoardResponse);  // accessToken 추가
+        getQnaRequest(receptionNumber).then(getQnaResponse);  // accessToken 추가
     }, [loginUserRole]);
 
     //                    render                    //

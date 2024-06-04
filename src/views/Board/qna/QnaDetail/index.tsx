@@ -57,7 +57,7 @@ export default function QnaDetail() {
         }
 
         if (!receptionNumber) return;
-        getQnaRequest(receptionNumber , cookies.accessToken)
+        getQnaRequest(receptionNumber )
             .then(getBoardResponse);
     };
 
@@ -106,7 +106,7 @@ export default function QnaDetail() {
         }
 
         if (!receptionNumber) return;
-        getQnaRequest(receptionNumber, cookies.accessToken).then(getBoardResponse);
+        getQnaRequest(receptionNumber).then(getBoardResponse);
 
     };
 
@@ -169,9 +169,9 @@ export default function QnaDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!receptionNumber ||!cookies.accessToken) return;
+        if (!receptionNumber ) return;
         // 토큰 없이 게시글 상세 정보를 가져오도록 수정
-        getQnaRequest(receptionNumber, cookies.accessToken).then(getBoardResponse);
+        getQnaRequest(receptionNumber).then(getBoardResponse);
     }, []);
     
     useEffect(() => {
@@ -180,6 +180,12 @@ export default function QnaDetail() {
             .then(response => response.json())
             .then(data => setImageUrl(data.imageUrl))
             .catch(error => console.error('Error fetching image:', error));
+    }, []);
+
+    useEffect(() => {
+        if (!cookies.accessToken || !receptionNumber) return;
+        increaseViewCountRequest(receptionNumber, cookies.accessToken)
+            .then(increaseViewCountResponse);
     }, []);
 
 
