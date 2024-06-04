@@ -3,7 +3,7 @@ import axios from "axios";
 import { GET_QNA_LIST_SEARCH_URL, GET_QNA_LIST_URL, GET_QNA_DETAIL_URL, INCREASE_QNA_VIEW_COUNT_URL, POST_COMMENT_REQUEST_URL, POST_QNA_REGIST_URL, PUT_QNA_REGIST_URL, DELETE_QNA_LIST_URL } from "src/constant";
 
 import ResponseDto from "src/apis/response.dto";
-import {  PostQnaBoardRequestDto, PostQnaCommentRequestDto,  } from "./request";
+import {  PostQnaBoardRequestDto, PostQnaCommentRequestDto, PutQnaRequestDto,  } from "./request";
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardListResponseDto } from "./response";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "src/apis";
 
@@ -44,15 +44,15 @@ export const getSearchQnaListRequest = async(word:string, accessToken:string) =>
 // 게시물 불러올때 토큰없이 받는 작업하면됨 바로 밑에
 
 // function : Q&A 게시물 불러오기 API 함수
-export const getQnaRequest = async(receptionNumber:number | string, accessToken:string) => {
-    const result = await axios.get(GET_QNA_DETAIL_URL(receptionNumber),bearerAuthorization(accessToken))
+export const getQnaRequest = async(receptionNumber:number | string) => {
+    const result = await axios.get(GET_QNA_DETAIL_URL(receptionNumber))
     .then(requestHandler<GetQnaBoardResponseDto>)
     .catch(requestErrorHandler);
     return result;
 }
 
 // function : Q&A 게시물 수정 API 함수
-export const postQnaRequest = async(receptionNumber: number | string , requestBody: PostQnaBoardRequestDto , accessToken:string) =>{
+export const putQnaRequest = async(receptionNumber: number | string , requestBody: PutQnaRequestDto , accessToken:string) =>{
     const result = await axios.put(PUT_QNA_REGIST_URL(receptionNumber), requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
@@ -75,18 +75,3 @@ export const deleteBoardRequest = async(receptionNumber: number | string, access
     return result; // 결과 반환
 }
 
-// // function : 파일 업로드 API 함수
-// export const postUploadRequest = async (accessToken:string) => {
-//     const result = await axios.post(POST_QNA_REGIST_URL, bearerAuthorization(accessToken))
-//         .then(requestHandler<ResponseDto>) // 이거 명세서 수정되면 바꿔야함
-//         .catch(requestErrorHandler)
-//     return result;
-// };
-
-// //  function : 파일 불러오기 API 함수
-// export const getUserInfoRequest = async (fileName: number | string, accessToken:string) => {
-//     const result = await axios.get(Post(fileName), bearerAuthorization(accessToken))
-//         .then(requestHandler<ResponseDto>) // 이거 명세서 수정되면 바꿔야함
-//         .catch(requestErrorHandler)
-//     return result;
-// };

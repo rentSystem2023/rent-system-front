@@ -19,6 +19,7 @@ export interface PutQnaRequestDto {
     contents: string;
     category: string;
     publicState: boolean;
+    imageUrl:string;
 }
 
 export interface PostQnaCommentRequestDto {
