@@ -106,6 +106,7 @@ export default function QnaUpdate() {
         setCategory(event.target.value);
     };
 
+    
     const onPublicStateChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setPublicState(event.target.checked);
     };
