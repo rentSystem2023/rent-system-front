@@ -33,6 +33,7 @@ export default function QnaDetail() {
     const [comment, setComment] = useState<string | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
     const [imageUrl , setImageUrl] = useState<string>('');
+    const [category, setCategory] = useState<string>('');
 
 
     //                    function                    //
@@ -62,13 +63,14 @@ export default function QnaDetail() {
     };
 
     const getBoardResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
+        console.log(result); // Add this line to log the API response
         const message =
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '잘못된 접수번호입니다.' :
         result.code === 'AF' ? '인증에 실패했습니다.' :
         result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
+    
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
@@ -78,8 +80,8 @@ export default function QnaDetail() {
             navigator(QNA_LIST_ABSOLUTE_PATH);
             return;
         }
-
-        const { title, writerId, writeDatetime, viewCount, contents, status, comment ,imageUrl} = result as GetQnaBoardResponseDto;
+    
+        const { title, writerId, writeDatetime, viewCount, contents, status, comment ,imageUrl , category} = result as GetQnaBoardResponseDto;
         setTitle(title);
         setWriterId(writerId);
         setWriteDate(writeDatetime);
@@ -88,6 +90,7 @@ export default function QnaDetail() {
         setStatus(status);
         setComment(comment);
         setImageUrl(imageUrl);
+        setCategory(category);
     };
 
     const postCommentResponse = (result: ResponseDto | null) => {
@@ -203,10 +206,11 @@ export default function QnaDetail() {
                         <div className='qna-detail-info'>작성일 {writeDate}</div>
                         <div className='qna-detail-info-divider'>{'\|'}</div>
                         <div className='qna-detail-info'>조회수 {viewCount}</div>
-                        {imageUrl && <img src={imageUrl} alt="Database Image" className="qna-image" />}
+                        <div className='qna-detail-contents-box'>유형{category}</div>
                     </div>
                 </div>
                 <div className='qna-detail-contents-box'>{contents}</div>
+                {imageUrl && <img src={imageUrl} alt="Database Image" className="qna-image" />}
             </div>
             {loginUserRole === 'ROLE_ADMIN' && !status &&
                 <div className='qna-detail-comment-write-box'>
