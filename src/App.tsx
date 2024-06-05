@@ -38,10 +38,10 @@ RESERVATION_CAR_PATH,
 RESERVATION_COMPANY_PATH,
 RESERVATION_PATH,
 RESERVATION_REQUEST_PATH,
+USER_EMAIL_UPDATE_PATH,
 USER_PATH,
 USER_QNA_PATH,
-USER_RESERVATION_PATH,
-USER_UPDATE_PATH,
+USER_RESERVATION_PATH
 } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 import UserList from "./views/User/List";
@@ -52,7 +52,6 @@ import Main from "./views/Main";
 import SignIn from "./views/Authentication/SignIn";
 import SignUp from "./views/Authentication/SignUp";
 import MyInfo from "./views/MyPage/MyInfo/Information";
-import MyInfoModify from "./views/MyPage/MyInfo/Modify";
 import AdminContainer from "./layouts/AdminContainer";
 import UserContainer from "./layouts/UserContainer";
 import NoticeList from "./views/Board/notice/NoticeList";
@@ -75,6 +74,8 @@ import NoticeDetail from "./views/Board/notice/NoticeDetail";
 import CarSelect from "./views/Reservation/CarSelect";
 import InsuranceSelect from "./views/Reservation/InsuranceSelect";
 import ReservationDetail from "./views/Reservation/ReservationDetail";
+import MyInfoPwModify from "./views/MyPage/MyInfo/PasswordModify";
+import MyInfoEmailModify from "./views/MyPage/MyInfo/EmailModify";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -168,7 +169,7 @@ return (
         {/* // route : 마이 페이지 */}
         <Route path={USER_PATH} element={<UserContainer />}>
         <Route index element={<MyInfo />} />
-        <Route path={USER_UPDATE_PATH} element={<MyInfoModify />} />
+        <Route path={USER_EMAIL_UPDATE_PATH} element={<MyInfoEmailModify />} />
         <Route path={USER_RESERVATION_PATH} element={<MyReservation/>} />
         <Route path={USER_QNA_PATH} element={<MyQna/>} />
         </Route>
