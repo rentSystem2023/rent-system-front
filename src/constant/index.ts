@@ -207,23 +207,24 @@ export const GET_MY_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/myl
 export const GET_MY_RESERVATION_DETAIL_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
 // 마이페이지 예약 취소 URL
 export const PATCH_MY_RESERVATION_DETAIL_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}/cancel`;
-// 취소 신청 예약 리스트 불러오기 
+// 취소 신청 예약 리스트 URL
 export const GET_RESERVATION_CANCEL_LIST_URL = (reservationState: string) => `${SERVER_RESERVATION_MODULE_URL}/cancel/${reservationState}`;
-// 예약 취소 신청 승인하기
+// 예약 취소 신청 승인 URL
 export const DELETE_RESERVATION_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/cancel/${reservationCode}`;
-// 예약 전체 리스트
+// 예약 전체 리스트 URL
 export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
-// 예약 검색 리스트
+// 예약 검색 리스트 URL
 export const GET_RESERVATION_LIST_SEARCH_URL = `${GET_RESERVATION_LIST_URL}/search`;
-// 예약 목록 리스트 삭제
+// 예약 목록 리스트 삭제 URL
 export const DELETE_RESERVATION_LIST_URL = (reservationCode : string | number) => `${GET_RESERVATION_LIST_URL}/${reservationCode}`;
-// 인기 차량 리스트, 차량 검색 결과 URL
+// 인기 차량 리스트 URL
 export const GET_POPULAR_CAR_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/polular`;
-
+// 차량 검색 결과 URL
+export const GET_CAR_SEARCH_LIST_URL = (address : string, reservationStart : string, reservationEnd : string) =>  `${SERVER_RESERVATION_MODULE_URL}/search/${address}/${reservationStart}/${reservationEnd}`;
 // 보험별 가격 검색 결과 URL
-export const GET_INSURANCE_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/insurance`;
+export const GET_CAR_PRICE_SEARCH_LIST_URL = (carName : string) => `${GET_CAR_SEARCH_LIST_URL}/${carName}`;
 // 보험별 가격 상세 검색 결과 URL
-export const GET_INSURANCE_DETAIL_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/insurance-detail`;
+export const GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL = (rentCompany : string) =>  `${GET_CAR_PRICE_SEARCH_LIST_URL}/${rentCompany}`;
 
 // description: NOTICE MODULE
 export const SERVER_NOTICE_MODULE_URL = `${SERVER_API_URL}/notice`;
