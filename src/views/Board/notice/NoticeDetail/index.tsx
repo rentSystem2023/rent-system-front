@@ -75,12 +75,13 @@ export default function NoticeDetail() {
           return;
       }
   
-      const { title, writeDatetime, viewCount,writerId} = result as GetNoticeBoardResponseDto;
+      const { title, writeDatetime, viewCount,writerId,imageUrl} = result as GetNoticeBoardResponseDto;
       setTitle(title);
       setWriteDate(writeDatetime);
       setViewCount(viewCount);
       setContents(contents);
       setWriterId(writerId);
+      setImageUrl(imageUrl);
   };
 
   const postCommentResponse = (result: ResponseDto | null) => {

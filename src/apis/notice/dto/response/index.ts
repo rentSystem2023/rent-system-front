@@ -19,5 +19,5 @@ export interface GetNoticeBoardResponseDto extends ResponseDto {
     writeDatetime: string;
     viewCount: number;
     contents: string;
-    imageUrl: string | null;
+    imageUrl: string ;
 }
