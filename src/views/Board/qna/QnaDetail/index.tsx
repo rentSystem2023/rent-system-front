@@ -9,7 +9,7 @@ import { MAIN_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, QNA_UPDATE_ABSOLUTE_PATH } 
 import { PostCommentRequestDto } from 'src/apis/company/dto/request';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
 import { PostCommentRequest, getQnaRequest, increaseViewCountRequest } from 'src/apis/qna/dto';
-import { deleteBoardRequest } from 'src/apis/notice/dto';
+import {  } from 'src/apis/notice/dto';
 import useUserStore from 'src/stores/user.store';
 
 
@@ -58,7 +58,7 @@ export default function QnaDetail() {
         }
 
         if (!receptionNumber) return;
-        getQnaRequest(receptionNumber )
+        getQnaRequest(receptionNumber)
             .then(getBoardResponse);
     };
 
@@ -166,7 +166,7 @@ export default function QnaDetail() {
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
 
-        deleteBoardRequest(receptionNumber, cookies.accessToken) 
+        deleteQnaRequest(receptionNumber, cookies.accessToken) 
         .then(deleteQnaRequest)
     }
 
