@@ -211,6 +211,11 @@
   color: rgba(138, 146, 166, 1);
 }
 
+/* 사용자 페이지 CSS */
+#user-page-wrapper {
+  padding: 30px;
+}
+
 /* 페이지 제목 CSS */
 .title-text{
   display: flex;
