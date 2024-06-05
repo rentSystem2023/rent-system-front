@@ -115,11 +115,11 @@
                 return;
             }
 
-            const { reservationList } = result as GetReservationListResponseDto;
-            changeReservationList(reservationList);
+            const { reservationUserList } = result as GetReservationListResponseDto;
+            changeReservationList(reservationUserList);
 
-            setCurrentPage(!reservationList.length ? 0 : 1);
-            setCurrentSection(!reservationList.length ? 0 : 1);
+            setCurrentPage(!reservationUserList.length ? 0 : 1);
+            setCurrentSection(!reservationUserList.length ? 0 : 1);
         };
 
         const getSearchCompanyListResponse = (result: GetSearchCompanyListResponseDto | ResponseDto | null) => {
