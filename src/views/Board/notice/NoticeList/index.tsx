@@ -25,13 +25,11 @@ function ListItem ({
     //                    render                    //
     return (
         <div className='table-list-table-tr notice' onClick={onClickHandler}>
-            
-                <div className='notice-list-table-writer-Id'>{writerId}</div>
                 <div className='notice-list-table-reception-number'>{registNumber}</div>
                 <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
+                <div className='notice-list-table-writer-Id'>{writerId}</div>
                 <div className='notice-list-table-write-date'>{writeDatetime}</div>
                 <div className='notice-list-table-viewcount'>{viewCount}</div>
-           
         </div>
     );
 }
