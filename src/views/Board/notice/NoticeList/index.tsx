@@ -4,7 +4,7 @@ import { useUserStore } from 'src/stores';
 import { ADMIN_NOTICE_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, NOTICE_DETAIL_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { getSearchBoardListRequest } from 'src/apis/notice/dto';
+import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
 import { GetSearchNoticeBoardListResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { noticeListItem } from 'src/types';
@@ -134,10 +134,10 @@ export default function NoticeList() {
 
     const onSearchButtonClickHandler = () => {
         if (!searchWord) {
-            getSearchBoardListRequest('', cookies.accessToken).then(getSearchBoardListResponse);
+            getSearcNoticeListRequest('', cookies.accessToken).then(getSearchBoardListResponse);
         } else {
             if (!cookies.accessToken) return;
-            getSearchBoardListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+            getSearcNoticeListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
         }
     };
 
