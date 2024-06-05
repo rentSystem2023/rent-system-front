@@ -1,5 +1,5 @@
 import ResponseDto from "src/apis/response.dto";
-import { PopularCarListItem, ReservationCarPriceListItem, ReservationListItem } from "src/types";
+import { PopularCarListItem, ReservationCarPriceListItem, ReservationListItem, ReservationUserListItem } from "src/types";
 
 
 // description: 나의 예약 리스트 불러오기 Response Body DTO
@@ -10,11 +10,11 @@ export interface GetReservationMyListResponseDto extends ResponseDto {
     reservationCode: string;
     rentCompany: string;
 }
+
 // description: 전체 예약 리스트 불러오기 Response Body DTO
 export interface GetReservationListResponseDto extends ResponseDto{
-    reservationList : ReservationListItem[];
+    reservationList : ReservationUserListItem[];
 }
-
 
 // description: 인기차량 리스트 불러오기 Response Body DTO
 export interface GetPopularcarListResponseDto extends ResponseDto {
