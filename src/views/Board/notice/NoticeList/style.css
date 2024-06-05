@@ -1,5 +1,8 @@
 .table-list-table-th.notice{
-    gap: 200px;
+    gap: 43px;
+}
+.table-list-table-tr.notice{
+    gap: 43px;
 }
 
 /* 순번 */
@@ -20,4 +23,9 @@
 /* 조회수 */
 .notice-list-table-viewcount{
     width: 42px;
+}
+
+/* 작성자 */
+.notice-list-table-writer-Id{
+    width: 50px;
 }
