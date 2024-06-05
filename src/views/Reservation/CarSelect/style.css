@@ -1,41 +1,32 @@
-.title-text{
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 173%;
-}
-
-/* 차량 검색 전체 페이지 */
-.car-select-wrap{
-    padding: 25px;
-}
-
-/* 차량 검색바 */
+/* 차량 선택 전체 */
 .car-select-wrap{
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
 
+    padding: 20px;
     gap: 25px;
 }
 
 /* 검색, 필터 */
 .option-container{
     display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
 
-    gap: 15px;
+.table-list-search-input-box{
+    width: 350px;
 }
 
 .filter-button{
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
     align-items: center;
 
-    padding: 8px 24px;
+    padding: 13px 24px;
 
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 6px;
@@ -43,33 +34,106 @@
     color: rgba(255, 255, 255, 1);
 }
 
-/* 차량 리스트 */
-.car-list-wrap{
+/* 차량 이름 */
+.car-name-wrap{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.car-name{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 173%;
+}
+
+/* 차량 리스트 카드 */
+.car-list-wrap {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content:start;
 
     gap: 20px;
 }
 
-/* 차량 리스트 카드 */
-.car-card{
+.car-list-card{
     box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: calc(33.33% - 13.5px);
 
-    padding: 8px 24px;
+    gap: 10px;    
+    padding: 20px;
 
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 6px;
 
-    color: rgba(255, 255, 255, 1);
+    color: rgba(0,0,0,1);
 }
 
 .list-wrap {
     display: flex;
+    flex-wrap: wrap;
+
+    gap: 30px;
+    max-width: 100%;
+}
+
+.car-image {
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    box-sizing: border-box;
+    padding: 8px;
+
+    width: 200px;
+    height: 200px;
+
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    padding: 13px 25px;    
+
+    color: rgba(0,0,0,1);
+
+    background-size: cover; 
+}
+
+.car-image.nano{
+    background-image: url('../../../assets/image/하느리강아지나노.jpg');
+}
+
+.insurance-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 20px;
+}
+
+.insurance-price{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 13px;
+    gap: 10px;
+    width: 312px;
+
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 6px;
+
+    color: rgba(0,0,0,1);
+
+    background-color: rgba(255,255,255,1);
+}
+
+.price-title{
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
 }
