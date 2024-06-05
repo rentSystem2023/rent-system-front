@@ -14,7 +14,7 @@ export interface GetCompanyDetailResponseDto extends ResponseDto{
     owner : string;
     companyTelnumber : string;
     registDate : string;
-    companyRule : string | null;
+    companyRule : string;
 }
 
 // description: 업체 검색 리스트 불러오기 Response Body DTO
