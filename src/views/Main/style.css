@@ -67,6 +67,11 @@
     border-radius: 8px; 
 }
 
+.car-search-button:hover{
+    cursor: pointer;
+    opacity: 0.85;
+}
+
 .popular-car-box{
     display: flex;
     width: 1000px;

@@ -1,0 +1,44 @@
+.search-box{
+    display: flex;
+    width: 1000px;    
+    gap: 20px;
+    padding: 14px;
+    
+    justify-content: space-between;
+
+    background-color: rgba(238, 238, 238, 1);
+    border-radius: 8px;
+}
+.search-select-box{
+    display: flex;
+    flex: 1;
+    gap: 14px;
+}
+.search-select-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    flex: 1;    
+
+    background-color: rgba(255, 255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 255);
+    border-radius: 8px;
+}
+.car-search-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 14px;
+    width: 100px;
+
+    background-color: rgba(255, 255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 255);
+    border-radius: 8px; 
+}
+
+.car-search-button:hover{
+    cursor: pointer;
+    opacity: 0.85;
+}
