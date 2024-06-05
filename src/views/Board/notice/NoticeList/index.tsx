@@ -107,7 +107,7 @@ export default function NoticeList() {
 
 
     const onWriteButtonClickHandler = () => {
-        if (loginUserRole !== 'ROLE_USER') return; 
+        if (loginUserRole !== 'ROLE_ADMIN') return; 
         navigator(ADMIN_NOTICE_REGIST_ABSOLUTE_PATH);
     };
 

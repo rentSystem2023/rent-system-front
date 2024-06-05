@@ -8,7 +8,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { MAIN_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, QNA_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { PostCommentRequestDto } from 'src/apis/company/dto/request';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
-import { PostCommentRequest, getQnaRequest, increaseViewCountRequest } from 'src/apis/qna/dto';
+import { PostCommentRequest,    deleteBoardRequest,    getQnaRequest, increaseViewCountRequest } from 'src/apis/qna/dto';
 import {  } from 'src/apis/notice/dto';
 import useUserStore from 'src/stores/user.store';
 
@@ -166,7 +166,7 @@ export default function QnaDetail() {
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
 
-        deleteQnaRequest(receptionNumber, cookies.accessToken) 
+        deleteBoardRequest(receptionNumber, cookies.accessToken) 
         .then(deleteQnaRequest)
     }
 
