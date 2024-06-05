@@ -1,0 +1,17 @@
+.car-select-wrap{
+    padding: 25px;
+}
+
+.title-text{
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 173%;
+}
+
+.car-select-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
