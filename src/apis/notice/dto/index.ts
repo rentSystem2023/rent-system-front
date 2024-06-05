@@ -3,8 +3,8 @@ import axios from "axios";
 
 import ResponseDto from "src/apis/response.dto";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "src/apis";
-import { DELETE_NOTICE_URL, DELETE_QNA_LIST_URL, GET_MY_QNA_LIST_SEARCH_URL, GET_NOTICE_DETAIL_URL, GET_NOTICE_LIST_URL, GET_QNA_DETAIL_URL, GET_QNA_LIST_URL, INCREASE_NOTICE_VIEW_COUNT_URL, INCREASE_QNA_VIEW_COUNT_URL, NOTICE_LIST_SEARCH_URL, POST_COMMENT_REQUEST_URL, POST_NOTICE_REQUESURL, POST_QNA_REGIST_URL, PUT_NOTICE_REGIST_URL, PUT_QNA_REGIST_URL } from "src/constant";
-import { PostQnaBoardRequestDto, PutQnaRequestDto } from "src/apis/qna/dto/request";
+import { DELETE_NOTICE_URL, GET_NOTICE_DETAIL_URL, GET_NOTICE_LIST_URL, GET_QNA_DETAIL_URL, GET_QNA_LIST_URL, INCREASE_NOTICE_VIEW_COUNT_URL, INCREASE_QNA_VIEW_COUNT_URL, NOTICE_LIST_SEARCH_URL, POST_COMMENT_REQUEST_URL, POST_NOTICE_REQUESURL, POST_QNA_REGIST_URL, PUT_NOTICE_REGIST_URL, PUT_QNA_REGIST_URL } from "src/constant";
+import { PutQnaRequestDto } from "src/apis/qna/dto/request";
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardListResponseDto } from "src/apis/qna/dto/response";
 import { PostNoticeBoardRequestDto } from "./request";
 import { GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto } from "./response";
@@ -36,7 +36,7 @@ export const getSearcNoticeListRequest = async(word:string, accessToken:string) 
 
 // function : 공지사항 게시물 불러오기 API 함수
 export const getnoticeRequest = async(registNumber:number | string, accessToken:string) => {
-    const result = await axios.get(GET_NOTICE_DETAIL_URL(registNumber),bearerAuthorization(accessToken))
+    const result = await axios.get(GET_NOTICE_DETAIL_URL(registNumber))
     .then(requestHandler<GetNoticeBoardResponseDto>)
     .catch(requestErrorHandler);
     return result;
@@ -60,7 +60,7 @@ export const increaseViewCountRequest = async (registNumber: number | string, ac
 
 // function : 공지사항 게시물 삭제 API 함수
 export const deleteNoticeRequest = async(registNumber: number | string, accessToken: string)=>{
-    const result = await axios.delete(DELETE_QNA_LIST_URL(registNumber),bearerAuthorization(accessToken))
+    const result = await axios.delete(DELETE_NOTICE_URL(registNumber),bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)   // 반환되는 타입이 responseDto 
     .catch(requestErrorHandler);        // 실패했을때 에러
     return result; // 결과 반환

@@ -20,6 +20,7 @@ export interface noticeListItem{
     title : string;
     writeDatetime : string;
     viewCount : number;
+    writerId : string;
 }
 
 export interface QnaListItem {
