@@ -1,6 +1,9 @@
 .search-box{
     display: flex;
-    width: 1000px;    
+    justify-content: center;
+    align-items: center;
+    
+    width: 1200px;    
     gap: 20px;
     padding: 14px;
     
