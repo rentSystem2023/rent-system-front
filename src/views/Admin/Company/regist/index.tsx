@@ -12,8 +12,6 @@ import InputBox from 'src/components/Inputbox';
 export default function CompanyRegist() {
 
     //                              state                              //
-    const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-    const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [companyCode, setCompanyCode] = useState<number | string>('');
     const [rentCompany, setRentCompany] = useState<string>('');
@@ -28,9 +26,9 @@ export default function CompanyRegist() {
     const registCompanyResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '내용을 올바르게 입력해주세요.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다' : '';
+            result.code === 'VF' ? '내용을 올바르게 입력해주세요.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);

@@ -199,27 +199,31 @@ export const GET_USER_LIST_SEARCH_URL = `${GET_USER_LIST_URL}/search`;
 // description: RESERVATION MODULE
 export const SERVER_RESERVATION_MODULE_URL = `${SERVER_API_URL}/reservation`;
 
-// 마이페이지 예약 내역 URL
+// 예약 하기 URL
+export const POST_RESERVATION_URL = `${SERVER_RESERVATION_MODULE_URL}/regist`;
+// 마이페이지 예약 내역 리스트 URL
 export const GET_MY_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/mylist`;
 // 마이페이지 예약 상세 내역 URL
-export const GET_MY_RESERVATION_DETAIL_URL = (reservationCode : number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
+export const GET_MY_RESERVATION_DETAIL_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
 // 마이페이지 예약 취소 URL
-export const PATCH_MY_RESERVATION_DETAIL_URL = (reservationCode : number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
-
-// 차량 검색, 예약 모듈 URL 다시 점검 필요함
+export const PATCH_MY_RESERVATION_DETAIL_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}/cancel`;
+// 취소 신청 예약 리스트 불러오기 
+export const GET_RESERVATION_CANCEL_LIST_URL = (reservationState: string) => `${SERVER_RESERVATION_MODULE_URL}/cancel/${reservationState}`;
+// 예약 취소 신청 승인하기
+export const DELETE_RESERVATION_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/cancel/${reservationCode}`;
+// 예약 전체 리스트
+export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
+// 예약 검색 리스트
+export const GET_RESERVATION_LIST_SEARCH_URL = `${GET_RESERVATION_LIST_URL}/search`;
+// 예약 목록 리스트 삭제
+export const DELETE_RESERVATION_LIST_URL = (reservationCode : string | number) => `${GET_RESERVATION_LIST_URL}/${reservationCode}`;
 // 인기 차량 리스트, 차량 검색 결과 URL
-export const GET_CAR_LIST_URL = `${SERVER_API_URL}/`
+export const GET_POPULAR_CAR_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/polular`;
+
 // 보험별 가격 검색 결과 URL
 export const GET_INSURANCE_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/insurance`;
 // 보험별 가격 상세 검색 결과 URL
 export const GET_INSURANCE_DETAIL_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/insurance-detail`;
-// 예약 URL ...........??
-export const POST_RESERVATION_URL = `${SERVER_RESERVATION_MODULE_URL}/list/search`;
-
-// 예약 목록 리스트 URL
-export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
-// 예약 목록 삭제 URL .........??
-// export const DELETE_RESERVATION_LIST_URL = `${GET_RESERVATION_LIST_URL}`
 
 // description: NOTICE MODULE
 export const SERVER_NOTICE_MODULE_URL = `${SERVER_API_URL}/notice`;
