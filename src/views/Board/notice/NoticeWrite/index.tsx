@@ -19,21 +19,21 @@ export default function NoticeWrite() {
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     //                              function                              //
 
-    // const navigator = useNavigate();
+    const navigator = useNavigate();
 
-    // const PostNotceResponse = (result: ResponseDto | null) => {
-    //     const message =
-    //     !result ? '서버에 문제가 있습니다.' :
-    //     result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
-    //     result.code === 'AF' ? '권한이 없습니다.' :
-    //     result.code === 'DBE' ? '서버에 문제가 있습니다' : '';
+    const PostNotceResponse = (result: ResponseDto | null) => {
+        const message =
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다' : '';
 
-    //     if (!result || result.code !== 'SU') {
-    //         alert(message);
-    //         return;
-    //     }
-    //     navigator(NOTICE_LIST_ABSOLUTE_PATH);
-    // };
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            return;
+        }
+        navigator(NOTICE_LIST_ABSOLUTE_PATH);
+    };
 
 
 
@@ -69,7 +69,7 @@ export default function NoticeWrite() {
             imageUrl
         }
 
-        // PostNoticeRequest(requestBody, cookies.accessToken).then(PostNotceResponse);
+        PostNoticeRequest(requestBody, cookies.accessToken).then(PostNotceResponse);
 
     };    
     

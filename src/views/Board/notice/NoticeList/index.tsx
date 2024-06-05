@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { useUserStore } from 'src/stores';
 import { ADMIN_NOTICE_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, NOTICE_DETAIL_ABSOLUTE_PATH } from 'src/constant';
@@ -8,36 +8,39 @@ import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
 import { GetSearchNoticeBoardListResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { noticeListItem } from 'src/types';
-
+    //                    component                    //
 function ListItem ({
     registNumber,
     title,
+    writerId,
     writeDatetime,
     viewCount
 }:noticeListItem) {
     
+    //                    function                    //
     const navigator = useNavigate();
-
+    //                    event handler                    //
     const onClickHandler = () => navigator(NOTICE_DETAIL_ABSOLUTE_PATH(registNumber));
 
+    //                    render                    //
     return (
-        <div className='table-list-table-tr' onClick={onClickHandler}>
-            <div className='table-list-table-th notice'>
+        <div className='table-list-table-tr notice' onClick={onClickHandler}>
+            
+                <div className='notice-list-table-writer-Id'>{writerId}</div>
                 <div className='notice-list-table-reception-number'>{registNumber}</div>
                 <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
                 <div className='notice-list-table-write-date'>{writeDatetime}</div>
                 <div className='notice-list-table-viewcount'>{viewCount}</div>
-            </div>
+           
         </div>
     );
 }
-
+//                    component                    //
 export default function NoticeList() {
     
+    //                    state                    //
     const {loginUserRole} = useUserStore();
-    const navigator = useNavigate();
     const [cookies] = useCookies();
-
     const [noticeList, setNoticeList] = useState<noticeListItem[]>([]);
     const [viewList, setViewList] = useState<noticeListItem[]>([]);
     const [totalPage, setTotalPage] = useState<number>(1);
@@ -47,6 +50,9 @@ export default function NoticeList() {
     const [totalSection, setTotalSection] = useState<number>(1);
     const [pageList, setPageList] = useState<number[]>([1]);
     const [searchWord, setSearchWord] = useState<string>('');
+
+        //                    function                    //
+        const navigator = useNavigate();
 
     const changePage = (noticeList: noticeListItem[], totalLenght: number) => {
         if (!currentPage) return;
@@ -68,6 +74,8 @@ export default function NoticeList() {
     };
 
     const changeBoardList = (noticeList: noticeListItem[]) => {
+        
+        setNoticeList(noticeList);
 
         const totalLenght = noticeList.length;
         setTotalLength(totalLenght);
@@ -105,7 +113,7 @@ export default function NoticeList() {
         setCurrentSection(!noticeList.length ? 0 : 1);
     };
 
-
+    //                    event handler                    //
     const onWriteButtonClickHandler = () => {
         if (loginUserRole !== 'ROLE_ADMIN') return; 
         navigator(ADMIN_NOTICE_REGIST_ABSOLUTE_PATH);
@@ -141,7 +149,32 @@ export default function NoticeList() {
         }
     };
 
+    //                    effect                    //
+
+    useEffect(() => {
+        if (!cookies.accessToken) {
+            // 토큰이 없는 경우 처리
+            getSearcNoticeListRequest(searchWord, '').then(getSearchBoardListResponse);
+        } else {
+            getSearcNoticeListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!NoticeList.length) return;
+        changePage(noticeList, totalLenght);
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (!NoticeList.length) return;
+        changeSection(totalPage);
+    }, [currentSection]);
+    
+    
+    //                    render                    //
+
     const searchButtonClass = searchWord ? 'search-button' : 'disable-button';
+
 
     return (
     <>  
@@ -160,6 +193,7 @@ export default function NoticeList() {
                 <div className='table-list-table-th notice'>
                     <div className='notice-list-table-reception-number'>순번</div>
                     <div className='notice-list-table-title'>제목</div>
+                    <div className='notice-list-table-writer-Id'>작성자</div>
                     <div className='notice-list-table-write-date'>작성일</div>
                     <div className='notice-list-table-viewcount'>조회수</div>
                 </div>
