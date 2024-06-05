@@ -213,7 +213,7 @@ export default function CompanyList() {
                 <div className='company-list-table-company-telnumber'>연락처</div>
                 <div className='company-list-table-company-date'>등록일</div>
             </div>
-            {viewList.map((item, index) => <ListItem key={index} index={viewList.length - index + (currentPage - 1) * COUNT_PER_PAGE} {...item} />)}
+            {viewList.map((item, index) => <ListItem key={index} index={totalLenght - ((currentPage - 1) * COUNT_PER_PAGE + index)} {...item} />)}
         </div>
         <div className='table-list-bottom'>
             <div style={{ width: '299px' }}></div>
