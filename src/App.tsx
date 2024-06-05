@@ -70,6 +70,9 @@ import FindPassword from "./views/Authentication/FindPassword";
 import FindPasswordReset from "./views/Authentication/FindPasswordReset";
 import CompanyUpdate from "./views/Admin/Company/CompanyUpdate";
 import ReservationList from "./views/Admin/Reservation";
+import NoticeWrite from "./views/Board/notice/NoticeWrite";
+import NoticeUpdate from "./views/Board/notice/NoticeUpdate";
+import NoticeDetail from "./views/Board/notice/NoticeDetail";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -210,9 +213,9 @@ return (
             <Route index element={<AdminBoardIndex />} />
             {/* // route : 관리자 - 게시물 (공지사항) 관리 페이지 */}
             <Route path={ADMIN_BOARD_NOTICE_PATH}>
-            <Route index element={<>공지사항 관리 리스트 페이지</>} />
-            <Route path={ADMIN_BOARD_NOTICE_REGIST_PATH} element={<>공지사항 작성 페이지</>} />
-            <Route path={ADMIN_BOARD_NOTICE_UPDATE_PATH} element={<>공지사항 수정 페이지</>} />
+            <Route index element={<NoticeDetail/>} />
+            <Route path={ADMIN_BOARD_NOTICE_REGIST_PATH} element={<NoticeWrite/>} />
+            <Route path={ADMIN_BOARD_NOTICE_UPDATE_PATH} element={<NoticeUpdate/>} />
             </Route>
 
             {/* // route : 관리자 - 게시물 (Q&A) 관리 페이지 */}
