@@ -21,15 +21,6 @@ export default function QnAWrite() {
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
-
-        const fileRef = useRef<HTMLInputElement | null>(null);
-
-    const [fileUpload, setFileUpload] = useState<String>('');
-    const [filePreviews, setFilePreviews] = useState<{name: string, url: string}[]>([]);
-    const [fileRevise, setFileRevise] = useState<number | null>(null);
-
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [publicState, setPublicState] = useState<boolean>(true); // 공개 여부 상태 추가
@@ -54,32 +45,7 @@ export default function QnAWrite() {
 
     };
 
-        const uploadImage = async (file: File): Promise<string | null> => {
-        const formData = new FormData();
-        formData.append('file', file);
 
-        try {
-            const response = await fetch('http://localhost:4000/upload', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Authorization': `Bearer ${cookies.accessToken}`
-                }
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                return data.url; // 서버에서 반환된 이미지 URL
-            } else {
-                alert('이미지 업로드에 실패했습니다.');
-                return null;
-            }
-        } catch (error) {
-            console.error('이미지 업로드 오류:', error);
-            alert('이미지 업로드 중 오류가 발생했습니다.');
-            return null;
-        }
-    };
 
 
     //                              event Handler                              //

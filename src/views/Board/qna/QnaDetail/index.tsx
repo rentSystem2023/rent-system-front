@@ -113,7 +113,7 @@ export default function QnaDetail() {
 
     };
 
-    const deleteBoardResponse = (result: ResponseDto | null) => {
+    const deleteQnaRequest = (result: ResponseDto | null) => {
 
         const message =
         !result ? '서버에 문제가 있습니다.' :
@@ -167,7 +167,7 @@ export default function QnaDetail() {
         if (!isConfirm) return;
 
         deleteBoardRequest(receptionNumber, cookies.accessToken) 
-        .then(deleteBoardResponse)
+        .then(deleteQnaRequest)
     }
 
     //                    effect                    //
@@ -176,14 +176,7 @@ export default function QnaDetail() {
         // 토큰 없이 게시글 상세 정보를 가져오도록 수정
         getQnaRequest(receptionNumber).then(getBoardResponse);
     }, []);
-    
-    useEffect(() => {
-        // API 호출하여 이미지 URL 가져오기 (예시)
-        fetch('https://your-api-endpoint.com/image')
-            .then(response => response.json())
-            .then(data => setImageUrl(data.imageUrl))
-            .catch(error => console.error('Error fetching image:', error));
-    }, []);
+
 
     useEffect(() => {
         if (!cookies.accessToken || !receptionNumber) return;
