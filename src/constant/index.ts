@@ -18,7 +18,8 @@ export const RESERVATION_REQUEST_PATH = 'request';
 
 // description: 마이 페이지 URL //
 export const USER_PATH = 'user';
-export const USER_UPDATE_PATH = 'update';
+export const USER_PW_UPDATE_PATH = 'password-update';
+export const USER_EMAIL_UPDATE_PATH = 'email-update';
 export const USER_RESERVATION_PATH = 'reservation';
 export const USER_QNA_PATH = 'qna';
 
@@ -81,8 +82,12 @@ export const RESERVATION_REQUEST_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PAT
 // description: 유저 //
 // description: 내 정보 페이지 절대 URL //
 export const USER_INFO_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}`;
-// description: 내 정보 수정 페이지 절대 URL //
-export const USER_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_UPDATE_PATH}`;
+// description: 내 정보 비밀번호 수정 페이지 절대 URL //
+export const USER_PW_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_PW_UPDATE_PATH}`;
+// description: 내 정보 이메일 수정 페이지 절대 URL //
+export const USER_EMAIL_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_EMAIL_UPDATE_PATH}`;
+// description: 내 정보 삭제 페이지 절대 URL //
+export const USER_INFO_DELETE_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}/${USER_PATH}/${userId}`;
 // description: 예약 내역 페이지 절대 URL //
 export const USER_RESERVATION_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_RESERVATION_PATH}`;
 // description: 문의 내역 페이지 절대 URL //
@@ -174,10 +179,13 @@ export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
 // 사용자 마이페이지 내 정보 URL
 export const GET_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information`;
-// 사용자 마이페이지 내 정보 수정 URL
-export const PATCH_MODIFY_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information/modify`;
+// 사용자 마이페이지 비밀번호 수정 URL
+export const PUT_MY_INFO_PW_MODIFY_URL = `${SERVER_USER_MODULE_URL}/information/password-modify`;
+// 사용자 마이페이지 이메일 수정 URL
+export const PUT_MY_INFO_EMAIL_MODIFY_URL = `${SERVER_USER_MODULE_URL}/information/email-modify`;
 // 사용자 마이페이지 내 정보 삭제 URL
-export const DELETE_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information/modify`;
+export const DELETE_MY_INFO_URL = (userId: string) => `${GET_MY_INFO_URL}/${userId}`;
+
 
 // 관리자페이지 회원 목록 리스트 URL
 export const GET_USER_LIST_URL = `${SERVER_USER_MODULE_URL}/list`;
