@@ -2,7 +2,7 @@
     gap: 43px
 }
 
-.table-list-table-tr.reservation{
+.table-list-table-th.reservation{
     gap: 43px
 }
 
@@ -12,36 +12,31 @@
 }
 
 /* 업체이름 */
-.reservation-list-table-list-number{
-    width: 60px;
+.reservation-list-table-reservation-name{
+    width: 260px;
 }
 
 /* 차종 */
-.reservation-list-table-list-number{
-    width: 60px;
+.reservation-list-table-reservation-car{
+    width: 110px;
 }
 
-/* 예약기간 */
-.reservation-list-table-list-number{
-    width: 60px;
+/* 예약시작, 예약 끝 */
+.reservation-list-table-reservation-date{
+    width: 100px;
 }
 
-/* 예약자명 */
-.reservation-list-table-list-number{
+/* 예약자 닉네임 */
+.reservation-list-table-reservation-user{
     width: 60px;
 }
 
 /* 아이디 */
-.reservation-list-table-list-number{
-    width: 60px;
-}
-
-/* 전화번호 */
-.reservation-list-table-list-number{
+.reservation-list-table-reservation-user-id{
     width: 60px;
 }
 
 /* 상태 */
-.reservation-list-table-list-number{
+.reservation-list-table-reservation-state{
     width: 60px;
 }
