@@ -68,7 +68,7 @@ export const increaseViewCountRequest = async (receptionNumber: number | string 
 }
 
 // function : Q&A 게시물 삭제 API 함수
-export const deleteBoardRequest = async(receptionNumber: number | string, accessToken: string)=>{
+export const deleteQnaRequest = async(receptionNumber: number | string, accessToken: string)=>{
     const result = await axios.delete(DELETE_QNA_LIST_URL(receptionNumber),bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)   // 반환되는 타입이 responseDto 
     .catch(requestErrorHandler);        // 실패했을때 에러

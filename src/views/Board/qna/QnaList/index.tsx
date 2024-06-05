@@ -9,6 +9,7 @@
     import { QnaListItem } from 'src/types';
     import './style.css';
 
+
     //                    component                    //
     function ListItem ({ 
     receptionNumber,
@@ -23,16 +24,22 @@
 
     //                    function                    //
     const navigator = useNavigate();
-
+        //                    state                    //
+    const {loginUserId} = useUserStore();
     //                    event handler                    //
-    const onClickHandler = () => navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
+    const onClickHandler = () => {
+        if (!publicState && loginUserId === writerId) {
+            alert("비공개글은 작성자만 볼 수 있습니다.");
+            return;
+        }
+        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));}
 
     //                    render                    //
     return (
         <div className='table-list-table-tr qna' onClick={onClickHandler}>
                 <div className='qna-list-table-reception-number'>{receptionNumber}</div>
                 <div className='qna-list-table-write-date'>{writeDatetime}</div>
-                <div className='qna-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
+                <div className={`qna-list-table-title ${publicState ? 'public' : 'private'}`} style={{ textAlign: 'left' }}>{publicState ? title : '비공개글입니다.'}</div>
                 <div className='qna-list-table-writer-id'>{writerId}</div>
                 <div className='qna-list-table-category'>{category}</div>
                 <div className='qna-list-table-exposure'>{publicState ? '공개' : '비공개'}</div>
@@ -52,7 +59,6 @@
         
     //                    state                    //
     const {loginUserRole} = useUserStore();
-
     const [cookies] = useCookies();
 
     const [qnaList, setQnaList] = useState<QnaListItem[]>([]);
