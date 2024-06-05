@@ -1,34 +1,53 @@
 import ResponseDto from "src/apis/response.dto";
-import { PopularCarListItem, ReservationCarPriceListItem, ReservationListItem, ReservationUserListItem } from "src/types";
+import { PopularCarListItem, ReservationCancelListItem, ReservationCarListItem, ReservationCarPriceListItem, ReservationListItem, ReservationUserListItem } from "src/types";
 
 
 // description: 나의 예약 리스트 불러오기 Response Body DTO
 export interface GetReservationMyListResponseDto extends ResponseDto {
+    reservationList: ReservationListItem[];
+}
+
+// description: 나의 예약 리스트 상세보기 Response Body DTO
+export interface GetReservationDetailMyListResponseDto extends ResponseDto {
     carImageUrl: string;
     nickName: string;
-    reservationDate: string;
-    reservationCode: string;
+    reservationStart: string;
+    reservationEnd: string;
+    carOil: number;
+    grade: string;
+    carNumber: string;
     rentCompany: string;
+    companyTelnumber: string;
+    address: string;
+}
+
+// description: 취소 신청 예약 리스트 불러오기 Response Body DTO
+export interface GetReservationCancelListResponseDto extends ResponseDto {
+    reservationCancelList: ReservationCancelListItem[];
 }
 
 // description: 전체 예약 리스트 불러오기 Response Body DTO
-export interface GetReservationListResponseDto extends ResponseDto{
-    reservationList : ReservationUserListItem[];
+export interface GetReservationListResponseDto extends ResponseDto {
+    reservationUserList : ReservationUserListItem[];
+}
+
+// description: 예약 검색 리스트 불러오기 Response Body DTO
+export interface GetSearchReservationListResponseDto extends ResponseDto {
+    reservationUserList : ReservationUserListItem[];
 }
 
 // description: 인기차량 리스트 불러오기 Response Body DTO
-export interface GetPopularcarListResponseDto extends ResponseDto {
+export interface GetReservationPopularListResponseDto extends ResponseDto {
     popularCarList: PopularCarListItem[];
 } 
 
 // description: 차량 검색 결과 리스트 불러오기 Response Body DTO
-export interface GetSearchCarListResponseDto extends ResponseDto {
-    address : string;
-    reservationPeriod : string;
+export interface GetSearchReservationCarListResponseDto extends ResponseDto {
+    reservationCarList: ReservationCarListItem[];
 }
 
 // description: 보험별 가격 검색 결과 불러오기 Response Body DTO
-export interface GetSearchPriceListResponseDto extends ResponseDto {
+export interface GetSearchReservationCarPriceListResponseDto extends ResponseDto {
     priceList: ReservationCarPriceListItem[];
 }
 
@@ -37,18 +56,19 @@ export interface GetSearchDetailListResponseDto extends ResponseDto {
     carImageUrl: string;
     carName: string;
     carYear: string;
-    reservationPeriod: string;
+    brand: string;
+    grade: string;
+    carOil: number;
+    fuelType: string;
+    capacity: string;
     normalPrice: number;
     luxuryPrice: number;
     superPrice: number;
-    brand: string;
-    grade: string;
-    carOil: string;
-    fuelType: string;
-    capacity: string;
     rentCompany: string;
     address: string;
     companyTelnumber: string;
     companyRule: string;
+    reservationStart: string;
+    reservationEnd: string;
 }
 
