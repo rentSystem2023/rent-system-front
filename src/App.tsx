@@ -176,7 +176,7 @@ return (
         {/* // route : 공지사항 페이지 */}
         <Route path={NOTICE_PATH}>
         <Route index element={<NoticeList/>} />
-        <Route path={NOTICE_DETAIL_PATH} element={<>공지사항 상세보기</>}/>
+        <Route path={NOTICE_DETAIL_PATH} element={<NoticeDetail/>}/>
         </Route>
 
         {/* // route : Q&A 페이지 */}
