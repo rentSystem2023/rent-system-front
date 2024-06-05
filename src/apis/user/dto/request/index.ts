@@ -6,16 +6,13 @@ export interface EmailAuthRequestDto {
     userEmail: string;
 }
 
-// description: 이메일 인증 확인 Request Body DTO 
-export interface EmailAuthCheckRequestDto {
-    userEmail: string;
-    authNumber: string;
+// description: 내정보 패스워드 수정 Request Body Dto 
+export interface PutMyInfoPwRequestDto {
+    userPassword: string;
 }
 
-// description: 내정보 수정 Request Body Dto 
-export interface PatchMyInfoRequestDto {
-    // accessToken: string;
-    userPassword: string;
+// description: 내정보 이메일 수정 Request Body Dto 
+export interface PutMyInfoEmailRequestDto {
     userEmail: string;
     authNumber: string;
 }

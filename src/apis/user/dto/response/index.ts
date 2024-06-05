@@ -20,17 +20,6 @@ export interface GetMyInfoResponseDto extends ResponseDto{
     joinDate: string;
 }
 
-// description: 내 정보 수정 Response Body DTO
-export interface PatchMyInfoResponseDto extends ResponseDto {
-    status: boolean;
-    userId: string;
-    nickName: string;
-    userEmail: string;
-    userRole: string;
-    joinPath: string;
-    joinDate: string;
-}
-
 // description: 유저 리스트 불러오기 Response Body DTO
 export interface GetUserListResponseDto extends ResponseDto {
     boardList: UserListItem[];
