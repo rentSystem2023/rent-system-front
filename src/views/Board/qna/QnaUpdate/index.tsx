@@ -10,6 +10,7 @@ import { QNA_DETAIL_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PutQnaRequestDto } from 'src/apis/qna/dto/request';
 import { getQnaRequest, putQnaRequest } from 'src/apis/qna/dto';
 import { putBoardRequest } from 'src/apis/notice/dto';
+import axios from 'axios';
 
 
 
@@ -120,33 +121,19 @@ export default function QnaUpdate() {
         if (selectedFile) {
             const formData = new FormData();
             formData.append('file', selectedFile);
-            try {
-                const response = await fetch('http://localhost:4000/upload', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Authorization': `Bearer ${cookies.accessToken}`
-                    }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    imageUrl = data.url;
-                } else {
-                    alert('이미지 업로드에 실패했습니다.');
-                    return;
-                }
-            } catch (error) {
-                console.error('이미지 업로드 오류:', error);
-                alert('이미지 업로드 중 오류가 발생했습니다.');
-                return;
-            }
+            imageUrl = await axios.post('http://localhost:4000/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(response => response.data ? response.data : '').catch(error => '');
         }
-
         
-    
-        const requestBody: PutQnaRequestDto = { title, contents, category, publicState, imageUrl };
+
+        const requestBody: PutQnaRequestDto = {
+            title,
+            contents,
+            category,
+            publicState,
+            imageUrl
+        }
         putQnaRequest(receptionNumber, requestBody, cookies.accessToken).then(putQnaResponse);
-    };
+    }
 
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const fileInput = event.target;
