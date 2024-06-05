@@ -46,7 +46,6 @@ USER_UPDATE_PATH,
 import ServiceContainer from "./layouts/ServiceContainer";
 import UserList from "./views/User/List";
 import QnaList from "./views/Board/qna/QnaList";
-import QnAContainer from "./layouts/QnAContainer";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import Main from "./views/Main";
@@ -73,6 +72,9 @@ import ReservationList from "./views/Admin/Reservation";
 import NoticeWrite from "./views/Board/notice/NoticeWrite";
 import NoticeUpdate from "./views/Board/notice/NoticeUpdate";
 import NoticeDetail from "./views/Board/notice/NoticeDetail";
+import CarSelect from "./views/Reservation/CarSelect";
+import InsuranceSelect from "./views/Reservation/InsuranceSelect";
+import ReservationDetail from "./views/Reservation/ReservationDetail";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -158,9 +160,9 @@ return (
         {/* // route : 예약 페이지 */}
         <Route path={RESERVATION_PATH}>
         <Route index element={<ReservationIndex />} />
-        <Route path={RESERVATION_CAR_PATH} element={<>차량 선택</>} />
-        <Route path={RESERVATION_COMPANY_PATH} element={<>업체 선택</>} />
-        <Route path={RESERVATION_REQUEST_PATH} element={<>예약 신청</>} />
+        <Route path={RESERVATION_CAR_PATH} element={<CarSelect/>} />
+        <Route path={RESERVATION_COMPANY_PATH} element={<InsuranceSelect/>} />
+        <Route path={RESERVATION_REQUEST_PATH} element={<ReservationDetail/>} />
         </Route>
 
         {/* // route : 마이 페이지 */}
@@ -178,7 +180,7 @@ return (
         </Route>
 
         {/* // route : Q&A 페이지 */}
-        <Route path={QNA_PATH} element={<QnAContainer />}>
+        <Route path={QNA_PATH}>
         <Route index element={<QnaList/>} />
         <Route path={QNA_DETAIL_PATH} element={<QnaDetail/>} />
         <Route path={QNA_REGIST_PATH} element={<QnAWrite/>} />
