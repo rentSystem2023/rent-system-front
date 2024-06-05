@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import { PostNoticeRequest } from 'src/apis/notice/dto';
@@ -86,7 +86,16 @@ export default function NoticeWrite() {
 
     //                              effect                              //
 
+    // 화면이 전환될때 작성
+    useEffect(() => {
 
+        if (loginUserRole === 'ROLE_USER') {
+            navigator(NOTICE_LIST_ABSOLUTE_PATH);
+            return;
+
+        }
+
+    }, [loginUserRole])
 
     //                              render                              //
 
