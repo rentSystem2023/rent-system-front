@@ -1,9 +1,9 @@
 import axios from "axios";
-import { DELETE_RESERVATION_LIST_URL, DELETE_RESERVATION_URL, GET_MY_RESERVATION_DETAIL_URL, GET_MY_RESERVATION_LIST_URL, GET_POPULAR_CAR_LIST_URL, GET_RESERVATION_CANCEL_LIST_URL, GET_RESERVATION_LIST_SEARCH_URL, GET_RESERVATION_LIST_URL, PATCH_MY_RESERVATION_DETAIL_URL, POST_RESERVATION_URL } from "src/constant";
+import { DELETE_RESERVATION_LIST_URL, DELETE_RESERVATION_URL, GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL, GET_CAR_PRICE_SEARCH_LIST_URL, GET_CAR_SEARCH_LIST_URL, GET_MY_RESERVATION_DETAIL_URL, GET_MY_RESERVATION_LIST_URL, GET_POPULAR_CAR_LIST_URL, GET_RESERVATION_CANCEL_LIST_URL, GET_RESERVATION_LIST_SEARCH_URL, GET_RESERVATION_LIST_URL, PATCH_MY_RESERVATION_DETAIL_URL, POST_RESERVATION_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import { PatchReservationRequestDto, PostReservationRequestDto } from "./dto/request";
 import ResponseDto from "../response.dto";
-import { GetReservationCancelListResponseDto, GetReservationDetailMyListResponseDto, GetReservationListResponseDto, GetReservationMyListResponseDto, GetReservationPopularListResponseDto, GetSearchReservationCarListResponseDto, GetSearchReservationListResponseDto } from "./dto/response";
+import { GetReservationCancelListResponseDto, GetReservationDetailMyListResponseDto, GetReservationListResponseDto, GetReservationMyListResponseDto, GetReservationPopularListResponseDto, GetSearchDetailListResponseDto, GetSearchReservationCarListResponseDto, GetSearchReservationCarPriceListResponseDto, GetSearchReservationListResponseDto } from "./dto/response";
 
 
 
@@ -88,14 +88,25 @@ export const GetReservationPopularListRequest = async(accessToken: string) => {
 }
 
 // function : 차량 검색 결과 불러오기 API 함수
-export const GetSearchReservationCarListRequest  = async(accessToken: string) => {
-    const result = await axios.get(GET_POPULAR_CAR_LIST_URL,bearerAuthorization(accessToken))
+export const GetSearchReservationCarListRequest  = async(address : string, reservationStart : string, reservationEnd : string, accessToken: string) => {
+    const result = await axios.get(GET_CAR_SEARCH_LIST_URL(address, reservationStart, reservationEnd),bearerAuthorization(accessToken))
     .then(requestHandler<GetSearchReservationCarListResponseDto>)
     .catch(requestErrorHandler);
     return result;
 }
 
 // function : 보험별(업체) 가격 결과 불러오기 API 함수
-
+export const GetSearchReservationCarPriceListRequest  = async(carName : string, accessToken: string) => {
+    const result = await axios.get(GET_CAR_PRICE_SEARCH_LIST_URL(carName),bearerAuthorization(accessToken))
+    .then(requestHandler<GetSearchReservationCarPriceListResponseDto>)
+    .catch(requestErrorHandler);
+    return result;
+}
 
 // function : 보험별 가격 상세 검색 결과 불러오기 API 함수
+export const GetSearchDetailListRequest  = async(rentCompany : string, accessToken: string) => {
+    const result = await axios.get(GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL(rentCompany),bearerAuthorization(accessToken))
+    .then(requestHandler<GetSearchDetailListResponseDto>)
+    .catch(requestErrorHandler);
+    return result;
+}
