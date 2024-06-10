@@ -11,6 +11,8 @@ ADMIN_COMPANY_PATH,
 ADMIN_COMPANY_REGIST_PATH,
 ADMIN_COMPANY_UPDATE_PATH,
 ADMIN_NOTICE_LIST_ABSOLUTE_PATH,
+ADMIN_NOTICE_REGIST_ABSOLUTE_PATH,
+ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH,
 ADMIN_PATH,
 ADMIN_RESERVATION_PATH,
 ADMIN_RESERVATION_UPDATE_PATH,
@@ -179,6 +181,8 @@ return (
         <Route path={NOTICE_PATH}>
         <Route index element={<NoticeList/>} />
         <Route path={NOTICE_DETAIL_PATH} element={<NoticeDetail/>}/>
+        <Route path={ADMIN_BOARD_NOTICE_REGIST_PATH} element={<NoticeWrite/>}/>
+        <Route path={ADMIN_BOARD_NOTICE_UPDATE_PATH} element={<NoticeUpdate/>}/>
         </Route>
 
         {/* // route : Q&A 페이지 */}

@@ -59,7 +59,7 @@ export const increaseViewCountRequest = async (registNumber: number | string, ac
 }
 
 // function : 공지사항 게시물 삭제 API 함수
-export const deleteNoticeRequest = async(registNumber: number | string, accessToken: string)=>{
+export const deleteNoticeBoardRequest = async(registNumber: number | string, accessToken: string)=>{
     const result = await axios.delete(DELETE_NOTICE_URL(registNumber),bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)   // 반환되는 타입이 responseDto 
     .catch(requestErrorHandler);        // 실패했을때 에러

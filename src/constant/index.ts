@@ -38,7 +38,7 @@ export const QNA_UPDATE_PATH = 'update/:receptionNumber';
 // description: ADMIN URL //
 export const ADMIN_PATH = 'admin';
 
-export const ADMIN_USER_PATH = 'user/list';
+export const ADMIN_USER_PATH = 'user';
 export const ADMIN_USER_DETAIL_PATH = ':userId';
 
 export const ADMIN_COMPANY_PATH = 'company';
@@ -129,6 +129,8 @@ export const ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH = (companyCode: string | number)
 // description: 관리자 - 예약 관리 //
 // description: 예약 리스트 페이지 절대 URL //
 export const ADMIN_RESERVATION_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_RESERVATION_PATH}`;
+// description: 예약 상세 페이지 절대 URL //
+export const ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH = (reservationCode: string | number) => `${ADMIN_RESERVATION_LIST_ABSOLUTE_PATH}/${reservationCode}`
 // description: 예약 수정 페이지 절대 URL //
 export const ADMIN_RESERVATION_UPDATE_ABSOLUTE_PATH = (reservationCode: string | number) => `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_RESERVATION_PATH}/update/${reservationCode}`;
 
