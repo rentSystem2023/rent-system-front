@@ -137,7 +137,7 @@ export default function NoticeUpdate() {
     useEffect(() => {
         if (!registNumber || !cookies.accessToken) return;
         if (!loginUserRole) return;
-        if (loginUserRole !== 'ROLE_USER') {
+        if (loginUserRole !== 'ROLE_ADMIN') {
             navigator(NOTICE_LIST_ABSOLUTE_PATH);
             return;
         }
