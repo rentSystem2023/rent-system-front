@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { deleteNoticeBoardRequest,  getNoticeRequest, increaseViewCountRequest } from 'src/apis/notice/dto';
+import { deleteNoticeBoardRequest,  getNoticeRequest, increaseViewCountRequest, putNoticeRequest } from 'src/apis/notice/dto';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
@@ -75,26 +75,7 @@ export default function NoticeDetail() {
       setImageUrl(imageUrl);
   };
 
-  const postCommentResponse = (result: ResponseDto | null) => {
-
-      const message =
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'AF' ? '권한이 없습니다.' :
-      result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
-      result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-      result.code === 'WC' ? '이미 답글이 작성된 게시물입니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-      if (!result || result.code !== 'SU') {
-          alert(message);
-          return;
-      }
-
-      if (!registNumber) return;
-      getNoticeRequest(registNumber,cookies.accessToken).then(getNoticeResponse);
-
-  };
-
+ 
   const deleteNoticeRequest = (result: ResponseDto | null) => {
 
       const message =
@@ -123,7 +104,7 @@ export default function NoticeDetail() {
 
   // 수정
   const onUpdateClickHandler = () => {
-      if (!registNumber ||loginUserId !==writerId ||!cookies.accessToken) return;
+      if (!registNumber ||loginUserId !==writerId) return;
       navigator(ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH(registNumber));
   }
 
