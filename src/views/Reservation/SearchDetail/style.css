@@ -1,0 +1,177 @@
+.search-datail-wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+/* 선택 차량 정보 */
+.search-detail-container{
+    display: flex;
+    justify-content: center;
+
+    gap: 24px;
+    width: 910px;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 10px 25px;
+}
+
+/* 선택 차량 사진 */
+.search-detail-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 150px;
+    height: 150px;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 13px 25px;
+}
+
+/* 선택 차량 리스트 */
+.search-datail-list{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 750px;
+    gap: 12px;
+}
+
+/* 이름, 예약날짜, 가격 행 감싸는 CSS */
+.search-info-container{
+    display: flex;
+    gap: 12px;
+}
+
+.search-detail-title{
+    width: 65px;
+}
+
+/* 가격 행 전체 감싸는 CSS */
+.search-payment-wrap{
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+/* 차량 정보, 업체 정보 전체 감싸는 CSS */
+.search-detail-info-list-wrap{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 920px;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 25px;
+}
+
+/* 차량정보, 업체정보 버튼 감싸는 CSS */
+.search-detail-info-button{
+    display: flex;
+    justify-content: center;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+}
+
+/* 차량정보, 업체정보 버튼 글씨 감싸는 CSS */
+.search-detail-button-wrap{
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+
+    padding: 15px;
+}
+
+.search-detail-button-wrap:hover{
+    cursor: pointer;
+    
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+
+    background-color:rgba(238, 238, 238, 1);
+}
+
+.search-detail-button-wrap.active{
+    cursor: pointer;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    
+    background-color:rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+/* 차량정보, 업체 정보 글씨 */
+.search-detail-info-title{
+    font-size: 20px;
+    font-weight:600;
+}
+
+/* 리스트 감싸는 CSS */
+.search-detail-info-list-container{
+    display: flex;
+    flex-direction: column;
+
+    
+    padding: 24px;
+    gap: 24px;
+}
+
+/* 차량정보 리스트 감싸는 CSS */
+.search-detail-car-info-list{
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px
+}
+
+/* 업체정보 리스트 감싸는 CSS */
+.search-detail-company-info-list{
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px
+}
+
+/* 작은 리스트 감싸는 CSS */
+.search-detail-info-contents{
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+/* 행 감싸는 CSS */
+.list-title-wrap{
+    display: flex;
+
+    gap: 10px;
+}
+
+.list-title{
+    width: 80px;
+}
+
+/* 지도 리스트 감싸는 CSS */
+.list-map-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 지도 크기 */
+.list-map{
+    
+}
