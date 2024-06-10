@@ -98,19 +98,18 @@
 }
 
 .insurance-info-contents{
-    flex-grow: 0; /* 요소가 늘어나지 않도록 설정 */
+    flex-grow: 1; /* 요소가 늘어나지 않도록 설정 */
     flex-shrink: 0; /* 요소가 줄어들지 않도록 설정 */
     overflow: hidden; /* 텍스트가 너비를 벗어나면 잘리도록 함 */
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 함 */
 }
 
-/* 업체명과 예약수의 너비를 고정 */
 .insurance-info-title {
-    width: 100px; /* 업체명의 너비를 100px로 고정 */
+    width: 100px;
 }
 
 .insurance-info-contents {
-    width: 50px; /* 예약수의 너비를 50px로 고정 (적절한 너비로 조정) */
+    width: 50px;
 }
 
 /* 페이지 번호 CSS */
