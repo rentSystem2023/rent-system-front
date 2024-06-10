@@ -1,5 +1,5 @@
 import ResponseDto from "src/apis/response.dto";
-import { UserListItem } from "src/types";
+import { QnaListItem, UserListItem } from "src/types";
 
 
 // description: 로그인 유저 정보 불러오기 Response Body DTO
@@ -20,12 +20,7 @@ export interface GetMyInfoResponseDto extends ResponseDto{
     joinDate: string;
 }
 
-// description: 유저 리스트 불러오기 Response Body DTO
-export interface GetUserListResponseDto extends ResponseDto {
-    boardList: UserListItem[];
-}
-
-// description: 유저 검색 리스트 불러오기 Response Body DTO
-export interface GetSearchUserListResponseDto extends ResponseDto {
-    boardList: UserListItem[];
+// description: Q&A 전체 게시물 리스트 불러오기 Response Body DTO
+export interface GetMyInfoQnaListResponseDto extends ResponseDto {
+    qnaList: QnaListItem[];
 }
