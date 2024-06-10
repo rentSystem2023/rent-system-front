@@ -4,7 +4,7 @@
     import { getSearchQnaListRequest } from 'src/apis/qna/dto';
     import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/qna/dto/response';
     import ResponseDto from 'src/apis/response.dto';
-    import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH,  QNA_LIST_ABSOLUTE_PATH,  QNA_LIST_PATH,  QNA_REGIST_ABSOLUTE_PATH, QNA_REGIST_PATH } from 'src/constant';
+    import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH,   QNA_REGIST_ABSOLUTE_PATH} from 'src/constant';
     import { useUserStore } from 'src/stores';
     import { QnaListItem } from 'src/types';
     import './style.css';
@@ -26,21 +26,25 @@
     const navigator = useNavigate();
         //                    state                    //
     const {loginUserId} = useUserStore();
+    const {loginUserRole} = useUserStore();
     //                    event handler                    //
     const onClickHandler = () => {
-        if (!publicState && loginUserId === writerId) {
-            alert("비공개글은 작성자만 볼 수 있습니다.");
+        if (!publicState && (loginUserRole !== 'ROLE_ADMIN' && loginUserId !== writerId )) { 
+            alert("비공개글은 작성자 혹은 관리자만 볼 수 있습니다.");
+            console.log(writerId);
+            console.log(loginUserId);
             return;
         }
-        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));}
-
+        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
+    }
     //                    render                    //
+    const coverdWriterId = writerId !== '' && (writerId[0] + '*'.repeat(writerId.length - 1));
     return (
         <div className='table-list-table-tr qna' onClick={onClickHandler}>
                 <div className='qna-list-table-reception-number'>{receptionNumber}</div>
                 <div className='qna-list-table-write-date'>{writeDatetime}</div>
                 <div className={`qna-list-table-title ${publicState ? 'public' : 'private'}`} style={{ textAlign: 'left' }}>{publicState ? title : '비공개글입니다.'}</div>
-                <div className='qna-list-table-writer-id'>{writerId}</div>
+                <div className='qna-list-table-writer-id'>{coverdWriterId}</div>
                 <div className='qna-list-table-category'>{category}</div>
                 <div className='qna-list-table-exposure'>{publicState ? '공개' : '비공개'}</div>
                 <div className='qna-list-table-status'>
@@ -253,7 +257,7 @@
                     <div className='qna-list-table-write-date'>작성일</div>
                     <div className='qna-list-table-title'>제목</div>
                     <div className='qna-list-table-writer-id'>작성자</div>
-                    <div className='qna-list-table-category'> 유형</div>
+                    <div className='qna-list-table-category'> 문의</div>
                     <div className='qna-list-table-exposure'> 노출여부</div>
                     <div className='qna-list-table-status'>상태</div>
                     <div className='qna-list-table-viewcount'>조회수</div>
