@@ -30,7 +30,7 @@ export const getDetailUserListRequest = async(userId: string, accessToken: strin
 }
 
 // function: 회원 삭제하기 API 함수 
-export const deleteUserRequest = async (accessToken: string, userId: string) => {
+export const deleteUserRequest = async (userId: string, accessToken: string) => {
     const result = await axios
         .delete(DELETE_USER_LIST_URL(userId), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
