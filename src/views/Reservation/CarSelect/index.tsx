@@ -13,7 +13,7 @@ export default function CarSelect() {
                         <div className='table-list-search-input-box'>
                             <input className='table-list-search-input' placeholder='검색어를 입력하세요.' />
                         </div>
-                        <div className='primary-button'>검색 우하늘 사고치는 중</div>
+                        <div className='primary-button'>검색</div>
                     </div>
                     <div className='filter-button'>필터</div>
                 </div>

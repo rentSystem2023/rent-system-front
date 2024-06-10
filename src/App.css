@@ -401,3 +401,18 @@
 
   color: rgba(64, 64, 64, 1);
 }
+
+/* 파일 CSS */
+.file-select{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 15px;
+  gap: 10px;
+}
+
+.file-image{
+  width: 400px;
+  height: 400px;
+}
