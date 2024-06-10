@@ -1,13 +1,10 @@
 import React from 'react'
 import './style.css'
-import SelectContainer from 'src/layouts/SelectContainer'
 
 export default function CarSelect() {
     return (
         <div id="user-page-wrapper">
-            <div className='car-select-wrap'>
-                <div className='car-select-container'><SelectContainer /></div>
-                
+            <div className='car-select-wrap'>                
                 <div className='option-container'>
                     <div className='table-list-search-box'>
                         <div className='table-list-search-input-box'>
