@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { PostCommentRequestDto } from 'src/apis/company/dto/request';
-import { deleteNoticeRequest, getnoticeRequest, increaseViewCountRequest } from 'src/apis/notice/dto';
+import { deleteNoticeRequest, getNoticeRequest, increaseViewCountRequest } from 'src/apis/notice/dto';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
 import { PostCommentRequest } from 'src/apis/qna/dto';
 import ResponseDto from 'src/apis/response.dto';
@@ -53,7 +53,7 @@ export default function NoticeDetail() {
       }
 
       if (!registNumber) return;
-      getnoticeRequest(registNumber,cookies.accessToken)
+      getNoticeRequest(registNumber,cookies.accessToken)
           .then(getNoticeResponse);
   };
 
@@ -100,7 +100,7 @@ export default function NoticeDetail() {
       }
 
       if (!registNumber) return;
-      getnoticeRequest(registNumber,cookies.accessToken).then(getNoticeResponse);
+      getNoticeRequest(registNumber,cookies.accessToken).then(getNoticeResponse);
 
   };
 
@@ -123,22 +123,7 @@ export default function NoticeDetail() {
   }
 
   //                    event handler                    //
-  const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-      if (status || loginUserRole !== 'ROLE_ADMIN') return;
-      const comment = event.target.value;
-      setComment(comment);
 
-      const commentRows = comment.split('\n').length;
-      setCommentRows(commentRows);
-  };
-
-  const onCommentSubmitClickHandler = () => {
-      if (!comment || !comment.trim()) return;
-      if (!registNumber || loginUserRole !== 'ROLE_USER') return;
-
-      const requestBody: PostCommentRequestDto = { comment };
-      PostCommentRequest(registNumber, requestBody, cookies.accessToken).then(postCommentResponse);
-  };
 
   // 목록
   const onListClickHandler = () => {
@@ -165,7 +150,7 @@ export default function NoticeDetail() {
   useEffect(() => {
       if (!registNumber ) return;
       // 토큰 없이 게시글 상세 정보를 가져오도록 수정
-      getnoticeRequest(registNumber,cookies.accessToken).then(getNoticeResponse);
+      getNoticeRequest(registNumber,cookies.accessToken).then(getNoticeResponse);
   }, []);
 
 
@@ -194,21 +179,6 @@ export default function NoticeDetail() {
               <div className='qna-detail-contents-box'>{contents}</div>
               {imageUrl && <img src={imageUrl} alt="Database Image" className="qna-image" />}
           </div>
-          {loginUserRole === 'ROLE_ADMIN' && !status &&
-              <div className='qna-detail-comment-write-box'>
-                  <div className='qna-detail-comment-textarea-box'>
-                      <textarea style={{ height: `${28 * commentRows}px` }} className='qna-detail-comment-textarea' placeholder='답글을 작성해주세요.' value={comment === null ? '' : comment} onChange={onCommentChangeHandler} />
-                  </div>
-                  
-                  <div className='primary-button' onClick={onCommentSubmitClickHandler}>답글달기</div>
-              </div>
-          }
-          {status &&
-              <div className='qna-detail-comment-box'>
-                  <div className='primary-bedge'>답변</div>
-                  <div className='qna-detail-comment'>{comment}</div>
-              </div>
-          }
           <div className='qna-detail-button-box'>
               <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
               { loginUserRole === 'ROLE_ADMIN' &&
