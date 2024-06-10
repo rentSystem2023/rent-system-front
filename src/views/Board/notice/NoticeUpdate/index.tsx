@@ -5,16 +5,12 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 
 import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_DETAIL_ABSOLUTE_PATH,  NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { NOTICE_DETAIL_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
 import axios from 'axios';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
-import { getNoticeRequest,  putNoticeRequest } from 'src/apis/notice/dto';
+import { getNoticeRequest, putNoticeRequest } from 'src/apis/notice/dto';
 import { PutNoticeBoardRequestDto } from 'src/apis/notice/dto/request';
 
-
-
-
-//                    component                    //
 export default function NoticeUpdate() {
 
     //                    state                    //
@@ -25,9 +21,9 @@ export default function NoticeUpdate() {
     const [writerId, setWriterId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
-    const [selectedFile, setSelectedFile] = useState<File | null>(null); // 파일 state 추가
-    const [imageUrl, setImageUrl] = useState<string | null>(null); // 이미지 미리보기 URL 추가
-    const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null); // 초기 이미지 URL을 저장
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null);
 
     const { registNumber } = useParams();
     //                    function                    //
@@ -35,11 +31,11 @@ export default function NoticeUpdate() {
 
     const getNoticeResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
         const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-            result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+        result.code === 'AF' ? '인증에 실패했습니다.' :
+        result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -47,7 +43,7 @@ export default function NoticeUpdate() {
             return;
         }
 
-        const { writerId, title, contents} = result as GetNoticeBoardResponseDto;  // 카테고리와 퍼블릭 스테이트 포함
+        const { writerId, title, contents, imageUrl } = result as GetNoticeBoardResponseDto;
         if (writerId !== loginUserId) {
             alert('권한이 없습니다.');
             navigator(NOTICE_LIST_ABSOLUTE_PATH);
@@ -58,16 +54,17 @@ export default function NoticeUpdate() {
         setContents(contents);
         setWriterId(writerId);
         setImageUrl(imageUrl);
+        setInitialImageUrl(imageUrl);
     };
 
     const putQnaResponse = (result: ResponseDto | null) => {
         const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
-            result.code === 'VF' ? '모든 값을 입력해주세요.' :
-            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-            result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'VF' ? '모든 값을 입력해주세요.' :
+        result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+        result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -77,8 +74,6 @@ export default function NoticeUpdate() {
         if (!registNumber) return;
         navigator(NOTICE_DETAIL_ABSOLUTE_PATH(registNumber));
     };
-
-    
 
     //                    event handler                    //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -109,19 +104,14 @@ export default function NoticeUpdate() {
         } else {
             imageUrlToUpdate = initialImageUrl; // 새로운 파일이 없으면 초기 이미지 URL 유지
         }
-        
 
         const requestBody: PutNoticeBoardRequestDto = {
             title,
             contents,
-            imageUrl
+            imageUrl: imageUrlToUpdate
         }
         putNoticeRequest(registNumber, requestBody, cookies.accessToken).then(putQnaResponse);
-    }
-
-    
-
-
+    };
 // description: 이미지 변경 시 이미지 미리보기 //
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const fileInput = event.target;
@@ -141,7 +131,7 @@ export default function NoticeUpdate() {
             navigator(NOTICE_LIST_ABSOLUTE_PATH);
             return;
         }
-        getNoticeRequest(registNumber,cookies.accessToken).then(getNoticeResponse);  // accessToken 추가
+        getNoticeRequest(registNumber, cookies.accessToken).then(getNoticeResponse); // accessToken 추가
     }, [loginUserRole]);
 
     //                    render                    //
@@ -154,7 +144,6 @@ export default function NoticeUpdate() {
                 <div className='primary-button' onClick={onUpdateButtonClickHandler}>올리기</div>
             </div>
             <div className='qna-write-contents-box'>
-                {/*  두줄이상 작성할때 textarea 사용,  row로 기본값 10줄짜리 작성, 1000자 제한 가능 */}
                 <textarea ref={contentsRef} className='qna-write-contents-textarea' rows={10} placeholder='내용을 입력해주세요/ 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
                 <div className='dd'>파일첨부  <input type="file" onChange={onFileChangeHandler} />
                 </div>

@@ -21,6 +21,7 @@ export interface noticeListItem{
     writeDatetime : string;
     viewCount : number;
     writerId : string;
+    imageUrl : string;
 }
 
 export interface QnaListItem {
