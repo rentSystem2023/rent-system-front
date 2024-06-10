@@ -1,3 +1,8 @@
+.reservation-select-container{
+    display: flex;
+    justify-content: center;
+}
+
 /* 차량 선택 전체 */
 .car-select-wrap{
     display: flex;

@@ -1,15 +1,8 @@
 #reservation-search-wrapper{
-    display: grid;
-    grid-template-areas:
-        "search"
-        "main";
-
     padding: 30px 24px;
 }
 
 .reservation-container{
-    grid-area: search;
-
     justify-self: center;
     align-self: center;
 }
