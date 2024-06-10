@@ -1,4 +1,5 @@
 import axios from 'axios';
+import './style.css'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
@@ -109,11 +110,15 @@ export default function NoticeWrite() {
             </div>
             <div className='notice-write-contents-box'>
             <textarea ref={contentsRef} className='qna-write-contents-textarea' rows={10} placeholder='내용을 입력해주세요/ 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
-                <div className='dd'>파일첨부  <input type="file" onChange={onFileChangeHandler} />
+                
+                <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+                
+                <div className='file-select'>파일첨부<input type="file" onChange={onFileChangeHandler} />
                 </div>
+
                 {imageUrl && (
-                    <div className='preview'>
-                        <img src={imageUrl} alt="Preview" className='preview-image' />
+                    <div className='file-upload'>
+                        <img src={imageUrl} alt="Preview" className='file-image' />
                     </div>
                 )}
             </div>

@@ -1,31 +1,35 @@
 .table-list-table-th.notice{
-    gap: 200px;
+    gap: 120px;
 }
 .table-list-table-tr.notice{
-    gap: 150px;
+    gap: 120px;
 }
 
 /* 순번 */
-/* .notice-list-table-reception-number{
+.notice-list-table-reception-number{
     width: 30px;
-} */
-
-/* 작성일 */
-/* .notice-list-table-write-date{
-    width: 350px;
-} */
+}
 
 /* 제목 */
-/* .notice-list-table-title{
-    width: 200px;
-} */
+.notice-list-table-title{
+    width: 250px;
 
-/* 조회수 */
-/* .notice-list-table-viewcount{
-    width: 42px;
-} */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 /* 작성자 */
-/* .notice-list-table-writer-Id{
+.notice-list-table-writer-Id{
     width: 50px;
-} */
+}
+
+/* 작성일 */
+.notice-list-table-write-date{
+    width: 350px;
+}
+
+/* 조회수 */
+.notice-list-table-viewcount{
+    width: 42px;
+}
