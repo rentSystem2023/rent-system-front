@@ -1,12 +1,11 @@
-/*// 바부*/
-
-#qna-detail-wrapper {
+#notice-detail-wrapper {
     display: flex;
     flex-direction: column;
+    padding: 24px;
     gap: 24px;
 }
 
-.qna-detail-main-box {
+.notice-detail-main-box {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -18,25 +17,25 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-.qna-detail-top-box {
+.notice-detail-top-box {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.qna-detail-title-box {
+.notice-detail-title-box {
     font-size: 24px;
     font-weight: 700;
     
     color: rgba(64, 64, 64, 1);
 }
 
-.qna-detail-info-box {
+.notice-detail-info-box {
     display: flex;
     gap: 8px;
 }
 
-.qna-detail-info {
+.notice-detail-info {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -44,7 +43,7 @@
     color: rgba(138, 146, 166, 1);
 }
 
-.qna-detail-info-divider {
+.notice-detail-info-divider {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -52,7 +51,7 @@
     color: rgba(238, 238, 238, 1);
 }
 
-.qna-detail-contents-box {
+.notice-detail-contents-box {
     min-height: 207px;
 
     font-size: 18px;
@@ -63,17 +62,17 @@
     white-space: pre-wrap;
 }
 
-.qna-detail-button-box {
+.notice-detail-button-box {
     display: flex;
     justify-content: space-between;
 }
 
-.qna-detail-owner-button-box {
+.notice-detail-owner-button-box {
     display: flex;
     gap: 12px;
 }
 
-.qna-detail-comment-box {
+.notice-detail-comment-box {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -85,7 +84,7 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-.qna-detail-comment {
+.notice-detail-comment {
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
@@ -95,13 +94,13 @@
     white-space: pre-wrap;
 }
 
-.qna-detail-comment-write-box {
+.notice-detail-comment-write-box {
     display: flex;
     align-items: start;
     gap: 12px;
 }
 
-.qna-detail-comment-textarea-box {
+.notice-detail-comment-textarea-box {
     flex-grow: 1;
 
     border: 1px solid rgba(238, 238, 238);
@@ -111,7 +110,7 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-.qna-detail-comment-textarea {
+.notice-detail-comment-textarea {
     border: none;
     outline: none;
     background: none;

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
+import './style.css'
 import { useNavigate, useParams } from 'react-router';
 import { deleteNoticeBoardRequest, getNoticeRequest, increaseViewCountRequest, putNoticeRequest } from 'src/apis/notice/dto';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
@@ -136,25 +137,34 @@ export default function NoticeDetail() {
 
     //                    render                    //
     return (
-        <div id='qna-detail-wrapper'>
-            <div className='qna-detail-main-box'>
-                <div className='qna-detail-top-box'>
-                    <div className='qna-detail-title-box'>{title}</div>
-                    <div className='qna-detail-info-box'>
-                        <div className='qna-detail-info'>작성자 : {writerId}</div>
-                        <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='qna-detail-info'>작성일 {writeDate}</div>
-                        <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='qna-detail-info'>조회수 {viewCount}</div>
+        <div id='notice-detail-wrapper'>
+            <div className='notice-detail-main-box'>
+                <div className='notice-detail-top-box'>
+                    <div className='notice-detail-title-box'>{title}</div>
+                    
+                    <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+
+                    <div className='notice-detail-info-box'>
+                        <div className='notice-detail-info'>작성자 : {writerId}</div>
+                        <div className='notice-detail-info-divider'>{'\|'}</div>
+                        <div className='notice-detail-info'>작성일 {writeDate}</div>
+                        <div className='notice-detail-info-divider'>{'\|'}</div>
+                        <div className='notice-detail-info'>조회수 {viewCount}</div>
                     </div>
+
+                    <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
                 </div>
-                <div className='qna-detail-contents-box'>{contents}</div>
-                {imageUrl && <img src={imageUrl} alt="Database Image" className="qna-image" />}
+                
+                <div className='notice-detail-contents-box'>{contents}</div>
+
+                <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+
+                {imageUrl && <img src={imageUrl} alt="Database Image" className="file-image" />}
             </div>
-            <div className='qna-detail-button-box'>
+            <div className='notice-detail-button-box'>
                 <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
                 {loginUserRole === 'ROLE_ADMIN' &&
-                    <div className='qna-detail-owner-button-box'>
+                    <div className='notice-detail-owner-button-box'>
                         <div className='second-button' onClick={onUpdateClickHandler}>수정</div>
                         <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
                     </div>
