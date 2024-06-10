@@ -1,9 +1,9 @@
 import axios from "axios";
-import { DELETE_MY_INFO_URL, GET_MY_INFO_URL, GET_SIGN_IN_USER_REQUEST_URL, POST_EMAIL_AUTH_REQUEST_URL, PUT_MY_INFO_EMAIL_MODIFY_URL, PUT_MY_INFO_PW_MODIFY_URL } from "src/constant";
+import { DELETE_MY_INFO_URL, GET_MY_INFO_URL, GET_MY_QNA_LIST_URL, GET_SIGN_IN_USER_REQUEST_URL, POST_EMAIL_AUTH_REQUEST_URL, PUT_MY_INFO_EMAIL_MODIFY_URL, PUT_MY_INFO_PW_MODIFY_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { EmailAuthRequestDto, PutMyInfoEmailRequestDto, PutMyInfoPwRequestDto } from "./dto/request";
-import { GetMyInfoResponseDto, GetSignInUserResponseDto } from "./dto/response";
+import { GetMyInfoQnaListResponseDto, GetMyInfoResponseDto, GetSignInUserResponseDto } from "./dto/response";
 
 // function: 로그인 유저 정보 불러오기 API 함수
 export const getSignInUserRequest = async (accessToken: string) => {
@@ -62,3 +62,10 @@ const result = await axios
 return result;
 };
 
+// function : 마이페이지 Q&A 전체 리스트 불러오기 API 함수
+export const getQnaListRequest = async(accessToken: string) => {
+    const result = await axios.get(GET_MY_QNA_LIST_URL, bearerAuthorization(accessToken))
+    .then(requestHandler<GetMyInfoQnaListResponseDto>)
+    .catch(requestErrorHandler);
+    return result;
+}
