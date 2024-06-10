@@ -14,7 +14,7 @@ export interface GetSearchUserListResponseDto extends ResponseDto {
 
 // description: 회원 상세페이지 불러오기 Response Body DTO
 export interface GetDetailUserListResponseDto extends ResponseDto {
-    status: boolean;
+    // status: boolean;
     userId: string;
     nickName: string;
     userEmail: string;

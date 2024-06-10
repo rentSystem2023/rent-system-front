@@ -223,7 +223,13 @@ export default function UserList() {
                     <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                 </div>
             </div>
-            {/* <SideBar/> */}
+            
+            <div className='table-list-search-box'>
+                <div className='table-list-search-input-box'>
+                    <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+                </div>
+                <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+            </div>
             <div className='table-list-table'>
                 <div className='table-list-table-th user'>
                     <div className='user-list-table-number'>순번</div>
@@ -248,12 +254,6 @@ export default function UserList() {
                 <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
             </div>
 
-            <div className='table-list-search-box'>
-                <div className='table-list-search-input-box'>
-                    <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
-                </div>
-                <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
-            </div>
         </div>
     </div>
     )
