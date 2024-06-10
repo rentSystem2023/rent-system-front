@@ -67,7 +67,7 @@ import MyQna from "./views/MyPage/Qna";
 import FindPassword from "./views/Authentication/FindPassword";
 import FindPasswordReset from "./views/Authentication/FindPasswordReset";
 import CompanyUpdate from "./views/Admin/Company/CompanyUpdate";
-import ReservationList from "./views/Admin/Reservation";
+import ReservationList from "./views/Admin/Reservation/ReservationList";
 import NoticeWrite from "./views/Board/notice/NoticeWrite";
 import NoticeUpdate from "./views/Board/notice/NoticeUpdate";
 import NoticeDetail from "./views/Board/notice/NoticeDetail";
