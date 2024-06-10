@@ -44,7 +44,7 @@ USER_QNA_PATH,
 USER_RESERVATION_PATH
 } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
-import UserList from "./views/User/List";
+import UserList from "./views/Admin/User/List";
 import QnaList from "./views/Board/qna/QnaList";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
@@ -76,6 +76,7 @@ import InsuranceSelect from "./views/Reservation/InsuranceSelect";
 import ReservationDetail from "./views/Reservation/ReservationDetail";
 import MyInfoPwModify from "./views/MyPage/MyInfo/PasswordModify";
 import MyInfoEmailModify from "./views/MyPage/MyInfo/EmailModify";
+import DetailUserList from "./views/Admin/User/DetailUserList";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -193,9 +194,10 @@ return (
         <Route index element={<AdminUserIndex />} />
         {/* // route : 관리자 - 회원관리 페이지 */}
         <Route path={ADMIN_USER_PATH}>
-            <Route index element={<>회원관리 리스트</>} />
-            <Route path={ADMIN_USER_DETAIL_PATH} element={<>회원 상세 보기</>} />
+            <Route index element={<UserList />} />
+            <Route path={ADMIN_USER_DETAIL_PATH} element={<DetailUserList />} />
         </Route>
+
 
         {/* // route : 관리자 - 업체관리 페이지 */}
         <Route path={ADMIN_COMPANY_PATH}>
