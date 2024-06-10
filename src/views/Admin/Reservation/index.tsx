@@ -1,18 +1,16 @@
     import React, { ChangeEvent, useEffect, useState } from 'react'
     import './style.css'
-    import { CompanyListItem, ReservationUserListItem } from 'src/types';
+    import { ReservationUserListItem } from 'src/types';
     import { useNavigate } from 'react-router';
-    import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
-    import { useUserStore } from 'src/stores';
+    import { ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
     import { useCookies } from 'react-cookie';
-    import { GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from 'src/apis/company/dto/response';
     import ResponseDto from 'src/apis/response.dto';
-    import { getSearchCompanyListRequest } from 'src/apis/company';
-    import { GetReservationListResponseDto } from 'src/apis/reservation/dto/response';
+    import { GetReservationListResponseDto, GetSearchReservationListResponseDto } from 'src/apis/reservation/dto/response';
+import { getSearchReservationListRequest } from 'src/apis/reservation';
 
     //                    component                    //
     function ListItem ({
-    reservaionCode,
+    reservationCode,
     rentCompany,
     carName,
     carNumber,
@@ -27,13 +25,13 @@
         const navigator = useNavigate();
 
         //                    event handler                    //
-        // Todo : 예약 상세 페이지 PATH 콘스탄트에 작성해야함
-        // const onClickHandler = () => navigator(ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH(reservaionCode));
+
+        const onClickHandler = () => navigator(ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH(reservationCode));
 
         //                    render                    //
         return (
-            <div className='table-list-table-tr reservation'>
-                <div className='reservation-list-table-list-number'>{reservaionCode}</div>
+            <div className='table-list-table-tr reservation' onClick={onClickHandler}>
+                <div className='reservation-list-table-list-number'>{reservationCode}</div>
                 <div className='reservation-list-table-reservation-name'>{rentCompany}</div>
                 <div className='reservation-list-table-reservation-car'>{carName}</div>
                 <div className='reservation-list-table-reservation-carnum'>{carNumber}</div>
@@ -49,8 +47,6 @@
     //                    component                    //
     export default function ReservationList() {
         //                    state                    //
-        const {loginUserRole} = useUserStore();
-
         const [cookies] = useCookies();
 
         const [reservationList, setReservationList] = useState<ReservationUserListItem[]>([]);
@@ -62,7 +58,7 @@
         const [totalSection, setTotalSection] = useState<number>(1);
         const [currentSection, setCurrentSection] = useState<number>(1);
 
-        const [searchWord, setSearchWord] = useState<string>('');
+        const [searchWord, setSearchWord] = useState<string | number>('');
 
         //                    function                    //
         const navigator = useNavigate();
@@ -103,7 +99,7 @@
             changeSection(totalPage);
         };
 
-        const getCompanyListResponse = (result: GetReservationListResponseDto | ResponseDto | null) => {
+        const getReservationListResponse = (result: GetReservationListResponseDto | ResponseDto | null) => {
             const message = 
                 !result ? '서버에 문제가 있습니다.' :
                 result.code === 'AF' ? '인증에 실패했습니다.' : 
@@ -115,14 +111,14 @@
                 return;
             }
 
-            const { reservationUserList } = result as GetReservationListResponseDto;
-            changeReservationList(reservationUserList);
+            const { reservationList } = result as GetReservationListResponseDto;
+            changeReservationList(reservationList);
 
-            setCurrentPage(!reservationUserList.length ? 0 : 1);
-            setCurrentSection(!reservationUserList.length ? 0 : 1);
+            setCurrentPage(!reservationList.length ? 0 : 1);
+            setCurrentSection(!reservationList.length ? 0 : 1);
         };
 
-        const getSearchCompanyListResponse = (result: GetSearchCompanyListResponseDto | ResponseDto | null) => {
+        const getSearchReservationListResponse = (result: GetSearchReservationListResponseDto | ResponseDto | null) => {
 
             const message =
                 !result ? '서버에 문제가 있습니다.' :
@@ -136,8 +132,8 @@
                 return;
             }
     
-            const { companyList } = result as GetSearchCompanyListResponseDto;
-            changeReservationList(reservationList);
+            const { reservationUserList } = result as GetSearchReservationListResponseDto;
+            changeReservationList(reservationUserList);
     
             setCurrentPage(!reservationList.length ? 0 : 1);
             setCurrentSection(!reservationList.length ? 0 : 1);
@@ -167,17 +163,17 @@
     
         const onSearchButtonClickHandler = () => {
         if (!searchWord) {
-            getSearchCompanyListRequest('', cookies.accessToken).then(getSearchCompanyListResponse);
+            getSearchReservationListRequest('', cookies.accessToken).then(getSearchReservationListResponse);
         } else {
             if (!cookies.accessToken) return;
-            getSearchCompanyListRequest(searchWord, cookies.accessToken).then(getSearchCompanyListResponse);
+            getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
         }
-    };
+        };
     
         //                    effect                    //
         useEffect(() => {
             if (!cookies.accessToken) return;
-            getSearchCompanyListRequest(searchWord,cookies.accessToken).then(getSearchCompanyListResponse);
+            getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
         }, []);
     
         useEffect(() => {
@@ -193,7 +189,6 @@
 
     //                    render                    //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
-
     return (
         <div>
         <div id='table-list-wrapper'>
@@ -206,8 +201,8 @@
                     <div className='reservation-list-table-reservation-name'>업체 이름</div>
                     <div className='reservation-list-table-reservation-car'>차종</div>
                     <div className='reservation-list-table-reservation-carnum'>차량번호</div>
-                    <div className='reservation-list-table-reservation-date'>예약시작</div>
-                    <div className='reservation-list-table-reservation-date'>예약끝</div>
+                    <div className='reservation-list-table-reservation-date'>예약시작일</div>
+                    <div className='reservation-list-table-reservation-date'>예약종료일</div>
                     <div className='reservation-list-table-reservation-user'>예약자명</div>
                     <div className='reservation-list-table-reservation-user-id'>아이디</div>
                     <div className='reservation-list-table-reservation-state'>상태</div>
@@ -231,7 +226,7 @@
                     <div className='table-list-search-input-box'>
                         <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
                     </div>
-                    <div className={searchButtonClass}>검색</div>
+                    <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
                 </div>
             </div>
         </div>
