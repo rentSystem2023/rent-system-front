@@ -1,6 +1,6 @@
 export interface UserListItem {
     userId: string;
-    userName: string;
+    nickName: string;
     userEmail: string;
     joinDate: string;
 }

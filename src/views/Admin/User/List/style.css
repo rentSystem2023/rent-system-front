@@ -1,0 +1,32 @@
+.table-list-table-th.user{
+    gap: 43px;
+}
+
+.table-list-table-tr.user{
+    gap: 43px;
+}
+
+/* 순번 */
+.user-list-table-list-number {
+    width: 50px;
+}
+
+/* 아이디 */
+.user-list-table-id {
+    width: 200px;
+}
+
+/* 닉네임 */
+.user-list-table-nickname {
+    width: 150px;
+}
+
+/* 이메일 */
+.user-list-table-email {
+    width: 300px;
+}
+
+/* 가입 날짜 */
+.user-list-table-join-date{
+    width: 150px;
+}
