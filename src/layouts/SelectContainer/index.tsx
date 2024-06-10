@@ -11,15 +11,17 @@ export default function SelectContainer() {
 
     return (
         <div id="reservation-search-wrapper">
-            <div className="search-box">
-                <div className="search-select-box">
-                    <div className="search-select-item">위치선택</div>
-                    <div className="search-select-item">날짜선택</div>
-                </div>
-                <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>
+            <div className='reservation-container'>
+                <div className="search-box">
+                    <div className="search-select-box">
+                        <div className="search-select-item">위치선택</div>
+                        <div className="search-select-item">날짜선택</div>
+                    </div>
+                    <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>
+                </div>            
             </div>
             <div className="main-container">
-            <Outlet />
+                <Outlet />
             </div>
         </div>
     )
