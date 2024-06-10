@@ -73,11 +73,12 @@ import NoticeUpdate from "./views/Board/notice/NoticeUpdate";
 import NoticeDetail from "./views/Board/notice/NoticeDetail";
 import CarSelect from "./views/Reservation/CarSelect";
 import InsuranceSelect from "./views/Reservation/InsuranceSelect";
-import ReservationDetail from "./views/Reservation/ReservationDetail";
 import MyInfoPwModify from "./views/MyPage/MyInfo/PasswordModify";
 import MyInfoEmailModify from "./views/MyPage/MyInfo/EmailModify";
 import DetailUserList from "./views/Admin/User/DetailUserList";
 import SelectContainer from "./layouts/SelectContainer";
+import ReservationDetail from "./views/Admin/Reservation/ReservationDetail";
+import SearchDetail from "./views/Reservation/SearchDetail";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -165,7 +166,7 @@ return (
         <Route index element={<ReservationIndex />} />
         <Route path={RESERVATION_CAR_PATH} element={<CarSelect/>} />
         <Route path={RESERVATION_COMPANY_PATH} element={<InsuranceSelect/>} />
-        <Route path={RESERVATION_REQUEST_PATH} element={<ReservationDetail/>} />
+        <Route path={RESERVATION_REQUEST_PATH} element={<SearchDetail/>} />
         </Route>
 
         {/* // route : 마이 페이지 */}
