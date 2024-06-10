@@ -11,8 +11,6 @@ ADMIN_COMPANY_PATH,
 ADMIN_COMPANY_REGIST_PATH,
 ADMIN_COMPANY_UPDATE_PATH,
 ADMIN_NOTICE_LIST_ABSOLUTE_PATH,
-ADMIN_NOTICE_REGIST_ABSOLUTE_PATH,
-ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH,
 ADMIN_PATH,
 ADMIN_RESERVATION_PATH,
 ADMIN_RESERVATION_UPDATE_PATH,
@@ -79,6 +77,7 @@ import ReservationDetail from "./views/Reservation/ReservationDetail";
 import MyInfoPwModify from "./views/MyPage/MyInfo/PasswordModify";
 import MyInfoEmailModify from "./views/MyPage/MyInfo/EmailModify";
 import DetailUserList from "./views/Admin/User/DetailUserList";
+import SelectContainer from "./layouts/SelectContainer";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -162,7 +161,7 @@ return (
         </Route>
 
         {/* // route : 예약 페이지 */}
-        <Route path={RESERVATION_PATH}>
+        <Route path={RESERVATION_PATH} element={<SelectContainer/>}>
         <Route index element={<ReservationIndex />} />
         <Route path={RESERVATION_CAR_PATH} element={<CarSelect/>} />
         <Route path={RESERVATION_COMPANY_PATH} element={<InsuranceSelect/>} />
@@ -181,8 +180,6 @@ return (
         <Route path={NOTICE_PATH}>
         <Route index element={<NoticeList/>} />
         <Route path={NOTICE_DETAIL_PATH} element={<NoticeDetail/>}/>
-        <Route path={ADMIN_BOARD_NOTICE_REGIST_PATH} element={<NoticeWrite/>}/>
-        <Route path={ADMIN_BOARD_NOTICE_UPDATE_PATH} element={<NoticeUpdate/>}/>
         </Route>
 
         {/* // route : Q&A 페이지 */}

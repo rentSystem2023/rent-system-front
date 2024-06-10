@@ -1,47 +1,19 @@
-.search-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    width: 1200px;    
-    gap: 20px;
-    padding: 14px;
-    
-    justify-content: space-between;
+#reservation-search-wrapper{
+    display: grid;
+    grid-template-areas:
+        "search"
+        "main";
 
-    background-color: rgba(238, 238, 238, 1);
-    border-radius: 8px;
-}
-.search-select-box{
-    display: flex;
-    flex: 1;
-    gap: 14px;
-}
-.search-select-item{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 14px;
-    flex: 1;    
-
-    background-color: rgba(255, 255, 255, 255);
-    border: 1px solid rgba(255, 255, 255, 255);
-    border-radius: 8px;
-}
-.car-search-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 14px;
-    width: 100px;
-
-    background-color: rgba(255, 255, 255, 255);
-    border: 1px solid rgba(255, 255, 255, 255);
-    border-radius: 8px; 
+    padding: 30px 24px;
 }
 
-.car-search-button:hover{
-    cursor: pointer;
-    opacity: 0.85;
+.reservation-container{
+    grid-area: search;
+
+    justify-self: center;
+    align-self: center;
+}
+
+.search-box{    
+    width: 1200px;
 }
