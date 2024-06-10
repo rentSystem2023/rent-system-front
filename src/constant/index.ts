@@ -38,7 +38,7 @@ export const QNA_UPDATE_PATH = 'update/:receptionNumber';
 // description: ADMIN URL //
 export const ADMIN_PATH = 'admin';
 
-export const ADMIN_USER_PATH = 'user';
+export const ADMIN_USER_PATH = 'user/list';
 export const ADMIN_USER_DETAIL_PATH = ':userId';
 
 export const ADMIN_COMPANY_PATH = 'company';
