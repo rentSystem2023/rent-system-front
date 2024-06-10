@@ -66,6 +66,7 @@ export default function QnaUpdate() {
         setCategory(category);  // 카테고리 설정
         setPublicState(publicState);  // 퍼블릭 스테이트 설정
         setImageUrl(imageUrl);
+        setInitialImageUrl(imageUrl);
     };
 
     const putQnaResponse = (result: ResponseDto | null) => {
@@ -124,7 +125,7 @@ export default function QnaUpdate() {
             contents,
             category,
             publicState,
-            imageUrl
+            imageUrl: imageUrlToUpdate
         }
         putQnaRequest(receptionNumber, requestBody, cookies.accessToken).then(putQnaResponse);
     }
