@@ -211,7 +211,7 @@ return (
         {/* // route : 관리자 - 예약관리 페이지 */}
         <Route path={ADMIN_RESERVATION_PATH}>
             <Route index element={<ReservationList/>} />
-            <Route path={ADMIN_RESERVATION_UPDATE_PATH} element={<>예약 상세</>} />
+            <Route path={ADMIN_RESERVATION_UPDATE_PATH} element={<ReservationDetail/>} />
         </Route>
 
         {/* // route : 관리자 - 게시물관리 페이지 */}

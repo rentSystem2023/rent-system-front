@@ -95,7 +95,7 @@ export interface ReservationCarPriceListItem{
 }
 
 export interface ReservationUserListItem{
-    reservaionCode : number;
+    reservationCode : number;
     rentCompany : string;
     carName : string;
     carNumber : string;
