@@ -63,7 +63,6 @@ export default function QnaDetail() {
     };
 
     const getBoardResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
-        console.log(result); // Add this line to log the API response
         const message =
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '잘못된 접수번호입니다.' :
@@ -91,6 +90,7 @@ export default function QnaDetail() {
         setComment(comment);
         setImageUrl(imageUrl);
         setCategory(category);
+
     };
 
     const postCommentResponse = (result: ResponseDto | null) => {
@@ -199,7 +199,7 @@ export default function QnaDetail() {
                         <div className='qna-detail-info'>작성일 {writeDate}</div>
                         <div className='qna-detail-info-divider'>{'\|'}</div>
                         <div className='qna-detail-info'>조회수 {viewCount}</div>
-                        <div className='qna-detail-contents-box'>유형{category}</div>
+                        <div className='qna-detail-info'>문의 유형 : {category}</div>
                     </div>
                 </div>
                 <div className='qna-detail-contents-box'>{contents}</div>
