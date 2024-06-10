@@ -19,7 +19,7 @@ export default function QnaUpdate() {
     //                    state                    //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserId, loginUserRole } = useUserStore();
-    const { receptionNumber } = useParams();
+
     const [cookies] = useCookies();
     const [writerId, setWriterId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
@@ -29,6 +29,7 @@ export default function QnaUpdate() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null); // 파일 state 추가
     const [imageUrl, setImageUrl] = useState<string | null>(null); // 이미지 미리보기 URL 추가
 
+    const { receptionNumber } = useParams();
     //                    function                    //
     const navigator = useNavigate();
 
@@ -102,19 +103,11 @@ export default function QnaUpdate() {
         contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
     };
 
-    const onCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-        setCategory(event.target.value);
-    };
-
-    
-    const onPublicStateChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setPublicState(event.target.checked);
-    };
 
 
     const onUpdateButtonClickHandler = async () => {
         if (!cookies.accessToken || !receptionNumber) return;
-        if (!title.trim() || !contents.trim() || !category) return;
+        if (!title.trim() || !contents.trim() ) return;
     
         let imageUrl = '';
         if (selectedFile) {
@@ -122,6 +115,7 @@ export default function QnaUpdate() {
             formData.append('file', selectedFile);
             imageUrl = await axios.post('http://localhost:4000/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(response => response.data ? response.data : '').catch(error => '');
         }
+        
         
 
         const requestBody: PutQnaRequestDto = {
@@ -134,6 +128,10 @@ export default function QnaUpdate() {
         putQnaRequest(receptionNumber, requestBody, cookies.accessToken).then(putQnaResponse);
     }
 
+    
+
+
+// description: 이미지 변경 시 이미지 미리보기 //
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const fileInput = event.target;
         if (fileInput.files && fileInput.files.length > 0) {
@@ -143,6 +141,16 @@ export default function QnaUpdate() {
             setImageUrl(imageUrl);
         }
     };
+
+    const onCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+        setCategory(event.target.value);
+    };
+
+    
+    const onPublicStateChangeHandler = () => {
+        setPublicState(!publicState); // 체크 여부에 따라 값을 반대로 설정
+    };
+
 
     //                    effect                    //
     useEffect(() => {
@@ -160,22 +168,25 @@ export default function QnaUpdate() {
         <div id="qna-write-wrapper">
             <div className='qna-write-top'>
                 <div className='qna-write-title-box'>
+
                     <input className='qna-write-title-input' placeholder='제목을 입력해 주세요' value={title} onChange={onTitleChangeHandler} />
                 </div>
                 <div className='qna-category-box'>
-                    <label className='public-state-toggle'>
-                        공개 여부:<input type="checkbox" checked={publicState} onChange={onPublicStateChangeHandler} />
-                        {publicState ? '공개' : '비공개'}
-                    </label>
+                    <div className='public-state-toggle'>
+                        공개 여부:<input type="checkbox" onChange={onPublicStateChangeHandler} />
+                        {publicState ? '비공개' : '공개'}
+                    </div>
                     <select value={category} onChange={onCategoryChangeHandler} className='qna-category-select'>
                         <option value="문의">문의</option>
                         <option value="건의">건의</option>
                         <option value="기타">기타</option>
                     </select>
                 </div>
-                <div className='primary-button' onClick={onUpdateButtonClickHandler}>수정</div>
+                <div className='primary-button' onClick={onUpdateButtonClickHandler}>올리기</div>
             </div>
+
             <div className='qna-write-contents-box'>
+                {/*  두줄이상 작성할때 textarea 사용,  row로 기본값 10줄짜리 작성, 1000자 제한 가능 */}
                 <textarea ref={contentsRef} className='qna-write-contents-textarea' rows={10} placeholder='내용을 입력해주세요/ 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
                 <div className='dd'>파일첨부  <input type="file" onChange={onFileChangeHandler} />
                 </div>

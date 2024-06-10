@@ -155,6 +155,5 @@ export default function QnAWrite() {
                 )}
             </div>
         </div>
-
     );
 }
