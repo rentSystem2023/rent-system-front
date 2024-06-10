@@ -1,21 +1,18 @@
-/*// 바부*/
-
 #qna-detail-wrapper {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    padding: 24px;
 }
 
 .qna-detail-main-box {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
+
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 8px;
     padding: 24px;
-    
-    background-color: rgba(255, 255, 255, 1);
 }
 
 .qna-detail-top-box {
@@ -25,15 +22,20 @@
 }
 
 .qna-detail-title-box {
-    font-size: 24px;
-    font-weight: 700;
+    padding-bottom: 20px;
     
+    font-size: 24px;
+    font-weight: 700;   
     color: rgba(64, 64, 64, 1);
+
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
 }
 
 .qna-detail-info-box {
     display: flex;
     gap: 8px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
 }
 
 .qna-detail-info {
@@ -55,17 +57,27 @@
 .qna-detail-contents-box {
     min-height: 207px;
 
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
 
     color: rgba(64, 64, 64, 1);
-    white-space: pre-wrap;
+    white-space: pre-wrap; /* 자동 줄바꿈 */
+}
+
+.qna-image{
+    width: 400px;
+    height: 400px;
 }
 
 .qna-detail-button-box {
     display: flex;
     justify-content: space-between;
+
+    padding: 0px 24px;
 }
 
 .qna-detail-owner-button-box {
@@ -97,12 +109,13 @@
 
 .qna-detail-comment-write-box {
     display: flex;
-    align-items: start;
+    align-items: center;
     gap: 12px;
 }
 
 .qna-detail-comment-textarea-box {
     flex-grow: 1;
+    height: 100px;
 
     border: 1px solid rgba(238, 238, 238);
     border-radius: 6px;
