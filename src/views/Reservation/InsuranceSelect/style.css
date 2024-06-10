@@ -1,4 +1,4 @@
-#insurance-wrapper{
+.insurance-wrapper{
     display: grid;
     grid-template-areas:"info list";
     grid-template-rows: auto 1fr;

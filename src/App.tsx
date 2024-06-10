@@ -163,7 +163,7 @@ return (
         </Route>
 
         {/* // route : 예약 페이지 */}
-        <Route path={RESERVATION_PATH} element={<SelectContainer/>}>
+        <Route path={RESERVATION_PATH}>
         <Route index element={<ReservationIndex />} />
         <Route path={RESERVATION_CAR_PATH} element={<CarSelect/>} />
         <Route path={RESERVATION_COMPANY_PATH} element={<InsuranceSelect/>} />
