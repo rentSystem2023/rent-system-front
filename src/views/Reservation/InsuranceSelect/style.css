@@ -1,0 +1,123 @@
+#insurance-wrapper{
+    display: grid;
+    grid-template-areas:"info list";
+    grid-template-rows: auto 1fr;
+    
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 30px;
+    padding: 30px 24px;
+}
+
+/* 선택한 자동차 보험 CSS */
+.select-car-info{
+    grid-area: info;
+
+    display: flex;
+    gap: 30px;
+
+    width: 400px;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 13px 25px;
+}
+
+/* 선택한 자동차 사진 CSS */
+.select-car-info-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 13px 25px;
+
+    width: 100px;
+    height: 100px;
+}
+
+/* 선택한 자동차 정보 CSS */
+.select-car-info-list{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.select-info-wrap {
+    display: flex;
+    gap: 10px;
+}
+
+/* 보험정보 리스트 전체 CSS */
+.insurance-list-wrap{
+    grid-area: list;
+
+    display: flex;
+    flex-direction: column;
+    
+    gap: 24px;
+}
+
+/* 보험정보 안에 카드 CSS */
+.insurance-list-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 650px;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 13px 25px;
+
+    position: relative;
+}
+
+.insurance-list-container:hover{
+    cursor: pointer;
+}
+
+/* 보험 정보 CSS */
+.insurance-info-wrap{
+    display: flex;
+    gap: 30px;
+}
+
+.insurance-info-title-container {
+    display: flex;
+    flex-grow: 1;
+    gap: 12px;
+    
+}
+
+.insurance-info-contents{
+    flex-grow: 0; /* 요소가 늘어나지 않도록 설정 */
+    flex-shrink: 0; /* 요소가 줄어들지 않도록 설정 */
+    overflow: hidden; /* 텍스트가 너비를 벗어나면 잘리도록 함 */
+    white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 함 */
+}
+
+/* 업체명과 예약수의 너비를 고정 */
+.insurance-info-title {
+    width: 100px; /* 업체명의 너비를 100px로 고정 */
+}
+
+.insurance-info-contents {
+    width: 50px; /* 예약수의 너비를 50px로 고정 (적절한 너비로 조정) */
+}
+
+/* 페이지 번호 CSS */
+.table-list-page-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 18px;
+}
