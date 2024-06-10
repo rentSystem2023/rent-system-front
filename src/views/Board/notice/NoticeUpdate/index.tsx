@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 
 import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_DETAIL_ABSOLUTE_PATH,  QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { NOTICE_DETAIL_ABSOLUTE_PATH,  NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
 import axios from 'axios';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
 import { getNoticeRequest,  putNoticeRequest } from 'src/apis/notice/dto';
@@ -43,14 +43,14 @@ export default function NoticeUpdate() {
 
         if (!result || result.code !== 'SU') {
             alert(message);
-            navigator(QNA_LIST_ABSOLUTE_PATH);
+            navigator(NOTICE_LIST_ABSOLUTE_PATH);
             return;
         }
 
         const { writerId, title, contents} = result as GetNoticeBoardResponseDto;  // 카테고리와 퍼블릭 스테이트 포함
         if (writerId !== loginUserId) {
             alert('권한이 없습니다.');
-            navigator(QNA_LIST_ABSOLUTE_PATH);
+            navigator(NOTICE_LIST_ABSOLUTE_PATH);
             return;
         }
 
@@ -138,7 +138,7 @@ export default function NoticeUpdate() {
         if (!registNumber || !cookies.accessToken) return;
         if (!loginUserRole) return;
         if (loginUserRole !== 'ROLE_USER') {
-            navigator(QNA_LIST_ABSOLUTE_PATH);
+            navigator(NOTICE_LIST_ABSOLUTE_PATH);
             return;
         }
         getNoticeRequest(registNumber,cookies.accessToken).then(getNoticeResponse);  // accessToken 추가
