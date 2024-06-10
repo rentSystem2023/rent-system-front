@@ -28,7 +28,7 @@ export interface GetReservationCancelListResponseDto extends ResponseDto {
 
 // description: 전체 예약 리스트 불러오기 Response Body DTO
 export interface GetReservationListResponseDto extends ResponseDto {
-    reservationUserList : ReservationUserListItem[];
+    reservationList : ReservationUserListItem[];
 }
 
 // description: 예약 검색 리스트 불러오기 Response Body DTO
