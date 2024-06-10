@@ -132,7 +132,7 @@ export default function QnAWrite() {
                 <div className='qna-category-box'>
                     <div className='public-state-toggle'>
                         공개 여부:<input type="checkbox" onChange={onPublicStateChangeHandler} />
-                        {publicState ? '비공개' : '공개'}
+                        {publicState ? '비공개' : '비공개'}
                     </div>
                     <select value={category} onChange={onCategoryChangeHandler} className='qna-category-select'>
                         <option value="문의">문의</option>

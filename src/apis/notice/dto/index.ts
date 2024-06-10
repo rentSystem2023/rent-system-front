@@ -6,7 +6,7 @@ import { bearerAuthorization, requestErrorHandler, requestHandler } from "src/ap
 import { DELETE_NOTICE_URL, GET_NOTICE_DETAIL_URL, GET_NOTICE_LIST_URL, GET_QNA_DETAIL_URL, GET_QNA_LIST_URL, INCREASE_NOTICE_VIEW_COUNT_URL, INCREASE_QNA_VIEW_COUNT_URL, NOTICE_LIST_SEARCH_URL, POST_COMMENT_REQUEST_URL, POST_NOTICE_REQUESURL, POST_QNA_REGIST_URL, PUT_NOTICE_REGIST_URL, PUT_QNA_REGIST_URL } from "src/constant";
 import { PutQnaRequestDto } from "src/apis/qna/dto/request";
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardListResponseDto } from "src/apis/qna/dto/response";
-import { PostNoticeBoardRequestDto } from "./request";
+import { PostNoticeBoardRequestDto, PutNoticeBoardRequestDto } from "./request";
 import { GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto } from "./response";
 
 // function : 공지사항 작성 API 함수 
@@ -35,7 +35,7 @@ export const getSearcNoticeListRequest = async(word:string, accessToken:string) 
 }
 
 // function : 공지사항 게시물 불러오기 API 함수
-export const getnoticeRequest = async(registNumber:number | string, accessToken:string) => {
+export const getNoticeRequest = async(registNumber:number | string, accessToken:string) => {
     const result = await axios.get(GET_NOTICE_DETAIL_URL(registNumber))
     .then(requestHandler<GetNoticeBoardResponseDto>)
     .catch(requestErrorHandler);
@@ -43,7 +43,7 @@ export const getnoticeRequest = async(registNumber:number | string, accessToken:
 }
 
 // function : 공지사항 게시물 수정 API 함수
-export const putNoticeRequest = async(registNumber: number | string, requestBody: PutQnaRequestDto , accessToken:string) =>{
+export const putNoticeRequest = async(registNumber: number | string, requestBody: PutNoticeBoardRequestDto , accessToken:string) =>{
     const result = await axios.put(PUT_NOTICE_REGIST_URL(registNumber), requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);

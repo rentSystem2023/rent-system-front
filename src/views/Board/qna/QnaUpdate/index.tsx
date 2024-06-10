@@ -25,9 +25,10 @@ export default function QnaUpdate() {
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
     const [category, setCategory] = useState<string>('');  // 카테고리 state 추가
-    const [publicState, setPublicState] = useState<boolean>(false);  // 퍼블릭 스테이트 state 추가
+    const [publicState, setPublicState] = useState<boolean>(true);  // 퍼블릭 스테이트 state 추가
     const [selectedFile, setSelectedFile] = useState<File | null>(null); // 파일 state 추가
     const [imageUrl, setImageUrl] = useState<string | null>(null); // 이미지 미리보기 URL 추가
+    const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null); // 초기 이미지 URL을 저장
 
     const { receptionNumber } = useParams();
     //                    function                    //
@@ -103,19 +104,19 @@ export default function QnaUpdate() {
         contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
     };
 
-
-
     const onUpdateButtonClickHandler = async () => {
         if (!cookies.accessToken || !receptionNumber) return;
-        if (!title.trim() || !contents.trim() ) return;
-    
-        let imageUrl = '';
+        if (!title.trim() || !contents.trim()) return;
+
+        let imageUrlToUpdate = imageUrl;
         if (selectedFile) {
             const formData = new FormData();
             formData.append('file', selectedFile);
-            imageUrl = await axios.post('http://localhost:4000/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(response => response.data ? response.data : '').catch(error => '');
+            imageUrlToUpdate = await axios.post('http://localhost:4000/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                .then(response => response.data ? response.data : '');
+        } else {
+            imageUrlToUpdate = initialImageUrl; // 새로운 파일이 없으면 초기 이미지 URL 유지
         }
-        
         
 
         const requestBody: PutQnaRequestDto = {
@@ -151,7 +152,6 @@ export default function QnaUpdate() {
         setPublicState(!publicState); // 체크 여부에 따라 값을 반대로 설정
     };
 
-
     //                    effect                    //
     useEffect(() => {
         if (!receptionNumber || !cookies.accessToken) return;
@@ -174,7 +174,7 @@ export default function QnaUpdate() {
                 <div className='qna-category-box'>
                     <div className='public-state-toggle'>
                         공개 여부:<input type="checkbox" onChange={onPublicStateChangeHandler} />
-                        {publicState ? '비공개' : '공개'}
+                        {publicState ? '비공개' : '비공개'}
                     </div>
                     <select value={category} onChange={onCategoryChangeHandler} className='qna-category-select'>
                         <option value="문의">문의</option>
