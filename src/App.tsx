@@ -63,7 +63,7 @@ import QnAWrite from "./views/Board/qna/QnaWrite";
 import QnaUpdate from "./views/Board/qna/QnaUpdate";
 import CompanyDetail from "./views/Admin/Company/CompanyDetail";
 import MyReservation from "./views/MyPage/Reservation";
-import MyQna from "./views/MyPage/Qna";
+import MyQna from "./views/MyPage/Qna/list";
 import FindPassword from "./views/Authentication/FindPassword";
 import FindPasswordReset from "./views/Authentication/FindPasswordReset";
 import CompanyUpdate from "./views/Admin/Company/CompanyUpdate";
@@ -79,6 +79,7 @@ import DetailUserList from "./views/Admin/User/DetailUserList";
 import SelectContainer from "./layouts/SelectContainer";
 import ReservationDetail from "./views/Admin/Reservation/ReservationDetail";
 import SearchDetail from "./views/Reservation/SearchDetail";
+import MyInfoQnaList from "./views/MyPage/Qna/list";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -174,7 +175,7 @@ return (
         <Route index element={<MyInfo />} />
         <Route path={USER_EMAIL_UPDATE_PATH} element={<MyInfoEmailModify />} />
         <Route path={USER_RESERVATION_PATH} element={<MyReservation/>} />
-        <Route path={USER_QNA_PATH} element={<MyQna/>} />
+        <Route path={USER_QNA_PATH} element={<MyInfoQnaList />} />
         </Route>
 
         {/* // route : 공지사항 페이지 */}
