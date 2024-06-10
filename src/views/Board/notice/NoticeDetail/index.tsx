@@ -1,10 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { PostCommentRequestDto } from 'src/apis/company/dto/request';
-import { deleteNoticeRequest, getNoticeRequest, increaseViewCountRequest } from 'src/apis/notice/dto';
+import { deleteNoticeBoardRequest,  getNoticeRequest, increaseViewCountRequest } from 'src/apis/notice/dto';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
-import { PostCommentRequest } from 'src/apis/qna/dto';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
@@ -16,20 +14,13 @@ export default function NoticeDetail() {
   const { loginUserId, loginUserRole } = useUserStore();
   const {registNumber} = useParams();
 
-
   const [cookies] = useCookies();
   const [title, setTitle] = useState<string>('');
   const [writerId, setWriterId] = useState<string>('');
   const [writeDate, setWriteDate] = useState<string>('');
   const [viewCount, setViewCount] = useState<number>(0);
   const [contents, setContents] = useState<string>('');
-  const [status, setStatus] = useState<boolean>(false);
-  const [comment, setComment] = useState<string | null>(null);
-  const [commentRows, setCommentRows] = useState<number>(1);
   const [imageUrl , setImageUrl] = useState<string>('');
-
-  
-
 
   //                    function                    //
   const navigator = useNavigate();
@@ -104,7 +95,7 @@ export default function NoticeDetail() {
 
   };
 
-  const deleteQnaRequest = (result: ResponseDto | null) => {
+  const deleteNoticeRequest = (result: ResponseDto | null) => {
 
       const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -142,8 +133,8 @@ export default function NoticeDetail() {
       const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
       if (!isConfirm) return;
 
-      deleteNoticeRequest(registNumber, cookies.accessToken) 
-      .then(deleteQnaRequest)
+      deleteNoticeBoardRequest(registNumber, cookies.accessToken) 
+      .then(deleteNoticeRequest)
   }
 
   //                    effect                    //
