@@ -40,6 +40,7 @@ RESERVATION_PATH,
 RESERVATION_REQUEST_PATH,
 USER_EMAIL_UPDATE_PATH,
 USER_PATH,
+USER_PW_UPDATE_PATH,
 USER_QNA_PATH,
 USER_RESERVATION_PATH
 } from "./constant";
@@ -173,6 +174,7 @@ return (
         {/* // route : 마이 페이지 */}
         <Route path={USER_PATH} element={<UserContainer />}>
         <Route index element={<MyInfo />} />
+        <Route path={USER_PW_UPDATE_PATH} element={<MyInfoPwModify />} />
         <Route path={USER_EMAIL_UPDATE_PATH} element={<MyInfoEmailModify />} />
         <Route path={USER_RESERVATION_PATH} element={<MyReservation/>} />
         <Route path={USER_QNA_PATH} element={<MyInfoQnaList />} />
