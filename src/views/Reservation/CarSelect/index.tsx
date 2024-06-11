@@ -143,7 +143,6 @@ export default function CarSelect() {
             if (list[existCarIndex].lowLuxuryPrice > car.luxuryPrice) list[existCarIndex].lowLuxuryPrice = car.luxuryPrice;
             if (list[existCarIndex].lowNormalPrice > car.normalPrice) list[existCarIndex].lowNormalPrice = car.normalPrice;
             if (list[existCarIndex].lowSuperPrice > car.superPrice) list[existCarIndex].lowSuperPrice = car.superPrice;
-
         })
 
         setReservationCarList(list);
@@ -222,7 +221,7 @@ export default function CarSelect() {
                 <div className='option-container'>
                     <div className='table-list-search-box'>
                         <div className='table-list-search-input-box'>
-                            <input className='table-list-search-input' placeholder='검색어를 입력하세요.' />
+                            <input className='table-list-search-input' placeholder='자동차 모델명을 입력하세요.' />
                         </div>
                         <div className={searchButtonClass}>검색</div>
                     </div>
