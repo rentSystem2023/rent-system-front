@@ -31,6 +31,20 @@ export interface GetReservationListResponseDto extends ResponseDto {
     reservationList : ReservationUserListItem[];
 }
 
+// description: 예약 상세 리스트 불러오기 Response Body DTO
+export interface GetReservationDetailResponseDto extends ResponseDto {
+    reservationCode : string | number;
+    rentCompany : string;
+    carName : string;
+    carNumber : string;
+    reservationStart : string;
+    reservationEnd : string;
+    userId : string;
+    nickName : string;
+    reservationState : string;
+}
+
+
 // description: 예약 검색 리스트 불러오기 Response Body DTO
 export interface GetSearchReservationListResponseDto extends ResponseDto {
     reservationUserList : ReservationUserListItem[];
