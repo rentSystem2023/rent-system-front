@@ -4,6 +4,7 @@ import './style.css'
 export default function MyReservation() {
     return (
         <div className='my-reservation-wrapper'>
+            <div className="my-info-title h1">나의 예약 내역</div>
             <div className='my-reservation-card'>
                 <div className='my-reservation-state'>
                     <div className='reservation-title'>예약상태</div>
