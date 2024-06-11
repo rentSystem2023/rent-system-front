@@ -78,6 +78,10 @@ export default function ReservationDetail() {
         navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
     }
 
+    const onReservationApproveClickHandler = () => {
+
+    }
+
     const onDeleteClickHandler = () => {
         if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
@@ -111,7 +115,7 @@ export default function ReservationDetail() {
                             <div>예약상태{reservationState}</div>
                     </div>
                 <div className='primary-button' onClick={onListClickHandler} >목록보기</div>
-                <div className='primary-button' >예약완료 처리버튼 이름만 예약완료로 변경</div>
+                <div className='primary-button' onClick={onReservationApproveClickHandler} >예약완료 처리버튼 이름만 예약완료로 변경</div>
                 <div className='error-button' >예약취소승인 처리하면 예약취소완료 or 바로삭제처리 back은 delete</div>
                 <div className='error-button' onClick={onDeleteClickHandler} >삭제</div>
             </div>
