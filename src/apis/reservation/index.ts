@@ -99,8 +99,9 @@ export const getReservationPopularListRequest = async(accessToken: string) => {
 }
 
 // function : 차량 검색 결과 불러오기 API 함수
-export const getSearchReservationCarListRequest  = async(address : string, reservationStart : string, reservationEnd : string, accessToken: string) => {
-    const result = await axios.get(GET_CAR_SEARCH_LIST_URL(address, reservationStart, reservationEnd),bearerAuthorization(accessToken))
+export const getSearchReservationCarListRequest  = async(address : string, reservationStart : string, reservationEnd : string) => {
+    const config = { params: { address, reservationStart, reservationEnd } };
+    const result = await axios.get(GET_CAR_SEARCH_LIST_URL, config)
     .then(requestHandler<GetSearchReservationCarListResponseDto>)
     .catch(requestErrorHandler);
     return result;
