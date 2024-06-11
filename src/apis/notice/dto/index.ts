@@ -20,7 +20,7 @@ export const PostNoticeRequest = async(requestBody: PostNoticeBoardRequestDto, a
 // function : 공지사항 전체 리스트 불러오기 API 함수
 export const getNoticeListRequest = async(accessToken: string) => { // 토큰을 포함해서 가져와야 함
     const result = await axios.get(GET_NOTICE_LIST_URL,bearerAuthorization(accessToken))
-    .then(requestHandler<GetQnaBoardListResponseDto>) //위에 코드가 성공한다면 <GetBoardListResponseDto> 받을 것이고
+    .then(requestHandler<GetNoticeBoardResponseDto>) //위에 코드가 성공한다면 <GetBoardListResponseDto> 받을 것이고
     .catch(requestErrorHandler); // 실패한다면 에러
     return result;
 }
