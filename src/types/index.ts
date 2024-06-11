@@ -83,6 +83,18 @@ export interface ReservationCarListItem{
     superPrice : number;
 }
 
+export interface ReservationCarViewListItem{
+    carName : string;
+    carImageUrl : string;
+    highNormalPrice : number;
+    lowNormalPrice : number;
+    highLuxuryPrice : number;
+    lowLuxuryPrice : number;
+    highSuperPrice : number;
+    lowSuperPrice : number;
+}
+
+
 export interface ReservationCarPriceListItem{
     carName : string;
     carImageUrl : string;
