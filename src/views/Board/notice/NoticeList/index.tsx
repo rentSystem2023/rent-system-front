@@ -171,7 +171,7 @@ export default function NoticeList() {
     
     //                    render                    //
 
-    const searchButtonClass = searchWord ? 'search-button' : 'disable-button';
+    const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
 
 
     return (
