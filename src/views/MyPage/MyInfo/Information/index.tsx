@@ -106,6 +106,7 @@ export default function MyInfo() {
             <div className='information-main'>  
                 <div className='information-contents'>
                     <div className='information-container'>
+                        <div className='my-info-title h1'>내 정보</div>
                         <div className='information-box'>
                             <div className='information-title'>닉네임</div>
                             <div className='information-value'>{nickName}</div>    

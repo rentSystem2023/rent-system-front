@@ -104,7 +104,7 @@ export default function MyInfoPwModify() {
     return (
         <div id="authentication-wrapper">
             <div className='authentication-sign-up'>
-                <div className="title-text">비밀번호 재설정</div>
+                <div className='my-info-title h1'>비밀번호 재설정</div>
                 <div className='authentication-contents'>
 
                     <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
