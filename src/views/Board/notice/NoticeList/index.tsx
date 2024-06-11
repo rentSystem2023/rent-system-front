@@ -159,12 +159,12 @@ export default function NoticeList() {
     }, []);
 
     useEffect(() => {
-        if (!NoticeList.length) return;
+        if (!noticeList.length) return;
         changePage(noticeList, totalLenght);
     }, [currentPage]);
 
     useEffect(() => {
-        if (!NoticeList.length) return;
+        if (!noticeList.length) return;
         changeSection(totalPage);
     }, [currentSection]);
     
