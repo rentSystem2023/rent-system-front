@@ -116,11 +116,11 @@ export default function MyInfoEmailModify() {
   return (
     <div id="authentication-wrapper">
         <div className='authentication-sign-up'>
-            <div className="title-text">이메일 변경</div>
+            <div className="my-info-title h1">이메일 변경</div>
             <div className='authentication-contents'>
 
             <InputBox 
-                label="이메일" type="text" value={email} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} 
+                label="변경할 이메일" type="text" value={email} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} 
             />
             
             {isEmailCheck && 
