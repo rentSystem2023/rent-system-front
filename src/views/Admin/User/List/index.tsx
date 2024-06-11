@@ -10,34 +10,6 @@ import { useUserStore } from 'src/stores';
 import { getSearchUserListRequest, getUserListRequest } from 'src/apis/userList';
 import { GetSearchUserListResponseDto, GetUserListResponseDto } from 'src/apis/userList/dto/response';
 
-function SideBar () {
-    return (
-        <>
-            <div id="user-list-wrapper">
-            <div className="side-navigation-container">
-                <div className="side-navigation-item">
-                    <div className="side-navigation-icon person"></div>
-                    <div className="side-navigation-item-title">회원 관리</div>
-                </div>
-                <div className="side-navigation-item">
-                    <div className="side-navigation-icon office"></div>
-                    <div className="side-navigation-item-title">업체 관리</div>
-                </div>
-                <div className="side-navigation-item">
-                    <div className="side-navigation-icon check"></div>
-                    <div className="side-navigation-item-title">예약 관리</div>
-                </div>
-                <div className="side-navigation-item">
-                    <div className="side-navigation-icon board"></div>
-                    <div className="side-navigation-item-title">게시물 관리</div>
-                </div>
-            </div>
-            </div>
-        </>
-    )
-}
-
-//                    component                    //
 function ListItem ({
     index,
     userId,
@@ -55,11 +27,11 @@ function ListItem ({
     //                    render                    //
     return (
         <div className='table-list-table-tr user' onClick={onClickHandler}>
-                <div className='user-list-table-list-number'>{index}</div>
-                <div className='user-list-table-id'>{userId}</div>
-                <div className='user-list-table-nickname'>{nickName}</div>
-                <div className='user-list-table-email' style={{ textAlign: 'left' }}>{userEmail}</div>
-                <div className='user-list-table-join-date'>{joinDate}</div>
+            <div className='user-list-table-list-number'>{index}</div>
+            <div className='user-list-table-id'>{userId}</div>
+            <div className='user-list-table-nickname'>{nickName}</div>
+            <div className='user-list-table-email'>{userEmail}</div>
+            <div className='user-list-table-join-date'>{joinDate}</div>
         </div>
     );
 }
@@ -172,13 +144,13 @@ export default function UserList() {
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
-  
+
     const onPreSectionClickHandler = () => {
         if (currentSection <= 1) return;
         setCurrentSection(currentSection - 1);
         setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
     };
-  
+
     const onNextSectionClickHandler = () => {
         if (currentSection === totalSection) return;
         setCurrentSection(currentSection + 1);
@@ -200,12 +172,12 @@ export default function UserList() {
         if (!cookies.accessToken) return;
         getSearchUserListRequest(searchWord,cookies.accessToken).then(getSearchUserListResponse);
     }, []);
-  
+
     useEffect(() => {
         if (!userList.length) return;
         changePage(userList, totalLenght);
     }, [currentPage]);
-  
+
     useEffect(() => {
         if (!userList.length) return;
         changeSection(totalPage);
@@ -213,48 +185,46 @@ export default function UserList() {
 
     //                    render                    //
 
-    const searchButtonClass = searchWord ? 'search-button' : 'disable-button';
+    const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
 
     return (
-        <div>
-            <div className="title-text">회원 목록</div>
-            <div id='table-list-wrapper'>
-                <div className='table-list-top'>
-                    <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
-                </div>
-            </div>
-            
-            <div className='table-list-search-box'>
-                <div className='table-list-search-input-box'>
-                    <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
-                </div>
-                <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
-            </div>
-            <div className='table-list-table'>
-                <div className='table-list-table-th user'>
-                    <div className='user-list-table-number'>순번</div>
-                    <div className='user-list-table-id'>아이디</div>
-                    <div className='user-list-table-nickname'>닉네임</div>
-                    <div className='user-list-table-email'> 이메일</div>
-                    <div className='user-list-table-join-date'> 가입날짜</div>
-                </div>
-                {viewList.map((item, index) => <ListItem key={index} index={totalLenght - ((currentPage - 1) * COUNT_PER_PAGE + index)} {...item} />)}
-            </div>
-            <div className='table-list-bottom'>
-                <div style={{ width: '299px' }}></div>
-                <div className='table-list-pagenation'>
-                    
-                <div className='table-list-page-box'>
-                    {pageList.map(page => 
-                    page === currentPage ?
-                    <div className='table-list-page-active'>{page}</div> :
-                    <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
-                    )}
-                </div>
-                <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
-            </div>
+        <>
+        <div id='table-list-wrapper'>
+            <div className='table-list-top'>
+                <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+            </div>        
 
+        <div className='table-list-table'>
+            <div className='table-list-table-th user'>
+                <div className='user-list-table-number'>순번</div>
+                <div className='user-list-table-id'>아이디</div>
+                <div className='user-list-table-nickname'>닉네임</div>
+                <div className='user-list-table-email'> 이메일</div>
+                <div className='user-list-table-join-date'> 가입날짜</div>
+            </div>
+            {viewList.map((item, index) => <ListItem key={index} index={totalLenght - ((currentPage - 1) * COUNT_PER_PAGE + index)} {...item} />)}
+        </div>
+        <div className='table-list-bottom'>
+            <div style={{ width: '299px' }}></div>
+            <div className='table-list-pagenation'>
+                
+            <div className='table-list-page-box'>
+                {pageList.map(page => 
+                page === currentPage ?
+                <div className='table-list-page-active'>{page}</div> :
+                <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
+                )}
+            </div>
+            <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
+        </div>
+        <div className='table-list-search-box'>
+            <div className='table-list-search-input-box'>
+                <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+            </div>
+            <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
         </div>
     </div>
+    </div>
+    </>
     )
 }

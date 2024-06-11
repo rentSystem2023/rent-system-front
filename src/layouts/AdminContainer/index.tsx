@@ -71,8 +71,8 @@ export default function AdminContainer() {
     useEffect(() => {
         const path = 
             pathname === ADMIN_USER_LIST_ABSOLUTE_PATH ? '회원 관리' :
-            pathname === ADMIN_COMPANY_LIST_ABSOLUTE_PATH ? '업체 관리' : '' ;
-            // pathname === ADMIN_RESERVATION_LIST_ABSOLUTE_PATH ? '예약 관리' : 
+            pathname === ADMIN_COMPANY_LIST_ABSOLUTE_PATH ? '업체 관리' :
+            pathname === ADMIN_RESERVATION_LIST_ABSOLUTE_PATH ? '예약 관리' : '';
             // pathname === ADMIN_NOTICE_LIST_ABSOLUTE_PATH ? '공지사항 관리' : 
             // pathname === ADMIN_QNA_LIST_ABSOLUTE_PATH ? 'Q&A 관리' : '';
     
