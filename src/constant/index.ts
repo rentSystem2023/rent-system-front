@@ -220,11 +220,11 @@ export const GET_RESERVATION_DETAIL_URL = (reservationCode : string | number) =>
 // 예약 검색 리스트 URL
 export const GET_RESERVATION_LIST_SEARCH_URL = `${GET_RESERVATION_LIST_URL}/search`;
 // 예약 목록 리스트 삭제 URL
-export const DELETE_RESERVATION_LIST_URL = (reservationCode : string | number) => `${GET_RESERVATION_LIST_URL}/${reservationCode}`;
+export const DELETE_RESERVATION_LIST_URL = (reservationCode : string | number) => `${SERVER_RESERVATION_MODULE_URL}/${reservationCode}`;
 // 인기 차량 리스트 URL
 export const GET_POPULAR_CAR_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/polular`;
 // 차량 검색 결과 URL
-export const GET_CAR_SEARCH_LIST_URL = (address : string, reservationStart : string, reservationEnd : string) =>  `${SERVER_RESERVATION_MODULE_URL}/search/${address}/${reservationStart}/${reservationEnd}`;
+export const GET_CAR_SEARCH_LIST_URL =  `${SERVER_RESERVATION_MODULE_URL}/search`;
 // 보험별 가격 검색 결과 URL
 export const GET_CAR_PRICE_SEARCH_LIST_URL = (carName : string) => `${GET_CAR_SEARCH_LIST_URL}/${carName}`;
 // 보험별 가격 상세 검색 결과 URL
@@ -293,3 +293,4 @@ export const DELETE_COMPANY_LIST_URL = (companyCode : string | number) => `${SER
 //description: PAGE
 export const COUNT_PER_PAGE = 10; 
 export const COUNT_PER_SECTION = 10;
+export const COUNT_RESERVATION_PAGE = 6;

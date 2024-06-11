@@ -7,8 +7,9 @@ import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
 import { GetSearchReservationCarListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ReservationCarListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_PATH, RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
+import { useReservationStore } from 'src/stores';
 
 function ListItem ({
     carName,
@@ -69,10 +70,12 @@ export default function CarSelect() {
     //                    function                    //
     const navigator = useNavigate();
 
+    const { address, reservationStart, reservationEnd } = useReservationStore();
+
     const changePage = (reservationCarList: ReservationCarListItem[], totalLenght: number) => {
         if (!currentPage) return;
-        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-        let endIndex = currentPage * COUNT_PER_PAGE;
+        const startIndex = (currentPage - 1) * COUNT_RESERVATION_PAGE;
+        let endIndex = currentPage * COUNT_RESERVATION_PAGE;
         if (endIndex > totalLenght - 1) endIndex = totalLenght;
         const viewList = reservationCarList.slice(startIndex, endIndex);
         setViewList(viewList);
@@ -95,7 +98,7 @@ export default function CarSelect() {
         const totalLenght = reservationCarList.length;
         setTotalLength(totalLenght);
 
-        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
+        const totalPage = Math.floor((totalLenght - 1) / COUNT_RESERVATION_PAGE) + 1;
         setTotalPage(totalPage);
 
         const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
@@ -106,7 +109,7 @@ export default function CarSelect() {
         changeSection(totalPage);
     };
     
-    const getReservationCarListResponse = (result: GetSearchReservationCarListResponseDto | ResponseDto | null) => {
+    const getSearchReservationCarListResponse = (result: GetSearchReservationCarListResponseDto | ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -121,6 +124,8 @@ export default function CarSelect() {
         }
 
         const { reservationCarList } = result as GetSearchReservationCarListResponseDto;
+
+        console.log(reservationCarList);
         changeReservationCarList(reservationCarList);
 
         setCurrentPage(!reservationCarList.length ? 0 : 1);
@@ -128,14 +133,14 @@ export default function CarSelect() {
     };
 
     //                    event handler                    //
+    const onPageClickHandler = (page: number) => {
+        setCurrentPage(page);
+    };
+
     const onPreSectionClickHandler = () => {
         if (currentSection <= 1) return;
         setCurrentSection(currentSection - 1);
         setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-    };
-
-    const onPageClickHandler = (page: number) => {
-        setCurrentPage(page);
     };
 
     const onNextSectionClickHandler = () => {
@@ -172,14 +177,18 @@ export default function CarSelect() {
     // }, []);
 
     useEffect(() => {
-        if (!CarSelect.length) return;
+        if (!reservationCarList.length) return;
         changePage(reservationCarList, totalLenght);
     }, [currentPage]);
 
     useEffect(() => {
-        if (!CarSelect.length) return;
+        if (!reservationCarList.length) return;
         changeSection(totalPage);
     }, [currentSection]);
+
+    useEffect(() => {
+        getSearchReservationCarListRequest(address, reservationStart, reservationEnd).then(getSearchReservationCarListResponse)
+    }, [address, reservationStart, reservationEnd]);
 
     //                    render                    //
 
