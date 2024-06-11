@@ -6,7 +6,7 @@ import { getSearchReservationCarListRequest } from 'src/apis/reservation';
 import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
 import { GetSearchReservationCarListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { ReservationCarListItem } from 'src/types';
+import { ReservationCarListItem, ReservationCarViewListItem } from 'src/types';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_PATH, RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';
@@ -14,13 +14,18 @@ import { useReservationStore } from 'src/stores';
 function ListItem ({
     carName,
     carImageUrl,
-    normalPrice,
-    luxuryPrice,
-    superPrice
-}: ReservationCarListItem) {
+    highLuxuryPrice,
+    highNormalPrice,
+    highSuperPrice,
+    lowLuxuryPrice,
+    lowNormalPrice,
+    lowSuperPrice
+}: ReservationCarViewListItem) {
 
     //                    function                    //
     const navigator = useNavigate();
+
+    const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
 
     return(
         <>
@@ -29,22 +34,21 @@ function ListItem ({
                 <div className='car-name'>{carName}</div>
             </div>
             <div className='list-wrap'>
-                <div className='car-image'>{carImageUrl}</div>
+                <div className='car-image'>
+                    <img style={{ width: '150%'}} src={carImageUrl} />
+                </div>
                 <div className='insurance-wrap'>
                     <div className='insurance-price'>
                         <div className='price-title'>완전자차</div>
-                        <div className='price-result'>최소가격</div>
-                        <div className='price-result'>최대가격</div>
+                        <div className='price-result'>{`${krw(lowNormalPrice)} ~ ${krw(highNormalPrice)}`}</div>
                     </div>
                     <div className='insurance-price'>
                         <div className='price-title'>고급자차</div>
-                        <div className='price-result'>최소가격</div>
-                        <div className='price-result'>최대가격</div>
+                        <div className='price-result'>{`${krw(lowLuxuryPrice)} ~ ${krw(highLuxuryPrice)}`}</div>
                     </div>
                     <div className='insurance-price'>
                         <div className='price-title'>슈퍼자차</div>
-                        <div className='price-result'>최소가격</div>
-                        <div className='price-result'>최대가격</div>
+                        <div className='price-result'>{`${krw(lowSuperPrice)} ~ ${krw(highSuperPrice)}`}</div>
                     </div>
                 </div>
             </div>
@@ -58,8 +62,8 @@ export default function CarSelect() {
     //                    state                    //
     const [cookies] = useCookies();
     const [searchWord, setSearchWord] = useState<string>('');
-    const [reservationCarList, setReservationCarList] = useState<ReservationCarListItem[]>([]);
-    const [viewList, setViewList] = useState<ReservationCarListItem[]>([]);
+    const [reservationCarList, setReservationCarList] = useState<ReservationCarViewListItem[]>([]);
+    const [viewList, setViewList] = useState<ReservationCarViewListItem[]>([]);
     const [totalLenght, setTotalLength] = useState<number>(0);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [totalSection, setTotalSection] = useState<number>(1);
@@ -72,7 +76,7 @@ export default function CarSelect() {
 
     const { address, reservationStart, reservationEnd } = useReservationStore();
 
-    const changePage = (reservationCarList: ReservationCarListItem[], totalLenght: number) => {
+    const changePage = (reservationCarList: ReservationCarViewListItem[], totalLenght: number) => {
         if (!currentPage) return;
         const startIndex = (currentPage - 1) * COUNT_RESERVATION_PAGE;
         let endIndex = currentPage * COUNT_RESERVATION_PAGE;
@@ -91,7 +95,7 @@ export default function CarSelect() {
         setPageList(pageList);
     };
 
-    const changeReservationCarList = (reservationCarList: ReservationCarListItem[]) => {
+    const changeReservationCarList = (reservationCarList: ReservationCarViewListItem[]) => {
 
         setReservationCarList(reservationCarList);
 
@@ -125,11 +129,27 @@ export default function CarSelect() {
 
         const { reservationCarList } = result as GetSearchReservationCarListResponseDto;
 
-        console.log(reservationCarList);
-        changeReservationCarList(reservationCarList);
+        const list: ReservationCarViewListItem[] = [];
+        reservationCarList.forEach(car => {
+            const existCarIndex = list.findIndex(item => item.carName === car.carName);
+            if (existCarIndex === -1) {
+                list.push({ carName: car.carName, carImageUrl: car.carImageUrl, highLuxuryPrice: car.luxuryPrice, lowLuxuryPrice: car.luxuryPrice, highNormalPrice: car.luxuryPrice, lowNormalPrice: car.normalPrice, highSuperPrice: car.superPrice, lowSuperPrice: car.superPrice });
+                return;
+            }
 
+            if (list[existCarIndex].highLuxuryPrice < car.luxuryPrice) list[existCarIndex].highLuxuryPrice = car.luxuryPrice;
+            if (list[existCarIndex].highNormalPrice < car.normalPrice) list[existCarIndex].highNormalPrice = car.normalPrice;
+            if (list[existCarIndex].highSuperPrice < car.superPrice) list[existCarIndex].highSuperPrice = car.superPrice;
+            if (list[existCarIndex].lowLuxuryPrice > car.luxuryPrice) list[existCarIndex].lowLuxuryPrice = car.luxuryPrice;
+            if (list[existCarIndex].lowNormalPrice > car.normalPrice) list[existCarIndex].lowNormalPrice = car.normalPrice;
+            if (list[existCarIndex].lowSuperPrice > car.superPrice) list[existCarIndex].lowSuperPrice = car.superPrice;
+
+        })
+
+        setReservationCarList(list);
         setCurrentPage(!reservationCarList.length ? 0 : 1);
         setCurrentSection(!reservationCarList.length ? 0 : 1);
+        changeReservationCarList(list);
     };
 
     //                    event handler                    //
