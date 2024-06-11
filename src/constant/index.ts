@@ -215,6 +215,8 @@ export const GET_RESERVATION_CANCEL_LIST_URL = (reservationState: string) => `${
 export const DELETE_RESERVATION_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/cancel/${reservationCode}`;
 // 예약 전체 리스트 URL
 export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
+// 예약 상세 URL
+export const GET_RESERVATION_DETAIL_URL = (reservationCode : string | number) =>  `${SERVER_RESERVATION_MODULE_URL}/${reservationCode}`;
 // 예약 검색 리스트 URL
 export const GET_RESERVATION_LIST_SEARCH_URL = `${GET_RESERVATION_LIST_URL}/search`;
 // 예약 목록 리스트 삭제 URL
