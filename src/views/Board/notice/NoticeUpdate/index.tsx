@@ -57,7 +57,7 @@ export default function NoticeUpdate() {
         setInitialImageUrl(imageUrl);
     };
 
-    const putQnaResponse = (result: ResponseDto | null) => {
+    const putNoticeResponse = (result: ResponseDto | null) => {
         const message =
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'AF' ? '권한이 없습니다.' :
@@ -110,7 +110,7 @@ export default function NoticeUpdate() {
             contents,
             imageUrl: imageUrlToUpdate
         }
-        putNoticeRequest(registNumber, requestBody, cookies.accessToken).then(putQnaResponse);
+        putNoticeRequest(registNumber, requestBody, cookies.accessToken).then(putNoticeResponse);
     };
 // description: 이미지 변경 시 이미지 미리보기 //
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
