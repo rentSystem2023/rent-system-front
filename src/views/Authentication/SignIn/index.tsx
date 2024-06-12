@@ -1,6 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import "./style.css";
-
 import InputBox from "src/components/Inputbox";
 import { SignInRequestDto } from "src/apis/auth/dto/request";
 import { SignInRequest } from "src/apis/auth";
@@ -33,7 +32,6 @@ export function Sns () {
     return <></>;
 }
 
-
 //                    interface                    //
 interface SnsContainerProps {
     title: string;
@@ -58,7 +56,6 @@ function SnsContainer({ title }: SnsContainerProps) {
         </div>
     );
 }
-
 
 //                    component                    //
 export default function SignIn() {
@@ -132,7 +129,6 @@ export default function SignIn() {
 
     //                    render                    //
     return (
-
         <div id="authentication-wrapper">
             <div className="title-text">로그인</div>
             <div className="authentication-sign-in">
@@ -160,11 +156,11 @@ export default function SignIn() {
                     </div>
                     <div className="other-authentication-button-container">
                         <div className="moving-find-id-password">
-                            <div className="moving-find-id" onClick={() => {navigator(AUTH_FIND_ID_ABSOLUTE_PATH)}}>아이디</div>
+                            <div className="moving-find" onClick={() => {navigator(AUTH_FIND_ID_ABSOLUTE_PATH)}}>아이디</div>
                             <div>{'/'}</div>
-                            <div className="moving-find-password" onClick={() => {navigator(AUTH_FIND_PASSWORD_ABSOLUTE_PATH)}}>비밀번호 찾기</div>
+                            <div className="moving-find" onClick={() => {navigator(AUTH_FIND_PASSWORD_ABSOLUTE_PATH)}}>비밀번호 찾기</div>
                         </div>
-                        <div className="moving-sign-up" onClick={ onSignUpButtonClickHandler }>회원가입</div>
+                        <div className="moving-find" onClick={ onSignUpButtonClickHandler }>회원가입</div>
                     </div>
                     <div className="short-divider"></div>
                     <SnsContainer title="SNS 로그인" />

@@ -202,8 +202,13 @@ export default function MyInfoQnaList() {
     const filteredViewList = viewList.filter(item => item.writerId === loginUserId);
 
     return (
-        <>
-            <div className="my-info-title h1">나의 문의내역</div>
+        <>        
+        <div id='information-wrapper'>
+            <div className='information-main'>
+            <div className="my-info-title">문의내역</div>
+            
+            <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+
             <div id='table-list-wrapper'>
                 <div className='table-list-top'>
                     <div className='table-list-size-text'></div>
@@ -245,6 +250,8 @@ export default function MyInfoQnaList() {
                         <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
                     </div>
                 </div>
+            </div>
+            </div>
             </div>
         </>
     );

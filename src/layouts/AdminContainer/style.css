@@ -2,7 +2,7 @@
     display: grid;
     grid-template: 
         "sidenav main" minmax(900px, auto)
-        / 340px minmax(1182px, 1fr);
+        / 280px minmax(1182px, 1fr);
 }
 
 .admin-main {
@@ -29,7 +29,7 @@
     align-items: center;
     gap: 16px;
 
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(138, 146, 166, 1);
 
     font-size: 20px;
     font-style: normal;
@@ -43,7 +43,7 @@
 }
 
 .admin-side-navigation-item.active {
-    background-color: rgba(138, 146, 166, 1);
+    background-color: rgba(138, 146, 166, 0.6);
     color: rgba(255, 255, 255, 1);
 }
 
@@ -53,7 +53,7 @@
     background-size: 100% 100%;
 }
 
-.admin-side-navigation-sub-item {
+/* .admin-side-navigation-sub-item {
     display: flex;
     flex-direction: column;
 
@@ -78,7 +78,7 @@
 
 .admin-side-navigation-sub-item-title {
     padding: 10px;
-}
+} */
 
 .admin-side-navigation-icon.person {
     background-image: url('../../assets/image/person.png');

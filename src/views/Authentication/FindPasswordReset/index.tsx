@@ -11,14 +11,12 @@ import useAuthStore from 'src/stores/auth.store';
 export default function FindPasswordReset() {
 
     //                    state                    //
-    
     const [password, setPassword] = useState<string>('');
     const { userId } = useParams();
 
     const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
     const [passwordCheck, setPasswordCheck] = useState<string>('');
     const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
-    const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
     const [passwordMessage, setPasswordMessage] = useState<string>('');
     const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
     
@@ -26,11 +24,9 @@ export default function FindPasswordReset() {
     const findPwResetButtonClass = `${isFindPwActive ? 'primary' : 'disable'}-button full-width`;
 
     //                    function                    //
-
     const navigator = useNavigate();
 
     const findPwResetResponse = (result: ResponseDto | null) => {
-
         const message = 
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
@@ -41,7 +37,6 @@ export default function FindPasswordReset() {
             alert(message);
             return;
         }
-
     };
 
     //                    event handler                    //
@@ -95,29 +90,34 @@ export default function FindPasswordReset() {
         findPwResetRequest(userId, requestBody).then(findPwResetResponse);
 
         navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+    };
 
-    }
-
-
-
-  return (
-    <div id="authentication-wrapper">
-        <div className='authentication-sign-up'>
+    return (
+        <div id="authentication-wrapper">
             <div className="title-text">비밀번호 재설정</div>
-            <div className='authentication-contents'>
 
-                <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-                
-                <InputBox label="비밀번호 확인" type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+            <div className='authentication-sign-up'>
+                <div className='authentication-find-password'>
+                    <InputBox 
+                        label="비밀번호" 
+                        type="password" 
+                        value={password} 
+                        placeholder="비밀번호를 입력해주세요" 
+                        onChangeHandler={onPasswordChangeHandler} 
+                        message={passwordMessage} error />
+                        <InputBox label="비밀번호 확인" 
+                        type="password" 
+                        value={passwordCheck} 
+                        placeholder="비밀번호를 입력해주세요" 
+                        onChangeHandler={onPasswordCheckChangeHandler} 
+                        message={passwordCheckMessage} error 
+                    />
 
-            <div className="authentication-button-container">
-                <div className={findPwResetButtonClass} onClick={ onFindPwResetButtonClickHandler }>확인</div>
+                <div className="authentication-button-container">
+                    <div className={findPwResetButtonClass} onClick={ onFindPwResetButtonClickHandler }>확인</div>
+                </div>
             </div>
-
         </div>
-
-      </div>
-      
-  </div>
-  )
+    </div>
+    )
 }

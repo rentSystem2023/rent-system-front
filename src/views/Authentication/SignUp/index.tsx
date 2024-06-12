@@ -10,10 +10,8 @@ import { AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_PATH } from "src/constant";
 import useAuthStore from "src/stores/auth.store";
 import { useSearchParams } from "react-router-dom";
 
-
 //                    component                    //
 export default function SignUp() {
-
 
     //                    state                    //
     const [searchParam, setSearchParam] = useSearchParams();
@@ -70,7 +68,6 @@ export default function SignUp() {
         setIdMessage(idMessage);
         setIdError(idError);
         setIdCheck(idCheck);
-
     };
 
     const nickNameCheckResponse = (result: ResponseDto | null) => {
@@ -87,7 +84,6 @@ export default function SignUp() {
         setNickNameMessage(nickNameMessage);
         setNickNameError(nickNameError);
         setNickNameCheck(nickNameCheck);
-
     };
 
     const emailAuthResponse = (result: ResponseDto | null) => {
@@ -105,7 +101,6 @@ export default function SignUp() {
         setEmailMessage(emailMessage);
         setEmailCheck(emailCheck);
         setEmailError(emailError);
-
     };
 
     const emailAuthCheckResponse = (result: ResponseDto | null) => {
@@ -122,7 +117,6 @@ export default function SignUp() {
         setAuthNumberMessage(authNumberMessage);
         setAuthNumberCheck(authNumberCheck);
         setAuthNumberError(authNumberError);
-
     };
 
     const signUpResponse = (result: ResponseDto | null) => {
@@ -140,7 +134,6 @@ export default function SignUp() {
             alert(message);
             return;
         }
-
     };
 
     //                    event handler                    //
@@ -193,7 +186,7 @@ export default function SignUp() {
         setNickNameButtonStatus(value !== '');
         setNickNameCheck(false);
         setNickNameMessage('');
-    }
+    };
 
     const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
@@ -281,17 +274,15 @@ export default function SignUp() {
     if (snsId) setSnsId(snsId);
 
         navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-
     };
 
     //                    render                    //
-
     return (
         <div id="authentication-wrapper">
         <div className="title-text">회원가입</div>
             <div className="authentication-sign-up">
                 <div className="authentication-contents">
-                    <div className="authentication-input-container">                        
+                    <div className="authentication-input-container">
                         <InputBox 
                             label="아이디" 
                             type="text" 
