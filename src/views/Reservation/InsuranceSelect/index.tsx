@@ -7,7 +7,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';
 import { getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
 
 function ListItem ({
   carName,
@@ -21,10 +21,13 @@ function ListItem ({
   superPrice
 }: ReservationCarPriceListItem){
 
-  return(
+  const navigator = useNavigate();
 
+  const onClickHandler = () => navigator(RESERVATION_REQUEST_ABSOLUTE_PATH(rentCompany));
+  
+  return(
     <>
-    <div className='insurance-list-container'>
+    <div className='insurance-list-container' onClick={onClickHandler}>
       <div className='insurance-info-wrap'>
         <div className='insurance-info-title-container'>
           <div className='insurance-info-title'>업체명</div>
