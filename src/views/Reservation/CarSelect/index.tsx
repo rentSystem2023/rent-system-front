@@ -35,18 +35,21 @@ function ListItem ({
             </div>
             <div className='list-wrap'>
                 <div className='car-image'>
-                    <img style={{ width: '150%'}} src={carImageUrl} />
+                    <img style={{ width: '190%'}} src={carImageUrl} />
                 </div>
                 <div className='insurance-wrap'>
                     <div className='insurance-price'>
+                        <div className='price-image normal'></div>
                         <div className='price-title'>완전자차</div>
                         <div className='price-result'>{`${krw(lowNormalPrice)} ~ ${krw(highNormalPrice)}`}</div>
                     </div>
                     <div className='insurance-price'>
+                    <div className='price-image luxury'></div>
                         <div className='price-title'>고급자차</div>
                         <div className='price-result'>{`${krw(lowLuxuryPrice)} ~ ${krw(highLuxuryPrice)}`}</div>
                     </div>
                     <div className='insurance-price'>
+                    <div className='price-image super'></div>
                         <div className='price-title'>슈퍼자차</div>
                         <div className='price-result'>{`${krw(lowSuperPrice)} ~ ${krw(highSuperPrice)}`}</div>
                     </div>
