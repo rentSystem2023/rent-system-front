@@ -10,6 +10,7 @@ import { LocationPopup } from 'src/components/LocationPopup';
 import { GetReservationPopularListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getReservationPopularListRequest } from 'src/apis/reservation';
+import { useCookies } from 'react-cookie';
 function ListItem ({
     carImageUrl,
     carName
@@ -21,8 +22,9 @@ function ListItem ({
         <div className='car-list-card'>
             <div className='car-name-wrap'>
                 <div className='car-image'>
-                    <img src={carImageUrl} alt={carName} />
+                    <img src={carImageUrl} />
                 </div>
+                <div>{carName}</div>
             </div>
         </div>
     );
@@ -34,11 +36,18 @@ function ListItem ({
         const [isLocationPopupOpen, setIsLocationPopupOpen] = useState(false);
         const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
         const navigator = useNavigate();
+        const [cookies] = useCookies();
+        const [popularList, setPopularCarList] = useState<PopularCarListItem[]>([]);
 
-
-    //                  effect                        //
-
- 
+    const handlePopularCarListResponse = (result: GetReservationPopularListResponseDto | ResponseDto | null) => {
+        if (!result || result.code !== 'SU') {
+            // 처리할 오류가 있는 경우
+            return;
+        }
+        // Popular Car 목록을 업데이트
+        const { popularList } = result as GetReservationPopularListResponseDto;
+        setPopularCarList(popularList);
+    };
 
     //                  event handler                   //
         const onSearchButtonClickHandler = () => {
@@ -64,7 +73,13 @@ function ListItem ({
         const closeDatePickerHandler = () => {
             setIsDatePickerOpen(false);
         };
-            //                    effect                    //
+
+
+        //                  effect                        //
+    
+        useEffect(() => {
+            getReservationPopularListRequest().then(handlePopularCarListResponse);
+        }, []); // reservationStart, reservationEnd가 변경될 때마다 실행
 
             
         //                    render                    //
@@ -85,7 +100,7 @@ function ListItem ({
                             <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>
                         </div>
                         <div className="popular-car-box">
-
+                        {popularList.map((item, index) => <ListItem key={index} {...item} />)}
                         </div>
                     </div>
                 </div>
