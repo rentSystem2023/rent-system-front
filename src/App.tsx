@@ -158,7 +158,7 @@ return (
         {/* // route : 인증 페이지 */}
         <Route path={AUTH_PATH}>
         <Route path={AUTH_SIGN_IN_PATH} element={<SignIn />} />
-        {/* <Route path={SNS_PATH} element={<Sns />} /> */}
+        <Route path={SNS_PATH} element={<Sns />} />
         <Route path={AUTH_SIGN_UP_PATH} element={<SignUp />} />
         <Route path={AUTH_FIND_ID_PATH} element={<FindId />} />
         <Route path={AUTH_FIND_PASSWORD_PATH} element={<FindPassword />} />
