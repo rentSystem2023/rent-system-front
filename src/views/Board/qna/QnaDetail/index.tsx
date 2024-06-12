@@ -3,9 +3,9 @@ import './style.css'
 
 
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, QNA_UPDATE_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, QNA_UPDATE_ABSOLUTE_PATH, USER_QNA_ABSOLUTE_PATH } from 'src/constant';
 import { PostCommentRequestDto } from 'src/apis/company/dto/request';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
 import { PostCommentRequest,    deleteBoardRequest,    getQnaRequest, increaseViewCountRequest } from 'src/apis/qna/dto';
@@ -22,7 +22,7 @@ export default function QnaDetail() {
 
     const { loginUserId, loginUserRole } = useUserStore();
     const { receptionNumber } = useParams();
-
+    const location = useLocation(); // location 객체를 가져옵니다.
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
@@ -127,8 +127,14 @@ export default function QnaDetail() {
             return;
         }
 
-        // 삭제되면 그 게시물에 있으면 안되기 때문에 목록 페이지로 이동
-        navigator(QNA_LIST_ABSOLUTE_PATH);
+        // 삭제되면 이전 페이지 정보에 따라 이동
+        const previousPage = location.state?.previousPage;
+        if (previousPage === 'MY_QNA_LIST') {
+            navigator(USER_QNA_ABSOLUTE_PATH);
+        } else {
+            navigator(QNA_LIST_ABSOLUTE_PATH);
+        }
+        // navigator(QNA_LIST_ABSOLUTE_PATH);
     }
 
     //                    event handler                    //
@@ -151,13 +157,24 @@ export default function QnaDetail() {
 
     // 목록
     const onListClickHandler = () => {
-        navigator(QNA_LIST_ABSOLUTE_PATH);
+
+        // location.state에서 previousPage 값을 확인하고 해당 경로로 이동합니다.
+        const previousPage = location.state?.previousPage;
+        if (previousPage === 'MY_QNA_LIST') {
+            navigator(USER_QNA_ABSOLUTE_PATH);
+        } else {
+            navigator(QNA_LIST_ABSOLUTE_PATH);
+        }
+
     }
 
     // 수정
     const onUpdateClickHandler = () => {
         if (!receptionNumber || loginUserId !== writerId || status) return;
-        navigator(QNA_UPDATE_ABSOLUTE_PATH(receptionNumber));
+
+        const previousPage = location.state?.previousPage;
+        navigator(`/rentcar/qna/update/${receptionNumber}`, { state: { previousPage } });
+        // navigator(QNA_UPDATE_ABSOLUTE_PATH(receptionNumber));
     }
 
     // 삭제
