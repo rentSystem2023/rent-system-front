@@ -30,7 +30,11 @@ function ListItem({
     const { loginUserId } = useUserStore();
 
     const onClickHandler = () => {
-        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
+
+        // 나의 문의내역 페이지에서 상세 페이지로 이동할 때
+        navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'MY_QNA_LIST' } });
+
+        // navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
     };
 
     const coveredWriterId = writerId !== '' ? writerId[0] + '*'.repeat(writerId.length - 1) : '';

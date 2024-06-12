@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { useNavigate, useParams } from 'react-router';
 import { findPasswordRequest } from 'src/apis/auth';
 import { FindPasswordRequestDto } from 'src/apis/auth/dto/request';
@@ -81,6 +81,11 @@ export default function FindPassword() {
 
   };
 
+  const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== 'Enter') return;
+    onFindPwButtonClickHandler();
+  };
+
   const onFindPwButtonClickHandler = () => {
 
     if (!userId || !userEmail) {
@@ -108,7 +113,7 @@ export default function FindPassword() {
 
           <InputBox label="아이디" type="text" value={userId} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} />
 
-          <InputBox label="이메일" type="text" value={userEmail} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} onButtonClickHandler={onFindPwButtonClickHandler} message={emailMessage} error={isEmailError} />
+          <InputBox label="이메일" type="text" value={userEmail} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} onButtonClickHandler={onFindPwButtonClickHandler} message={emailMessage} error={isEmailError} onkeydownhandler={onPasswordKeydownHandler} />
 
           <div className="primary-button" onClick={onFindPwButtonClickHandler} >인증</div>
 

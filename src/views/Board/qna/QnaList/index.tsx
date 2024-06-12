@@ -35,7 +35,9 @@
             console.log(loginUserId);
             return;
         }
-        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
+        // 전체 문의내역 페이지에서 상세 페이지로 이동할 때
+        navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'ALL_QNA_LIST' } });
+        // navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
     }
     //                    render                    //
     const coverdWriterId = writerId !== '' && (writerId[0] + '*'.repeat(writerId.length - 1));
