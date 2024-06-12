@@ -116,8 +116,9 @@ export const getSearchReservationCarListRequest  = async(address : string, reser
 }
 
 // function : 보험별(업체) 가격 결과 불러오기 API 함수
-export const getSearchReservationCarPriceListRequest  = async(carName : string, accessToken: string) => {
-    const result = await axios.get(GET_CAR_PRICE_SEARCH_LIST_URL(carName),bearerAuthorization(accessToken))
+export const getSearchReservationCarPriceListRequest  = async(address : string, reservationStart : string, reservationEnd : string, carName : string) => {
+    const config = { params: { address, reservationStart, reservationEnd } };
+    const result = await axios.get(GET_CAR_PRICE_SEARCH_LIST_URL(carName), config)
     .then(requestHandler<GetSearchReservationCarPriceListResponseDto>)
     .catch(requestErrorHandler);
     return result;

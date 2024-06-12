@@ -14,7 +14,7 @@ export const AUTH_FIND_PW_RESET_PATH = 'find-password/:userId';
 // description: 예약 페이지 URL //
 export const RESERVATION_PATH = 'reservation';
 export const RESERVATION_CAR_PATH = 'car';
-export const RESERVATION_COMPANY_PATH = 'company';
+export const RESERVATION_COMPANY_PATH = 'company/:carName';
 export const RESERVATION_REQUEST_PATH = 'request';
 
 // description: 마이 페이지 URL //
@@ -76,7 +76,7 @@ export const AUTH_FIND_PW_RESET_ABSOLUTE_PATH =  (userId: string) => `${MAIN_PAT
 // description: 차량 선택 페이지 절대 URL //
 export const RESERVATION_CAR_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/${RESERVATION_CAR_PATH}`;
 // description: 업체 선택 페이지 절대 URL //
-export const RESERVATION_COMPANY_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/${RESERVATION_COMPANY_PATH}`;
+export const RESERVATION_COMPANY_ABSOLUTE_PATH = (carName: string) => `${MAIN_PATH}/${RESERVATION_PATH}/company/${carName}`;
 // description: 예약 신청 페이지 절대 URL //
 export const RESERVATION_REQUEST_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/${RESERVATION_REQUEST_PATH}`;
 
