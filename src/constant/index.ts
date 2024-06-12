@@ -15,7 +15,7 @@ export const SNS_PATH = 'sns/:accessToken/:expires';
 export const RESERVATION_PATH = 'reservation';
 export const RESERVATION_CAR_PATH = 'car';
 export const RESERVATION_COMPANY_PATH = 'company/:carName';
-export const RESERVATION_REQUEST_PATH = 'request';
+export const RESERVATION_REQUEST_PATH = 'request/:rentCompany';
 
 // description: 마이 페이지 URL //
 export const USER_PATH = 'user';
@@ -78,7 +78,7 @@ export const RESERVATION_CAR_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/$
 // description: 업체 선택 페이지 절대 URL //
 export const RESERVATION_COMPANY_ABSOLUTE_PATH = (carName: string) => `${MAIN_PATH}/${RESERVATION_PATH}/company/${carName}`;
 // description: 예약 신청 페이지 절대 URL //
-export const RESERVATION_REQUEST_ABSOLUTE_PATH = `${MAIN_PATH}/${RESERVATION_PATH}/${RESERVATION_REQUEST_PATH}`;
+export const RESERVATION_REQUEST_ABSOLUTE_PATH = (rentComapny: string) => `${MAIN_PATH}/${RESERVATION_PATH}/request/${rentComapny}`;
 
 // description: 유저 //
 // description: 내 정보 페이지 절대 URL //
