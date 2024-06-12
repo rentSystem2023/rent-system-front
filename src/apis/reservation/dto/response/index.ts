@@ -62,7 +62,7 @@ export interface GetSearchReservationCarListResponseDto extends ResponseDto {
 
 // description: 보험별 가격 검색 결과 불러오기 Response Body DTO
 export interface GetSearchReservationCarPriceListResponseDto extends ResponseDto {
-    priceList: ReservationCarPriceListItem[];
+    reservationCarPriceList: ReservationCarPriceListItem[];
 }
 
 // description: 보험별 가격 상세 검색 결과 불러오기 Response Body DTO
