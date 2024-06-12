@@ -52,7 +52,7 @@ export interface GetSearchReservationListResponseDto extends ResponseDto {
 
 // description: 인기차량 리스트 불러오기 Response Body DTO
 export interface GetReservationPopularListResponseDto extends ResponseDto {
-    popularCarList: PopularCarListItem[];
+    popularList: PopularCarListItem[];
 } 
 
 // description: 차량 검색 결과 리스트 불러오기 Response Body DTO

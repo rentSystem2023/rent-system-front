@@ -99,8 +99,8 @@ export const deleteReservationListRequest = async (reservationCode: string | num
 };
 
 // function : 인기 차량 리스트 불러오기 API 함수
-export const getReservationPopularListRequest = async(accessToken: string) => {
-    const result = await axios.get(GET_POPULAR_CAR_LIST_URL,bearerAuthorization(accessToken))
+export const getReservationPopularListRequest = async() => {
+    const result = await axios.get(GET_POPULAR_CAR_LIST_URL)
     .then(requestHandler<GetReservationPopularListResponseDto>)
     .catch(requestErrorHandler);
     return result;
