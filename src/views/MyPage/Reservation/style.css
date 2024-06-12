@@ -16,6 +16,11 @@
     padding: 13px 25px;
 }
 
+.my-reservation-state-wrap{
+    display: flex;
+    gap: 10px;
+}
+
 .my-reservation-state{
     display: flex;
     justify-content: center;
