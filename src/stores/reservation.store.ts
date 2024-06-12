@@ -11,7 +11,7 @@ interface ReservationStore {
 };
 
 const useReservationStore = create<ReservationStore>(set => ({
-    address: '제주특별자치도 제주시 공항로 2 (용담2동)',
+    address: '제주국제공항',
     reservationStart: getYYYYMMDD(new Date()),
     reservationEnd: getYYYYMMDD(new Date()),
     setAddress: (address: string) => set(state => ({ ...state, address })),
