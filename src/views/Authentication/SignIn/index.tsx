@@ -8,7 +8,7 @@ import ResponseDto from "src/apis/response.dto";
 import { SignInResponseDto } from "src/apis/auth/dto/response";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { AUTH_SIGN_IN_PATH, MAIN_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH, SNS_SIGN_IN_REQUEST_URL } from "src/constant";
+import { AUTH_SIGN_IN_PATH, MAIN_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH, SNS_SIGN_IN_REQUEST_URL, MAIN_ABSOLUTE_PATH } from "src/constant";
 
 //                    component                    //
 export function Sns () {
@@ -26,7 +26,7 @@ export function Sns () {
         const expiration = new Date(Date.now() + (Number(expires) * 1000));
         setCookie('accessToken', accessToken, { path: '/', expires: expiration });
 
-        navigator(MAIN_PATH);
+        navigator(MAIN_ABSOLUTE_PATH);
     }, []);
 
     //                    render                    //
@@ -91,7 +91,7 @@ export default function SignIn() {
         const expiration = new Date(Date.now() + (expires * 1000));
         setCookie('accessToken', accessToken, { path: '/', expires: expiration });
 
-        navigator(MAIN_PATH);
+        navigator(MAIN_ABSOLUTE_PATH);
     };
 
     //                    event handler                    //
