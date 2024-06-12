@@ -12,7 +12,6 @@ import { putMyInfoPwRequest } from 'src/apis/user';
 export default function MyInfoPwModify() {
 
     //                    state                    //
-    
     const [password, setPassword] = useState<string>('');
     // const [userId] = useState<string>('');
     const [cookies] = useCookies();
@@ -102,23 +101,37 @@ export default function MyInfoPwModify() {
     }
 
     return (
-        <div id="authentication-wrapper">
-            <div className='authentication-sign-up'>
-                <div className='my-info-title h1'>비밀번호 재설정</div>
-                <div className='authentication-contents'>
+        <div id="information-wrapper">
+            <div className='information-main'>
+                <div className='my-info-title'>비밀번호 변경</div>
+                
+                <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
 
-                    <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-                    
-                    <InputBox label="비밀번호 확인" type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+                <div className='information-container'>
+                    <div className='infomation-contents'>
+                        <InputBox 
+                            label="비밀번호" 
+                            type="password" 
+                            value={password} 
+                            placeholder="비밀번호를 입력해주세요" 
+                            onChangeHandler={onPasswordChangeHandler} 
+                            message={passwordMessage} error 
+                        />                    
+                        <InputBox 
+                            label="비밀번호 확인" 
+                            type="password" 
+                            value={passwordCheck}
+                            placeholder="비밀번호를 입력해주세요" 
+                            onChangeHandler={onPasswordCheckChangeHandler} 
+                            message={passwordCheckMessage} error 
+                        />
 
-                <div className="authentication-button-container">
-                    <div className={pwUpdateButtonClass} onClick={ onPwUpdateButtonClickHandler }>확인</div>
+                    <div className="authentication-button-container">
+                        <div className={pwUpdateButtonClass} onClick={ onPwUpdateButtonClickHandler }>확인</div>
+                    </div>
+                    </div>
                 </div>
-
-                </div>
-
             </div>
-            
         </div>
     );
 }

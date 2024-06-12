@@ -7,7 +7,7 @@
 .authentication-sign-up {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 350px;
     padding: 30px;
     margin: auto;
 }
@@ -31,7 +31,7 @@
 .authentication-input-container {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 5px;
 
     width: 100%;
 }
@@ -40,13 +40,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
 
+    width: 100%;
 }
 
 .other-authentication-button-container {
     display: flex;
     justify-content: space-around;
+
     gap: 14px;
     font-size: small;
 }
@@ -56,19 +57,7 @@
     flex-direction: row;
 }
 
-.authentication-sns-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+.label{
+    gap:10px;
 }
-
-.kakao-button {
-    background-image: url('../../../assets/image/kakao-button.png');
-}
-
-.naver-button {
-    background-image: url('../../../assets/image/naver-button.png');
-}
-
 

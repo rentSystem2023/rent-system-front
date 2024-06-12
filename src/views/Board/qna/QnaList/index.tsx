@@ -235,11 +235,12 @@
     return (
     <>  
     <div className="title-text">문의사항</div>
-        <div className="qna-board-text">
-            <div className="qna-board-image help"></div>
-            궁금한 사항이 있으신가요? <br/> Q&A 등록은 로그인 후 가능 합니다. <br/> (평일 09:00 ~ 18:00 주말 공휴일 휴무)
-        </div>
+        
         <div id='table-list-wrapper'>
+            <div className="qna-board-text">
+                <div className="qna-board-image help"></div>
+                궁금한 사항이 있으신가요? <br/> Q&A 등록은 로그인 후 가능 합니다. <br/> (평일 09:00 ~ 18:00 주말 공휴일 휴무)
+            </div>
             <div className='table-list-top'>
                 <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                 <div className='table-list-top-right'>

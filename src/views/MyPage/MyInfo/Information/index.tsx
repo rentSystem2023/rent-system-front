@@ -6,7 +6,6 @@ import { MAIN_ABSOLUTE_PATH, USER_EMAIL_UPDATE_ABSOLUTE_PATH, USER_INFO_ABSOLUTE
 import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { deleteUserRequest, getMyInfoRequest } from 'src/apis/user';
-import { useUserStore } from 'src/stores';
 
 //                    component                    //
 export default function MyInfo() {
@@ -15,6 +14,7 @@ export default function MyInfo() {
     const [cookies, setCookie, removeCookie] = useCookies();
     const [nickName, setNickName] = useState<string>('');
     const [userId, setUserId] = useState<string>('');
+    const [userPassword, setUserPassword] = useState<number>(5); 
     const [userEmail, setUserEmail] = useState<string>('');
     const [joinDate, setJoinDate] = useState<string>('');
     const [userRole, setUserRole] = useState<String>('');
@@ -47,6 +47,8 @@ export default function MyInfo() {
         setJoinDate(joinDate);
         setUserRole(userRole);
 
+        // 임의로 비밀번호를  '*'로 10개 나타나도록 함
+        setUserPassword(10);
     };
 
     const deleteUserResponse = (result: ResponseDto | null) => {
@@ -68,9 +70,7 @@ export default function MyInfo() {
         
         navigator(MAIN_ABSOLUTE_PATH);
         window.location.reload();
-
     }
-
 
     //                    event handler                    //
     const onPwModifyButtonClickHandler = () => {
@@ -81,13 +81,6 @@ export default function MyInfo() {
         navigator(USER_EMAIL_UPDATE_ABSOLUTE_PATH);
     }
 
-    //                  effect                      //
-    useEffect (() => {
-        if (!cookies.accessToken) return;
-        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
-        
-    }, []);
-
     const onDeleteButtonClickHandler = () => {
 
         if (!userId || !cookies.accessToken) return;
@@ -96,19 +89,26 @@ export default function MyInfo() {
 
         if (!isConfirm) return;
 
-        deleteUserRequest(cookies.accessToken, userId)
-        .then(deleteUserResponse);
-        
+        deleteUserRequest(cookies.accessToken, userId).then(deleteUserResponse);
     }
 
+    //                  effect                      //
+    useEffect (() => {
+        if (!cookies.accessToken) return;
+        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+    }, []);
+
     return (
-        <div id='information-wrapper'>          
-            <div className='information-main'>  
-                <div className='information-contents'>
-                    <div className='information-container'>
-                        <div className='my-info-title h1'>내 정보</div>
+        <div id='information-wrapper'>      
+            <div className='information-main'>
+                <div className='my-info-title'>회원 정보</div>
+
+                <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+
+                <div className='information-container'>
+                    <div className='infomation-contents'>
                         <div className='information-box'>
-                            <div className='information-title'>닉네임</div>
+                            <div className='label'>닉네임</div>
                             <div className='information-value'>{nickName}</div>    
                         </div>
                         <div className='information-box'>
@@ -116,25 +116,26 @@ export default function MyInfo() {
                             <div className='information-value'>{userId}</div>    
                         </div>
                         <div className='information-box'>
-                            <div className='information-title'>비밀번호</div>
-                            <div>
-                                <div className='information-modify-value'>비밀번호</div> 
-                                <div className='information-modify-button' onClick={ onPwModifyButtonClickHandler }>변경</div>
+                            <div className='label'>비밀번호</div>
+                            <div className='infomation-modify-wrap'>
+                                <div className='information-value'>{'*'.repeat(userPassword)}</div> 
+                                <div className='information-modify-button' onClick={ onPwModifyButtonClickHandler }>비밀번호 변경</div>
                             </div>
                         </div>
                         <div className='information-box'>
-                            <div className='information-title'>이메일</div>
-                            <div>
-                                <div className='information-modify-value'>{userEmail}</div>
-                                <div className='information-modify-button' onClick={ onEmailModifyButtonClickHandler }>변경</div>
+                            <div className='label'>이메일</div>
+                            <div className='infomation-modify-wrap'>
+                                <div className='information-value'>{userEmail}</div>
+                                <div className='information-modify-button' onClick={ onEmailModifyButtonClickHandler }>이메일 변경</div>
                             </div>
                         </div>
                         <div className='information-box'>
-                            <div className='information-title'>가입날짜</div>
+                            <div className='label'>가입날짜</div>
                             <div className='information-value'>{joinDate}</div>    
-                        </div>                 
+                        </div>
+
+                        <div className='information-modify-button delete' onClick={ onDeleteButtonClickHandler }>회원탈퇴하기</div>
                     </div>
-                        <div className='information-delete-button' onClick={ onDeleteButtonClickHandler }>탈퇴하기</div>
                 </div>
             </div>
         </div>

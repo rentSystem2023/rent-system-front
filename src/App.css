@@ -62,7 +62,7 @@
 
 .search-button:hover {
   cursor: pointer;
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .error-button {
@@ -110,7 +110,7 @@
 
 .primary-button:hover {
   cursor: pointer;
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .sns-button {
@@ -166,7 +166,7 @@
 }
 
 .primary {
-  color: rgba(0,0,0,1);
+  color: rgba(58, 87, 232, 1);
 }
 
 .error {
@@ -230,7 +230,7 @@
 
   color: rgba(64, 64, 64, 1);
 
-  border-bottom: 3px dotted rgba(238, 238, 238, 0.8);
+  border-bottom: 2px dotted rgba(238, 238, 238, 0.8);
 }
 
 /* 테이블 CSS */

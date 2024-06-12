@@ -12,18 +12,13 @@
   font-family: Pretendard;
 }
 
-.h1 {
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 173%;
-}
-
 .label {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  font-size: 17px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 175%;
+
+    color: rgba(0, 0, 0, 0.7);
 }
 
 body {
