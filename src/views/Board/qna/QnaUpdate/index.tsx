@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 import ResponseDto from 'src/apis/response.dto';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
@@ -31,6 +31,8 @@ export default function QnaUpdate() {
     const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null); // 초기 이미지 URL을 저장
 
     const { receptionNumber } = useParams();
+    const location = useLocation();
+
     //                    function                    //
     const navigator = useNavigate();
 
@@ -84,7 +86,11 @@ export default function QnaUpdate() {
         }
 
         if (!receptionNumber) return;
-        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
+        
+        // 수정 작업을 수행한 후 상세 페이지로 이동합니다.
+        const previousPage = location.state?.previousPage;
+        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber), { state: { previousPage } });
+        // navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
     };
 
     

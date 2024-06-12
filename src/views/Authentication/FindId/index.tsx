@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { findIdRequest } from 'src/apis/auth';
@@ -6,7 +6,7 @@ import { FindIdRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import InputBox from 'src/components/Inputbox'
-import { AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
 
 
@@ -14,22 +14,16 @@ import { AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/cons
 export default function FindId() {
 
     //                    state                    //
-    // const { userId, setUserId, userEmail, setUserEmail } = useAuthStore();
 
     const [userEmail, setUserEmail] =useState<string>('');
     const [userId, setUserId] = useState<string>('');
-    
     const [message, setMessage] = useState<string>('');
-
     const [isEmailError, setEmailError] = useState<boolean>(false);
-
     const [emailMessage, setEmailMessage] = useState<string>('');
-
     const [isEmailCheck, setEmailCheck] = useState<boolean>(false);
-    
-    const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
 
-    // const findIdButtonClass = `${isFindIdActive ? 'primary' : 'disable'}-button full-width`;
+    const isFindIdActive = isEmailCheck;
+    const findIdButtonClass = isFindIdActive ? 'primary-button' : 'disable-button';
 
     //                    function                    //
     const navigator = useNavigate();
@@ -72,7 +66,6 @@ export default function FindId() {
             setEmailCheck(false);
         }
 
-        setEmailButtonStatus(false);
         setEmailCheck(false);
         setEmailMessage('');
         // setUserEmail(userEmail);
@@ -83,7 +76,7 @@ export default function FindId() {
     };
 
     const onFindIdButtonClickHandler = () => {
-        
+
         if (!userEmail) {
             setMessage('이메일을 입력하세요.');
             return;
@@ -94,14 +87,22 @@ export default function FindId() {
         }
 
         findIdRequest(getFindIdRequest).then(findIdResponse);
-        console.log(userId);
         
 
     };
 
     const onSignInButtonClickHandler = () => {
         navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-    }
+    };
+
+    const onFindPwButtonClickHandler = () => {
+        navigator(AUTH_FIND_PASSWORD_ABSOLUTE_PATH);
+    };
+
+    const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key !== 'Enter') return;
+        onFindIdButtonClickHandler();
+    };
 
 
 
@@ -111,18 +112,22 @@ export default function FindId() {
             <div className="title-text">아이디 찾기</div>
                 <div className='authentication-contents'>
 
-                    <InputBox label="이메일" type="text" value={userEmail} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} buttonTitle="아이디 전송" buttonStatus={emailButtonStatus} onButtonClickHandler={onFindIdButtonClickHandler} message={emailMessage} error={isEmailError} />
+                    <InputBox label="이메일" type="text" value={userEmail} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} message={emailMessage} error={isEmailError} onkeydownhandler={onPasswordKeydownHandler} />
+                    <div>
+                        <div className={findIdButtonClass} onClick={onFindIdButtonClickHandler}>아이디 전송</div>
+                    </div>
 
                 </div>
-
             </div>
             {!isEmailCheck &&
-            <div>
-                <div className='return-id' >{userId}</div>
-                <div className='moving-sign-up' onClick={ onSignInButtonClickHandler }></div>
-            </div>
-            
+                <div>
+                    <div className='return-id'>아이디는 {userId}</div>
+                </div>
             }
+            <div className='moving-button'>
+                <div className='moving-sign-up' onClick={ onFindPwButtonClickHandler }>비밀번호 찾기</div>
+                <div className='moving-sign-up' onClick={ onSignInButtonClickHandler }>로그인 하기</div>
+            </div>
         </div>
     )
 }
