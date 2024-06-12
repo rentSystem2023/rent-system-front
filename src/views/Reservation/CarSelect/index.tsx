@@ -7,25 +7,36 @@ import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
 import { GetSearchReservationCarListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ReservationCarListItem, ReservationCarViewListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_PATH, RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_PATH, RESERVATION_CAR_ABSOLUTE_PATH, RESERVATION_COMPANY_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';
 
-function ListItem ({
-    carName,
-    carImageUrl,
-    highLuxuryPrice,
-    highNormalPrice,
-    highSuperPrice,
-    lowLuxuryPrice,
-    lowNormalPrice,
-    lowSuperPrice
-}: ReservationCarViewListItem) {
+function ListItem (props: ReservationCarViewListItem) {
+
+    const {
+        carName,
+        carImageUrl,
+        highLuxuryPrice,
+        highNormalPrice,
+        highSuperPrice,
+        lowLuxuryPrice,
+        lowNormalPrice,
+        lowSuperPrice
+    } = props;
+    
+    const { setSelectedCar, setSelectedInsurance } = useReservationStore();
 
     //                    function                    //
     const navigator = useNavigate();
 
     const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
+
+    //                    event handler                    //
+    const onClickHandler = (insurance: string) => {
+        setSelectedCar(props);
+        setSelectedInsurance(insurance);
+        navigator(RESERVATION_COMPANY_ABSOLUTE_PATH(carName));
+    };
 
     return(
         <>
@@ -38,17 +49,17 @@ function ListItem ({
                     <img style={{ width: '190%'}} src={carImageUrl} />
                 </div>
                 <div className='insurance-wrap'>
-                    <div className='insurance-price'>
+                    <div className='insurance-price' onClick={() => onClickHandler('normal')}>
                         <div className='price-image normal'></div>
                         <div className='price-title'>완전자차</div>
                         <div className='price-result'>{`${krw(lowNormalPrice)} ~ ${krw(highNormalPrice)}`}</div>
                     </div>
-                    <div className='insurance-price'>
+                    <div className='insurance-price' onClick={() => onClickHandler('luxury')}>
                     <div className='price-image luxury'></div>
                         <div className='price-title'>고급자차</div>
                         <div className='price-result'>{`${krw(lowLuxuryPrice)} ~ ${krw(highLuxuryPrice)}`}</div>
                     </div>
-                    <div className='insurance-price'>
+                    <div className='insurance-price' onClick={() => onClickHandler('super')}>
                     <div className='price-image super'></div>
                         <div className='price-title'>슈퍼자차</div>
                         <div className='price-result'>{`${krw(lowSuperPrice)} ~ ${krw(highSuperPrice)}`}</div>
@@ -133,6 +144,7 @@ export default function CarSelect() {
         const { reservationCarList } = result as GetSearchReservationCarListResponseDto;
 
         const list: ReservationCarViewListItem[] = [];
+        
         reservationCarList.forEach(car => {
             const existCarIndex = list.findIndex(item => item.carName === car.carName);
             if (existCarIndex === -1) {
