@@ -1,7 +1,6 @@
 // constant : URL PATH //
 // description: 메인 페이지 URL //
 export const MAIN_PATH = '/rentcar';
-export const SNS_PATH = '/auth/sns/:accessToken/:expires';
 
 // description: 인증 페이지 URL //
 export const AUTH_PATH = 'auth';
@@ -10,6 +9,7 @@ export const AUTH_SIGN_UP_PATH = 'sign-up';
 export const AUTH_FIND_ID_PATH = 'find-id';
 export const AUTH_FIND_PASSWORD_PATH = 'find-password';
 export const AUTH_FIND_PW_RESET_PATH = 'find-password/:userId';
+export const SNS_PATH = 'sns/:accessToken/:expires';
 
 // description: 예약 페이지 URL //
 export const RESERVATION_PATH = 'reservation';
