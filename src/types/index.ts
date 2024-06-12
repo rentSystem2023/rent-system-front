@@ -56,7 +56,7 @@ export interface ReservationCarPriceListItem {
     fuelType : string;
     rentCompany : string;
     reservationCount : number;
-    carYear : string;
+    address : string;
     normalPrice : number;
     luxuryPrice : number;
     superPrice : number;

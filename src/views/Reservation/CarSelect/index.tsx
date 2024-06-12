@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import SelectContainer from 'src/layouts/SelectContainer';
 import { useCookies } from 'react-cookie';
@@ -75,7 +75,7 @@ export default function CarSelect() {
 
     //                    state                    //
     const [cookies] = useCookies();
-    const [searchWord, setSearchWord] = useState<string>('');
+    const [searchWord, setSearchWord] = useState<string>('');   
     const [reservationCarList, setReservationCarList] = useState<ReservationCarViewListItem[]>([]);
     const [viewList, setViewList] = useState<ReservationCarViewListItem[]>([]);
     const [totalLenght, setTotalLength] = useState<number>(0);
@@ -148,7 +148,7 @@ export default function CarSelect() {
         reservationCarList.forEach(car => {
             const existCarIndex = list.findIndex(item => item.carName === car.carName);
             if (existCarIndex === -1) {
-                list.push({ carName: car.carName, carImageUrl: car.carImageUrl, highLuxuryPrice: car.luxuryPrice, lowLuxuryPrice: car.luxuryPrice, highNormalPrice: car.luxuryPrice, lowNormalPrice: car.normalPrice, highSuperPrice: car.superPrice, lowSuperPrice: car.superPrice });
+                list.push({ carName: car.carName, carImageUrl: car.carImageUrl, highLuxuryPrice: car.luxuryPrice, lowLuxuryPrice: car.luxuryPrice, highNormalPrice: car.normalPrice, lowNormalPrice: car.normalPrice, highSuperPrice: car.superPrice, lowSuperPrice: car.superPrice });
                 return;
             }
 
@@ -183,33 +183,21 @@ export default function CarSelect() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    // const onSearchButtonClickHandler = () => {
-    //     // 검색어가 있는 경우
-    //     if (searchWord) {
-    //         if (cookies.accessToken) {
-    //             getSearcNoticeListRequest(searchWord, cookies.accessToken).then(getReservationCarListResponse);
-    //         } else {
-    //             // 토큰이 없는 경우, 빈 문자열을 전달하여 검색
-    //             getSearcNoticeListRequest(searchWord, '').then(getReservationCarListResponse);
-    //         }
-    //     }
-    //     // 검색어가 없는 경우
-    //     else {
-    //         // 빈 문자열을 전달하여 검색
-    //         getSearcNoticeListRequest('', '').then(getReservationCarListResponse);
-    //     }
-    // }
+    const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        const searchWord = event.target.value;
+        setSearchWord(searchWord);
+    }
+
+    const onSearchButtonClickHandler = () => {
+        if (!searchWord) {
+            getSearchReservationCarListRequest(address, reservationStart, reservationEnd).then(getSearchReservationCarListResponse);
+        } else {
+        const carNameList = reservationCarList.filter(car => car.carName.includes(searchWord));
+        changeReservationCarList(carNameList);
+    };
+    }
 
     //                    effect                    //
-    // useEffect(() => {
-    //     if (!cookies.accessToken) {
-    //         // 토큰이 없는 경우 처리
-    //         getSearcNoticeListRequest(searchWord, '').then(getSearchBoardListResponse);
-    //     } else {
-    //         getSearcNoticeListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-    //     }
-    // }, []);
-
     useEffect(() => {
         if (!reservationCarList.length) return;
         changePage(reservationCarList, totalLenght);
@@ -236,9 +224,9 @@ export default function CarSelect() {
                 <div className='option-container'>
                     <div className='table-list-search-box'>
                         <div className='table-list-search-input-box'>
-                            <input className='table-list-search-input' placeholder='자동차 모델명을 입력하세요.' />
+                            <input className='table-list-search-input' placeholder='자동차 모델명을 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
                         </div>
-                        <div className={searchButtonClass}>검색</div>
+                        <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
                     </div>
                     {/* <div className='filter-button'>필터</div> */}
                 </div>
