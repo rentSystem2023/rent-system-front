@@ -38,6 +38,7 @@ RESERVATION_CAR_PATH,
 RESERVATION_COMPANY_PATH,
 RESERVATION_PATH,
 RESERVATION_REQUEST_PATH,
+SNS_PATH,
 USER_EMAIL_UPDATE_PATH,
 USER_PATH,
 USER_PW_UPDATE_PATH,
@@ -50,7 +51,7 @@ import QnaList from "./views/Board/qna/QnaList";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import Main from "./views/Main";
-import SignIn from "./views/Authentication/SignIn";
+import SignIn, { Sns } from "./views/Authentication/SignIn";
 import SignUp from "./views/Authentication/SignUp";
 import MyInfo from "./views/MyPage/MyInfo/Information";
 import AdminContainer from "./layouts/AdminContainer";
@@ -157,6 +158,7 @@ return (
         {/* // route : 인증 페이지 */}
         <Route path={AUTH_PATH}>
         <Route path={AUTH_SIGN_IN_PATH} element={<SignIn />} />
+        {/* <Route path={SNS_PATH} element={<Sns />} /> */}
         <Route path={AUTH_SIGN_UP_PATH} element={<SignUp />} />
         <Route path={AUTH_FIND_ID_PATH} element={<FindId />} />
         <Route path={AUTH_FIND_PASSWORD_PATH} element={<FindPassword />} />

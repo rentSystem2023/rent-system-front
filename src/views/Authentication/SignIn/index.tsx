@@ -8,7 +8,7 @@ import ResponseDto from "src/apis/response.dto";
 import { SignInResponseDto } from "src/apis/auth/dto/response";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { AUTH_SIGN_IN_PATH, MAIN_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH } from "src/constant";
+import { AUTH_SIGN_IN_PATH, MAIN_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH, SNS_SIGN_IN_REQUEST_URL } from "src/constant";
 
 //                    component                    //
 export function Sns () {
@@ -26,7 +26,7 @@ export function Sns () {
         const expiration = new Date(Date.now() + (Number(expires) * 1000));
         setCookie('accessToken', accessToken, { path: '/', expires: expiration });
 
-        navigator(AUTH_SIGN_IN_PATH);
+        navigator(MAIN_PATH);
     }, []);
 
     //                    render                    //
@@ -44,7 +44,7 @@ function SnsContainer({ title }: SnsContainerProps) {
 
     //                    event handler                    //
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-        window.location.href = 'http://localhost:3000/rentcar/auth/oauth2/' + type;
+        window.location.href = SNS_SIGN_IN_REQUEST_URL(type);
     };
 
     //                    render                    //
