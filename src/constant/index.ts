@@ -1,6 +1,7 @@
 // constant : URL PATH //
 // description: 메인 페이지 URL //
 export const MAIN_PATH = '/rentcar';
+export const SNS_PATH = '/auth/sns/:accessToken/:expires';
 
 // description: 인증 페이지 URL //
 export const AUTH_PATH = 'auth';
@@ -157,6 +158,7 @@ export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
 
 // 로그인 URL
 export const POST_SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-in`;
+export const SNS_SIGN_IN_REQUEST_URL = (type : string) => `${SERVER_AUTH_MODULE_URL}/oauth2/${type}`;
 // 아이디 중복 확인 URL
 export const POST_ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
 // 닉네임 중복 확인 URL
