@@ -15,7 +15,7 @@ export function Sns () {
 
     //                    state                    //
     const { accessToken, expires } = useParams();
-    const [cookies, setCookie] = useCookies();
+    const [cookie, setCookie] = useCookies();
 
     //                    function                    //
     const navigator = useNavigate();

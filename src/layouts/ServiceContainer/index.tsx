@@ -14,7 +14,7 @@ function TopBar() {
     const [nickName, setNickName] = useState<string>('');
 
     const navigator = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies();
+    const [cookies, setCookie, removeCookie ] = useCookies();
     const { pathname } = useLocation();
     const { loginUserRole, setLoginUserId, setLoginUserRole } = useUserStore();
 
