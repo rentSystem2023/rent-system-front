@@ -31,6 +31,17 @@
     opacity: 0.85;
 }
 
+/* .logo-image{
+    height: 20px;
+    width: 20px; 
+    background-size: cover; 
+    background-position: 50% 40%; 
+} */
+
+/* .logo-image.logo{
+    background-image: url('../../assets/image/logo.png');
+} */
+
 .top-bar-container {
     grid-area: topbar;
 
