@@ -7,7 +7,8 @@ import { useEffect, useState } from 'react';
 import { GetReservationDetailResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_RESERVATION_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
-import { deleteReservationListRequest, getReservationDetailRequest } from 'src/apis/reservation';
+import { PathchReservationApproveRequest, deleteReservationListRequest, getReservationDetailRequest } from 'src/apis/reservation';
+import { PathchReservationApproveRequestDto } from 'src/apis/reservation/dto/request';
 
 export default function ReservationDetail() {
 
@@ -56,6 +57,23 @@ export default function ReservationDetail() {
         setReservationState(reservationState);
     };
 
+    const patchReservaitonApproveResponse = (result: ResponseDto | null) => {
+
+        const message =
+          !result ? '서버에 문제가 있습니다.' :
+          result.code === 'AF' ? '권한이 없습니다.' :
+          result.code === 'VF' ? '올바르지 않은 예약번호입니다.' :
+          result.code === 'NC' ? '존재하지 않는 예약입니다.' :
+          result.code === 'NW' ? '예약대기 상태가 아닙니다.' :
+          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    
+        if (!result || result.code !== 'SU') {
+          alert(message);
+          return;
+        }
+    };
+
+
     const deleteReservationResponse = (result: ResponseDto | null) => {
 
         const message =
@@ -79,7 +97,13 @@ export default function ReservationDetail() {
     }
 
     const onReservationApproveClickHandler = () => {
+        if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
+        const isConfirm = window.confirm('예약 승인하시겠습니까?');
+        if (!isConfirm) return;
 
+        const requestBody: PathchReservationApproveRequestDto = { reservationState: '예약완료' };
+        PathchReservationApproveRequest(reservationCode, requestBody, cookies.accessToken)
+        .then(patchReservaitonApproveResponse); 
     }
 
     const onDeleteClickHandler = () => {
@@ -116,7 +140,7 @@ export default function ReservationDetail() {
                     </div>
                 <div className='primary-button' onClick={onListClickHandler} >목록보기</div>
                 <div className='primary-button' onClick={onReservationApproveClickHandler} >예약완료 처리버튼 이름만 예약완료로 변경</div>
-                <div className='error-button' >예약취소승인 처리하면 예약취소완료 or 바로삭제처리 back은 delete</div>
+                <div className='error-button' >예약취소승인 처리하면 예약취소완료 or 바로삭제처리 back은 delete로 되어있음</div>
                 <div className='error-button' onClick={onDeleteClickHandler} >삭제</div>
             </div>
         </div>
