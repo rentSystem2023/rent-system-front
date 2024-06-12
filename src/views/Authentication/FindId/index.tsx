@@ -1,4 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import './style.css'
 import { useNavigate } from 'react-router-dom';
 import { findIdRequest } from 'src/apis/auth';
 import { FindIdRequestDto } from 'src/apis/auth/dto/request';
@@ -93,10 +94,11 @@ export default function FindId() {
 
     return (
         <div id="authentication-wrapper">
+            <div className="title-text">아이디 찾기</div>
+
             <div className='authentication-sign-up'>
-                <div className="title-text">아이디 찾기</div>
                 <div className='authentication-contents'>
-                    <InputBox 
+                    <InputBox
                         label="이메일" 
                         type="text" 
                         value={userEmail} 
@@ -110,15 +112,18 @@ export default function FindId() {
                         onkeydownhandler={onPasswordKeydownHandler} 
                     />
                 </div>
-            </div>
-            {isEmailCheck && (
-                <div>
-                    <div className='return-id'>아이디는 {userId}</div>
+            
+                {isEmailCheck && (
+                    <div>
+                        <div className='return-id'>회원님의 아이디는 {userId} 입니다.</div>
+                    </div>
+                )}
+
+                <div className='moving-find-id-password'>
+                    <div className='moving-find' onClick={onFindPwButtonClickHandler}>비밀번호 찾기</div>
+                    <div>{'/'}</div>
+                    <div className='moving-find' onClick={onSignInButtonClickHandler}>로그인</div>
                 </div>
-            )}
-            <div className='moving-button'>
-                <div className='moving-find-password' onClick={onFindPwButtonClickHandler}>비밀번호 찾기</div>
-                <div className='moving-sign-in' onClick={onSignInButtonClickHandler}>로그인 하기</div>
             </div>
         </div>
     )

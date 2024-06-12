@@ -2,7 +2,7 @@
     display: grid;
     grid-template: 
         "sidenav main" minmax(944px, auto)
-        / 257px minmax(1182px, 1fr);
+        / 280px minmax(1182px, 1fr);
 }
 
 #user-main {
@@ -14,18 +14,18 @@
 
 .user-side-navigation-container {
     grid-area: sidenav;
-    padding: 50px 20px;
+    padding: 25px 0px 20px;
 
     display: flex;
     flex-direction: column;
     gap: 10px;
     
-    border-right: none;  
+    border-right : 2px dotted rgba(238, 238, 238, 1);
 }
 
 .user-side-navigation-item {
-    border-radius: 6px;
-    padding: 8px 24px;
+    border-radius: 5px;
+    padding: 12px 24px;
 
     display: flex;
     align-items: center;
@@ -45,7 +45,7 @@
 }
 
 .user-side-navigation-item.active {
-    background-color: rgba(138, 146, 166, 1);
+    background-color: rgba(138, 146, 166, 0.6);
     color: rgba(255, 255, 255, 1);
 
     font-size: 20px;

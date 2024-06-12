@@ -113,29 +113,48 @@ export default function MyInfoEmailModify() {
         navigator(USER_INFO_ABSOLUTE_PATH);
     };
 
-  return (
-    <div id="authentication-wrapper">
-        <div className='authentication-sign-up'>
-            <div className="my-info-title h1">이메일 변경</div>
-            <div className='authentication-contents'>
-
-            <InputBox 
-                label="변경할 이메일" type="text" value={email} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} buttonTitle="이메일 인증" buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} 
-            />
+    return (
+        <div id="information-wrapper">
+            <div className='information-main'>
+            <div className='my-info-title'>이메일 변경</div>
             
-            {isEmailCheck && 
-                <InputBox label="인증번호" type="text" value={authNumber} placeholder="인증번호 4자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} 
+            <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+
+            <div className='information-container'>
+                <div className='infomation-contents'>
+
+                <InputBox 
+                    label="변경할 이메일" 
+                    type="text" value={email} 
+                    placeholder="이메일을 입력해주세요" 
+                    onChangeHandler={onEmailChangeHandler} 
+                    buttonTitle="이메일 인증" 
+                    buttonStatus={emailButtonStatus} 
+                    onButtonClickHandler={onEmailButtonClickHandler} 
+                    message={emailMessage} error={isEmailError} 
                 />
-            }
+                
+                {isEmailCheck && 
+                    <InputBox 
+                        label="인증번호" 
+                        type="text" 
+                        value={authNumber} 
+                        placeholder="인증번호 4자리를 입력해주세요" 
+                        onChangeHandler={onAuthNumberChangeHandler} 
+                        buttonTitle="인증 확인" 
+                        buttonStatus={authNumberButtonStatus} 
+                        onButtonClickHandler={onAuthNumberButtonClickHandler} 
+                        message={authNumberMessage} error={isAuthNumberError} 
+                    />
+                }
 
-            {/* <div className="authentication-button-container">
-                <div className={emailModifyButtonClass} onClick={ onEmailModifyButtonClickHandler }>확인</div>
-            </div> */}
+                {/* <div className="authentication-button-container">
+                    <div className={emailModifyButtonClass} onClick={ onEmailModifyButtonClickHandler }>확인</div>
+                </div> */}
 
+                </div>
+            </div>
         </div>
-
-      </div>
-      
-  </div>
-  );
+    </div>
+    );
 }

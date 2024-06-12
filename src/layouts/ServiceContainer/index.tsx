@@ -8,7 +8,6 @@ import { GetMyInfoResponseDto, GetSignInUserResponseDto } from "src/apis/user/dt
 import ResponseDto from "src/apis/response.dto";
 import { getMyInfoRequest, getSignInUserRequest } from "src/apis/user";
 
-// TODO: 로그인, 회원가입에 아이콘 넣어야함
 function TopBar() {
 
     const [nickName, setNickName] = useState<string>('');

@@ -10,10 +10,8 @@ import { getDetailUserListRequest, deleteUserRequest } from 'src/apis/userList';
 export default function DetailUserList() {
 
     //                    state                    //
-    // const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
     const { userId } = useParams();
-    // const [userId, setUserId] = useState<string>('');
     const [userEmail, setUserEmail] = useState<string>('');
     const [nickName, setNickName] = useState<string>('');
     const [joinDate, setJoinDate] = useState<string>('');
@@ -22,7 +20,6 @@ export default function DetailUserList() {
     const navigator = useNavigate();
 
     const getDetailUserListResponse = (result: GetDetailUserListResponseDto | ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '잘못된 유저아이디입니다.' : 
@@ -64,7 +61,7 @@ export default function DetailUserList() {
     //                    event handler                    //
     const onListClickHandler = () => {
         navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);
-    }
+    };
 
     const onDeleteClickHandler = () => {
         if (!userId || !cookies.accessToken) return;
@@ -73,8 +70,7 @@ export default function DetailUserList() {
 
         deleteUserRequest(userId, cookies.accessToken) 
         .then(deleteUserListResponse)
-    }
-
+    };
     
     //                    effect                    //
     useEffect(() => {
@@ -86,21 +82,20 @@ export default function DetailUserList() {
     //                    render                    //
     return (
         <div>
-            <div className="title-text">회원 상세 목록</div>
             <div className='detail-user-container'>
             <div className="user-detail-box">
-              <div className='user-detail-title'>아이디</div>
-              <div className='user-detail-id'>{userId}</div>
-              <div className='user-detail-title'>이메일</div>
-              <div className='user-detail-email'>{userEmail}</div>
-              <div className='user-detail-title'>닉네임</div>
-              <div className='user-detail-nickname'>{nickName}</div>
-              <div className='user-detail-title'>가입날짜</div>
-              <div className='user-detail-join-date'>{joinDate}</div>
+                <div className='user-detail-title'>아이디</div>
+                <div className='user-detail-id'>{userId}</div>
+                <div className='user-detail-title'>이메일</div>
+                <div className='user-detail-email'>{userEmail}</div>
+                <div className='user-detail-title'>닉네임</div>
+                <div className='user-detail-nickname'>{nickName}</div>
+                <div className='user-detail-title'>가입날짜</div>
+                <div className='user-detail-join-date'>{joinDate}</div>
             </div>
             <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
             <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
-          </div>
+            </div>
         </div>
-    )
+    );
 }
