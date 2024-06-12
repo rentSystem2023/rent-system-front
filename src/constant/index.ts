@@ -158,6 +158,7 @@ export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
 
 // 로그인 URL
 export const POST_SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-in`;
+// SNS 로그인 URL
 export const SNS_SIGN_IN_REQUEST_URL = (type : string) => `${SERVER_AUTH_MODULE_URL}/oauth2/${type}`;
 // 아이디 중복 확인 URL
 export const POST_ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
