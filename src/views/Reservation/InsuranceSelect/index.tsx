@@ -15,7 +15,7 @@ function ListItem ({
   fuelType,
   rentCompany,
   reservationCount,
-  carYear,
+  address,
   normalPrice,
   luxuryPrice,
   superPrice
@@ -46,9 +46,9 @@ function ListItem ({
 
       <div className='insurance-info-wrap'>                
         <div className='insurance-info-title-container'>
-          <div className='insurance-info-title'>연식</div>
+          <div className='insurance-info-title'>주소</div>
           <div className='qna-detail-info-divider'>{'\|'}</div>
-          <div className='insurance-info-contents'>{carYear}</div>
+          <div className='insurance-info-contents'>{address}</div>
         </div>
 
         <div className='insurance-info-title-container'>
