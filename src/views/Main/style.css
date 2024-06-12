@@ -14,6 +14,7 @@
     background-size: cover; 
     background-position: 50% 40%; 
 }
+
 .top-image.jeju {
     background-image: url('../../assets/jejuImage/car.jpg');
 }

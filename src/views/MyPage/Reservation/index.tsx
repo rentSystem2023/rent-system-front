@@ -6,8 +6,11 @@ export default function MyReservation() {
         <div className='my-reservation-wrapper'>
             <div className="my-info-title h1">나의 예약 내역</div>
             <div className='my-reservation-card'>
-                <div className='my-reservation-state'>
-                    <div className='reservation-title'>예약상태</div>
+                <div className='my-reservation-state-wrap'>
+                    <div className='my-reservation-state'>
+                        <div className='reservation-title'>예약상태</div>
+                    </div>
+                    <div className='disable-button'>예약취소</div>
                 </div>
                 
                 <div className='my-reservation-info-list'>

@@ -56,7 +56,9 @@ function TopBar() {
 
     return (
         <>
-        <div className="logo-container" onClick={onLogoClickHandler}>로고</div>
+        <div className="logo-container" onClick={onLogoClickHandler}>
+            <div className="logo-image logo">로고 정해야함</div>
+        </div>
         <div className="top-bar-container">
             <div className="top-bar-button">
             <div className="top-button" onClick={onNoticeClickHandler}>공지사항</div>
@@ -102,7 +104,7 @@ function BottomBar() {
                 <div className="company-info">
                     <h3>회사소개</h3>
                     <p>
-                        (주)자코모<br/>
+                        (주)제주렌트카<br/>
                         대표: 김민철,장현아,우하늘,한성윤<br/>
                         경기도 남양주시 오남읍 진건오남로929번길 8<br/>
                         사업자등록번호: 132-81-62165 사업자정보확인<br/>
