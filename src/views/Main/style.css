@@ -1,3 +1,4 @@
+
 #main-page-wrapper{
     display: flex;
     flex-direction: column;
@@ -11,10 +12,10 @@
 .top-image {
     height: 500px; 
     background-size: cover; 
-    background-position: 55% 58%; 
+    background-position: 50% 40%; 
 }
 .top-image.jeju {
-    background-image: url('../../assets/jejuImage/jejuSea.jpg');
+    background-image: url('../../assets/jejuImage/car.jpg');
 }
 
 .container-box{

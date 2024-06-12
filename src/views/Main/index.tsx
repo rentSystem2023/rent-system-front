@@ -79,7 +79,7 @@ function ListItem ({
     
         useEffect(() => {
             getReservationPopularListRequest().then(handlePopularCarListResponse);
-        }, []); // reservationStart, reservationEnd가 변경될 때마다 실행
+        }, [reservationStart, reservationEnd]); // reservationStart, reservationEnd가 변경될 때마다 실행
 
             
         //                    render                    //
@@ -94,8 +94,8 @@ function ListItem ({
                                     {address || "제주공항"}
                                 </div>
                                 <div className="search-select-item" onClick={openDatePickerHandler}>
-                                    {reservationStart && reservationEnd ? `날짜선택` : "날짜선택"}
-                                </div>
+                                {reservationStart && reservationEnd ? `${reservationStart} ~ ${reservationEnd}` : "날짜선택"}
+                            </div>
                             </div>
                             <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>
                         </div>

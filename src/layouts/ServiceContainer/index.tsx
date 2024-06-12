@@ -14,7 +14,7 @@ function TopBar() {
     const [nickName, setNickName] = useState<string>('');
 
     const navigator = useNavigate();
-    const [cookies, setCookie, removeCookie ] = useCookies();
+    const [cookies, setCookie, removeCookie] = useCookies();
     const { pathname } = useLocation();
     const { loginUserRole, setLoginUserId, setLoginUserRole } = useUserStore();
 
@@ -94,14 +94,45 @@ function TopBar() {
     );
 }
 
-// TODO: 하단바에 넣을 내용 정해야함
+
 function BottomBar() {
-    return(
-        <>
+    return (
         <div className="bottom-container">
-            <div>하단바</div>
+            <div className="bottom-content">
+                <div className="company-info">
+                    <h3>회사소개</h3>
+                    <p>
+                        (주)자코모<br/>
+                        대표: 김민철,장현아,우하늘,한성윤<br/>
+                        경기도 남양주시 오남읍 진건오남로929번길 8<br/>
+                        사업자등록번호: 132-81-62165 사업자정보확인<br/>
+                        통신판매업신고번호: 2020-진접오남-0219<br/>
+                        개인정보보호책임자: 박유신<br/>
+                        팩스번호: 031-527-8618<br/>
+                        이메일: jakomo@jakomo.co.kr
+                    </p>
+                </div>
+                <div className="quick-links">
+                    <h3>빠른 링크</h3>
+                    <ul>
+                        <li>마이페이지</li>
+                        <li>곻지사항</li>
+                        <li>이용약관</li>
+                        <li>이용안내</li>
+                        <li>개인정보처리방침</li>
+                        <li>구매관련 문의 사항문의</li>
+                    </ul>
+                </div>
+                <div className="social-media">
+                    <h3>고객센터</h3>
+                    <p>1588-6007<br/>평일: 09:00 ~ 17:30<br/>점심: 12:00 ~ 13:00<br/>휴무: 주말/공휴일</p>
+                </div>
+            </div>
+            <div className="bottom-footer">
+                <p>Copyright 2024. JAKOMO All Rights Reserved.</p>
+                <p>입금계좌안내<br/>하나은행 164-910017-44504<br/>예금주: (주)자코모<br/>* 입금 시 주문자 성함 필시 기재</p>
+            </div>
         </div>
-        </>
     );
 }
 
