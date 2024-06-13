@@ -58,21 +58,19 @@ export default function ReservationDetail() {
     };
 
     const patchReservaitonApproveResponse = (result: ResponseDto | null) => {
-
         const message =
-          !result ? '서버에 문제가 있습니다.' :
-          result.code === 'AF' ? '권한이 없습니다.' :
-          result.code === 'VF' ? '올바르지 않은 예약번호입니다.' :
-          result.code === 'NC' ? '존재하지 않는 예약입니다.' :
-          result.code === 'NW' ? '예약대기 상태가 아닙니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-    
-        if (!result || result.code !== 'SU') {
-          alert(message);
-          return;
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'VF' ? '올바르지 않은 예약번호입니다.' :
+        result.code === 'NC' ? '존재하지 않는 예약입니다.' :
+        result.code === 'NW' ? '예약대기 상태가 아닙니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+        alert(message);
+        return;
         }
     };
-
 
     const deleteReservationResponse = (result: ResponseDto | null) => {
 
@@ -87,7 +85,6 @@ export default function ReservationDetail() {
             alert(message);
             return;
         }
-
         navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
     };
 
@@ -124,28 +121,95 @@ export default function ReservationDetail() {
 
     //                    render                    //
     return (
-        <div id="reservation-detail-wrapper">
-            <div className='company-detail-container'>
-                <h2>예약 현황</h2>
-                    <div className="company-detail-box">
-                            <div>예약번호{reservationCode}</div>
-                            <div>업체이름{rentCompany}</div>
-                            <div>차종{carName}</div>
-                            <div>차량번호{carNumber}</div>
-                            <div>예약시작일{reservationStart}</div>
-                            <div>예약종료일{reservationEnd}</div>
-                            <div>아이디{userId}</div>
-                            <div>닉네임{nickName}</div>
-                            <div>예약상태{reservationState}</div>
+        <div id='admin-detail-wrapper'>
+        <div className="my-info-title">예약 정보 상세</div>
+            <div className='admin-detail-main-box'>
+                <div className='admin-datail-contents'>
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>예약번호</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{reservationCode}</div>
+                        </div>
                     </div>
-                <div className='primary-button' onClick={onListClickHandler} >목록보기</div>
-                <div className='primary-button' onClick={onReservationApproveClickHandler} >예약완료 처리버튼 이름만 예약완료로 변경</div>
-                <div className='error-button' >예약취소승인 처리하면 예약취소완료 or 바로삭제처리 back은 delete로 되어있음</div>
-                <div className='error-button' onClick={onDeleteClickHandler} >삭제</div>
+                    
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>업체이름</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{rentCompany}</div>
+                        </div>
+                    </div>
+
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>차종</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{carName}</div>
+                        </div>
+                    </div>
+
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>차량번호</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{carNumber}</div>
+                        </div>
+                    </div>
+
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>예약날짜</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{reservationStart} ~ {reservationEnd}</div>
+                        </div>
+                    </div>
+
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>예약자 아이디</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{userId}</div>
+                        </div>
+                    </div>
+
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>예약자 닉네임</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{nickName}</div>
+                        </div>
+                    </div>
+
+                    <div className='admin-contents-wrap date'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>예약상태</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{reservationState}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className='admin-button-box reservation'>  
+                <div className='reservation-primary-button'>
+                    <div className='primary-button list' onClick={onListClickHandler}>목록</div>                    
+                </div>              
+                <div className='reservation-error-button'>
+                    <div className='primary-button list' onClick={onReservationApproveClickHandler} >예약승인</div>
+                    <div className='primary-button list' >취소승인</div>
+                    {/* 예약취소승인 처리하면 예약취소완료 or 바로삭제처리 back은 delete로 되어있음 */}
+                    <div className='error-button delete' onClick={onDeleteClickHandler} >삭제</div>
+                </div>
             </div>
         </div>
-        );
-
-
-
+    );
 }

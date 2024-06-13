@@ -1,0 +1,15 @@
+.admin-button-box.company{
+    justify-content: space-between;
+}
+
+.admin-button-active{
+    display: flex;
+    gap: 10px;
+}
+.second-button.update{
+    width: 150px;
+}
+
+.admin-title-wrap.rule{
+    height: 250px;
+}
