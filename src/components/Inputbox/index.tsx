@@ -2,7 +2,7 @@ import React, { ChangeEvent, KeyboardEvent } from "react";
 import './style.css';
 
 export interface InputBoxProps {
-    label: string;
+    label?: string;
     type: 'text' | 'password';
     value: string | number;
     placeholder?: string;

@@ -1,1 +1,54 @@
-/*  */
+.my-reservation-list-wrap{
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+    width: 100%;
+}
+
+.reservation-up-title{
+    width: 70px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.reservation-content.nickname{
+    font-size: 18px;
+}
+
+.my-reservation-car-image.detail{
+    width: 320px;
+    height: 250px;
+}
+
+.my-reservation-detail-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.my-reservation-detail-list{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reservation-car-container.detail{
+    font-size: 18px;
+}
+
+.reservation-side-title{
+    width: 100px;
+    font-weight: 600;
+}
+
+.my-reservation-button{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 10px;
+}

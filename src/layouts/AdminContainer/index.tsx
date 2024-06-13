@@ -24,12 +24,13 @@ function SideBar ({ path } : Props) {
     const onUserClickHandler = () => navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);
     const onCompanyClickHandler = () => navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
     const onReservationClickHandler = () => navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
-    const onBoardClickHandler = () => {
-        setBoardItem(!boardItem);
-    navigator(ADMIN_NOTICE_LIST_ABSOLUTE_PATH);
-    }
-    const onBoardNoticeClickHandler = () => navigator(ADMIN_NOTICE_LIST_ABSOLUTE_PATH);
-    const onBoardQnaClickHandler = () => navigator(ADMIN_QNA_LIST_ABSOLUTE_PATH);
+    
+    // const onBoardClickHandler = () => {
+    //     setBoardItem(!boardItem);
+    // navigator(ADMIN_NOTICE_LIST_ABSOLUTE_PATH);
+    // }
+    // const onBoardNoticeClickHandler = () => navigator(ADMIN_NOTICE_LIST_ABSOLUTE_PATH);
+    // const onBoardQnaClickHandler = () => navigator(ADMIN_QNA_LIST_ABSOLUTE_PATH);
 
     return (
         <div className="admin-side-navigation-container">
@@ -66,7 +67,7 @@ function SideBar ({ path } : Props) {
 export default function AdminContainer() {
 
     const { pathname } = useLocation();
-    const [path, setPath] = useState<Path>('회원 관리');
+    const [path, setPath] = useState<Path>('');
 
     useEffect(() => {
         const path = 
