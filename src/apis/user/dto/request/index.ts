@@ -16,3 +16,8 @@ export interface PutMyInfoEmailRequestDto {
     userEmail: string;
     authNumber: string;
 }
+
+// description: 예약 취소 하기 Request Body DTO //
+export interface PatchReservationRequestDto {
+    reservationState : string;
+}

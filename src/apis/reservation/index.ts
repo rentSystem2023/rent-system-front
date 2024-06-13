@@ -1,39 +1,15 @@
 import axios from "axios";
 import { DELETE_RESERVATION_LIST_URL, DELETE_RESERVATION_URL, GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL, GET_CAR_PRICE_SEARCH_LIST_URL, GET_CAR_SEARCH_LIST_URL, GET_MY_RESERVATION_DETAIL_URL, GET_MY_RESERVATION_LIST_URL, GET_POPULAR_CAR_LIST_URL, GET_RESERVATION_CANCEL_LIST_URL, GET_RESERVATION_DETAIL_URL, GET_RESERVATION_LIST_SEARCH_URL, GET_RESERVATION_LIST_URL, PATCH_MY_RESERVATION_DETAIL_URL, PATCH_RESERVATION_APPROVE_URL, POST_RESERVATION_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
-import { PatchReservationRequestDto, PathchReservationApproveRequestDto, PostReservationRequestDto } from "./dto/request";
+import { PathchReservationApproveRequestDto, PostReservationRequestDto } from "./dto/request";
 import ResponseDto from "../response.dto";
-import { GetReservationCancelListResponseDto, GetReservationDetailMyListResponseDto, GetReservationDetailResponseDto, GetReservationListResponseDto, GetReservationMyListResponseDto, GetReservationPopularListResponseDto, GetSearchDetailListResponseDto, GetSearchReservationCarListResponseDto, GetSearchReservationCarPriceListResponseDto, GetSearchReservationListResponseDto } from "./dto/response";
+import { GetReservationCancelListResponseDto, GetReservationDetailResponseDto, GetReservationListResponseDto, GetReservationPopularListResponseDto, GetSearchDetailListResponseDto, GetSearchReservationCarListResponseDto, GetSearchReservationCarPriceListResponseDto, GetSearchReservationListResponseDto } from "./dto/response";
 
 
 
 // function : 예약 하기 API 함수
 export const postReservationRequest = async (requestBody: PostReservationRequestDto, accessToken: string) => {
     const result = await axios.post(POST_RESERVATION_URL, requestBody, bearerAuthorization(accessToken))
-        .then(requestHandler<ResponseDto>)
-        .catch(requestErrorHandler);
-    return result;
-};
-
-// function : 내 예약 내역 리스트 보기 API 함수
-export const getReservationMyListRequest = async (accessToken: string) => {
-    const result = await axios.get(GET_MY_RESERVATION_LIST_URL, bearerAuthorization(accessToken))
-        .then(requestHandler<GetReservationMyListResponseDto>)
-        .catch(requestErrorHandler);
-    return result;
-};
-
-// function : 내 예약 내역 상세보기 API 함수
-export const getReservationDetailMyListRequest = async (reservationCode: string | number, accessToken: string) => {
-    const result = await axios.get(GET_MY_RESERVATION_DETAIL_URL(reservationCode), bearerAuthorization(accessToken))
-        .then(requestHandler<GetReservationDetailMyListResponseDto>)
-        .catch(requestErrorHandler);
-    return result;
-};
-
-// function : 예약 취소하기 API 함수
-export const patchReservationRequest = async (reservationCode: string | number, requestBody: PatchReservationRequestDto, accessToken: string) => {
-    const result = await axios.patch(PATCH_MY_RESERVATION_DETAIL_URL(reservationCode), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
