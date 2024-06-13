@@ -81,20 +81,51 @@ export default function DetailUserList() {
 
     //                    render                    //
     return (
-        <div>
-            <div className='detail-user-container'>
-            <div className="user-detail-box">
-                <div className='user-detail-title'>아이디</div>
-                <div className='user-detail-id'>{userId}</div>
-                <div className='user-detail-title'>이메일</div>
-                <div className='user-detail-email'>{userEmail}</div>
-                <div className='user-detail-title'>닉네임</div>
-                <div className='user-detail-nickname'>{nickName}</div>
-                <div className='user-detail-title'>가입날짜</div>
-                <div className='user-detail-join-date'>{joinDate}</div>
+        <div id='admin-detail-wrapper'>
+        <div className="my-info-title">회원 정보 상세</div>
+            <div className='admin-detail-main-box'>
+                <div className='admin-datail-contents'>
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>아이디</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{userId}</div>
+                        </div>
+                    </div>
+                    
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>닉네임</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{nickName}</div>
+                        </div>
+                    </div>
+
+                    <div className='admin-contents-wrap'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>이메일</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{userEmail}</div>
+                        </div>
+                    </div>
+
+                    <div className='admin-contents-wrap date'>
+                        <div className='admin-title-wrap'>
+                            <div className='admin-detail-title'>가입날짜</div>
+                        </div>
+                        <div className='admin-content-wrap'>
+                            <div className='admin-detail-content'>{joinDate}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
-            <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
+
+            <div className='admin-button-box'>
+                    <div className='primary-button list' onClick={onListClickHandler}>목록</div>
+                    <div className='error-button delete' onClick={onDeleteClickHandler}>회원삭제</div>
             </div>
         </div>
     );

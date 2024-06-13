@@ -29,16 +29,15 @@ registDate
     //                    render                    //
     return (
         <div className='table-list-table-tr company' onClick={onClickHandler} >
-                <div className='company-list-table-list-number'>{index}</div>
-                <div className='company-list-table-comapny-code'>{companyCode}</div>
-                <div className='company-list-table-company-name'>{rentCompany}</div>
-                <div className='company-list-table-company-address'>{address}</div>
-                <div className='company-list-table-company-owner'>{owner}</div>
-                <div className='company-list-table-company-telnumber'>{companyTelnumber}</div>
-                <div className='company-list-table-company-date'>{registDate}</div>
+            <div className='company-list-table-list-number'>{index}</div>
+            <div className='company-list-table-comapny-code'>{companyCode}</div>
+            <div className='company-list-table-company-name'>{rentCompany}</div>
+            <div className='company-list-table-company-address'>{address}</div>
+            <div className='company-list-table-company-owner'>{owner}</div>
+            <div className='company-list-table-company-telnumber'>{companyTelnumber}</div>
+            <div className='company-list-table-company-date'>{registDate}</div>
         </div>
     );
-
 }
 
 //                    component                    //
@@ -125,20 +124,20 @@ export default function CompanyList() {
             result.code === 'VF' ? '검색어를 입력하세요.' : 
             result.code === 'AF' ? '인증에 실패했습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-  
+
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') navigator(MAIN_PATH);
             return;
         }
-  
+
         const { companyList } = result as GetSearchCompanyListResponseDto;
         changeCompanyList(companyList);
-  
+
         setCurrentPage(!companyList.length ? 0 : 1);
         setCurrentSection(!companyList.length ? 0 : 1);
     };
-  
+
     //                    event handler                    //
     const onRegistButtonClickHandler = () => {
         if (loginUserRole !== 'ROLE_ADMIN') return; 
@@ -148,57 +147,57 @@ export default function CompanyList() {
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
-  
+
     const onPreSectionClickHandler = () => {
         if (currentSection <= 1) return;
         setCurrentSection(currentSection - 1);
         setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
     };
-  
+
     const onNextSectionClickHandler = () => {
         if (currentSection === totalSection) return;
         setCurrentSection(currentSection + 1);
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
-  
+
     const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const searchWord = event.target.value;
         setSearchWord(searchWord);
     };
-  
+
     const onSearchButtonClickHandler = () => {
-      if (!searchWord) {
-          getSearchCompanyListRequest('', cookies.accessToken).then(getSearchCompanyListResponse);
-      } else {
-          if (!cookies.accessToken) return;
-          getSearchCompanyListRequest(searchWord, cookies.accessToken).then(getSearchCompanyListResponse);
-      }
-  };
-  
+        if (!searchWord) {
+            getSearchCompanyListRequest('', cookies.accessToken).then(getSearchCompanyListResponse);
+        } else {
+            if (!cookies.accessToken) return;
+            getSearchCompanyListRequest(searchWord, cookies.accessToken).then(getSearchCompanyListResponse);
+        }
+    };
+
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
         getSearchCompanyListRequest(searchWord,cookies.accessToken).then(getSearchCompanyListResponse);
     }, []);
-  
+
     useEffect(() => {
         if (!companyList.length) return;
         changePage(companyList, totalLenght);
     }, [currentPage]);
-  
+
     useEffect(() => {
         if (!companyList.length) return;
         changeSection(totalPage);
     }, [currentSection]);
 
-
-  //                    render                    //
-  const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
-  return (
+    //                    render                    //
+    const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+    return (
     <div>
     <div id='table-list-wrapper'>
+        <div className="my-info-title">업체 관리</div>
         <div className='table-list-top'>
-            <div className='table-list-size-text'>전체 <span className='emphasis'>건</span> | 페이지 <span className='emphasis'></span></div>
+            <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             <div className='table-list-top-right'>
                 <div className='primary-button' onClick={onRegistButtonClickHandler}>업체등록</div>
             </div>

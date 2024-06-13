@@ -1,19 +1,60 @@
-
-.detail-user-container {
+#admin-detail-wrapper{
     display: flex;
     flex-direction: column;
-    gap: 12px;
-
-    width: 100%;
+    gap: 24px;
 }
 
-.user-detail-title{
-    padding-bottom: 5px;
+.admin-detail-main-box{
+    display: flex;
+    flex-direction: column;
+    
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 8px;
+}
 
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 175%;
+.admin-datail-contents{
+    display: flex;
+    flex-direction: column;
+}
 
-    color: rgba(0, 0, 0, 0.7);
+.admin-contents-wrap{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+
+    margin-bottom: 1px;
+}
+
+.admin-contents-wrap.date{
+    border-bottom: none;
+}
+
+.admin-title-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    padding: 18px 40px;
+    background-color: rgba(138, 146, 166, 0.1);
+}
+
+.admin-content-wrap{
+    width: 100%;
+    padding: 18px 25px;
+}
+
+.admin-button-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 24px;
+}
+
+.primary-button.list{
+    width: 150px;
+}
+
+.error-button.delete{
+    width: 150px;
 }
