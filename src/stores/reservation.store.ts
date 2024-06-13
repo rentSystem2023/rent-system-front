@@ -8,11 +8,16 @@ interface ReservationStore {
     reservationEnd: string;
     selectedCar: ReservationCarViewListItem | null;
     selectedInsurance: string;
+
+    selectedRentCompany: string;
+
     setAddress: (address: string) => void;
     setReservationStart: (reservationStart: string) => void;
     setReservationEnd: (reservationEnd: string) => void;
     setSelectedCar: (selectedCar: ReservationCarViewListItem) => void;
     setSelectedInsurance: (selectedInsurance: string) => void;
+
+    setSelectedRentCompany:(selectedRentCompany:string)=> void;
 };
 
 const useReservationStore = create<ReservationStore>(set => ({
@@ -21,11 +26,13 @@ const useReservationStore = create<ReservationStore>(set => ({
     reservationEnd: getYYYYMMDD(new Date()),
     selectedCar: null,
     selectedInsurance: '',
+    selectedRentCompany: '',
     setAddress: (address: string) => set(state => ({ ...state, address })),
     setReservationStart: (reservationStart: string) => set(state => ({ ...state, reservationStart })),
     setReservationEnd: (reservationEnd: string) => set(state => ({ ...state, reservationEnd })),
     setSelectedCar: (selectedCar: ReservationCarViewListItem) => set(state => ({ ...state, selectedCar })),
     setSelectedInsurance: (selectedInsurance: string) => set(state => ({ ...state, selectedInsurance })),
+    setSelectedRentCompany: (selectedRentCompany: string) => set(state => ({ ...state, selectedRentCompany })),
 }));
 
 export default useReservationStore;
