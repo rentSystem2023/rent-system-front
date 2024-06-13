@@ -43,6 +43,7 @@ USER_EMAIL_UPDATE_PATH,
 USER_PATH,
 USER_PW_UPDATE_PATH,
 USER_QNA_PATH,
+USER_RESERVATION_DETAIL_PATH,
 USER_RESERVATION_PATH
 } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
@@ -64,7 +65,7 @@ import QnaDetail from "./views/Board/qna/QnaDetail";
 import QnAWrite from "./views/Board/qna/QnaWrite";
 import QnaUpdate from "./views/Board/qna/QnaUpdate";
 import CompanyDetail from "./views/Admin/Company/CompanyDetail";
-import MyReservation from "./views/MyPage/Reservation";
+import MyReservation from "./views/MyPage/Reservation/ReservationList";
 import MyQna from "./views/MyPage/Qna/list";
 import FindPassword from "./views/Authentication/FindPassword";
 import FindPasswordReset from "./views/Authentication/FindPasswordReset";
@@ -82,6 +83,7 @@ import SelectContainer from "./layouts/SelectContainer";
 import ReservationDetail from "./views/Admin/Reservation/ReservationDetail";
 import SearchDetail from "./views/Reservation/SearchDetail";
 import MyInfoQnaList from "./views/MyPage/Qna/list";
+import MyReservationDetail from "./views/MyPage/Reservation/ReservationDetail";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -178,7 +180,8 @@ return (
         <Route index element={<MyInfo />} />
         <Route path={USER_PW_UPDATE_PATH} element={<MyInfoPwModify />} />
         <Route path={USER_EMAIL_UPDATE_PATH} element={<MyInfoEmailModify />} />
-        <Route path={USER_RESERVATION_PATH} element={<MyReservation/>} />
+        <Route path={USER_RESERVATION_PATH} element={<MyReservation />} />
+        <Route path={USER_RESERVATION_DETAIL_PATH} element={<MyReservationDetail />} />
         <Route path={USER_QNA_PATH} element={<MyInfoQnaList />} />
         </Route>
 
