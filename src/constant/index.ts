@@ -22,6 +22,7 @@ export const USER_PATH = 'user';
 export const USER_PW_UPDATE_PATH = 'password-update';
 export const USER_EMAIL_UPDATE_PATH = 'email-update';
 export const USER_RESERVATION_PATH = 'reservation';
+export const USER_RESERVATION_DETAIL_PATH = 'reservation/:reservationCode';
 export const USER_QNA_PATH = 'qna';
 
 // description: 공지사항 페이지 URL //
@@ -89,8 +90,10 @@ export const USER_PW_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_PW
 export const USER_EMAIL_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_EMAIL_UPDATE_PATH}`;
 // description: 내 정보 삭제 페이지 절대 URL //
 export const USER_INFO_DELETE_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}/${USER_PATH}/${userId}`;
-// description: 예약 내역 페이지 절대 URL //
+// description: 나의 예약 내역 페이지 절대 URL //
 export const USER_RESERVATION_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_RESERVATION_PATH}`;
+// description: 나의 예약 상세 페이지 절대 URL //
+export const USER_RESERVATION_DETAIL_ABSOLUTE_PATH = (reservationCode: string | number) => `${MAIN_PATH}/${USER_PATH}/${USER_RESERVATION_PATH}/${reservationCode}`;
 // description: 문의 내역 페이지 절대 URL //
 export const USER_QNA_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_QNA_PATH}`;
 

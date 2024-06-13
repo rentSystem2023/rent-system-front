@@ -62,12 +62,16 @@ export interface ReservationCarPriceListItem {
     superPrice : number;
 }
 
-export interface ReservationListItem{
+// 나의 문의내역
+export interface MyReservationListItem{
     carImageUrl : string;
     nickName : string;
     reservationDate : string;
     reservationCode : string;
     rentCompany : string;
+    reservationStart: string;
+    reservationEnd: string;
+    reservationState: string;
 }
 
 export interface ReservationCancelListItem{
