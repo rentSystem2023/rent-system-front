@@ -19,6 +19,7 @@ export default function CompanyRegist() {
     const [owner, setOwner] = useState<string>('');
     const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
     const [companyRule, setCompanyRule] = useState<string>('');
+    const contentsRef = useRef<HTMLTextAreaElement | null>(null);
 
     //                              function                              //
     const navigator = useNavigate();
@@ -92,22 +93,110 @@ export default function CompanyRegist() {
 
     //                    render                    //
     return (
-        <div id="registration-wrapper">
-            <div className='registration-container'>
-                <h2>업체 등록</h2>
-                <div className="registration-form-box">
-                    <InputBox label="업체코드" type="text" value={companyCode} onChangeHandler={onCompanyCodeChangeHandler} />
-                    <InputBox label="업체명" type="text" value={rentCompany} onChangeHandler={onRentCompanyChangeHandler} />
-                    <InputBox label="주소" type="text" value={address} onChangeHandler={onAddressChangeHandler} />
-                    <InputBox label="담당자" type="text" value={owner} onChangeHandler={onOwnerChangeHandler} />
-                    <InputBox label="연락처" type="text" value={companyTelnumber} onChangeHandler={onCompanyTelnumberChangeHandler} />
-                </div>
-                <div className="registration-form-box">
-                    <label className='registration-label'>영업방침:</label>
-                    <textarea className="companyRule" value={companyRule} onChange={onCompanyRuleChangeHandler} />
-                </div>
-                <button type="submit" className="submit-button" onClick={onRegistButtonClickHandler}>등록</button>
+        <div id="admin-detail-wrapper">
+        <div className="my-info-title">업체 정보 등록</div>
+            <div className='admin-detail-main-box company'>
+                <div className='admin-datail-contents'>
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체 고유번호</div>
+                            </div>
+                            <div className='admin-content-wrap company'>
+                                <InputBox 
+                                    type="text" 
+                                    value={companyCode} 
+                                    onChangeHandler={onCompanyCodeChangeHandler} 
+                                />
+                            </div>
+                        </div>
+                        
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체명</div>
+                            </div>
+                            <div className='admin-content-wrap company'>
+                                <InputBox 
+                                    type="text"
+                                    value={rentCompany} 
+                                    onChangeHandler={onRentCompanyChangeHandler} 
+                                />
+                            </div>
+                        </div>
+
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체 주소</div>
+                            </div>
+                            <div className='admin-content-wrap company'>
+                            <InputBox 
+                                type="text" 
+                                value={address} 
+                                onChangeHandler={onAddressChangeHandler} 
+                            />
+
+                            </div>
+                        </div>
+
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>담당자명</div>
+                            </div>
+                            <div className='admin-content-wrap company'>
+                            <InputBox
+                                type="text" 
+                                value={owner} 
+                                onChangeHandler={onOwnerChangeHandler} 
+                            />
+
+                            </div>
+                        </div>
+
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체 전화번호</div>
+                            </div>
+                            <div className='admin-content-wrap company'>
+                            <InputBox 
+                                type="text" 
+                                value={companyTelnumber} 
+                                onChangeHandler={onCompanyTelnumberChangeHandler} 
+                            />
+
+                            </div>
+                        </div>
+
+                        {/* <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체 등록일</div>
+                            </div>
+                            <div className='admin-content-wrap'>
+                                <div className='admin-detail-content'>{registDate}</div>
+                            </div>
+                        </div> */}
+
+                        <div className='admin-contents-wrap rule'>
+                            <div className='admin-title-wrap rule'>
+                                <div className='admin-detail-title'>영업 방침</div>
+                            </div>
+                            <div className="company-rule-box-wrap">
+                                <div className='company-rule-box'>
+                                <textarea 
+                                        ref={contentsRef}
+                                        className='company-textarea'
+                                        rows={10} 
+                                        placeholder='내용을 입력해주세요/ 1000자' 
+                                        maxLength={1000}
+                                        onChange={onCompanyRuleChangeHandler} 
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            
+            <div className="company-update-button-box">
+            <div className="primary-button comup" onClick={onRegistButtonClickHandler}>등록</div>
             </div>
         </div>
     );
-  }
+}

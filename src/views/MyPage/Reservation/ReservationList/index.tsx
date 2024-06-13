@@ -29,23 +29,43 @@ function ListItem ({
 
     //                    render                    //
     return (
-        <div className='my-reservation-list-table myReservation' onClick={onClickHandler}>
-            <div className='reservation-list-state'>예약 상태 : {reservationState}</div>
+        <div className='my-reservation-list-table' onClick={onClickHandler}>
+            <div className='my-reservation-state'>{reservationState}</div>
             <div className='my-reservation-info-list'>
-                <div className='reservation-list-car-image'>사진{carImageUrl}</div>
+                <div className='my-reservation-car-image'>
+                    <img style={{ width: '190%', height: '150%', marginLeft:'22px'}} src={carImageUrl} />
+                </div>
                 <div className='my-reservation-info'>
-                    <div className='reservation-list-date'>예약날짜 : {reservationDate}</div>
-                    <div className='reservation-list-nickname'>예약자명 : {nickName}</div>
-                    <div className='reservation-list-code'>예약번호 : {reservationCode}</div>
-                    <div className='reservation-list-company'>영업점 : {rentCompany}</div>
-                    <div className='reservation-list-period'> 예약기간 : {reservationStart} ~ {reservationEnd}
+                    <div className='reservation-car-container'>
+                        <div className='reservation-list-title'>예약번호</div>
+                        <div className='qna-detail-info-divider'>{'\|'}</div>
+                        <div className='reservation-content'>{reservationCode}</div>
+                    </div>
+                    <div className='reservation-car-container'>
+                        <div className='reservation-list-title'>닉네임</div>
+                        <div className='qna-detail-info-divider'>{'\|'}</div>
+                        <div className='reservation-content'>{nickName}</div>
+                    </div>
+                    <div className='reservation-car-container'>
+                        <div className='reservation-list-title'>업체명</div>
+                        <div className='qna-detail-info-divider'>{'\|'}</div>
+                        <div className='reservation-content'>{rentCompany}</div>
+                    </div>
+                    <div className='reservation-car-container'>
+                        <div className='reservation-list-title'>예약날짜</div>
+                        <div className='qna-detail-info-divider'>{'\|'}</div>
+                        <div className='reservation-content'>{reservationDate}</div>
+                    </div>
+                    <div className='reservation-car-container'>
+                        <div className='reservation-list-title'>예약기간</div>
+                        <div className='qna-detail-info-divider'>{'\|'}</div>
+                        <div className='reservation-content'>{reservationStart} ~ {reservationEnd}</div>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-
 
 export default function MyReservation() {
 
@@ -159,25 +179,30 @@ export default function MyReservation() {
             <div className='information-main'>
                 <div className="my-info-title">예약 내역</div>
 
-                <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}>
-                    
-                </div>
-                <div className='my-reservation-card'></div>
-                {viewList.map((item) => <ListItem {...item} />)}
-
-                <div className='table-list-bottom'>
-                <div style={{ width: '299px' }}></div>
-                <div className='table-list-pagenation'>
-                    <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
-                    <div className='table-list-page-box'>
-                        {pageList.map(page => 
-                        page === currentPage ?
-                        <div className='table-list-page-active'>{page}</div> :
-                        <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
-                        )}
+                <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+                
+                <div className='my-reservation-card-list'>
+                    <div className='table-list-top'>
+                        <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                     </div>
-                    <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
-                </div>
+
+                    <div className='my-reservation-card'>
+                        {viewList.map((item) => <ListItem {...item} />)}
+                    </div>
+
+                    <div className='table-reservation-list-bottom'>
+                        <div className='table-list-pagenation'>
+                            <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
+                            <div className='table-list-page-box'>
+                                {pageList.map(page => 
+                                page === currentPage ?
+                                <div className='table-list-page-active'>{page}</div> :
+                                <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
+                                )}
+                            </div>
+                            <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

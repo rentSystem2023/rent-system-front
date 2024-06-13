@@ -190,6 +190,7 @@ export default function UserList() {
     return (
         <>
         <div id='table-list-wrapper'>
+        <div className="my-info-title">회원 관리</div>
             <div className='table-list-top'>
                 <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>        

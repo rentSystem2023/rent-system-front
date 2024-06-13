@@ -1,13 +1,11 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
-
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { GetCompanyDetailResponseDto } from 'src/apis/company/dto/response';
-import { PostCompanyRequestDto } from 'src/apis/company/dto/request';
 import { deleteCompanyRequest, getCompanyDetailRequest } from 'src/apis/company';
 
 //                    component                    //
@@ -24,8 +22,6 @@ export default function CompanyDetail() {
     const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
     const [registDate, setRegistDate] = useState<string>('');
     const [companyRule, setCompanyRule] = useState<string | null>('');
-
-
 
     //                    function                    //
     const navigator = useNavigate();
@@ -103,22 +99,82 @@ export default function CompanyDetail() {
 
     //                    render                    //
     return (
-    <div id="company-detail-wrapper">
-        <div className='company-detail-container'>
-            <h2>업체 현황</h2>
-                <div className="company-detail-box">
-                        <div>{companyCode}</div>
-                        <div>{rentCompany}</div>
-                        <div>{address}</div>
-                        <div>{owner}</div>
-                        <div>{companyTelnumber}</div>
-                        <div>{registDate}</div>
-                        <div>{companyRule}</div>
+        <div id="admin-detail-wrapper">
+        <div className="my-info-title">업체 정보 상세</div>
+            <div className='admin-detail-main-box'>
+                <div className='admin-datail-contents'>
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체 고유번호</div>
+                            </div>
+                            <div className='admin-content-wrap'>
+                                <div className='admin-detail-content'>{companyCode}</div>
+                            </div>
+                        </div>
+                        
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체명</div>
+                            </div>
+                            <div className='admin-content-wrap'>
+                                <div className='admin-detail-content'>{rentCompany}</div>
+                            </div>
+                        </div>
+
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체 주소</div>
+                            </div>
+                            <div className='admin-content-wrap'>
+                                <div className='admin-detail-content'>{address}</div>
+                            </div>
+                        </div>
+
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>담당자명</div>
+                            </div>
+                            <div className='admin-content-wrap'>
+                                <div className='admin-detail-content'>{owner}</div>
+                            </div>
+                        </div>
+
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체 전화번호</div>
+                            </div>
+                            <div className='admin-content-wrap'>
+                                <div className='admin-detail-content'>{companyTelnumber}</div>
+                            </div>
+                        </div>
+
+                        <div className='admin-contents-wrap'>
+                            <div className='admin-title-wrap'>
+                                <div className='admin-detail-title'>업체 등록일</div>
+                            </div>
+                            <div className='admin-content-wrap'>
+                                <div className='admin-detail-content'>{registDate}</div>
+                            </div>
+                        </div>
+
+                        <div className='admin-contents-wrap date'>
+                            <div className='admin-title-wrap rule'>
+                                <div className='admin-detail-title'>업체 방침</div>
+                            </div>
+                            <div className='admin-content-wrap'>
+                                <div className='admin-detail-content'>{companyRule}</div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div className='admin-button-box company'>
+                <div className='primary-button list' onClick={onListClickHandler}>목록</div>
+                <div className='admin-button-active'>
+                    <div className='second-button update'onClick={onUpdateClickHandler}>수정</div>
+                    <div className='error-button delete' onClick={onDeleteClickHandler}>삭제</div>
                 </div>
-                <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
-                <div className='second-button'onClick={onUpdateClickHandler}>수정</div>
-                <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
+            </div>
         </div>
-    </div>
     );
 }
