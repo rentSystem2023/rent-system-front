@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, KeyboardEvent } from 'react'
 import { useNavigate, useParams } from 'react-router';
 import { findPwResetRequest } from 'src/apis/auth';
 import { FindPasswordResetRequestDto } from 'src/apis/auth/dto/request';
@@ -75,6 +75,11 @@ export default function FindPasswordReset() {
         setPasswordCheckMessage(passwordCheckMessage);
     };
 
+    const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key !== 'Enter') return;
+        onFindPwResetButtonClickHandler();
+    };
+
     const onFindPwResetButtonClickHandler = () => {
 
         if(!isFindPwActive || !userId) return;
@@ -89,9 +94,12 @@ export default function FindPasswordReset() {
         
         findPwResetRequest(userId, requestBody).then(findPwResetResponse);
 
+        alert('비밀번호가 변경되었습니다.');
         navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     };
+    
 
+    //                    render                    //
     return (
         <div id="authentication-wrapper">
             <div className="title-text">비밀번호 재설정</div>
@@ -110,6 +118,7 @@ export default function FindPasswordReset() {
                         value={passwordCheck} 
                         placeholder="비밀번호를 입력해주세요" 
                         onChangeHandler={onPasswordCheckChangeHandler} 
+                        onkeydownhandler={onPasswordKeydownHandler} 
                         message={passwordCheckMessage} error 
                     />
 
