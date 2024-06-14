@@ -109,9 +109,16 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
                                 <div className='location-image'></div>
                                 <div className='location-title'>{address || "제주공항"}</div>
                             </div>
-                            <div className="search-select-item date" onClick={openDatePickerHandler}>
+                            <div className="search-select-item date" onClick={openDatePickerHandler}>                                
                                 <div className='date-image'></div>
-                            {reservationStart && reservationEnd ? `${reservationStart} ~ ${reservationEnd}` : "날짜선택"}
+                                {reservationStart && reservationEnd ? 
+                                    <div className='search-date-wrap'>
+                                        <div className='search-date-title'>{reservationStart}</div>
+                                        <div className='search-date-emo'>{'~'}</div>
+                                        <div className='search-date-title'>{reservationEnd}</div>
+                                    </div> 
+                                    : "날짜선택"
+                                }
                         </div>
                         </div>
                         <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>

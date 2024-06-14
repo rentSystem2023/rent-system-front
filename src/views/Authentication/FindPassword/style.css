@@ -1,3 +1,19 @@
+.find-password-image{
+    width: 75px;
+    height: 70px;
+    background-size: 100% 100%;
+
+    background-image: url('../../../assets/image/findPassword.png');
+}
+
+.authentication-sign-up.findps{
+    margin-top: -25px;
+}
+
+.authentication-contents{
+    gap: 10px;
+}
+
 .authentication-find-password{
     display: flex;
     flex-direction: column;
