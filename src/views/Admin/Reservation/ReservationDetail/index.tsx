@@ -188,12 +188,16 @@ export default function ReservationDetail() {
                         </div>
                     </div>
 
-                    <div className='admin-contents-wrap date'>
+                    <div className='admin-contents-wrap state'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>예약상태</div>
                         </div>
-                        <div className='admin-content-wrap'>
+                        <div className='admin-content-wrap reser'>
                             <div className='admin-detail-content'>{reservationState}</div>
+                            <div className='admin-reservation-state'>
+                                <div className='reservation-button confirm' onClick={onReservationApproveClickHandler} >예약승인</div>
+                                <div className='reservation-button cancle'>취소승인</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -204,9 +208,6 @@ export default function ReservationDetail() {
                     <div className='primary-button list' onClick={onListClickHandler}>목록</div>                    
                 </div>              
                 <div className='reservation-error-button'>
-                    <div className='primary-button list' onClick={onReservationApproveClickHandler} >예약승인</div>
-                    <div className='primary-button list' >취소승인</div>
-                    {/* 예약취소승인 처리하면 예약취소완료 or 바로삭제처리 back은 delete로 되어있음 */}
                     <div className='error-button delete' onClick={onDeleteClickHandler} >삭제</div>
                 </div>
             </div>
