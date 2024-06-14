@@ -23,7 +23,7 @@ function ListItem ({
     return (
         <div className='popular-car-list-wrap'>
             <div className='popular-car-image'>
-                <img style={{ width: '245%', height: '140%'}} src={carImageUrl} />
+                <img style={{ width: '280%', height: '140%'}} src={carImageUrl} />
             </div>
 
             <div style={{border: '1px solid rgba(238, 238, 238, 1)', width: '100%'}}></div>
@@ -81,6 +81,10 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
         setIsLocationPopupOpen(false);
     };
 
+    const openLocationPopupHandler = () => {
+        setIsLocationPopupOpen(true);
+    };
+
     const openDatePickerHandler = () => {
         setIsDatePickerOpen(true);
     };
@@ -105,7 +109,7 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
                 <div className="container-box">
                     <div className="search-box">
                         <div className="search-select-box">
-                            <div className="search-select-item location">
+                            <div className="search-select-item location" onClick={openLocationPopupHandler}>
                                 <div className='location-image'></div>
                                 <div className='location-title'>{address || "제주공항"}</div>
                             </div>
