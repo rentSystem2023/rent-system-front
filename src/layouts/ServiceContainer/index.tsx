@@ -56,7 +56,7 @@ function TopBar() {
     return (
         <>
         <div className="logo-container" onClick={onLogoClickHandler}>
-            <div className="logo-image logo">로고 정해야함</div>
+            <div className="logo-image logo"></div>
         </div>
         <div className="top-bar-container">
             <div className="top-bar-button">
@@ -97,6 +97,14 @@ function TopBar() {
 
 
 function BottomBar() {
+    const [cookies, setCookie] = useCookies();
+    const navigator = useNavigate();
+
+    const onMyPageButtonClickHandler = () => {
+        if (!cookies.accessToken) return navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+        navigator(USER_INFO_ABSOLUTE_PATH);
+    }
+
     return (
         <div className="bottom-container">
             <div className="bottom-content">
@@ -114,14 +122,12 @@ function BottomBar() {
                 </div>
                 <div className="quick-links">
                     <h3>빠른 링크</h3>
-                    <ul>
-                        <li>마이페이지</li>
-                        <li>곻지사항</li>
-                        <li>이용약관</li>
-                        <li>이용안내</li>
-                        <li>개인정보처리방침</li>
-                        <li>구매관련 문의 사항문의</li>
-                    </ul>
+                    <div className="quick-links-page" onClick={onMyPageButtonClickHandler}>마이페이지</div>
+                    <div className="quick-links-page" onClick={() => navigator(NOTICE_LIST_ABSOLUTE_PATH)}>공지사항</div>
+                    <div className="quick-links-page">이용약관</div>
+                    <div className="quick-links-page">이용안내</div>
+                    <div className="quick-links-page">개인정보처리방침</div>
+                    <div className="quick-links-page" onClick={() => navigator(QNA_LIST_ABSOLUTE_PATH)}>구매관련 문의사항 문의</div>
                 </div>
                 <div className="social-media">
                     <h3>고객센터</h3>
