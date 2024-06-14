@@ -1,4 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import './style.css'
 import { useNavigate, useParams } from 'react-router';
 import { findPasswordRequest } from 'src/apis/auth';
 import { FindPasswordRequestDto } from 'src/apis/auth/dto/request';
@@ -106,22 +107,32 @@ export default function FindPassword() {
   return (
     <div id="authentication-wrapper">
       <div className="title-text">비밀번호 찾기</div>
-      <div className='authentication-sign-up'>
-        <div className='authentication-contents'>
-          <div className='qna-board-text'>
-          <div className="qna-board-image help"></div>
-            아이디와 이메일 인증 시<br/>비밀번호 재설정 페이지로 넘어갑니다.
-          </div>
-          <InputBox label="아이디" type="text" value={userId} placeholder="아이디를 입력해주세요" onChangeHandler={onIdChangeHandler} />
-
-          <InputBox label="이메일" type="text" value={userEmail} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailChangeHandler} onButtonClickHandler={onFindPwButtonClickHandler} message={emailMessage} error={isEmailError} onkeydownhandler={onPasswordKeydownHandler} />
-
-          <div className="primary-button" onClick={onFindPwButtonClickHandler} >인증</div>
-
+        <div className='qna-board-text'>
+          <div className="find-password-image"></div>
+          아이디와 이메일 인증 시,<br/>비밀번호 재설정 페이지로 넘어갑니다.
         </div>
-
+        <div className='authentication-sign-up findps'>
+          <div className='authentication-contents'>
+            <InputBox
+              label="아이디" 
+              type="text" 
+              value={userId} 
+              placeholder="아이디를 입력해주세요" 
+              onChangeHandler={onIdChangeHandler} 
+            />
+            <InputBox 
+              label="이메일" 
+              type="text" 
+              value={userEmail} 
+              placeholder="이메일을 입력해주세요" 
+              onChangeHandler={onEmailChangeHandler} 
+              onButtonClickHandler={onFindPwButtonClickHandler} 
+              message={emailMessage} error={isEmailError} 
+              onkeydownhandler={onPasswordKeydownHandler} 
+            />
+          </div>
+          <div className="primary-button" onClick={onFindPwButtonClickHandler} >인증</div>
       </div>
-      
   </div>
   )
 }
