@@ -140,6 +140,12 @@
     color: rgba(64, 64, 64, 1);
 }
 
+.quick-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .quick-links-page:hover {
     cursor: pointer;
     opacity: 0.85;
