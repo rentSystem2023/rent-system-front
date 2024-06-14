@@ -10,12 +10,13 @@ import ResponseDto from 'src/apis/response.dto';
 import { noticeListItem } from 'src/types';
     //                    component                    //
 function ListItem ({
+    index,
     registNumber,
     title,
     writerId,
     writeDatetime,
     viewCount
-}:noticeListItem) {
+}:noticeListItem & { index: number }) {
     
     //                    function                    //
     const navigator = useNavigate();
@@ -25,7 +26,7 @@ function ListItem ({
     //                    render                    //
     return (
         <div className='table-list-table-tr notice' onClick={onClickHandler}>
-            <div className='notice-list-table-reception-number'>{registNumber}</div>
+            <div className='notice-list-table-reception-number'>{index + 1}</div>
             <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
             <div className='notice-list-table-writer-Id'>{writerId}</div>
             <div className='notice-list-table-write-date'>{writeDatetime}</div>
@@ -42,7 +43,7 @@ export default function NoticeList() {
     const [noticeList, setNoticeList] = useState<noticeListItem[]>([]);
     const [viewList, setViewList] = useState<noticeListItem[]>([]);
     const [totalPage, setTotalPage] = useState<number>(1);
-    const [totalLenght, setTotalLength] = useState<number>(0);
+    const [totalLength, setTotalLength] = useState<number>(0);
     const [currentSection, setCurrentSection] = useState<number>(1);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalSection, setTotalSection] = useState<number>(1);
@@ -160,7 +161,7 @@ export default function NoticeList() {
 
     useEffect(() => {
         if (!noticeList.length) return;
-        changePage(noticeList, totalLenght);
+        changePage(noticeList, totalLength);
     }, [currentPage]);
 
     useEffect(() => {
@@ -179,7 +180,7 @@ export default function NoticeList() {
     <div className="title-text">공지사항</div>
         <div id='table-list-wrapper'>
             <div className='table-list-top'>
-                <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+                <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                 <div className='table-list-top-right'>
                     {loginUserRole === 'ROLE_ADMIN' ? 
                     <div className='primary-button' onClick={onWriteButtonClickHandler}>글쓰기</div> : ''
@@ -195,7 +196,7 @@ export default function NoticeList() {
                     <div className='notice-list-table-write-date'>작성일</div>
                     <div className='notice-list-table-viewcount'>조회수</div>
                 </div>
-                {viewList.map(item => <ListItem {...item} />)}
+                {viewList.map((item, index) => <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.registNumber} />)}
             </div>
             <div className='table-list-bottom'>
                 <div style={{ width: '299px' }}></div>
