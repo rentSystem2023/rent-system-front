@@ -9,16 +9,18 @@ import { RESERVATION_COMPANY_PATH } from 'src/constant';
 import { getReservationDetailRequest, getSearchDetailListRequest, getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
 
 
+
+
+
+
 //                    component                   //
 export default function SearchDetail() {
-
   
 //                    state                   //
+
+    const {rentCompany} = useParams();
     const { loginUserId, loginUserRole } = useUserStore();
-    const [cookies] = useCookies();
-
     const { address, reservationStart, reservationEnd, selectedCar } = useReservationStore();
-
 
     const [carImageUrl,setCarImageUrl] = useState<string | null>(null);
     const [carName,setCarName] = useState<string>('');
@@ -30,8 +32,7 @@ export default function SearchDetail() {
     const [normalPrice,setNormalPrice] = useState<number>();
     const [luxuryPrice,setLuxuryPrice] = useState<number>();
     const [superPrice,setSuperPrice] = useState<number>();
-    const [rentCompany,setRentCompany] = useState<string>('');
-
+    const [fuelType,setFuelType] = useState<string>('');
     const [companyTelnumber,setCompanyTelnumber] = useState<string>('');
     const [companyRule,setCompanyRule] = useState<string>('');
 
@@ -55,9 +56,8 @@ const GetSearchDetailListResponse = (result: GetSearchDetailListResponseDto | Re
     return;
   }
 
-  const {carImageUrl,carYear,brand,grade,carOil,capacity,normalPrice,luxuryPrice,superPrice,rentCompany,companyTelnumber,companyRule} =result as GetSearchDetailListResponseDto
+  const {carImageUrl,carYear,brand,grade,carOil,capacity,normalPrice,luxuryPrice,superPrice,companyTelnumber,companyRule} =result as GetSearchDetailListResponseDto
   setCarImageUrl(carImageUrl)
-  setCarName(carName)
   setCarYear(carYear)
   setBrand(brand)
   setGrade(grade)
@@ -66,10 +66,9 @@ const GetSearchDetailListResponse = (result: GetSearchDetailListResponseDto | Re
   setNormalPrice(normalPrice)
   setLuxuryPrice(luxuryPrice)
   setSuperPrice(superPrice)
-  setRentCompany(rentCompany)
   setCompanyTelnumber(companyTelnumber)
   setCompanyRule(companyRule)
-
+  setFuelType(fuelType)
 };
 
 //                    event handler                   //
@@ -93,18 +92,15 @@ const reservationButtonClickHandler = ()=> {
 
 // 선택한 차량의 상태를 가져오는 것
 useEffect(() => {
-  if (!selectedCar) return;
-  getSearchReservationCarPriceListRequest(address,reservationStart,reservationEnd,selectedCar.carName).then(GetSearchDetailListResponse);
-}, [selectedCar]);
+  if (!selectedCar || !rentCompany) return;
+  
+  getSearchReservationCarPriceListRequest(address, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
+  getSearchDetailListRequest(address, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
+}, [selectedCar, rentCompany]);
 
-// // 업체 정보
-// useEffect(() => {
-//   if (!selectedCar || !selectedRentCompany) return;
-//   getSearchDetailListRequest(selectedRentCompany, address, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
-// }, [selectedCar, selectedRentCompany]);
 
 if (!selectedCar) return <></>;
-console.log('렌더링 시 렌트 회사 정보:', brand);
+
 
 //                    render                    //
 
@@ -169,17 +165,17 @@ console.log('렌더링 시 렌트 회사 정보:', brand);
                 <div className='list-title-wrap'>
                   <div className='list-title'>등급</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>등급등급등급</div>
+                  <div className='list-title-contents'>{grade}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>연비</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>여어어어어ㅓ어어언비</div>
+                  <div className='list-title-contents'>{carOil}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>연료</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>연료로롱로오로오오오오오</div>
+                  <div className='list-title-contents'>{fuelType}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>연식</div>
@@ -199,7 +195,7 @@ console.log('렌더링 시 렌트 회사 정보:', brand);
                 <div className='list-title-wrap'>
                   <div className='list-title'>탑승 인원 수</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>탑승가능인원수탑승가능인원수</div>
+                  <div className='list-title-contents'>{capacity}</div>
                 </div>
               </div>
             </div>

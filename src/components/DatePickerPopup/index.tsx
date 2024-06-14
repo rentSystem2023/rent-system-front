@@ -9,12 +9,10 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
     //                       State                          //
     const { reservationStart, reservationEnd, setReservationStart, setReservationEnd } = useReservationStore();
 
-    const today = new Date(); // 현재 날짜 가져오기
-    const tomorrow = new Date(today); // 오늘의 복사본 생성
-    tomorrow.setDate(tomorrow.getDate() + 1); // 내일로 설정
+    const tomorrow =  new Date(new Date().setDate(new Date().getDate() + 1)); // 현재 날짜 가져오기
 
     const [startDate, setStartDate] = useState<Date | null>(tomorrow); // 시작 날짜를 내일로 초기화
-    const [endDate, setEndDate] = useState<Date | null>(null); // 종료 날짜를 null로 초기화
+    const [endDate, setEndDate] = useState<Date | null>(tomorrow); // 종료 날짜를 null로 초기화
     const startDateInputRef = useRef<HTMLInputElement>(null); // 시작 날짜 input 엘리먼트에 대한 참조 생성
 
     //                      Effect                     //
