@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useEffect, useState } from "react";
-import { ADMIN_USER_LIST_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from "src/constant";
+import { ADMIN_USER_LIST_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, GUIDE_OF_USE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH, PERSONAL_INFORMATION_POLICY_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, TERMS_OF_USE_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 import { useCookies } from "react-cookie";
 import { GetMyInfoResponseDto, GetSignInUserResponseDto } from "src/apis/user/dto/response";
@@ -95,7 +95,6 @@ function TopBar() {
     );
 }
 
-
 function BottomBar() {
     const [cookies, setCookie] = useCookies();
     const navigator = useNavigate();
@@ -124,9 +123,9 @@ function BottomBar() {
                     <h3>빠른 링크</h3>
                     <div className="quick-links-page" onClick={onMyPageButtonClickHandler}>마이페이지</div>
                     <div className="quick-links-page" onClick={() => navigator(NOTICE_LIST_ABSOLUTE_PATH)}>공지사항</div>
-                    <div className="quick-links-page">이용약관</div>
-                    <div className="quick-links-page">이용안내</div>
-                    <div className="quick-links-page">개인정보처리방침</div>
+                    <div className="quick-links-page" onClick={() => navigator(TERMS_OF_USE_ABSOLUTE_PATH)} >이용약관</div>
+                    <div className="quick-links-page" onClick={() => navigator(GUIDE_OF_USE_ABSOLUTE_PATH)} >이용안내</div>
+                    <div className="quick-links-page" onClick={() => navigator(PERSONAL_INFORMATION_POLICY_ABSOLUTE_PATH)} >개인정보처리방침</div>
                     <div className="quick-links-page" onClick={() => navigator(QNA_LIST_ABSOLUTE_PATH)}>구매관련 문의사항 문의</div>
                 </div>
                 <div className="social-media">
