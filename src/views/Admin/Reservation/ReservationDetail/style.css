@@ -2,10 +2,44 @@
     justify-content: space-between;
 }
 
+.admin-contents-wrap.state{
+    border-bottom: none;
+
+    margin-top: -2px;
+    margin-bottom: -1px;
+}
+
+.admin-content-wrap.reser{
+    display: flex;
+    gap: 10px;
+}
+
 .reservation-primary-button{
     display: flex;
-    gap: 10px
+    gap: 10px;
+}
 
+.admin-reservation-state{
+    display: flex;
+    gap: 5px;
+}
+
+.reservation-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    padding: 2px 2px;
+
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.reservation-button:hover{
+    cursor: pointer;
+    opacity: 0.9;
 }
 
 .reservation-error-button{

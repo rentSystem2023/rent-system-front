@@ -245,11 +245,13 @@
             <div className='table-list-top'>
                 <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                 <div className='table-list-top-right'>
-                    {loginUserRole === 'ROLE_USER' ? 
-                    <div className='primary-button' onClick={onWriteButtonClickHandler}>글쓰기</div> :
+                    {loginUserRole === 'ROLE_ADMIN'?
                     <>
                     <div className={toggleClass} onClick={onToggleClickHandler}></div>
                     <div className='qna-list-top-admin-text'>미완료 보기</div>
+                    </> :                    
+                    <>
+                    <div className='primary-button' onClick={onWriteButtonClickHandler}>글쓰기</div>
                     </>
                     }
                 </div>
