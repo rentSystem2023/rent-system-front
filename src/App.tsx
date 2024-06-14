@@ -23,11 +23,13 @@ AUTH_FIND_PW_RESET_PATH,
 AUTH_PATH,
 AUTH_SIGN_IN_PATH,
 AUTH_SIGN_UP_PATH,
+GUIDE_OF_USE,
 MAIN_ABSOLUTE_PATH,
 MAIN_PATH,
 NOTICE_DETAIL_PATH,
 NOTICE_LIST,
 NOTICE_PATH,
+PERSONAL_INFORMATION_POLICY,
 QNA_DETAIL_PATH,
 QNA_LIST_PATH,
 QNA_PATH,
@@ -39,6 +41,7 @@ RESERVATION_COMPANY_PATH,
 RESERVATION_PATH,
 RESERVATION_REQUEST_PATH,
 SNS_PATH,
+TERMS_OF_USE,
 USER_EMAIL_UPDATE_PATH,
 USER_PATH,
 USER_PW_UPDATE_PATH,
@@ -84,6 +87,9 @@ import ReservationDetail from "./views/Admin/Reservation/ReservationDetail";
 import SearchDetail from "./views/Reservation/SearchDetail";
 import MyInfoQnaList from "./views/MyPage/Qna/list";
 import MyReservationDetail from "./views/MyPage/Reservation/ReservationDetail";
+import TermsOfUse from "./views/MainBottom/TermsOfUse";
+import GuideOfUse from "./views/MainBottom/GuideOfUse";
+import PersonalInformationPolicy from "./views/MainBottom/Policy";
 
 //          component: root 경로 컴포넌트          //
 function Index() {
@@ -156,6 +162,11 @@ return (
     {/* // route : 메인 페이지 */}
     <Route path={MAIN_PATH} element={<ServiceContainer />}>
         <Route index element={<Main />} />
+
+        {/* // route : 이용약관, 이용안내, 개인정보방침 페이지 */}
+        <Route path={TERMS_OF_USE} element={<TermsOfUse />} />
+        <Route path={GUIDE_OF_USE} element={<GuideOfUse />} />
+        <Route path={PERSONAL_INFORMATION_POLICY} element={<PersonalInformationPolicy />} />
 
         {/* // route : 인증 페이지 */}
         <Route path={AUTH_PATH}>

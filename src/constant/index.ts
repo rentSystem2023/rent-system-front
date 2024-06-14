@@ -3,6 +3,9 @@
 export const MAIN_PATH = '/rentcar';
 
 // description: 인증 페이지 URL //
+export const TERMS_OF_USE = 'terms';
+export const GUIDE_OF_USE = 'guide';
+export const PERSONAL_INFORMATION_POLICY = 'personal-information-policy';
 export const AUTH_PATH = 'auth';
 export const AUTH_SIGN_IN_PATH = 'sign-in';
 export const AUTH_SIGN_UP_PATH = 'sign-up';
@@ -60,6 +63,13 @@ export const ADMIN_BOARD_QNA_PATH = 'qna';
 // constant : Navigation 절대 URL PATH //
 // description: 메인 페이지 절대 URL //
 export const MAIN_ABSOLUTE_PATH = MAIN_PATH;
+
+// description: 이용약관, 이용안내, 개인정보처리방침 절대 URL //
+export const TERMS_OF_USE_ABSOLUTE_PATH = `${MAIN_PATH}/${TERMS_OF_USE}`;
+// description: 이용약관, 이용안내, 개인정보처리방침 절대 URL //
+export const GUIDE_OF_USE_ABSOLUTE_PATH = `${MAIN_PATH}/${GUIDE_OF_USE}`;
+// description: 이용약관, 이용안내, 개인정보처리방침 절대 URL //
+export const PERSONAL_INFORMATION_POLICY_ABSOLUTE_PATH = `${MAIN_PATH}/${PERSONAL_INFORMATION_POLICY}`;
 
 // description: 인증 //
 // description: 회원가입 페이지 절대 URL //
