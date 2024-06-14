@@ -33,7 +33,7 @@ function ListItem ({
             <div className='my-reservation-state'>{reservationState}</div>
             <div className='my-reservation-info-list'>
                 <div className='my-reservation-car-image'>
-                    <img style={{ width: '190%', height: '150%', marginLeft:'22px'}} src={carImageUrl} />
+                    <img style={{ width: '150%', height: '120%'}} src={carImageUrl} />
                 </div>
                 <div className='my-reservation-info'>
                     <div className='reservation-car-container'>
