@@ -236,7 +236,7 @@ export const GET_CAR_SEARCH_LIST_URL =  `${SERVER_RESERVATION_MODULE_URL}/search
 // 보험별 가격 검색 결과 URL
 export const GET_CAR_PRICE_SEARCH_LIST_URL = (carName : string) => `${GET_CAR_SEARCH_LIST_URL}/${carName}`;
 // 보험별 가격 상세 검색 결과 URL
-export const GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL = (rentCompany : string) =>  `${GET_CAR_PRICE_SEARCH_LIST_URL}/${rentCompany}`;
+export const GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL = (carName: string, rentCompany : string) =>  `${GET_CAR_SEARCH_LIST_URL}/${carName}/${rentCompany}`;
 
 // description: NOTICE MODULE
 export const SERVER_NOTICE_MODULE_URL = `${SERVER_API_URL}/notice`;
