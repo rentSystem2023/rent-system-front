@@ -21,9 +21,9 @@ interface ReservationStore {
 };
 
 const useReservationStore = create<ReservationStore>(set => ({
-    address: '제주국제공항',
-    reservationStart: getYYYYMMDD(new Date()),
-    reservationEnd: getYYYYMMDD(new Date()),
+    address: '제주국제공항', 
+    reservationStart: getYYYYMMDD(new Date(new Date().setDate(new Date().getDate() + 1))),
+    reservationEnd: getYYYYMMDD(new Date(new Date().setDate(new Date().getDate() + 2))),
     selectedCar: null,
     selectedInsurance: '',
     selectedRentCompany: '',
