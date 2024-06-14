@@ -142,7 +142,7 @@ export default function MyReservationDetail() {
                 <div className='my-reservation-detail-info'>
                     <div className='my-reservation-list-wrap'>                
                         <div className='my-reservation-car-image detail'>
-                            <img style={{ width: '160%', height: '130%', marginLeft:'48px'}} src={carImageUrl} />
+                            <img style={{ width: '130%', height: '100%'}} src={carImageUrl} />
                         </div>
                         
                         <div className='my-reservation-detail-list'>
