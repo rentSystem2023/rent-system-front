@@ -78,6 +78,7 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
             alert("시작 날짜와 종료 날짜를 모두 선택해주세요.");
         }
     };
+    
     return (
         <div className="popup-overlay">
             <div className="popup-content">
