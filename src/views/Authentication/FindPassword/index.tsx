@@ -105,8 +105,8 @@ export default function FindPassword() {
     //                    render                    //
   return (
     <div id="authentication-wrapper">
-      <div className='authentication-sign-up'>
       <div className="title-text">비밀번호 찾기</div>
+      <div className='authentication-sign-up'>
         <div className='authentication-contents'>
           <div className='qna-board-text'>
           <div className="qna-board-image help"></div>
