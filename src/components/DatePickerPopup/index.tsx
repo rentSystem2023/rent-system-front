@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useReservationStore } from "src/stores";
 import { getYYYYMMDD } from "src/utils";
-
 import './style.css'
 
 //                          Component                       //
@@ -55,7 +54,7 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
         const maxEndDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000); // 최대 30일 이후의 날짜 계산
     
         if (startDate && !endDate) {
-            alert("종료 날짜를 변경해주세요 (종료 날짜는 시작 날짜 이후여야 합니다.)");
+            alert("당일 예약은 불가합니다.\r시작날짜와 종료날짜를 선택해주세요.");
             return; // 종료
         }
     
@@ -65,7 +64,7 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
             if (startDate >= today && endDate <= maxEndDate) {
                 // 시작 날짜와 종료 날짜가 같은 경우 경고 메시지 표시
                 if (startDate.toISOString().split('T')[0] === endDate.toISOString().split('T')[0]) {
-                    alert("시작 날짜와 종료 날짜가 같습니다. 다른 날짜를 선택해주세요.");
+                    alert("시작날짜와 종료날짜를 모두 선택해주세요.");
                     return; // 종료
                 } else if (startDate.getTime() <= endDate.getTime()) {
                     // 시작 날짜와 종료 날짜가 같거나 이전인 경우에도 처리 가능
@@ -75,25 +74,45 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
                 alert("당일 예약은 불가능하며, 오늘 날짜 기준으로 최대 30일 이내여야 합니다.");
             }
         } else {
-            alert("시작 날짜와 종료 날짜를 모두 선택해주세요.");
+            alert("시작날짜와 종료날짜를 모두 선택해주세요.");
         }
     };
     
     return (
-        <div className="popup-overlay">
-            <div className="popup-content">
-                <h2>날짜 선택</h2>
-                <div>
-                    <span>시작 날짜: </span>
-                    <input ref={startDateInputRef} type="date" min={getYYYYMMDD(tomorrow)} onChange={handleStartDateSelecthandler} />
+        <div className="date-popup-wrapper">
+            <div className="date-popup-container">
+                <div className="date-popup-top">날짜 선택</div>
+
+                <div className="date-popup-contents">
+                    <div className="date-popup-content">
+                        <div className="date-popup-title">시작일</div>
+                        <div className="date-popup-calender">
+                        <input
+                            className="date-calender"
+                            ref={startDateInputRef} 
+                            type="date" 
+                            min={getYYYYMMDD(tomorrow)}
+                            onChange={handleStartDateSelecthandler} 
+                        />
+                        </div>
+                    </div>
+                    <div className="date-popup-content">
+                        <div className="date-popup-title">종료일</div>
+                        <div className="date-popup-calender">
+                            <input
+                                className="date-calender"
+                                type="date"  
+                                min={startDate ? getYYYYMMDD(startDate) : getYYYYMMDD(tomorrow)} 
+                                onChange={handleEndDateSelecthandler} 
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <span>종료 날짜: </span>
-                    <input type="date"  min={startDate ? getYYYYMMDD(startDate) : getYYYYMMDD(tomorrow)} onChange={handleEndDateSelecthandler} />
+
+                <div className="date-popup-button">
+                    <div className="primary-button choice" onClick={handleConfirmhandler}>선택</div>
+                    <div className="error-button cancle" onClick={onClose}>취소</div>
                 </div>
-                <div>대여 시간은 12:00 ~ 12:00(24시기준)</div>
-                <button onClick={handleConfirmhandler}>확인</button>
-                <button onClick={onClose}>취소</button>
             </div>
         </div>
     );
