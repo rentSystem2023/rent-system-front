@@ -57,12 +57,20 @@
 }
 
 .search-select-item.location{
-    width: 250px;
+    width: 550px;
 }
 
-/* .search-select-item.date{
-    width: 450px;
-} */
+.search-select-item.date{
+    width: 100%;
+    
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.search-select-item.date:hover{
+    cursor: pointer;
+    opacity: 0.9;
+}
 
 .location-image{
     width: 25px;
@@ -85,14 +93,18 @@
 
 .search-date-wrap{
     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
 }
 
-.search-date-title{
-    background-color: rgba(255, 255, 255, 1);
-    border: 1px solid rgba(255, 255, 255, 1);
-    border-radius: 8px;
+.search-date-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
-
 .car-search-button{
     display: flex;
     justify-content: center;
@@ -100,6 +112,9 @@
 
     padding: 14px;
     width: 100px;
+    
+    font-size: 16px;
+    font-weight: 600;
 
     background-color: rgba(255, 255, 255, 255);
     border: 1px solid rgba(255, 255, 255, 255);
@@ -108,7 +123,7 @@
 
 .car-search-button:hover{
     cursor: pointer;
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 /* 인기차량 CSS */
