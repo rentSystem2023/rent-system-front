@@ -12,6 +12,7 @@
 
     //                    component                    //
     function ListItem ({ 
+    index,
     receptionNumber,
     writeDatetime,
     title,
@@ -20,7 +21,7 @@
     category,
     publicState,
     status
-    }: QnaListItem) {
+    }: QnaListItem & { index: number }) {
 
     //                    function                    //
     const navigator = useNavigate();
@@ -43,7 +44,7 @@
     const coverdWriterId = writerId !== '' && (writerId[0] + '*'.repeat(writerId.length - 1));
     return (
         <div className='table-list-table-tr qna' onClick={onClickHandler}>
-                <div className='qna-list-table-reception-number'>{receptionNumber}</div>
+                <div className='qna-list-table-reception-number'>{index + 1}</div>
                 <div className='qna-list-table-write-date'>{writeDatetime}</div>
                 <div className={`qna-list-table-title ${publicState ? 'public' : 'private'}`} style={{ textAlign: 'left' }}>{publicState ? title : '비공개글입니다.'}</div>
                 <div className='qna-list-table-writer-id'>{coverdWriterId}</div>
@@ -69,7 +70,7 @@
 
     const [qnaList, setQnaList] = useState<QnaListItem[]>([]);
     const [viewList, setViewList] = useState<QnaListItem[]>([]);
-    const [totalLenght, setTotalLength] = useState<number>(0);
+    const [totalLength, setTotalLength] = useState<number>(0);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageList, setPageList] = useState<number[]>([1]);
@@ -220,7 +221,7 @@
 
     useEffect(() => {
         if (!qnaList.length) return;
-        changePage(qnaList, totalLenght);
+        changePage(qnaList, totalLength);
     }, [currentPage]);
 
     useEffect(() => {
@@ -242,7 +243,7 @@
                 궁금한 사항이 있으신가요? <br/> Q&A 등록은 로그인 후 가능 합니다. <br/> (평일 09:00 ~ 18:00 주말 공휴일 휴무)
             </div>
             <div className='table-list-top'>
-                <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+                <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                 <div className='table-list-top-right'>
                     {loginUserRole === 'ROLE_USER' ? 
                     <div className='primary-button' onClick={onWriteButtonClickHandler}>글쓰기</div> :
@@ -265,7 +266,7 @@
                     <div className='qna-list-table-status'>상태</div>
                     <div className='qna-list-table-viewcount'>조회수</div>
                 </div>
-                {viewList.map(item => <ListItem {...item} />)}
+                {viewList.map((item, index) => <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.receptionNumber} />)}
             </div>
             <div className='table-list-bottom'>
                 <div style={{ width: '299px' }}></div>

@@ -31,16 +31,16 @@
     opacity: 0.85;
 }
 
-/* .logo-image{
-    height: 20px;
-    width: 20px; 
+.logo-image{
+    height: 70px;
+    width: 220px; 
     background-size: cover; 
     background-position: 50% 40%; 
-} */
+}
 
-/* .logo-image.logo{
-    background-image: url('../../assets/image/logo.png');
-} */
+.logo-image.logo{
+    background-image: url('../../assets/image/logo-car.png');
+}
 
 .top-bar-container {
     grid-area: topbar;
@@ -138,4 +138,9 @@
     font-style: normal;
 
     color: rgba(64, 64, 64, 1);
+}
+
+.quick-links-page:hover {
+    cursor: pointer;
+    opacity: 0.85;
 }
