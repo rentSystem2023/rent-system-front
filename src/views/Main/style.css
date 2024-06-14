@@ -1,4 +1,3 @@
-
 #main-page-wrapper{
     display: flex;
     flex-direction: column;
@@ -50,12 +49,50 @@
     justify-content: center;
     align-items: center;
     padding: 14px;
-    flex: 1;    
+    gap: 5px; 
 
-    background-color: rgba(255, 255, 255, 255);
-    border: 1px solid rgba(255, 255, 255, 255);
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(255, 255, 255, 1);
     border-radius: 8px;
 }
+
+.search-select-item.location{
+    width: 250px;
+}
+
+/* .search-select-item.date{
+    width: 450px;
+} */
+
+.location-image{
+    width: 25px;
+    height: 25px; 
+    background-size: cover;
+    background-image: url('../../assets/image/location.png');
+}
+
+.date-image{
+    width: 25px;
+    height: 25px; 
+    background-size: cover;
+    background-image: url('../../assets/image/calender.png');
+}
+
+.location-title{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.search-date-wrap{
+    display: flex;
+}
+
+.search-date-title{
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 8px;
+}
+
 .car-search-button{
     display: flex;
     justify-content: center;
@@ -74,36 +111,90 @@
     opacity: 0.85;
 }
 
-.popular-car-box{
+/* 인기차량 CSS */
+.popular-car-list-box{
     display: flex;
-    width: 1000px;
+    justify-content: center;
+    align-items: center;
+
+    width: 1190px;
     height: 250px;
     gap: 20px;
-    padding: 14px;
+    padding: 25px 20px;
 
     background-color: rgba(238, 238, 238, 1);
     border-radius: 8px;
 
 }
-.popular-car-card{
+.popular-car-list-wrap{
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
 
     width: 100%;
-    gap: 24px;
-    padding: 14px;
+    gap: 10px;
+    padding: 15px;
     
     background-color: rgba(255, 255, 255, 255);
     border: 1px solid rgba(255, 255, 255, 255);
     border-radius: 8px; 
 }
 
+.popular-car-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    margin-left: 32px;
+    margin-top: -10px;
 
+    width: 180px;
+    height: 150px;
 
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 10px 25px;    
 
-/* 위치 선택 css */
+    color: rgba(0,0,0,1);
+
+    background-color: rgba(255, 255, 255, 0.5);
+    background-size: cover; 
+}
+
+.popular-car-info-list{
+    display: flex;
+    flex-direction: column;
+    
+    gap: 5px;
+    font-size: 13px;
+}
+
+.popular-car-info-contents-carname{
+    display: flex;
+    gap: 10px;
+    
+    border-radius: 6px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    background-size: cover; 
+    background-color: rgba(238, 238, 238, 1)
+}
+
+.popular-car-info-container{
+    margin-top: 2px;
+    margin-left: 10px;
+}
+
+.popular-car-info-contents{
+    display: flex;
+    gap: 10px;
+}
+
+.popular-car-title{
+    width: 80px;
+}
+
+/* 하단바 CSS */
 .bottom-container {
     background-color: #665b5b48;
     padding: 20px 0;
