@@ -95,7 +95,6 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
 
 
     //                  effect                        //
-
     useEffect(() => {
         getReservationPopularListRequest().then(handlePopularCarListResponse);
     }, [reservationStart, reservationEnd]); // reservationStart, reservationEnd가 변경될 때마다 실행

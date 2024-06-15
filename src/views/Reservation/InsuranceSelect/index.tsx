@@ -62,9 +62,26 @@ function ListItem ({
 );
 }
 
+// 하늘
+// func DetailImage ({ imageUrl, onClose }: { imageUrl: string, onClose: () => void }) {
+//   return (
+//     <div className='detail-image-container'>
+//       <div className='detail-image-wrap'>
+//         <div className='detail-image-close-button'>
+//           <div className='detail-image-close' onClick={onClose}>X</div>
+//         </div>
+//         <div className='detail-image-content'>
+//           <img src={imageUrl} alt="detail" style={{ width: '200%' }} />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
 export default function InsuranceSelect() {
 
   const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
+  
   //                    state                    //
   const [priceList, setPriceList] = useState<ReservationCarPriceListItem[]>([]);
   const [viewList, setViewList] = useState<ReservationCarPriceListItem[]>([]);
@@ -75,6 +92,7 @@ export default function InsuranceSelect() {
   const [currentSection, setCurrentSection] = useState<number>(1);
   const { address, reservationStart, reservationEnd, selectedCar, selectedInsurance } = useReservationStore();
   const [pageList, setPageList] = useState<number[]>([1]);
+  // const [imageDetail, setImageDetail] = useState(false);
     
   //                    function                    //
   const navigator = useNavigate();
@@ -151,7 +169,11 @@ export default function InsuranceSelect() {
       setCurrentSection(currentSection + 1);
       setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
   };
-  
+
+  // const closeImagePopupHandler = () => {
+  //   setImageDetail(false);
+  // };
+
   //                    effect                    //
   useEffect(() => {
     if (!priceList.length) return;
@@ -182,11 +204,17 @@ export default function InsuranceSelect() {
 
       <div className='insurance-wrapper'>
         <div className='select-car-info'>
-          <div className='select-car-info-image'><img style={{ width: '190%'}} src={selectedCar.carImageUrl} /></div>
+          <div className='select-car-info-image'>
+            <img 
+              style={{ width: '200%', height: '120%'}} 
+              src={selectedCar.carImageUrl} 
+              // onClick={() => setImageDetail(true)}
+            />
+          </div>
 
           <div className='select-car-info-list'>
             <div className='select-info-wrap'>
-              <div className='select-info'>자동차명</div>
+              <div className='select-info'>차량명</div>
               <div className='qna-detail-info-divider'>{'\|'}</div>
               <div className='selecet-info-cotents'>{selectedCar.carName}</div>
             </div>
@@ -218,7 +246,8 @@ export default function InsuranceSelect() {
               <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
           </div>
         </div>
-      </div>     
+      </div>
+      {/* {imageDetail && <DetailImage imageUrl={selectedCar.carImageUrl} onClose={closeImagePopupHandler}/>} */}
     </div>
   );
 }
