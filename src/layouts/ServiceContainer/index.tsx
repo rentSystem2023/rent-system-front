@@ -107,41 +107,58 @@ function BottomBar() {
     return (
         <div className="bottom-container">
             <div className="bottom-content">
-                <div className="company-info">
-                    <h3>회사 소개</h3>
-                    <p>
-                        (주)제주렌트카<br />
-                        대표: 김민철,장현아,우하늘,한성윤<br />
-                        제주도 제주시 제주군 제주동<br />
-                        사업자등록번호: 100-100-10000<br />
-                        통신판매업신고번호: 2024-경남부산-0613<br />
-                        개인정보보호책임자: 장현아<br />
-                        이메일: janghyuna@naver.com
-                    </p>
+                <div className="bottom-image-content">
+                    <div className="botton-logo"></div>
                 </div>
-                <div className="quick-links">
-                    <h3>빠른 링크</h3>
-                    <div className="quick-links-page" onClick={onMyPageButtonClickHandler}>마이페이지</div>
-                    <div className="quick-links-page" onClick={() => navigator(NOTICE_LIST_ABSOLUTE_PATH)}>공지사항</div>
-                    <div className="quick-links-page" onClick={() => navigator(TERMS_OF_USE_ABSOLUTE_PATH)} >이용약관</div>
-                    <div className="quick-links-page" onClick={() => navigator(GUIDE_OF_USE_ABSOLUTE_PATH)} >이용안내</div>
-                    <div className="quick-links-page" onClick={() => navigator(PERSONAL_INFORMATION_POLICY_ABSOLUTE_PATH)} >개인정보처리방침</div>
-                    <div className="quick-links-page" onClick={() => navigator(QNA_LIST_ABSOLUTE_PATH)}>구매관련 문의사항 문의</div>
+
+                <div className="bottom-contents-wrapper">
+                    <div className="bottom-content">
+                        <div className="bttom-link-contents">
+                            <div className="bttom-links-page" onClick={onMyPageButtonClickHandler}>마이페이지</div>
+                            <div className="bttom-links-page" onClick={() => navigator(NOTICE_LIST_ABSOLUTE_PATH)}>공지사항</div>
+                            <div className="bttom-links-page" onClick={() => navigator(QNA_LIST_ABSOLUTE_PATH)}>문의사항</div>
+                            <div className="bttom-links-page" onClick={() => navigator(TERMS_OF_USE_ABSOLUTE_PATH)} >이용약관</div>
+                            <div className="bttom-links-page" onClick={() => navigator(GUIDE_OF_USE_ABSOLUTE_PATH)} >이용안내</div>
+                            <div className="bttom-links-page" onClick={() => navigator(PERSONAL_INFORMATION_POLICY_ABSOLUTE_PATH)} >개인정보처리방침</div>
+                        </div>
+
+                        <div className="bottom-company-info">
+                            <div>(주)제주렌트카 {'\|'} 대표 : 김민철,장현아,우하늘,한성윤 {'\|'} 제주도 제주시 제주군 제주동</div>
+                            <div>사업자등록번호 : 100-100-10000 {'\|'} 통신판매업신고번호 : 2024-경남부산-0613</div>
+                            <div>개인정보보호책임자 : 장현아 {'\|'} 이메일 : janghyuna@naver.com</div>
+                        </div>
+                    </div>
+                    
+                    <div className="bottom-media-info">
+                        <div className="bottom-media-contents">
+                            <div className="bottom-media-titles">
+                                <div className="media-title">고객센터</div>
+                                <div className="media-title">1588-0510</div>
+                            </div>
+                            
+                            <div className="media-content">
+                                <div className="media-content-list">평일 : 09:00 ~ 17:30</div>
+                                <div className="media-content-list">점심 : 12:00 ~ 13:00</div>
+                                <div className="media-content-list">휴무 : 주말/공휴일</div>
+                            </div>
+                        </div>
+
+                        <div className="bottom-account-contents">
+                            <div className="media-title">입금 계좌 안내</div>
+                            <div className="media-content">
+                                <div className="media-content-list">부산은행 202-401-180705</div>
+                                <div className="media-content-list">예금주 : (주)차탕갑서</div>
+                                <div className="media-content-list">입금 시 주문자 성함 필시 기재</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="social-media">
-                    <h3>고객센터</h3>
-                    <p>1588-6007<br />평일: 09:00 ~ 17:30<br />점심: 12:00 ~ 13:00<br />휴무: 주말/공휴일</p>
-                </div>
-            </div>
-            <div className="bottom-footer">
-                <p className="account-info">입금계좌안내<br />하나은행 110-468-275052<br />예금주: (주)차탕갑서<br />* 입금 시 주문자 성함 필시 기재</p>
             </div>
         </div>
     );
 }
 
-
-    export default function ServiceContainer() {
+export default function ServiceContainer() {
 
     const { setLoginUserId, setLoginUserRole } = useUserStore();
     const navigator = useNavigate();

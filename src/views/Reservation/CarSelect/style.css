@@ -58,7 +58,7 @@
     flex-wrap: wrap; 
     justify-content:start;
 
-    padding-left: 40px;
+    /* padding-left: 40px; */
     gap: 20px;
 }
 
@@ -67,7 +67,7 @@
 
     display: flex;
     flex-direction: column;
-    width: 575px;
+    width: 600px;
 
     gap: 10px;    
     padding: 20px;
@@ -82,7 +82,7 @@
     display: flex;
     flex-wrap: wrap;
 
-    gap: 30px;
+    gap: 12px;
     max-width: 100%;
 }
 
@@ -92,10 +92,11 @@
     align-items: center;
 
     box-sizing: border-box;
+    overflow: hidden;
     padding: 8px;
 
-    width: 260px;
-    height: 200px;
+    width: 250px;
+    height: 185px;
 
     border-radius: 6px;
     padding: 13px 25px;    
@@ -122,8 +123,8 @@
 
     box-sizing: border-box;
     padding: 13px;
-    gap: 10px;
-    width: 245px;
+    gap: 8px;
+    width: 298px;
 
     border: 1px solid rgba(255, 255, 255, 1);
     border-radius: 6px;
@@ -131,6 +132,11 @@
     color: rgba(0,0,0,1);
 
     background-color: rgba(255,255,255,1);
+}
+
+.insurance-price:hover{
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .price-image{
@@ -152,11 +158,9 @@
     background-image: url('../../../assets/image/super.png');
 }
 
-
 .price-title{
+    width: 58px;
     font-size: 15px;
-    font-style: normal;
-    font-weight: 700;
 }
 
 .table-list-pagenation{

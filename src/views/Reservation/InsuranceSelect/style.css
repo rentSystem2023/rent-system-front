@@ -15,14 +15,19 @@
     grid-area: info;
 
     display: flex;
-    gap: 30px;
+    flex-direction: column;
+    gap: 12px;
 
-    width: 450px;
+    width: 320px;
 
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 6px;
     outline: none;
     padding: 13px 25px;
+}
+
+.car-image-detail{
+    cursor: pointer;
 }
 
 /* 선택한 자동차 사진 CSS */
@@ -32,20 +37,71 @@
     justify-content: center;
 
     border: 1px solid rgba(238, 238, 238, 1);
+    overflow: hidden;
     border-radius: 6px;
     outline: none;
-    padding: 13px 25px;
+    padding: 13px;
 
-    width: 100px;
-    height: 100px;
+    /* width: 200px; */
+    height: 180px;
 }
+
+/* 선택한 자동차 사진 상세 보기 CSS */
+/* .select-car-info-image:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.detail-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.detail-image-wrap{
+    background-color: rgba(255, 255, 255, 1);
+    overflow: hidden;
+    
+    padding: 20px;
+    border-radius: 8px;
+    width: 650px;
+}
+
+.detail-image-close-button{
+    display: flex;
+    justify-content: flex-end;
+
+    padding-right: 15px;
+    font-size: 28px;
+}
+
+.detail-image-close:hover{
+    cursor: pointer;
+}
+
+.detail-image-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+} */
 
 /* 선택한 자동차 정보 CSS */
 .select-car-info-list{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .select-info-wrap {
@@ -86,6 +142,7 @@
 
 .insurance-list-container:hover{
     cursor: pointer;
+    opacity: 0.8;
 }
 
 /* 보험 정보 CSS */

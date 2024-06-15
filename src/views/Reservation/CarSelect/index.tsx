@@ -46,7 +46,7 @@ function ListItem (props: ReservationCarViewListItem) {
             </div>
             <div className='list-wrap'>
                 <div className='car-image'>
-                    <img style={{ width: '190%'}} src={carImageUrl} />
+                    <img style={{ width: '180%', height: '150%'}} src={carImageUrl} />
                 </div>
                 <div className='insurance-wrap'>
                     <div className='insurance-price' onClick={() => onClickHandler('normal')}>
