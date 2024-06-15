@@ -1,13 +1,14 @@
 #wrapper {
     display: grid;
     grid-template-columns: 280px minmax(1182px, 1fr);
-    grid-template-rows: 85px minmax(944px, auto) 300px;
+    grid-template-rows: 85px minmax(944px, auto) 350px;
     grid-template-areas:
         "logo topbar"
         "main main"
         "footer footer";
 }
 
+/* 상단바 CSS */
 .logo-container {
     grid-area: logo;
 
@@ -76,6 +77,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .top-bar-role{
     display: flex;
     justify-content: center;
@@ -96,9 +98,11 @@
     width: 37px;
     background-position: 55% 58%;
 }
+
 .user-mypage-button.person{
     background-image: url('../../assets/image/login-icon.png');
 }
+
 .user-button:hover{
     cursor: pointer;
     opacity: 0.85;
@@ -125,28 +129,90 @@
     min-width: 1182px;
 }
 
+/* 하단바 CSS */
 .bottom-container{
     grid-area: footer;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     background-color: rgba(233, 236, 239, 1);
 
-    font-size: 15px;
-    font-style: normal;
-
+    padding: 25px 200px;
     color: rgba(64, 64, 64, 1);
 }
 
-.quick-links {
+.bottom-content{
     display: flex;
     flex-direction: column;
+}
+
+.bottom-image-content{
+    width: 390px;
+    height: 120px;
+    background-image: url('../../assets/image/logo-car.png');
+}
+
+.bottom-contents-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom-content{
+    gap: 20px;
+}
+
+.bttom-link-contents {
+    display: flex;
+    gap: 25px;
+}
+
+.bttom-links-page:hover {
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+.bottom-company-info{
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.bottom-media-info{
+    display: flex;
+
+    gap: 80px;
+}
+
+.bottom-media-contents{
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    margin-top: -32px;
+}
+
+.bottom-media-titles{
+    display: flex;
+    flex-direction: column;
+
     gap: 5px;
 }
 
-.quick-links-page:hover {
-    cursor: pointer;
-    opacity: 0.85;
+.media-title{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.media-content{
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.bottom-account-contents{
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
 }
