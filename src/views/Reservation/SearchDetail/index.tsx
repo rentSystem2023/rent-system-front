@@ -8,16 +8,10 @@ import ResponseDto from 'src/apis/response.dto';
 import { RESERVATION_COMPANY_PATH } from 'src/constant';
 import { getReservationDetailRequest, getSearchDetailListRequest, getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
 
-
-
-
-
-
 //                    component                   //
 export default function SearchDetail() {
   
-//                    state                   //
-
+  //                    state                   //
     const {rentCompany} = useParams();
     const { loginUserId, loginUserRole } = useUserStore();
     const { address, reservationStart, reservationEnd, selectedCar } = useReservationStore();
@@ -35,75 +29,69 @@ export default function SearchDetail() {
     const [fuelType,setFuelType] = useState<string>('');
     const [companyTelnumber,setCompanyTelnumber] = useState<string>('');
     const [companyRule,setCompanyRule] = useState<string>('');
-
     
-//                    function                    //
-const navigator = useNavigate();
+  //                    function                    //
+  const navigator = useNavigate();
 
-const GetSearchDetailListResponse = (result: GetSearchDetailListResponseDto | ResponseDto | null)=>{
-  const message =
-  !result ? '서버에 문제가 있습니다.' :
-  result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-  result.code === 'AF' ? '인증에 실패했습니다.' :
-  result.code === 'NB' ? '존재하지 않는 차량입니다.' :
-  result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+  const GetSearchDetailListResponse = (result: GetSearchDetailListResponseDto | ResponseDto | null)=>{
+    const message =
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+    result.code === 'AF' ? '인증에 실패했습니다.' :
+    result.code === 'NB' ? '존재하지 않는 차량입니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-  if(!result || result.code !== 'SU'){
-    alert(message);
+    if(!result || result.code !== 'SU'){
+      alert(message);
 
-    // 어디로 내보낼지 아직 모르겠음
-    navigator(RESERVATION_COMPANY_PATH);
-    return;
+      // 어디로 내보낼지 아직 모르겠음
+      navigator(RESERVATION_COMPANY_PATH);
+      return;
+    }
+
+    const {carImageUrl,carYear,brand,grade,carOil,capacity,normalPrice,luxuryPrice,superPrice,companyTelnumber,companyRule} =result as GetSearchDetailListResponseDto
+    setCarImageUrl(carImageUrl)
+    setCarYear(carYear)
+    setBrand(brand)
+    setGrade(grade)
+    setCarOil(carOil)
+    setCapacity(capacity)
+    setNormalPrice(normalPrice)
+    setLuxuryPrice(luxuryPrice)
+    setSuperPrice(superPrice)
+    setCompanyTelnumber(companyTelnumber)
+    setCompanyRule(companyRule)
+    setFuelType(fuelType)
+  };
+
+  //                    event handler                   //
+  // 차량정보 리스트
+  const carInformationClickHandler = () => {
+
   }
 
-  const {carImageUrl,carYear,brand,grade,carOil,capacity,normalPrice,luxuryPrice,superPrice,companyTelnumber,companyRule} =result as GetSearchDetailListResponseDto
-  setCarImageUrl(carImageUrl)
-  setCarYear(carYear)
-  setBrand(brand)
-  setGrade(grade)
-  setCarOil(carOil)
-  setCapacity(capacity)
-  setNormalPrice(normalPrice)
-  setLuxuryPrice(luxuryPrice)
-  setSuperPrice(superPrice)
-  setCompanyTelnumber(companyTelnumber)
-  setCompanyRule(companyRule)
-  setFuelType(fuelType)
-};
+  // 업체정보 리스트
+  const companyListClickHandler = () => {
 
-//                    event handler                   //
-// 차량정보 리스트
-const carInformationClickHandler = () => {
+  }
 
-}
+  // 예약하기
+  const reservationButtonClickHandler = ()=> {
 
-// 업체정보 리스트
-const companyListClickHandler = () => {
+  }
 
-}
+  //                    effect                    //
+  // 선택한 차량의 상태를 가져오는 것
+  useEffect(() => {
+    if (!selectedCar || !rentCompany) return;
+    
+    getSearchReservationCarPriceListRequest(address, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
+    getSearchDetailListRequest(address, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
+  }, [selectedCar, rentCompany]);
 
+  if (!selectedCar) return <></>;
 
-// 예약하기
-const reservationButtonClickHandler = ()=> {
-
-}
-
-//                    effect                    //
-
-// 선택한 차량의 상태를 가져오는 것
-useEffect(() => {
-  if (!selectedCar || !rentCompany) return;
-  
-  getSearchReservationCarPriceListRequest(address, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
-  getSearchDetailListRequest(address, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
-}, [selectedCar, rentCompany]);
-
-
-if (!selectedCar) return <></>;
-
-
-//                    render                    //
-
+  //                    render                    //
   return (
     <div id='user-page-wrapper'>
       <div className='search-datail-wrapper'>
