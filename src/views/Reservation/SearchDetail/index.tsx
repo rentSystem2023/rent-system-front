@@ -98,13 +98,13 @@ export default function SearchDetail() {
 
   const insurance =
     selectedInsurance === 'normal' ? `${krw(selectedCar.lowNormalPrice)} ~ ${krw(selectedCar.highNormalPrice)}` :
-      selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
-        selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
+    selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
+    selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
 
   const insuranceType =
     selectedInsurance === 'normal' ? '완전자차' :
-      selectedInsurance === 'luxury' ? '고급자차' :
-        selectedInsurance === 'super' ? '슈퍼자차' : '';
+    selectedInsurance === 'luxury' ? '고급자차' :
+    selectedInsurance === 'super' ? '슈퍼자차' : '';
 
   const calculateDateDifference = (start: string, end: string) => {
     const startDate = new Date(start);
@@ -118,8 +118,8 @@ export default function SearchDetail() {
 
   const insurancePrice =
     selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice * daysDifference)}` :
-      selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
-        selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
+    selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
+    selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
 
   //                    render                    //
   return (
@@ -178,6 +178,7 @@ export default function SearchDetail() {
             {displayCarInfo ? (
               <div className="search-detail-car-info-list">
                 <div className="search-detail-info-title">차량 정보</div>
+                
                 <div className="search-detail-info-contents">
                   <div className="list-title-wrap">
                     <div className="list-title">차량명</div>
@@ -229,12 +230,14 @@ export default function SearchDetail() {
             ) : (
               <div className="search-detail-company-info-list">
                 <div className="search-detail-info-title">업체 정보</div>
+
                 <div className="search-detail-info-contents">
                   <div className="list-title-wrap">
                     <div className="list-title">업체명</div>
                     <div className="qna-detail-info-divider">{'\|'}</div>
                     <div className="list-title-contents">{rentCompany}</div>
                   </div>
+
                   <div className="list-map-wrap">
                     <div className="list-title-wrap">
                       <div className="list-title">업체 위치</div>
@@ -262,11 +265,13 @@ export default function SearchDetail() {
                       />
                     </Map>
                   </div>
+
                   <div className="list-title-wrap">
                     <div className="list-title">전화번호</div>
                     <div className="qna-detail-info-divider">{'\|'}</div>
                     <div className="list-title-contents">{companyTelnumber}</div>
                   </div>
+
                   <div className="list-title-wrap">
                     <div className="list-title">영업점 방침</div>
                     <div className="qna-detail-info-divider">{'\|'}</div>
