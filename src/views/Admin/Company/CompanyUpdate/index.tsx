@@ -23,6 +23,7 @@ export default function CompanyUpdate() {
     const [address, setAddress] = useState<string>('');
     const [owner, setOwner] = useState<string>('');
     const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
+    const [registDate, setRegistDate] = useState<string>('');
     const [companyRule, setCompanyRule] = useState<string>('');
 
     //                    function                    //
@@ -42,7 +43,7 @@ export default function CompanyUpdate() {
             return;
         }
 
-        const { companyCode, rentCompany, address, owner, companyTelnumber, companyRule } = result as GetCompanyDetailResponseDto;
+        const { companyCode, rentCompany, address, owner, companyTelnumber, registDate, companyRule } = result as GetCompanyDetailResponseDto;
         if (loginUserRole !== 'ROLE_ADMIN') {
             alert('권한이 없습니다.');
             navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
@@ -53,6 +54,7 @@ export default function CompanyUpdate() {
         setAddress(address);
         setOwner(owner);
         setCompanyTelnumber(companyTelnumber);
+        setRegistDate(registDate);
         setCompanyRule(companyRule);
     };
 
@@ -185,14 +187,14 @@ export default function CompanyUpdate() {
                             </div>
                         </div>
 
-                        {/* <div className='admin-contents-wrap'>
+                        <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 등록일</div>
                             </div>
                             <div className='admin-content-wrap'>
                                 <div className='admin-detail-content'>{registDate}</div>
                             </div>
-                        </div> */}
+                        </div>
 
                         <div className='admin-contents-wrap rule'>
                             <div className='admin-title-wrap rule'>

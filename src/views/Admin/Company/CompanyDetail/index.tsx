@@ -88,14 +88,12 @@ export default function CompanyDetail() {
         .then(deleteBoardResponse)
     }
 
-
     //                    effect                    //
     useEffect(() => {
         if (!companyCode || !cookies.accessToken) return;
 
         getCompanyDetailRequest(companyCode, cookies.accessToken).then(getCompanyDetailResponse);
     }, []);
-
 
     //                    render                    //
     return (
