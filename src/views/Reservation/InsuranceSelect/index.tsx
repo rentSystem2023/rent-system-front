@@ -217,10 +217,15 @@ export default function InsuranceSelect() {
 
   if (!selectedCar) return <></>;
 
-  const insurance = 
-    selectedInsurance === 'normal' ? `${krw(selectedCar.lowNormalPrice)} ~ ${krw(selectedCar.highNormalPrice)}` :
-    selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
-    selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
+  // const insurance = 
+  //   selectedInsurance === 'normal' ? `${krw(selectedCar.lowNormalPrice)} ~ ${krw(selectedCar.highNormalPrice)}` :
+  //   selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
+  //   selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
+
+    const insuranceType =
+    selectedInsurance === 'normal' ? '완전자차' : 
+    selectedInsurance === 'luxury' ? '고급자차' :
+    selectedInsurance === 'super' ? '슈퍼자차' : '';
 
   return (
     <div id='user-page-wrapper'>
@@ -250,7 +255,7 @@ export default function InsuranceSelect() {
             <div className='select-info-wrap'>
               <div className='select-info'>보험</div>
               <div className='qna-detail-info-divider'>{'\|'}</div>
-              <div className='selecet-info-cotents'>{insurance}</div>
+              <div className='selecet-info-cotents'>{insuranceType}</div>
             </div>
           </div>
         </div>

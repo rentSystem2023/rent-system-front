@@ -1,5 +1,6 @@
 #reservation-search-wrapper{
     padding: 30px 24px;
+    z-index: 1;
 }
 
 .reservation-container{
