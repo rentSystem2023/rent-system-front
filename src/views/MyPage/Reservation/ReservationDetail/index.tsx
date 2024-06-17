@@ -21,6 +21,7 @@ export default function MyReservationDetail() {
     const [reservationStart, setReservationStart] = useState<string>('');
     const [reservationEnd, setReservationEnd] = useState<string>('');
     const [insuranceType, setInsuranceType] = useState<string>('');
+    
     const [carOil, setCarOil] = useState<number>(0);
     const [grade, setGrade] = useState<string>('');
     const [rentCompany, setRentCompany] = useState<string>('');
@@ -28,8 +29,8 @@ export default function MyReservationDetail() {
     const [address, setAddress] = useState<string>('');
     const [price, setPrice] = useState<number>(0);
 
-    // const [carName, setCarName] = useState<string>('');
-    // const [carNumber, setCarNumber] = useState<string>('');
+    const [carName, setCarName] = useState<string>('');
+    const [carNumber, setCarNumber] = useState<string>('');
     const [userId, setUserId] = useState<string>('');
     const [reservationState, setReservationState] = useState<string>('');
 
@@ -52,7 +53,7 @@ export default function MyReservationDetail() {
             }
         }
 
-        const { carImageUrl, nickName, reservationStart, reservationEnd, insuranceType, carOil, grade, rentCompany, companyTelnumber, address, price, reservationState } = result as GetMyReservationDetailResponseDto;
+        const { carImageUrl, nickName, reservationStart, reservationEnd, insuranceType, carOil, grade, rentCompany, companyTelnumber, address, price, reservationState, carName, carNumber } = result as GetMyReservationDetailResponseDto;
         setCarImageUrl(carImageUrl)
         setNickName(nickName);
         setReservationStart(reservationStart);
@@ -65,8 +66,8 @@ export default function MyReservationDetail() {
         setAddress(address);
         setPrice(price);
         setUserId(userId);
-        
-        // setCarName(carName);
+        setCarName(carName);
+        setCarNumber(carNumber)
         setReservationState(reservationState);
     };
 
@@ -95,8 +96,8 @@ export default function MyReservationDetail() {
 
         if (!reservationCode || !cookies.accessToken || reservationState === '예약취소') return;
 
-        if (reservationState === '예약 취소') {
-            alert('이미 취소된 예약내역입니다.')
+        if (reservationState !== '예약 완료') {
+            alert('예약완료 상태에서만 예약 취소할 수 있습니다.')
             return;
         }
         const isConfirm = window.confirm('예약 취소하시겠습니까?');
@@ -111,7 +112,7 @@ export default function MyReservationDetail() {
 
         alert('해당 예약 내역이 취소되었습니다.');
 
-        // navigator(USER_RESERVATION_ABSOLUTE_PATH);
+        navigator(USER_RESERVATION_ABSOLUTE_PATH);
     }
 
     //                    effect                    //
@@ -149,7 +150,12 @@ export default function MyReservationDetail() {
                             <div className='reservation-car-container detail'>
                                 <div className='reservation-side-title'>차량명</div>
                                 <div className='qna-detail-info-divider list'>{'\|'}</div>
-                                <div className='reservation-content'></div>
+                                <div className='reservation-content'>{carName}</div>
+                            </div>
+                            <div className='reservation-car-container detail'>
+                                <div className='reservation-side-title'>차 번호</div>
+                                <div className='qna-detail-info-divider list'>{'\|'}</div>
+                                <div className='reservation-content'>{carNumber}</div>
                             </div>
                             <div className='reservation-car-container detail'>
                                 <div className='reservation-side-title'>등급</div>
