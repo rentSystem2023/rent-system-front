@@ -31,6 +31,8 @@ export default function SearchDetail() {
     const [companyTelnumber,setCompanyTelnumber] = useState<string>('');
     const [companyRule,setCompanyRule] = useState<string>('');
     const [address,setAddress] = useState<string>('');
+
+    const [displayCarInfo, setDisplayCarInfo] = useState(true);
     
   //                    function                    //
   const navigator = useNavigate();
@@ -71,12 +73,12 @@ export default function SearchDetail() {
   //                    event handler                   //
   // 차량정보 리스트
   const carInformationClickHandler = () => {
-
+    setDisplayCarInfo(true)
   }
 
   // 업체정보 리스트
   const companyListClickHandler = () => {
-
+    setDisplayCarInfo(false)
   }
 
   // 예약하기
@@ -91,8 +93,6 @@ export default function SearchDetail() {
     getSearchReservationCarPriceListRequest(selectedAddress, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
     getSearchDetailListRequest(selectedAddress, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
   }, [selectedCar, rentCompany]);
-  
-  
 
   if (!selectedCar) return <></>;
 
@@ -106,144 +106,151 @@ export default function SearchDetail() {
   selectedInsurance === 'luxury' ? '고급자차' :
   selectedInsurance === 'super' ? '슈퍼자차' : '';
 
+  const insurancePrice = 
+  selectedInsurance === 'normal' && normalPrice ? krw(normalPrice) :
+  selectedInsurance === 'luxury' && luxuryPrice ? krw(luxuryPrice) :
+  selectedInsurance === 'super' && superPrice ? krw(superPrice) : '';
+
   //                    render                    //
   return (
-    <div id='user-page-wrapper'>
-      <div className='search-datail-wrapper'>
-        <div className='search-detail-container'>          
-          <div className='search-detail-image'>
-            <img style={{ width: '150%', height: '130%'}} src={carImageUrl} />
+    <div id="user-page-wrapper">
+      <div className="search-datail-wrapper">
+        <div className="search-detail-container">
+          <div className="search-detail-image">
+            <img style={{ width: '150%', height: '130%' }} src={carImageUrl} alt="Car" />
           </div>
 
-          <div className='search-datail-list'>
-            <div className='search-info-container'>
-              <div className='search-detail-title'>차이름</div>
-              <div className='qna-detail-info-divider'>{'\|'}</div>
-              <div className='search-detail-contents'>{selectedCar.carName}</div>
+          <div className="search-datail-list">
+            <div className="search-info-container">
+              <div className="search-detail-title">차이름</div>
+              <div className="qna-detail-info-divider">{'\|'}</div>
+              <div className="search-detail-contents">{selectedCar.carName}</div>
             </div>
 
-            <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-            
-            <div className='search-info-container'>
-                <div className='search-detail-title'>예약 날짜</div>
-                <div className='qna-detail-info-divider'>{'\|'}</div>
-                <div className='search-detail-contents'>{ `${reservationStart} ~ ${reservationEnd}`}</div>
-              </div>
-            <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+            <div style={{ border: '1px solid rgba(238, 238, 238, 1)' }}></div>
 
-            <div className='search-payment-wrap'>
-              <div className='search-info-container'>
-                <div className='search-detail-title'>가격</div>
-                <div className='qna-detail-info-divider'>{'\|'}</div>
-                <div className='search-detail-contents'>
-                  {selectedInsurance === 'normal' && normalPrice && krw(normalPrice)}
-                  {selectedInsurance === 'luxury' && luxuryPrice && krw(luxuryPrice)}
-                  {selectedInsurance === 'super' && superPrice && krw(superPrice)}
-                </div>
+            <div className="search-info-container">
+              <div className="search-detail-title">예약 날짜</div>
+              <div className="qna-detail-info-divider">{'\|'}</div>
+              <div className="search-detail-contents">{`${reservationStart} ~ ${reservationEnd}`}</div>
+            </div>
+            <div style={{ border: '1px solid rgba(238, 238, 238, 1)' }}></div>
+
+            <div className="search-payment-wrap">
+              <div className="search-info-container">
+                <div className="search-detail-title">가격</div>
+                <div className="qna-detail-info-divider">{'\|'}</div>
+                <div className="search-detail-contents">{insurancePrice}</div>
               </div>
-              
-              <div className='primary-button'>예약하기</div>
+
+              <div className="primary-button" onClick={reservationButtonClickHandler}>
+                예약하기
+              </div>
             </div>
           </div>
         </div>
 
-        <div className='search-detail-info-list-wrap'>
-          <div className='search-detail-info-button'>
-            <div className='search-detail-button-wrap active'>
-              <div className='search-detail-info-title'onClick={carInformationClickHandler}>차량 정보</div>
-            </div>            
-            <div className='search-detail-button-wrap'>
-              <div className='search-detail-info-title'onClick={companyListClickHandler}>업체 정보</div>
+        <div className="search-detail-info-list-wrap">
+          <div className="search-detail-info-button">
+            <div className={`search-detail-button-wrap${displayCarInfo ? ' active' : ''}`} onClick={carInformationClickHandler}>
+              <div className="search-detail-info-title">
+                차량 정보
+              </div>
+            </div>
+            <div className={`search-detail-button-wrap${!displayCarInfo ? ' active' : ''}`} onClick={companyListClickHandler}>
+              <div className="search-detail-info-title">
+                업체 정보
+              </div>
             </div>
           </div>
 
-          <div className='search-detail-info-list-container'>
-            <div className='search-detail-car-info-list'>
-              <div className='search-detail-info-title'>차량 정보</div>
-              <div className='search-detail-info-contents'>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>차량명</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{selectedCar.carName}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>브랜드</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{brand}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>등급</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{grade}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>연비</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{carOil}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>연료</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{fuelType}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>연식</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{carYear}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>보험</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{insuranceType}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>보험료</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>
-                    {selectedInsurance === 'normal' && normalPrice && krw(normalPrice)}
-                    {selectedInsurance === 'luxury' && luxuryPrice && krw(luxuryPrice)}
-                    {selectedInsurance === 'super' && superPrice && krw(superPrice)}
+          <div className="search-detail-info-list-container">
+            {displayCarInfo ? (
+              <div className="search-detail-car-info-list">
+                <div className="search-detail-info-title">차량 정보</div>
+                <div className="search-detail-info-contents">
+                  <div className="list-title-wrap">
+                    <div className="list-title">차량명</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{selectedCar.carName}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">브랜드</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{brand}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">등급</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{grade}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">연비</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{carOil}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">연료</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{fuelType}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">연식</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{carYear}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">보험</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{insuranceType}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">보험료</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">
+                      {selectedInsurance === 'normal' && normalPrice && krw(normalPrice)}
+                      {selectedInsurance === 'luxury' && luxuryPrice && krw(luxuryPrice)}
+                      {selectedInsurance === 'super' && superPrice && krw(superPrice)}
+                    </div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">탑승 인원 수</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{capacity}</div>
                   </div>
                 </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>탑승 인원 수</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{capacity}</div>
+              </div>
+            ) : (
+              <div className="search-detail-company-info-list">
+                <div className="search-detail-info-title">업체 정보</div>
+                <div className="search-detail-info-contents">
+                  <div className="list-title-wrap">
+                    <div className="list-title">업체명</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{rentCompany}</div>
+                  </div>
+                  <div className="list-map-wrap">
+                    <div className="list-title">업체 위치</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-map">지도 들어가야합니다.</div>
+                    <div className="list-title-contents">{address}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">전화번호</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{companyTelnumber}</div>
+                  </div>
+                  <div className="list-title-wrap">
+                    <div className="list-title">영업점 방침</div>
+                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-contents">{companyRule}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-
-            <div className='search-detail-company-info-list'>
-              <div className='search-detail-info-title'>업체 정보</div>
-              <div className='search-detail-info-contents'>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>업체명</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{rentCompany}</div>
-                </div>
-                <div className='list-map-wrap'>
-                  <div className='list-title'>업체 위치</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-map'>지도 들어가야합</div>
-                  <div className='list-title-contents'>{address}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>전화번호</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{companyTelnumber}</div>
-                </div>
-                <div className='list-title-wrap'>
-                  <div className='list-title'>영업점 방침</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{companyRule}</div>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
