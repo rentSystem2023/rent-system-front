@@ -105,10 +105,20 @@ export default function SearchDetail() {
   selectedInsurance === 'luxury' ? '고급자차' :
   selectedInsurance === 'super' ? '슈퍼자차' : '';
 
+  const calculateDateDifference = (start: string, end: string) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const timeDifference = endDate.getTime() - startDate.getTime();
+    const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // 밀리초를 일(day)로 변환
+    return dayDifference;
+  };
+
+  const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
+
   const insurancePrice = 
-  selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice)}` :
-  selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice)}` :
-  selectedInsurance === 'super' && superPrice ? `${krw(superPrice)}` : '';
+  selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice * daysDifference)}` :
+  selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
+  selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
 
   //                    render                    //
   return (

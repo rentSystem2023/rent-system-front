@@ -43,7 +43,7 @@ export interface GetMyReservationDetailResponseDto extends ResponseDto {
     rentCompany: string;
     companyTelnumber: string;
     address: string;
-    price: number;
     reservationState: string;
     carName: string;
+    insurancePrice: number;
 }
