@@ -76,13 +76,6 @@
 .qna-detail-button-box {
     display: flex;
     justify-content: space-between;
-
-    padding: 0px 24px;
-}
-
-.qna-detail-owner-button-box {
-    display: flex;
-    gap: 12px;
 }
 
 .qna-detail-comment-box {
