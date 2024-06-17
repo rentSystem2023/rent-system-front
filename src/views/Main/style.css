@@ -110,6 +110,7 @@
     align-items: center;
     gap: 5px;
 }
+
 .car-search-button{
     display: flex;
     justify-content: center;
@@ -140,7 +141,7 @@
     width: 1190px;
     height: 250px;
     gap: 20px;
-    padding: 25px 20px;
+    padding: 30px 20px;
 
     background-color: rgba(238, 238, 238, 1);
     border-radius: 8px;
@@ -152,7 +153,8 @@
     flex-direction: column;
 
     width: 100%;
-    gap: 10px;
+    height: 100%;
+    gap: 20px;
     padding: 15px;
     
     background-color: rgba(255, 255, 255, 255);
@@ -165,10 +167,8 @@
     align-items: center;
     justify-content: center;
 
-    /* margin-left: 32px; */
     margin-top: -10px;
 
-    /* width: 200px; */
     height: 150px;
 
     box-sizing: border-box;
@@ -185,9 +185,8 @@
 .popular-car-info-list{
     display: flex;
     flex-direction: column;
-    
-    gap: 5px;
-    font-size: 13px;
+
+    font-size: 15px
 }
 
 .popular-car-info-contents-carname{
@@ -202,8 +201,13 @@
 }
 
 .popular-car-info-container{
+    display: flex;
+    flex-direction: column;
+
     margin-top: 2px;
     margin-left: 10px;
+
+    gap: 12px;
 }
 
 .popular-car-info-contents{

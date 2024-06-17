@@ -26,10 +26,11 @@
     justify-content: center;
     align-items: center;
 
-    width: 150px;
+    width: 260px;
     height: 150px;
 
     border: 1px solid rgba(238, 238, 238, 1);
+    overflow: hidden;
     border-radius: 6px;
     outline: none;
     padding: 13px 25px;
@@ -161,7 +162,7 @@
 }
 
 .list-title{
-    width: 80px;
+    width: 90px;
 }
 
 /* 지도 리스트 감싸는 CSS */
