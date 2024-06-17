@@ -45,4 +45,5 @@ export interface GetMyReservationDetailResponseDto extends ResponseDto {
     address: string;
     price: number;
     reservationState: string;
+    carName: string;
 }
