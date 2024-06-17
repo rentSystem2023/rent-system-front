@@ -135,19 +135,27 @@
 
     background-color: rgba(233, 236, 239, 1);
 
-    padding: 25px 200px;
+    padding: 50px 200px;
     color: rgba(64, 64, 64, 1);
 }
 
 .bottom-content{
     display: flex;
     flex-direction: column;
+
+    gap: 20px;
 }
 
 .bottom-image-content{
-    width: 390px;
-    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 230px;
+    height: 80px;
+
     background-image: url('../../assets/image/logo-car.png');
+    background-size: contain;
 }
 
 .bottom-contents-wrapper{
@@ -156,8 +164,11 @@
     align-items: center;
 }
 
-.bottom-content{
-    gap: 20px;
+.bottom-info-contents{
+    display: flex;
+    flex-direction: column;
+
+    gap: 25px;
 }
 
 .bttom-link-contents {
@@ -199,7 +210,7 @@
 }
 
 .media-title{
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
 }
 

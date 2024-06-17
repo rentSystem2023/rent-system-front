@@ -16,7 +16,7 @@ export default function SearchDetail() {
     const { loginUserId, loginUserRole } = useUserStore();
     const { address, reservationStart, reservationEnd, selectedCar } = useReservationStore();
 
-    const [carImageUrl,setCarImageUrl] = useState<string | null>(null);
+    const [carImageUrl,setCarImageUrl] = useState<string>('');
     const [carName,setCarName] = useState<string>('');
     const [carYear,setCarYear] = useState<string>('');
     const [brand,setBrand] = useState<string>('');
@@ -96,7 +96,9 @@ export default function SearchDetail() {
     <div id='user-page-wrapper'>
       <div className='search-datail-wrapper'>
         <div className='search-detail-container'>          
-          <div className='search-detail-image'>사진</div>
+          <div className='search-detail-image'>
+            <img style={{ width: '150%', height: '130%'}} src={carImageUrl} />
+          </div>
 
           <div className='search-datail-list'>
             <div className='search-info-container'>
@@ -200,6 +202,7 @@ export default function SearchDetail() {
                 </div>
                 <div className='list-map-wrap'>
                   <div className='list-title'>업체 위치</div>
+                  <div className='qna-detail-info-divider'>{'\|'}</div>
                   <div className='list-map'>지도 들어가야합</div>
                   <div className='list-title-contents'>주소 들어가야함</div>
                 </div>
