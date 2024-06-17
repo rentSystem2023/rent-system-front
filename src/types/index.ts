@@ -49,7 +49,6 @@ export interface PopularCarListItem {
     carImageUrl: string;
     carName: string;
     reservationCount: number;
-    carRentCompany: string;
 }
 
 export interface ReservationCarPriceListItem {

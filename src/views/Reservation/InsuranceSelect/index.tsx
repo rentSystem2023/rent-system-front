@@ -10,15 +10,9 @@ import { getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
 
 function ListItem ({
-  carName,
-  carImageUrl,
-  fuelType,
   rentCompany,
-  reservationCount,
-  address,
-  normalPrice,
-  luxuryPrice,
-  superPrice
+  carYear,
+  address
 }: ReservationCarPriceListItem){
 
   const navigator = useNavigate();
@@ -36,9 +30,9 @@ function ListItem ({
         </div>
 
         <div className='insurance-info-title-container'>
-          <div className='insurance-info-title'>예약수</div>
+          <div className='insurance-info-title'>연식</div>
           <div className='qna-detail-info-divider'>{'\|'}</div>
-          <div className='insurance-info-contents'>{reservationCount}</div>
+          <div className='insurance-info-contents'>{carYear}</div>
         </div>
       </div>
       
