@@ -34,20 +34,12 @@ function ListItem ({
     return dayDifference;
   };
 
-  const PriceByInsuranceType = () => {
-    const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
+  const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
 
-    switch (selectedInsurance) {
-      case 'normal':
-        return `${krw(normalPrice * daysDifference)}`;
-      case 'luxury':
-        return `${krw(luxuryPrice * daysDifference)}`;
-      case 'super':
-        return `${krw(superPrice * daysDifference)}`;
-      default:
-        return '가격 없음';
-    }
-  }
+  const insurancePrice = 
+  selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice * daysDifference)}` :
+  selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
+  selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
   
   return(
     <>
@@ -78,7 +70,7 @@ function ListItem ({
         <div className='insurance-info-title-container'>
           <div className='insurance-info-title'>가격</div>
           <div className='qna-detail-info-divider'>{'\|'}</div>
-          <div className='insurance-info-contents'>{PriceByInsuranceType()}</div>
+          <div className='insurance-info-contents'>{insurancePrice}</div>
         </div>
       </div>
     </div>

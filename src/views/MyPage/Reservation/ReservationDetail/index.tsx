@@ -27,7 +27,7 @@ export default function MyReservationDetail() {
     const [rentCompany, setRentCompany] = useState<string>('');
     const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
     const [address, setAddress] = useState<string>('');
-    const [price, setPrice] = useState<number>(0);
+    const [insurancePrice, setInsurancePrice] = useState<number>(0);
 
     const [carName, setCarName] = useState<string>('');
     const [carNumber, setCarNumber] = useState<string>('');
@@ -53,7 +53,7 @@ export default function MyReservationDetail() {
             }
         }
 
-        const { carImageUrl, nickName, reservationStart, reservationEnd, insuranceType, carOil, grade, rentCompany, companyTelnumber, address, price, reservationState, carName, carNumber } = result as GetMyReservationDetailResponseDto;
+        const { carImageUrl, nickName, reservationStart, reservationEnd, insuranceType, carOil, grade, rentCompany, companyTelnumber, address, insurancePrice, reservationState, carName, carNumber } = result as GetMyReservationDetailResponseDto;
         setCarImageUrl(carImageUrl)
         setNickName(nickName);
         setReservationStart(reservationStart);
@@ -64,7 +64,7 @@ export default function MyReservationDetail() {
         setRentCompany(rentCompany);
         setCompanyTelnumber(companyTelnumber);
         setAddress(address);
-        setPrice(price);
+        setInsurancePrice(insurancePrice);
         setUserId(userId);
         setCarName(carName);
         setCarNumber(carNumber)
@@ -121,6 +121,11 @@ export default function MyReservationDetail() {
 
         getReservationDetailMyListRequest(reservationCode, cookies.accessToken).then(GetMyReservationDetailResponse);
     }, []);
+
+    const insuranceTypes =
+    insuranceType === 'normal' ? '완전자차' : 
+    insuranceType === 'luxury' ? '고급자차' :
+    insuranceType === 'super' ? '슈퍼자차' : '';
 
     return (
         <div id='information-wrapper'>
@@ -183,9 +188,14 @@ export default function MyReservationDetail() {
                                 <div className='reservation-content'>{address}</div>
                             </div>
                             <div className='reservation-car-container detail'>
+                                <div className='reservation-side-title'>보험 타입</div>
+                                <div className='qna-detail-info-divider list'>{'\|'}</div>
+                                <div className='reservation-content'>{insuranceTypes}</div>
+                            </div>
+                            <div className='reservation-car-container detail'>
                                 <div className='reservation-side-title'>결제금액</div>
                                 <div className='qna-detail-info-divider list'>{'\|'}</div>
-                                <div className='reservation-content'>{price}</div>
+                                <div className='reservation-content'>{insurancePrice}</div>
                             </div>
                         </div>
                     </div>
