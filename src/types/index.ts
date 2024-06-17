@@ -48,7 +48,7 @@ export interface QnaMyListItem {
 export interface PopularCarListItem {
     carImageUrl: string;
     carName: string;
-    reservationCount: number;
+    totalReservationCount: number;
 }
 
 export interface ReservationCarPriceListItem {
