@@ -129,7 +129,7 @@ export default function MyReservationDetail() {
                 <div className='reservation-car-container'>
                     <div className='reservation-up-title'>닉네임</div>
                     <div className='qna-detail-info-divider'>{'\|'}</div>
-                    <div className='reservation-content nickname'>{nickName}</div>
+                    <div className='reservation-content'>{nickName}</div>
                 </div>
                 <div className='reservation-car-container'>
                     <div className='reservation-up-title'>예약기간</div>

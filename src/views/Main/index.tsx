@@ -15,8 +15,7 @@ import { useCookies } from 'react-cookie';
 function ListItem ({
     carImageUrl,
     carName,
-    reservationCount,
-    carRentCompany
+    reservationCount
 }: PopularCarListItem) {
 
     //                    function                    //
@@ -29,9 +28,9 @@ function ListItem ({
             <div style={{border: '1px solid rgba(238, 238, 238, 1)', width: '100%'}}></div>
 
             <div className='popular-car-info-list'>
-                <div className='popular-car-info-contents-carname'>
+                {/* <div className='popular-car-info-contents-carname'>
                     <div className='poppular-car-company'>{carRentCompany}</div>
-                </div>
+                </div> */}
                 <div className='popular-car-info-container'>
                     <div className='popular-car-info-contents'>
                         <div className='popular-car-title'>차량명</div>
