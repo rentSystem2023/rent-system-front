@@ -107,12 +107,10 @@ function BottomBar() {
     return (
         <div className="bottom-container">
             <div className="bottom-content">
-                <div className="bottom-image-content">
-                    <div className="botton-logo"></div>
-                </div>
+                <div className="bottom-image-content"></div>
 
                 <div className="bottom-contents-wrapper">
-                    <div className="bottom-content">
+                    <div className="bottom-info-contents">
                         <div className="bttom-link-contents">
                             <div className="bttom-links-page" onClick={onMyPageButtonClickHandler}>마이페이지</div>
                             <div className="bttom-links-page" onClick={() => navigator(NOTICE_LIST_ABSOLUTE_PATH)}>공지사항</div>
