@@ -236,12 +236,15 @@ export default function SearchDetail() {
                     <div className="list-title-contents">{rentCompany}</div>
                   </div>
                   <div className="list-map-wrap">
-                    <div className="list-title">업체 위치</div>
-                    <div className="qna-detail-info-divider">{'\|'}</div>
+                    <div className="list-title-wrap">
+                      <div className="list-title">업체 위치</div>
+                      <div className="qna-detail-info-divider">{'\|'}</div>
+                      <div className="list-title-contents">{address}</div>
+                    </div>
                     <Map
                       center={{ lat: 33.5063, lng: 126.49 }}
-                      style={{ width: '100%', height: '500px' }}
-                      level={10}
+                      style={{ width: '100%', height: '400px' }}
+                      level={6}
                     >
                       <MapMarker // 마커를 생성합니다
                         position={{
@@ -250,7 +253,7 @@ export default function SearchDetail() {
                         }}
                         image={{
                           src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                          size: { width: 30, height: 30 },
+                          size: { width: 30, height: 40 },
                           options: {
                             alt: '제주특별자치도 제주시 용문로 8',
                             offset: { x: 15, y: 15 },
@@ -258,7 +261,6 @@ export default function SearchDetail() {
                         }}
                       />
                     </Map>
-                    <div className="list-title-contents">{address}</div>
                   </div>
                   <div className="list-title-wrap">
                     <div className="list-title">전화번호</div>
