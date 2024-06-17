@@ -1,9 +1,9 @@
 .table-list-table-th.reservation{
-    gap: 48px
+    gap: 63px
 }
 
 .table-list-table-tr.reservation{
-    gap: 48px
+    gap: 60px
 }
 
 /* 예약번호 */
@@ -13,7 +13,7 @@
 
 /* 업체이름 */
 .reservation-list-table-reservation-name{
-    width: 200px;
+    width: 100px;
     
     overflow: hidden;
     text-overflow: ellipsis;
@@ -22,7 +22,11 @@
 
 /* 차종 */
 .reservation-list-table-reservation-car{
-    width: 110px;
+    width: 100px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* 예약시작, 예약 끝 */

@@ -162,11 +162,11 @@ export default function NoticeDetail() {
                 {imageUrl && <img src={imageUrl} alt="Database Image" className="file-image" />}
             </div>
             <div className='notice-detail-button-box'>
-                <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
+                <div className='primary-button  list' onClick={onListClickHandler}>목록</div>
                 {loginUserRole === 'ROLE_ADMIN' &&
                     <div className='notice-detail-owner-button-box'>
-                        <div className='second-button' onClick={onUpdateClickHandler}>수정</div>
-                        <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
+                        <div className='error-button delete' onClick={onUpdateClickHandler}>수정</div>
+                        <div className='error-button delete' onClick={onDeleteClickHandler}>삭제</div>
                     </div>
                 }
             </div>
