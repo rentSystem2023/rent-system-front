@@ -12,12 +12,42 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, RESERVATION_
 function ListItem ({
   rentCompany,
   carYear,
-  address
+  address,
+  normalPrice,
+  luxuryPrice,
+  superPrice,
 }: ReservationCarPriceListItem){
 
   const navigator = useNavigate();
+  const selectedInsurance = useReservationStore(state => state.selectedInsurance);
+  const { reservationStart, reservationEnd } = useReservationStore();
 
   const onClickHandler = () => navigator(RESERVATION_REQUEST_ABSOLUTE_PATH(rentCompany));
+
+  const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
+
+  const calculateDateDifference = (start: string, end: string) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const timeDifference = endDate.getTime() - startDate.getTime();
+    const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // 밀리초를 일(day)로 변환
+    return dayDifference;
+  };
+
+  const PriceByInsuranceType = () => {
+    const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
+
+    switch (selectedInsurance) {
+      case 'normal':
+        return `${krw(normalPrice * daysDifference)}`;
+      case 'luxury':
+        return `${krw(luxuryPrice * daysDifference)}`;
+      case 'super':
+        return `${krw(superPrice * daysDifference)}`;
+      default:
+        return '가격 없음';
+    }
+  }
   
   return(
     <>
@@ -48,7 +78,7 @@ function ListItem ({
         <div className='insurance-info-title-container'>
           <div className='insurance-info-title'>가격</div>
           <div className='qna-detail-info-divider'>{'\|'}</div>
-          <div className='insurance-info-contents'>{''}</div>
+          <div className='insurance-info-contents'>{PriceByInsuranceType()}</div>
         </div>
       </div>
     </div>

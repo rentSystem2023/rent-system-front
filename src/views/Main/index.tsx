@@ -15,7 +15,7 @@ import { useCookies } from 'react-cookie';
 function ListItem ({
     carImageUrl,
     carName,
-    reservationCount
+    totalReservationCount
 }: PopularCarListItem) {
 
     //                    function                    //
@@ -40,7 +40,7 @@ function ListItem ({
                     <div className='popular-car-info-contents'>
                         <div className='popular-car-title'>차량 예약 수</div>
                         <div className='notice-detail-info-divider'>{'\|'}</div>
-                        <div className='popular-car-content'>{reservationCount}</div>
+                        <div className='popular-car-content'>{totalReservationCount}</div>
                     </div>
                 </div>
             </div>
