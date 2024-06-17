@@ -67,7 +67,6 @@ export default function SearchDetail() {
     setCompanyRule(companyRule)
     setFuelType(fuelType)
     setAddress(address) 
-    
   };
 
   //                    event handler                   //
@@ -107,9 +106,9 @@ export default function SearchDetail() {
   selectedInsurance === 'super' ? '슈퍼자차' : '';
 
   const insurancePrice = 
-  selectedInsurance === 'normal' && normalPrice ? krw(normalPrice) :
-  selectedInsurance === 'luxury' && luxuryPrice ? krw(luxuryPrice) :
-  selectedInsurance === 'super' && superPrice ? krw(superPrice) : '';
+  selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice)}` :
+  selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice)}` :
+  selectedInsurance === 'super' && superPrice ? `${krw(superPrice)}` : '';
 
   //                    render                    //
   return (
@@ -207,11 +206,7 @@ export default function SearchDetail() {
                   <div className="list-title-wrap">
                     <div className="list-title">보험료</div>
                     <div className="qna-detail-info-divider">{'\|'}</div>
-                    <div className="list-title-contents">
-                      {selectedInsurance === 'normal' && normalPrice && krw(normalPrice)}
-                      {selectedInsurance === 'luxury' && luxuryPrice && krw(luxuryPrice)}
-                      {selectedInsurance === 'super' && superPrice && krw(superPrice)}
-                    </div>
+                    <div className="list-title-contents">{insurancePrice}</div>
                   </div>
                   <div className="list-title-wrap">
                     <div className="list-title">탑승 인원 수</div>
