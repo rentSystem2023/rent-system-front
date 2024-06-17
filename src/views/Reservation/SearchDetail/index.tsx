@@ -101,6 +101,10 @@ export default function SearchDetail() {
   selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
   selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
 
+  const insuranceType =
+  selectedInsurance === 'normal' ? '완전자차' : 
+  selectedInsurance === 'luxury' ? '고급자차' :
+  selectedInsurance === 'super' ? '슈퍼자차' : '';
 
   //                    render                    //
   return (
@@ -131,7 +135,11 @@ export default function SearchDetail() {
               <div className='search-info-container'>
                 <div className='search-detail-title'>가격</div>
                 <div className='qna-detail-info-divider'>{'\|'}</div>
-                <div className='search-detail-contents'>데이터 수정 해야함</div>
+                <div className='search-detail-contents'>
+                  {selectedInsurance === 'normal' && normalPrice && krw(normalPrice)}
+                  {selectedInsurance === 'luxury' && luxuryPrice && krw(luxuryPrice)}
+                  {selectedInsurance === 'super' && superPrice && krw(superPrice)}
+                </div>
               </div>
               
               <div className='primary-button'>예약하기</div>
@@ -186,12 +194,16 @@ export default function SearchDetail() {
                 <div className='list-title-wrap'>
                   <div className='list-title'>보험</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{selectedInsurance}</div>
+                  <div className='list-title-contents'>{insuranceType}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>보험료</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{insurance}</div>
+                  <div className='list-title-contents'>
+                    {selectedInsurance === 'normal' && normalPrice && krw(normalPrice)}
+                    {selectedInsurance === 'luxury' && luxuryPrice && krw(luxuryPrice)}
+                    {selectedInsurance === 'super' && superPrice && krw(superPrice)}
+                  </div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>탑승 인원 수</div>
@@ -223,14 +235,9 @@ export default function SearchDetail() {
                   <div className='list-title-contents'>{companyTelnumber}</div>
                 </div>
                 <div className='list-title-wrap'>
-                  <div className='list-title'>영업시간</div>
-                  <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>{companyRule}</div>
-                </div>
-                <div className='list-title-wrap'>
                   <div className='list-title'>영업점 방침</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>방침???????????????</div>
+                  <div className='list-title-contents'>{companyRule}</div>
                 </div>
               </div>
             </div>
