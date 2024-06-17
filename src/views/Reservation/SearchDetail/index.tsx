@@ -10,11 +10,12 @@ import { getReservationDetailRequest, getSearchDetailListRequest, getSearchReser
 
 //                    component                   //
 export default function SearchDetail() {
+  const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
   
   //                    state                   //
     const {rentCompany} = useParams();
     const { loginUserId, loginUserRole } = useUserStore();
-    const { address, reservationStart, reservationEnd, selectedCar } = useReservationStore();
+    const { selectedInsurance,selectedAddress, reservationStart, reservationEnd, selectedCar } = useReservationStore();
 
     const [carImageUrl,setCarImageUrl] = useState<string>('');
     const [carName,setCarName] = useState<string>('');
@@ -29,6 +30,7 @@ export default function SearchDetail() {
     const [fuelType,setFuelType] = useState<string>('');
     const [companyTelnumber,setCompanyTelnumber] = useState<string>('');
     const [companyRule,setCompanyRule] = useState<string>('');
+    const [address,setAddress] = useState<string>('');
     
   //                    function                    //
   const navigator = useNavigate();
@@ -49,7 +51,7 @@ export default function SearchDetail() {
       return;
     }
 
-    const {carImageUrl,carYear,brand,grade,carOil,capacity,normalPrice,luxuryPrice,superPrice,companyTelnumber,companyRule} =result as GetSearchDetailListResponseDto
+    const {fuelType,address,carImageUrl,carYear,brand,grade,carOil,capacity,normalPrice,luxuryPrice,superPrice,companyTelnumber,companyRule} =result as GetSearchDetailListResponseDto
     setCarImageUrl(carImageUrl)
     setCarYear(carYear)
     setBrand(brand)
@@ -62,6 +64,8 @@ export default function SearchDetail() {
     setCompanyTelnumber(companyTelnumber)
     setCompanyRule(companyRule)
     setFuelType(fuelType)
+    setAddress(address) 
+    
   };
 
   //                    event handler                   //
@@ -81,15 +85,22 @@ export default function SearchDetail() {
   }
 
   //                    effect                    //
-  // 선택한 차량의 상태를 가져오는 것
   useEffect(() => {
     if (!selectedCar || !rentCompany) return;
     
-    getSearchReservationCarPriceListRequest(address, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
-    getSearchDetailListRequest(address, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
+    getSearchReservationCarPriceListRequest(selectedAddress, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
+    getSearchDetailListRequest(selectedAddress, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
   }, [selectedCar, rentCompany]);
+  
+  
 
   if (!selectedCar) return <></>;
+
+  const insurance = 
+  selectedInsurance === 'normal' ? `${krw(selectedCar.lowNormalPrice)} ~ ${krw(selectedCar.highNormalPrice)}` :
+  selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
+  selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
+
 
   //                    render                    //
   return (
@@ -170,17 +181,17 @@ export default function SearchDetail() {
                 <div className='list-title-wrap'>
                   <div className='list-title'>연식</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>여어어어어어언식</div>
+                  <div className='list-title-contents'>{carYear}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>보험</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>보허허허허엄</div>
+                  <div className='list-title-contents'>{selectedInsurance}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>보험료</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>보험료 얼마게</div>
+                  <div className='list-title-contents'>{insurance}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>탑승 인원 수</div>
@@ -204,17 +215,17 @@ export default function SearchDetail() {
                   <div className='list-title'>업체 위치</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
                   <div className='list-map'>지도 들어가야합</div>
-                  <div className='list-title-contents'>주소 들어가야함</div>
+                  <div className='list-title-contents'>{address}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>전화번호</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>업체 전화번호전화번호</div>
+                  <div className='list-title-contents'>{companyTelnumber}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>영업시간</div>
                   <div className='qna-detail-info-divider'>{'\|'}</div>
-                  <div className='list-title-contents'>영업시가아아아아안</div>
+                  <div className='list-title-contents'>{companyRule}</div>
                 </div>
                 <div className='list-title-wrap'>
                   <div className='list-title'>영업점 방침</div>
