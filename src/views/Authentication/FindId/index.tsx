@@ -112,18 +112,18 @@ export default function FindId() {
                         onkeydownhandler={onPasswordKeydownHandler} 
                     />
                 </div>
-            
-                {isEmailCheck && (
-                    <div>
-                        <div className='return-id'>회원님의 아이디는 {userId} 입니다.</div>
-                    </div>
-                )}
 
                 <div className='moving-find-id-password'>
                     <div className='moving-find' onClick={onFindPwButtonClickHandler}>비밀번호 찾기</div>
                     <div>{'/'}</div>
                     <div className='moving-find' onClick={onSignInButtonClickHandler}>로그인</div>
                 </div>
+
+                {isEmailCheck && (
+                    <div>
+                        <div className='return-id'>회원님의 아이디는&ensp;<div style={{color: 'rgba(58, 87, 232, 1)'}}>{userId}</div>&ensp;입니다.</div>
+                    </div>
+                )}
             </div>
         </div>
     )
