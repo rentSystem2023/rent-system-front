@@ -7,45 +7,46 @@ import { GetSearchDetailListResponseDto } from 'src/apis/reservation/dto/respons
 import ResponseDto from 'src/apis/response.dto';
 import { RESERVATION_COMPANY_PATH } from 'src/constant';
 import { getReservationDetailRequest, getSearchDetailListRequest, getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 //                    component                   //
 export default function SearchDetail() {
   const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
-  
+
   //                    state                   //
-    const {rentCompany} = useParams();
-    const { loginUserId, loginUserRole } = useUserStore();
-    const { selectedInsurance,selectedAddress, reservationStart, reservationEnd, selectedCar } = useReservationStore();
+  const { rentCompany } = useParams();
+  const { loginUserId, loginUserRole } = useUserStore();
+  const { selectedInsurance, selectedAddress, reservationStart, reservationEnd, selectedCar } = useReservationStore();
 
-    const [carImageUrl,setCarImageUrl] = useState<string>('');
-    const [carName,setCarName] = useState<string>('');
-    const [carYear,setCarYear] = useState<string>('');
-    const [brand,setBrand] = useState<string>('');
-    const [grade,setGrade] = useState<string>('');
-    const [carOil,setCarOil] = useState<number>();
-    const [capacity,setCapacity] = useState<string>('');
-    const [normalPrice,setNormalPrice] = useState<number>();
-    const [luxuryPrice,setLuxuryPrice] = useState<number>();
-    const [superPrice,setSuperPrice] = useState<number>();
-    const [fuelType,setFuelType] = useState<string>('');
-    const [companyTelnumber,setCompanyTelnumber] = useState<string>('');
-    const [companyRule,setCompanyRule] = useState<string>('');
-    const [address,setAddress] = useState<string>('');
+  const [carImageUrl, setCarImageUrl] = useState<string>('');
+  const [carName, setCarName] = useState<string>('');
+  const [carYear, setCarYear] = useState<string>('');
+  const [brand, setBrand] = useState<string>('');
+  const [grade, setGrade] = useState<string>('');
+  const [carOil, setCarOil] = useState<number>();
+  const [capacity, setCapacity] = useState<string>('');
+  const [normalPrice, setNormalPrice] = useState<number>();
+  const [luxuryPrice, setLuxuryPrice] = useState<number>();
+  const [superPrice, setSuperPrice] = useState<number>();
+  const [fuelType, setFuelType] = useState<string>('');
+  const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
+  const [companyRule, setCompanyRule] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
 
-    const [displayCarInfo, setDisplayCarInfo] = useState(true);
-    
+  const [displayCarInfo, setDisplayCarInfo] = useState(true);
+
   //                    function                    //
   const navigator = useNavigate();
 
-  const GetSearchDetailListResponse = (result: GetSearchDetailListResponseDto | ResponseDto | null)=>{
+  const GetSearchDetailListResponse = (result: GetSearchDetailListResponseDto | ResponseDto | null) => {
     const message =
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-    result.code === 'AF' ? '인증에 실패했습니다.' :
-    result.code === 'NB' ? '존재하지 않는 차량입니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      !result ? '서버에 문제가 있습니다.' :
+        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+          result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 차량입니다.' :
+              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if(!result || result.code !== 'SU'){
+    if (!result || result.code !== 'SU') {
       alert(message);
 
       // 어디로 내보낼지 아직 모르겠음
@@ -53,7 +54,7 @@ export default function SearchDetail() {
       return;
     }
 
-    const {fuelType,address,carImageUrl,carYear,brand,grade,carOil,capacity,normalPrice,luxuryPrice,superPrice,companyTelnumber,companyRule} =result as GetSearchDetailListResponseDto
+    const { fuelType, address, carImageUrl, carYear, brand, grade, carOil, capacity, normalPrice, luxuryPrice, superPrice, companyTelnumber, companyRule } = result as GetSearchDetailListResponseDto
     setCarImageUrl(carImageUrl)
     setCarYear(carYear)
     setBrand(brand)
@@ -66,7 +67,7 @@ export default function SearchDetail() {
     setCompanyTelnumber(companyTelnumber)
     setCompanyRule(companyRule)
     setFuelType(fuelType)
-    setAddress(address) 
+    setAddress(address)
   };
 
   //                    event handler                   //
@@ -81,29 +82,29 @@ export default function SearchDetail() {
   }
 
   // 예약하기
-  const reservationButtonClickHandler = ()=> {
+  const reservationButtonClickHandler = () => {
 
   }
 
   //                    effect                    //
   useEffect(() => {
     if (!selectedCar || !rentCompany) return;
-    
+
     getSearchReservationCarPriceListRequest(selectedAddress, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
     getSearchDetailListRequest(selectedAddress, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
   }, [selectedCar, rentCompany]);
 
   if (!selectedCar) return <></>;
 
-  const insurance = 
-  selectedInsurance === 'normal' ? `${krw(selectedCar.lowNormalPrice)} ~ ${krw(selectedCar.highNormalPrice)}` :
-  selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
-  selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
+  const insurance =
+    selectedInsurance === 'normal' ? `${krw(selectedCar.lowNormalPrice)} ~ ${krw(selectedCar.highNormalPrice)}` :
+      selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
+        selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
 
   const insuranceType =
-  selectedInsurance === 'normal' ? '완전자차' : 
-  selectedInsurance === 'luxury' ? '고급자차' :
-  selectedInsurance === 'super' ? '슈퍼자차' : '';
+    selectedInsurance === 'normal' ? '완전자차' :
+      selectedInsurance === 'luxury' ? '고급자차' :
+        selectedInsurance === 'super' ? '슈퍼자차' : '';
 
   const calculateDateDifference = (start: string, end: string) => {
     const startDate = new Date(start);
@@ -115,10 +116,10 @@ export default function SearchDetail() {
 
   const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
 
-  const insurancePrice = 
-  selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice * daysDifference)}` :
-  selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
-  selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
+  const insurancePrice =
+    selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice * daysDifference)}` :
+      selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
+        selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
 
   //                    render                    //
   return (
@@ -237,7 +238,26 @@ export default function SearchDetail() {
                   <div className="list-map-wrap">
                     <div className="list-title">업체 위치</div>
                     <div className="qna-detail-info-divider">{'\|'}</div>
-                    <div className="list-map">지도 들어가야합니다.</div>
+                    <Map
+                      center={{ lat: 33.5063, lng: 126.49 }}
+                      style={{ width: '100%', height: '500px' }}
+                      level={10}
+                    >
+                      <MapMarker // 마커를 생성합니다
+                        position={{
+                          // 마커가 표시될 위치입니다
+                          lat: 33.4996, lng: 126.5312
+                        }}
+                        image={{
+                          src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                          size: { width: 30, height: 30 },
+                          options: {
+                            alt: '제주특별자치도 제주시 용문로 8',
+                            offset: { x: 15, y: 15 },
+                          },
+                        }}
+                      />
+                    </Map>
                     <div className="list-title-contents">{address}</div>
                   </div>
                   <div className="list-title-wrap">
