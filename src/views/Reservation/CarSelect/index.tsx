@@ -24,12 +24,22 @@ function ListItem (props: ReservationCarViewListItem) {
         lowSuperPrice
     } = props;
     
-    const { setSelectedCar, setSelectedInsurance } = useReservationStore();
+    const { setSelectedCar, setSelectedInsurance, reservationStart, reservationEnd } = useReservationStore();
 
     //                    function                    //
     const navigator = useNavigate();
 
     const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
+
+    const calculateDateDifference = (start: string, end: string) => {
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        const timeDifference = endDate.getTime() - startDate.getTime();
+        const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // 밀리초를 일(day)로 변환
+        return dayDifference;
+    };
+
+    const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
 
     //                    event handler                    //
     const onClickHandler = (insurance: string) => {
@@ -52,17 +62,17 @@ function ListItem (props: ReservationCarViewListItem) {
                     <div className='insurance-price' onClick={() => onClickHandler('normal')}>
                         <div className='price-image normal'></div>
                         <div className='price-title'>완전자차</div>
-                        <div className='price-result'>{`${krw(lowNormalPrice)} ~ ${krw(highNormalPrice)}`}</div>
+                        <div className='price-result'>{`${krw(lowNormalPrice * daysDifference)} ~ ${krw(highNormalPrice * daysDifference)}`}</div>
                     </div>
                     <div className='insurance-price' onClick={() => onClickHandler('luxury')}>
                     <div className='price-image luxury'></div>
                         <div className='price-title'>고급자차</div>
-                        <div className='price-result'>{`${krw(lowLuxuryPrice)} ~ ${krw(highLuxuryPrice)}`}</div>
+                        <div className='price-result'>{`${krw(lowLuxuryPrice * daysDifference)} ~ ${krw(highLuxuryPrice * daysDifference)}`}</div>
                     </div>
                     <div className='insurance-price' onClick={() => onClickHandler('super')}>
                     <div className='price-image super'></div>
                         <div className='price-title'>슈퍼자차</div>
-                        <div className='price-result'>{`${krw(lowSuperPrice)} ~ ${krw(highSuperPrice)}`}</div>
+                        <div className='price-result'>{`${krw(lowSuperPrice * daysDifference)} ~ ${krw(highSuperPrice * daysDifference)}`}</div>
                     </div>
                 </div>
             </div>
