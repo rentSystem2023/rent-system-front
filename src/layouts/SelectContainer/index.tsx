@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 import { Outlet, useNavigate } from 'react-router';
-import { RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
+import { RESERVATION_CAR_ABSOLUTE_PATH, RESERVATION_COMPANY_ABSOLUTE_PATH } from 'src/constant';
 import { useReservationStore } from 'src/stores';
 import { DatePickerPopup } from 'src/components/DatePickerPopup';
 import { LocationPopup } from 'src/components/LocationPopup';
@@ -30,6 +30,15 @@ export default function SelectContainer() {
     };
     
     const onSearchButtonClickHandler = () => navigator(RESERVATION_CAR_ABSOLUTE_PATH);
+
+    // const onSearchButtonClickHandler = () => {
+    //     const currentPath = location.pathname;
+    //     if (currentPath === RESERVATION_CAR_ABSOLUTE_PATH) {
+    //         navigator(RESERVATION_CAR_ABSOLUTE_PATH);
+    //     } else if (currentPath === RESERVATION_COMPANY_ABSOLUTE_PATH) {
+    //         navigator(RESERVATION_COMPANY_ABSOLUTE_PATH);
+    //     }
+    // };
 
     return (
         <div id="reservation-search-wrapper">
