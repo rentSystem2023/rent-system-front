@@ -179,14 +179,14 @@ export default function ReservationDetail() {
                         </div>
                     </div>
 
-                    <div className='admin-contents-wrap'>
+                    {/* <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>예약자 닉네임</div>
                         </div>
                         <div className='admin-content-wrap'>
                             <div className='admin-detail-content'>{nickName}</div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className='admin-contents-wrap state'>
                         <div className='admin-title-wrap'>

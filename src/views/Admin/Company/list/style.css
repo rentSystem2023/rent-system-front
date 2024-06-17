@@ -1,9 +1,9 @@
 .table-list-table-th.company{
-    gap: 43px;
+    gap: 75px;
 }
 
 .table-list-table-tr.company{
-    gap: 43px;
+    gap: 75px;
 }
 
 /* 순번 */
@@ -18,7 +18,7 @@
 
 /* 업체명 */
 .company-list-table-company-name {
-    width: 300px;
+    width: 120px;
 }
 
 /* 주소 */
