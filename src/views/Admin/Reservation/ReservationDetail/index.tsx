@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { GetReservationDetailResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_RESERVATION_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
-import { PathchReservationApproveRequest, deleteReservationListRequest, getReservationDetailRequest } from 'src/apis/reservation';
-import { PathchReservationApproveRequestDto, PathchReservationCancelRequestDto } from 'src/apis/reservation/dto/request';
+import { PatchReservationApproveRequest, PatchReservationCancelRequest, deleteReservationListRequest, getReservationDetailRequest } from 'src/apis/reservation';
+import { PatchReservationApproveRequestDto, PatchReservationCancelRequestDto} from 'src/apis/reservation/dto/request';
 
 export default function ReservationDetail() {
 
@@ -62,8 +62,23 @@ export default function ReservationDetail() {
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'AF' ? '권한이 없습니다.' :
         result.code === 'VF' ? '올바르지 않은 예약번호입니다.' :
-        result.code === 'NC' ? '존재하지 않는 예약입니다.' :
+        result.code === 'NR' ? '존재하지 않는 예약입니다.' :
         result.code === 'NW' ? '예약대기 상태가 아닙니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+        alert(message);
+        return;
+        }
+    };
+
+    const patchReservaitonCancelResponse = (result: ResponseDto | null) => {
+        const message =
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'VF' ? '올바르지 않은 예약번호입니다.' :
+        result.code === 'NR' ? '존재하지 않는 예약입니다.' :
+        result.code === 'NCS' ? '예약취소 상태가 아닙니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
@@ -98,20 +113,28 @@ export default function ReservationDetail() {
         const isConfirm = window.confirm('예약 승인하시겠습니까?');
         if (!isConfirm) return;
 
-        const requestBody: PathchReservationApproveRequestDto = { reservationState: '예약완료' };
-        PathchReservationApproveRequest(reservationCode, requestBody, cookies.accessToken)
+        const requestBody: PatchReservationApproveRequestDto = { reservationState: '예약완료' };
+        PatchReservationApproveRequest(reservationCode, requestBody, cookies.accessToken)
         .then(patchReservaitonApproveResponse); 
     }
 
 
     const onReservationCancelClickHandler = () => {
         if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
+        if (reservationState !== 'cancel') {
+            alert('cancel 상태에서만 예약 취소할 수 있습니다.')
+            return;
+        }
         const isConfirm = window.confirm('취소 승인하시겠습니까?');
         if (!isConfirm) return;
 
-        const requestBody: PathchReservationCancelRequestDto = { reservationState: '예약취소완료' };
-        PathchReservationApproveRequest(reservationCode, requestBody, cookies.accessToken)
-        .then(patchReservaitonApproveResponse); 
+        const requestBody: PatchReservationCancelRequestDto = { reservationState: '예약취소완료' };
+        PatchReservationCancelRequest(reservationCode, requestBody, cookies.accessToken)
+        .then(patchReservaitonCancelResponse); 
+
+        alert('해당 예약 내역이 취소되었습니다.');
+
+        navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
     }
 
     const onDeleteClickHandler = () => {
@@ -207,7 +230,7 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{reservationState}</div>
                             <div className='admin-reservation-state'>
                                 <div className='reservation-button confirm' onClick={onReservationApproveClickHandler} >예약승인</div>
-                                <div className='reservation-button cancle'>취소승인</div>
+                                <div className='reservation-button cancle' onClick={onReservationCancelClickHandler} >취소승인</div>
                             </div>
                         </div>
                     </div>
