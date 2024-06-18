@@ -7,7 +7,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';
 import { getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_ABSOLUTE_PATH, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
 
 function ListItem ({
   rentCompany,
@@ -202,11 +202,13 @@ export default function InsuranceSelect() {
   }, [currentSection]);
 
   useEffect(() => {
-    if (!selectedCar) return;
-    
+    if (!selectedCar) {
+      navigator(MAIN_ABSOLUTE_PATH) 
+      return;
+    }
     getSearchReservationCarPriceListRequest(address, reservationStart, reservationEnd, selectedCar.carName).then(getCompanyListResponse);
   }, [selectedCar]);
-
+  
   if (!selectedCar) return <></>;
 
   // const insurance = 

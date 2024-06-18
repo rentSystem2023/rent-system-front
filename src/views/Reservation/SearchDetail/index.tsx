@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetSearchDetailListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { RESERVATION_COMPANY_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, RESERVATION_COMPANY_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { getReservationDetailRequest, getSearchDetailListRequest, getSearchReservationCarPriceListRequest, postReservationRequest } from 'src/apis/reservation';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { PostReservationRequestDto } from 'src/apis/reservation/dto/request';
@@ -124,6 +124,7 @@ export default function SearchDetail() {
     // getSearchReservationCarPriceListRequest(selectedAddress, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
     getSearchDetailListRequest(selectedAddress, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
   }, [selectedCar, rentCompany]);
+
 
   if (!selectedCar) return <></>;
 
@@ -277,26 +278,26 @@ export default function SearchDetail() {
                     </div>
                     {companyLat && companyLng &&  (
                     <Map
-                      center={{ lat: companyLat, lng:companyLng }}
-                      style={{ width: '100%', height: '400px' }}
-                      level={6}
-                    >
-                      <MapMarker // 마커를 생성합니다
-                        position={{
-                          // 마커가 표시될 위치입니다
-                          lat: companyLat, lng: companyLng
-                        }}
-                        image={{
-                          src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                          size: { width: 30, height: 40 },
-                          options: {
-                            alt: '제주특별자치도 제주시 용문로 8',
-                            offset: { x: 15, y: 15 },
-                          },
-                        }}
-                        title={rentCompany}
-                      />
-                    </Map>
+                    center={{ lat: companyLat, lng:companyLng }}
+                    style={{ width: '100%', height: '400px' }}
+                    level={6}
+                  >
+                    <MapMarker // 마커를 생성합니다
+                      position={{
+                        // 마커가 표시될 위치입니다
+                        lat: companyLat, lng: companyLng
+                      }}
+                      image={{
+                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png",
+                        size: { width: 30, height: 40 },
+                        options: {
+                          alt: '제주특별자치도 제주시 용문로 8',
+                          offset: { x: 15, y: 15 },
+                        },
+                      }}
+                      title={rentCompany}
+                    />
+                  </Map>
                     )}
                   </div>
 
