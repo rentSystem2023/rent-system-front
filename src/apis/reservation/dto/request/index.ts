@@ -10,3 +10,8 @@ export interface PostReservationRequestDto {
 export interface PathchReservationApproveRequestDto {
     reservationState : string;
 }
+
+// description: 예약 취소 신청 승인 하기 Request Body DTO //
+export interface PathchReservationCancelRequestDto {
+    reservationState : string;
+}
