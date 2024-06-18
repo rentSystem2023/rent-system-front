@@ -108,6 +108,7 @@ export default function ReservationDetail() {
         navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
     }
 
+    // 삭제예정
     const onReservationApproveClickHandler = () => {
         if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
         const isConfirm = window.confirm('예약 승인하시겠습니까?');
@@ -128,7 +129,7 @@ export default function ReservationDetail() {
         const isConfirm = window.confirm('취소 승인하시겠습니까?');
         if (!isConfirm) return;
 
-        const requestBody: PatchReservationCancelRequestDto = { reservationState: '예약취소완료' };
+        const requestBody: PatchReservationCancelRequestDto = { reservationState: 'cancelComplete' };
         PatchReservationCancelRequest(reservationCode, requestBody, cookies.accessToken)
         .then(patchReservaitonCancelResponse); 
 
@@ -154,6 +155,11 @@ export default function ReservationDetail() {
     }, []);
 
     //                    render                    //
+    const reservationStateWord =
+    reservationState === 'reservationComplete' ? '예약 완료' :
+    reservationState === 'watingCancel' ? '예약 취소 대기' :
+    reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
+
     return (
         <div id='admin-detail-wrapper'>
         <div className="my-info-title">예약 정보 상세</div>
@@ -227,7 +233,7 @@ export default function ReservationDetail() {
                             <div className='admin-detail-title'>예약상태</div>
                         </div>
                         <div className='admin-content-wrap reser'>
-                            <div className='admin-detail-content'>{reservationState}</div>
+                            <div className='admin-detail-content'>{reservationStateWord}</div>
                             <div className='admin-reservation-state'>
                                 <div className='reservation-button confirm' onClick={onReservationApproveClickHandler} >예약승인</div>
                                 <div className='reservation-button cancle' onClick={onReservationCancelClickHandler} >취소승인</div>

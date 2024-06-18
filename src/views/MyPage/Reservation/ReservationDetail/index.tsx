@@ -96,7 +96,7 @@ export default function MyReservationDetail() {
 
         if (!reservationCode || !cookies.accessToken || reservationState === '예약취소') return;
 
-        if (reservationState !== '예약 완료') {
+        if (reservationState !== 'reservationComplete') {
             alert('예약완료 상태에서만 예약 취소할 수 있습니다.')
             return;
         }
@@ -104,7 +104,7 @@ export default function MyReservationDetail() {
         if (!isConfirm) return;
 
         const requestBody: PatchReservationRequestDto = { 
-            reservationState: '예약 취소' 
+            reservationState: 'watingCancel'
         };
         
         patchReservationRequest(reservationCode, requestBody, cookies.accessToken)
