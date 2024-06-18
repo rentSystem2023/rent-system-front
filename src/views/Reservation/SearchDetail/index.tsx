@@ -5,9 +5,10 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetSearchDetailListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { RESERVATION_COMPANY_PATH } from 'src/constant';
-import { getReservationDetailRequest, getSearchDetailListRequest, getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
+import { RESERVATION_COMPANY_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+import { getReservationDetailRequest, getSearchDetailListRequest, getSearchReservationCarPriceListRequest, postReservationRequest } from 'src/apis/reservation';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { PostReservationRequestDto } from 'src/apis/reservation/dto/request';
 
 //                    component                   //
 export default function SearchDetail() {
@@ -29,6 +30,7 @@ export default function SearchDetail() {
   const [normalPrice, setNormalPrice] = useState<number>();
   const [luxuryPrice, setLuxuryPrice] = useState<number>();
   const [superPrice, setSuperPrice] = useState<number>();
+  const [companyCarCode, setCompanyCarCode] = useState<number>(0);
   const [fuelType, setFuelType] = useState<string>('');
   const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
   const [companyRule, setCompanyRule] = useState<string>('');
@@ -57,7 +59,7 @@ export default function SearchDetail() {
       return;
     }
 
-    const { fuelType, address, carImageUrl, carYear, brand, grade, carOil, capacity, normalPrice, luxuryPrice, superPrice, companyTelnumber, companyRule,companyLat,companyLng } = result as GetSearchDetailListResponseDto
+    const { fuelType, address, carImageUrl, carYear, brand, grade, carOil, capacity, normalPrice, luxuryPrice, superPrice, companyCarCode, companyTelnumber, companyRule,companyLat,companyLng } = result as GetSearchDetailListResponseDto
     setCarImageUrl(carImageUrl);
     setCarYear(carYear);
     setBrand(brand);
@@ -67,13 +69,26 @@ export default function SearchDetail() {
     setNormalPrice(normalPrice);
     setLuxuryPrice(luxuryPrice);
     setSuperPrice(superPrice);
+    setCompanyCarCode(companyCarCode);
     setCompanyTelnumber(companyTelnumber);
     setCompanyRule(companyRule);
     setFuelType(fuelType);
     setAddress(address);
     setCompantLat(companyLat);
     setCompanyLng(companyLng);
+  };
 
+  const postReservationResponse = (result: ResponseDto | null) => {
+    const message =
+    !result ? '서버에 문제가 있습니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'NV' ? '존재하지 않는 차량입니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+        alert(message);
+        return;
+        }
   };
 
   //                    event handler                   //
@@ -91,7 +106,15 @@ export default function SearchDetail() {
   const reservationButtonClickHandler = () => {
     if (!cookies.accessToken) return;
 
+    const isConfirm = window.confirm('예약하시겠습니까?');
+    if (!isConfirm) return;
 
+    const requestBody: PostReservationRequestDto = {insuranceType: selectedInsurance, reservationStart, reservationEnd, companyCarCode};
+    postReservationRequest(requestBody, cookies.accessToken).then(postReservationResponse);
+
+    alert('예약이 완료되었습니다.');
+    
+    navigator(USER_RESERVATION_ABSOLUTE_PATH);
   }
 
   //                    effect                    //
