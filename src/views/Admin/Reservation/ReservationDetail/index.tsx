@@ -8,7 +8,7 @@ import { GetReservationDetailResponseDto } from 'src/apis/reservation/dto/respon
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_RESERVATION_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { PathchReservationApproveRequest, deleteReservationListRequest, getReservationDetailRequest } from 'src/apis/reservation';
-import { PathchReservationApproveRequestDto } from 'src/apis/reservation/dto/request';
+import { PathchReservationApproveRequestDto, PathchReservationCancelRequestDto } from 'src/apis/reservation/dto/request';
 
 export default function ReservationDetail() {
 
@@ -99,6 +99,17 @@ export default function ReservationDetail() {
         if (!isConfirm) return;
 
         const requestBody: PathchReservationApproveRequestDto = { reservationState: '예약완료' };
+        PathchReservationApproveRequest(reservationCode, requestBody, cookies.accessToken)
+        .then(patchReservaitonApproveResponse); 
+    }
+
+
+    const onReservationCancelClickHandler = () => {
+        if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
+        const isConfirm = window.confirm('취소 승인하시겠습니까?');
+        if (!isConfirm) return;
+
+        const requestBody: PathchReservationCancelRequestDto = { reservationState: '예약취소완료' };
         PathchReservationApproveRequest(reservationCode, requestBody, cookies.accessToken)
         .then(patchReservaitonApproveResponse); 
     }
