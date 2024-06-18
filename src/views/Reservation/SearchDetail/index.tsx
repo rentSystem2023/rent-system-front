@@ -32,6 +32,8 @@ export default function SearchDetail() {
   const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
   const [companyRule, setCompanyRule] = useState<string>('');
   const [address, setAddress] = useState<string>('');
+  const [companyLng, setCompanyLng] = useState<number>();
+  const [companyLat, setCompantLat] = useState<number>();
 
   const [displayCarInfo, setDisplayCarInfo] = useState(true);
 
@@ -40,11 +42,11 @@ export default function SearchDetail() {
 
   const GetSearchDetailListResponse = (result: GetSearchDetailListResponseDto | ResponseDto | null) => {
     const message =
-      !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-          result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 차량입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+    result.code === 'AF' ? '인증에 실패했습니다.' :
+    result.code === 'NB' ? '존재하지 않는 차량입니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -54,31 +56,34 @@ export default function SearchDetail() {
       return;
     }
 
-    const { fuelType, address, carImageUrl, carYear, brand, grade, carOil, capacity, normalPrice, luxuryPrice, superPrice, companyTelnumber, companyRule } = result as GetSearchDetailListResponseDto
-    setCarImageUrl(carImageUrl)
-    setCarYear(carYear)
-    setBrand(brand)
-    setGrade(grade)
-    setCarOil(carOil)
-    setCapacity(capacity)
-    setNormalPrice(normalPrice)
-    setLuxuryPrice(luxuryPrice)
-    setSuperPrice(superPrice)
-    setCompanyTelnumber(companyTelnumber)
-    setCompanyRule(companyRule)
-    setFuelType(fuelType)
-    setAddress(address)
+    const { fuelType, address, carImageUrl, carYear, brand, grade, carOil, capacity, normalPrice, luxuryPrice, superPrice, companyTelnumber, companyRule,companyLat,companyLng } = result as GetSearchDetailListResponseDto
+    setCarImageUrl(carImageUrl);
+    setCarYear(carYear);
+    setBrand(brand);
+    setGrade(grade);
+    setCarOil(carOil);
+    setCapacity(capacity);
+    setNormalPrice(normalPrice);
+    setLuxuryPrice(luxuryPrice);
+    setSuperPrice(superPrice);
+    setCompanyTelnumber(companyTelnumber);
+    setCompanyRule(companyRule);
+    setFuelType(fuelType);
+    setAddress(address);
+    setCompantLat(companyLat);
+    setCompanyLng(companyLng);
+
   };
 
   //                    event handler                   //
   // 차량정보 리스트
   const carInformationClickHandler = () => {
-    setDisplayCarInfo(true)
+    setDisplayCarInfo(true);
   }
 
   // 업체정보 리스트
   const companyListClickHandler = () => {
-    setDisplayCarInfo(false)
+    setDisplayCarInfo(false);
   }
 
   // 예약하기
@@ -244,15 +249,16 @@ export default function SearchDetail() {
                       <div className="qna-detail-info-divider">{'\|'}</div>
                       <div className="list-title-contents">{address}</div>
                     </div>
+                    {companyLat && companyLng &&  (
                     <Map
-                      center={{ lat: 33.5063, lng: 126.49 }}
+                      center={{ lat: companyLat, lng:companyLng }}
                       style={{ width: '100%', height: '400px' }}
                       level={6}
                     >
                       <MapMarker // 마커를 생성합니다
                         position={{
                           // 마커가 표시될 위치입니다
-                          lat: 33.4996, lng: 126.5312
+                          lat: companyLat, lng: companyLng
                         }}
                         image={{
                           src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
@@ -262,8 +268,10 @@ export default function SearchDetail() {
                             offset: { x: 15, y: 15 },
                           },
                         }}
+                        title={rentCompany}
                       />
                     </Map>
+                    )}
                   </div>
 
                   <div className="list-title-wrap">
