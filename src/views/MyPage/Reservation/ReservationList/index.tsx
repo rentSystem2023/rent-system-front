@@ -27,10 +27,17 @@ function ListItem ({
 
     const onClickHandler = () => navigator(USER_RESERVATION_DETAIL_ABSOLUTE_PATH(reservationCode));
 
+
+    const reservationStateWord =
+    reservationState === 'reservationComplete' ? '예약 완료' :
+    reservationState === 'watingCancel' ? '예약 취소 대기' :
+    reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
+
+
     //                    render                    //
     return (
         <div className='my-reservation-list-table' onClick={onClickHandler}>
-            <div className='my-reservation-state'>{reservationState}</div>
+            <div className='my-reservation-state'>{reservationStateWord}</div>
             <div className='my-reservation-info-list'>
                 <div className='my-reservation-car-image'>
                     <img style={{ width: '150%', height: '120%'}} src={carImageUrl} />
