@@ -58,6 +58,7 @@ export interface GetSearchDetailListResponseDto extends ResponseDto {
     normalPrice: number;
     luxuryPrice: number;
     superPrice: number;
+    companyCarCode: number;
     rentCompany: string;
     address: string;
     companyTelnumber: string;

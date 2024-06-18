@@ -17,6 +17,7 @@ export default function SearchDetail() {
   const { rentCompany } = useParams();
   const { loginUserId, loginUserRole } = useUserStore();
   const { selectedInsurance, selectedAddress, reservationStart, reservationEnd, selectedCar } = useReservationStore();
+  const [cookies] = useCookies();
 
   const [carImageUrl, setCarImageUrl] = useState<string>('');
   const [carName, setCarName] = useState<string>('');
@@ -88,6 +89,8 @@ export default function SearchDetail() {
 
   // 예약하기
   const reservationButtonClickHandler = () => {
+    if (!cookies.accessToken) return;
+
 
   }
 
@@ -95,7 +98,7 @@ export default function SearchDetail() {
   useEffect(() => {
     if (!selectedCar || !rentCompany) return;
 
-    getSearchReservationCarPriceListRequest(selectedAddress, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
+    // getSearchReservationCarPriceListRequest(selectedAddress, reservationStart, reservationEnd, selectedCar.carName).then(GetSearchDetailListResponse);
     getSearchDetailListRequest(selectedAddress, reservationStart, reservationEnd, rentCompany, selectedCar.carName).then(GetSearchDetailListResponse);
   }, [selectedCar, rentCompany]);
 
