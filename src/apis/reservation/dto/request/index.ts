@@ -3,7 +3,7 @@ export interface PostReservationRequestDto {
     insuranceType : string;
     reservationStart : string;
     reservationEnd : string;
-    commpanyCarCode : number;
+    companyCarCode : number;
 }
 
 // description: 예약 신청 승인 하기 Request Body DTO //
