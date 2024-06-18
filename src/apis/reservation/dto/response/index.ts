@@ -64,5 +64,7 @@ export interface GetSearchDetailListResponseDto extends ResponseDto {
     companyRule: string;
     reservationStart: string;
     reservationEnd: string;
+    companyLat: number;
+    companyLng: number;
 }
 
