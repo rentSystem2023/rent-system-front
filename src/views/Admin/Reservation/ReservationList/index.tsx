@@ -29,6 +29,11 @@ import { getSearchReservationListRequest } from 'src/apis/reservation';
     const onClickHandler = () => navigator(ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH(reservationCode));
 
     //                    render                    //
+    const reservationStateWord =
+    reservationState === 'reservationComplete' ? '예약 완료' :
+    reservationState === 'watingCancel' ? '예약 취소 대기' :
+    reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
+
     return (
         <div className='table-list-table-tr reservation' onClick={onClickHandler}>
             <div className='reservation-list-table-list-number'>{reservationCode}</div>
@@ -39,7 +44,7 @@ import { getSearchReservationListRequest } from 'src/apis/reservation';
             <div className='reservation-list-table-reservation-date'>{reservationEnd}</div>
             <div className='reservation-list-table-reservation-user'>{nickName}</div>
             <div className='reservation-list-table-reservation-user-id'>{userId}</div>
-            <div className='reservation-list-table-reservation-state'>{reservationState}</div>
+            <div className='reservation-list-table-reservation-state'>{reservationStateWord}</div>
         </div>
     );
 }
