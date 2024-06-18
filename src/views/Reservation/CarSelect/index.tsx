@@ -143,7 +143,7 @@ export default function CarSelect() {
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '검색어를 입력하세요.' : 
             result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'DBE' ? '종료일을 선택해주세요.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
