@@ -117,7 +117,9 @@ export default function MyReservationDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!reservationCode || !cookies.accessToken) return;
+        if (!reservationCode || !cookies.accessToken || userId !== 'ROLE_USER') {
+            return navigator(MAIN_ABSOLUTE_PATH);
+        };
 
         getReservationDetailMyListRequest(reservationCode, cookies.accessToken).then(GetMyReservationDetailResponse);
     }, []);

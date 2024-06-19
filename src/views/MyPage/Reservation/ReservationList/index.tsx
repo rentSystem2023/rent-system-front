@@ -3,7 +3,7 @@ import './style.css'
 import { MyReservationListItem, ReservationUserListItem } from 'src/types';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, USER_RESERVATION_DETAIL_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH, USER_RESERVATION_DETAIL_ABSOLUTE_PATH } from 'src/constant';
 import { GetMyReservationListResponseDto } from 'src/apis/user/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getReservationMyListRequest } from 'src/apis/user';
@@ -24,15 +24,12 @@ function ListItem ({
     const navigator = useNavigate();
 
     //                    event handler                    //
-
     const onClickHandler = () => navigator(USER_RESERVATION_DETAIL_ABSOLUTE_PATH(reservationCode));
-
 
     const reservationStateWord =
     reservationState === 'reservationComplete' ? '예약 완료' :
     reservationState === 'watingCancel' ? '예약 취소 대기' :
     reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
-
 
     //                    render                    //
     return (
@@ -79,6 +76,7 @@ export default function MyReservation() {
     //                    state                    //
     const [cookies] = useCookies();
 
+    const [userId, setUserId] = useState<string>('');
     const [reservationList, setReservationList] = useState<MyReservationListItem[]>([]);
     const [viewList, setViewList] = useState<MyReservationListItem[]>([]);
     const [totalLenght, setTotalLength] = useState<number>(0);
@@ -165,7 +163,9 @@ export default function MyReservation() {
 
     //                    effect                    //
     useEffect (() => {
-        if (!cookies.accessToken) return;
+        if (!cookies.accessToken || userId !== 'ROLE_USER') {
+            return navigator(MAIN_ABSOLUTE_PATH);
+        };
         getReservationMyListRequest(cookies.accessToken).then(getMyReservationListResponse);
     }, []);
 
