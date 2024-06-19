@@ -6,13 +6,13 @@ import { emailAuthRequest, putMyInfoEmailRequest } from 'src/apis/user';
 import { EmailAuthRequestDto, PutMyInfoEmailRequestDto } from 'src/apis/user/dto/request';
 import InputBox from 'src/components/Inputbox';
 import { AUTH_SIGN_IN_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
 
 export default function MyInfoEmailModify() {
     
     //                    state                    //
     const [cookies] = useCookies();
-    
-    const [userId, setUserId] = useState<string>('');
+    const { loginUserRole } = useUserStore();
     const [email, setEmail] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
     const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
@@ -33,6 +33,7 @@ export default function MyInfoEmailModify() {
             result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : 
             result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
+            
         const emailCheck = result !== null && result.code === 'SU';
         const emailError = !emailCheck;
 
@@ -118,11 +119,11 @@ export default function MyInfoEmailModify() {
             authNumber: authNumber
         };
 
-        if (!cookies.accessToken) {
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
             navigator(MAIN_ABSOLUTE_PATH);
         } else {
             putMyInfoEmailRequest(requestBody, cookies.accessToken).then(emailAuthCheckResponse);
-        };
+        }
     }, []);
 
     //                    render                    //

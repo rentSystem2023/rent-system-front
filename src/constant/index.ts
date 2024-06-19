@@ -205,7 +205,6 @@ export const PUT_MY_INFO_EMAIL_MODIFY_URL = `${SERVER_USER_MODULE_URL}/informati
 // 사용자 마이페이지 내 정보 삭제 URL
 export const DELETE_MY_INFO_URL = (userId: string) => `${GET_MY_INFO_URL}/${userId}`;
 
-
 // 관리자페이지 회원 목록 리스트 URL
 export const GET_USER_LIST_URL = `${SERVER_USER_MODULE_URL}/list`;
 // 관리자페이지 회원 목록 상세 URL
@@ -271,7 +270,7 @@ export const DELETE_NOTICE_URL = (registNumber : number | string ) => `${SERVER_
 export const SERVER_QNA_MODULE_URL = `${SERVER_API_URL}/qna`;
 
 // 마이페이지 Q&A 목록 URL
-export const GET_MY_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/myList`;
+export const GET_MY_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/mylist`;
 // 마이페이지 Q&A 목록 검색 URL
 export const GET_MY_QNA_LIST_SEARCH_URL = `${GET_MY_QNA_LIST_URL}/search`;
 // 마이페이지 Q&A 게시물 삭제 URL

@@ -7,14 +7,14 @@ import InputBox from 'src/components/Inputbox';
 import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { PutMyInfoPwRequestDto } from 'src/apis/user/dto/request';
 import { putMyInfoPwRequest } from 'src/apis/user';
+import { useUserStore } from 'src/stores';
 
 //                    component                    //
 export default function MyInfoPwModify() {
 
     //                    state                    //
     const [cookies] = useCookies();
-
-    const [userId, setUserId] = useState<string>('');
+    const { loginUserRole } = useUserStore();
     const [password, setPassword] = useState<string>('');
     const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
     const [passwordCheck, setPasswordCheck] = useState<string>('');
@@ -39,7 +39,7 @@ export default function MyInfoPwModify() {
         if (!isSuccess) {
             alert(message);
             return;
-        }
+        };
     };
 
     //                    event handler                    //
@@ -98,17 +98,15 @@ export default function MyInfoPwModify() {
     };
 
     //                  effect                      //
-    // useEffect (() => {
-    //     const requestBody: PutMyInfoPwRequestDto = {
-    //         userPassword: password
-    //     };
+    useEffect (() => {
+        const requestBody: PutMyInfoPwRequestDto = {
+            userPassword: password
+        };
 
-    //     if (!cookies.accessToken) {
-    //         navigator(MAIN_ABSOLUTE_PATH);
-    //     } else {
-    //         putMyInfoPwRequest(requestBody, cookies.accessToken).then(putMyInfoPwModifyResponse);
-    //     }
-    // }, []);
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
+            navigator(MAIN_ABSOLUTE_PATH);
+        }
+    }, []);
 
     //                    render                    //
     return (

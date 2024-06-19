@@ -117,7 +117,7 @@ export default function MyReservationDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!reservationCode || !cookies.accessToken) {
+        if (!reservationCode || !cookies.accessToken || loginUserRole !== 'ROLE_USER') {
             return navigator(MAIN_ABSOLUTE_PATH);
         };
 

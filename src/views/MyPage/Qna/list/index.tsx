@@ -13,7 +13,7 @@ import './style.css';
 import { GetMyInfoQnaListResponseDto } from 'src/apis/user/dto/response';
 import { getMyQnaListRequest } from 'src/apis/user';
 
-// Component for a single list item
+//                    component                    //
 function ListItem({
     index,
     receptionNumber,
@@ -25,11 +25,10 @@ function ListItem({
     publicState,
     status
 }: QnaListItem & { index: number }) {
+
     const navigator = useNavigate();
 
     const onClickHandler = () => {
-
-        // 나의 문의내역 페이지에서 상세 페이지로 이동할 때
         navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'MY_QNA_LIST' } });
     };
 
@@ -49,9 +48,11 @@ function ListItem({
     );
 }
 
-// Main component for the Q&A list
 export default function MyInfoQnaList() {
+
+    //                    state                    //
     const [cookies] = useCookies();
+    const { loginUserRole } = useUserStore();
     const [qnaList, setQnaList] = useState<QnaListItem[]>([]);
     const [viewList, setViewList] = useState<QnaListItem[]>([]);
     const [totalLength, setTotalLength] = useState<number>(0);
@@ -62,6 +63,7 @@ export default function MyInfoQnaList() {
     const [currentSection, setCurrentSection] = useState<number>(1);
     const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
+    //                    function                    //
     const navigator = useNavigate();
 
     const changePage = (boardList: QnaListItem[], totalLength: number) => {
@@ -103,8 +105,8 @@ export default function MyInfoQnaList() {
     const getMyQnaListResponse = (result: GetMyInfoQnaListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '인증에 실패했습니다.' :
-                    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -119,6 +121,7 @@ export default function MyInfoQnaList() {
         setCurrentSection(!qnaList.length ? 0 : 1);
     };
 
+    //                    event handler                    //
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
@@ -135,9 +138,9 @@ export default function MyInfoQnaList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    
+    //                  effect                      //
     useEffect (() => {
-        if (!cookies.accessToken) return;
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') return;
         getMyQnaListRequest(cookies.accessToken).then(getMyQnaListResponse);
     }, []);
 
@@ -151,6 +154,7 @@ export default function MyInfoQnaList() {
         changeSection(totalPage);
     }, [currentSection]);
 
+    //                    render                    //
     return (
         <>        
         <div id='information-wrapper'>
