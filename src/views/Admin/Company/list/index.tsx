@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { CompanyListItem } from 'src/types';
 import { useNavigate } from 'react-router';
-import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
+import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from 'src/apis/company/dto/response';
@@ -176,7 +176,7 @@ export default function CompanyList() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken) return;
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
         getSearchCompanyListRequest(searchWord,cookies.accessToken).then(getSearchCompanyListResponse);
     }, []);
 

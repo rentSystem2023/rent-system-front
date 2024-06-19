@@ -5,7 +5,7 @@ import { UserListItem } from 'src/types';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { ADMIN_USER_DETAIL_ABSOLUTE_PATH, ADMIN_USER_LIST_ABSOLUTE_PATH, ADMIN_USER_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
+import { ADMIN_USER_DETAIL_ABSOLUTE_PATH, ADMIN_USER_LIST_ABSOLUTE_PATH, ADMIN_USER_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { getSearchUserListRequest, getUserListRequest } from 'src/apis/userList';
 import { GetSearchUserListResponseDto, GetUserListResponseDto } from 'src/apis/userList/dto/response';
@@ -169,7 +169,7 @@ export default function UserList() {
     
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken) return;
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
         getSearchUserListRequest(searchWord,cookies.accessToken).then(getSearchUserListResponse);
     }, []);
 
@@ -209,17 +209,14 @@ export default function UserList() {
             <div style={{ width: '299px' }}></div>
             <div className='table-list-pagenation'>
                 
-            <div className='table-list-pagenation'>
-                <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
-                <div className='table-list-page-box'>
-                    {pageList.map(page => 
-                    page === currentPage ?
-                    <div className='table-list-page-active'>{page}</div> :
-                    <div className='table-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
-                    )}
-                </div>
-                <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
+            <div className='table-list-page-box'>
+                {pageList.map(page => 
+                page === currentPage ?
+                <div className='table-list-page-active'>{page}</div> :
+                <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
+                )}
             </div>
+            <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         <div className='table-list-search-box'>
             <div className='table-list-search-input-box'>

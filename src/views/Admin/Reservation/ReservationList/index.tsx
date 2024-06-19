@@ -2,11 +2,12 @@
     import './style.css'
     import { ReservationUserListItem } from 'src/types';
     import { useNavigate } from 'react-router';
-    import { ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
+    import { ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
     import { useCookies } from 'react-cookie';
     import ResponseDto from 'src/apis/response.dto';
     import { GetReservationListResponseDto, GetSearchReservationListResponseDto } from 'src/apis/reservation/dto/response';
 import { getSearchReservationListRequest } from 'src/apis/reservation';
+import { useUserStore } from 'src/stores';
 
     //                    component                    //
     function ListItem ({
@@ -53,6 +54,7 @@ import { getSearchReservationListRequest } from 'src/apis/reservation';
     export default function ReservationList() {
 
     //                    state                    //
+    const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
 
     const [reservationList, setReservationList] = useState<ReservationUserListItem[]>([]);
@@ -176,7 +178,7 @@ import { getSearchReservationListRequest } from 'src/apis/reservation';
 
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken) return;
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
         getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
     }, []);
 

@@ -3,7 +3,7 @@ import "./style.css";
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import {  ADMIN_USER_LIST_ABSOLUTE_PATH,  MAIN_PATH } from 'src/constant';
+import {  ADMIN_USER_LIST_ABSOLUTE_PATH,  MAIN_ABSOLUTE_PATH,  MAIN_PATH } from 'src/constant';
 import { GetDetailUserListResponseDto } from 'src/apis/userList/dto/response';
 import { getDetailUserListRequest, deleteUserRequest } from 'src/apis/userList';
 
@@ -74,7 +74,7 @@ export default function DetailUserList() {
     
     //                    effect                    //
     useEffect(() => {
-        if (!userId || !cookies.accessToken) return;
+        if (!userId || !cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH);
 
         getDetailUserListRequest(userId, cookies.accessToken).then(getDetailUserListResponse);
     }, []);

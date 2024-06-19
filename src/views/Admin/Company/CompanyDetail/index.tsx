@@ -90,7 +90,7 @@ export default function CompanyDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!companyCode || !cookies.accessToken) return;
+        if (!companyCode || !cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
 
         getCompanyDetailRequest(companyCode, cookies.accessToken).then(getCompanyDetailResponse);
     }, []);

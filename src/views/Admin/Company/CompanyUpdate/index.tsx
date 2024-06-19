@@ -7,7 +7,7 @@ import { PutCompanyRequestDto } from "src/apis/company/dto/request";
 import { GetCompanyDetailResponseDto, GetCompanyListResponseDto } from "src/apis/company/dto/response";
 import ResponseDto from "src/apis/response.dto";
 import InputBox from "src/components/Inputbox";
-import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_LIST_ABSOLUTE_PATH } from "src/constant";
+import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 
 
@@ -111,7 +111,7 @@ export default function CompanyUpdate() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!companyCode || !cookies.accessToken) return;
+        if (!companyCode || !cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH) ;
         if (!loginUserRole) return;
         if (loginUserRole !== 'ROLE_ADMIN') {
             navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
