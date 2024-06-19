@@ -192,12 +192,13 @@ return (
 
         <Route path={USER_INFO_PATH}>
             <Route index element={<MyInfo/>}/>
-            <Route path={USER_PW_UPDATE_PATH} element={<MyInfoPwModify />} />
-            <Route path={USER_EMAIL_UPDATE_PATH} element={<MyInfoEmailModify />} />
+            <Route path={USER_PW_UPDATE_PATH} element={<MyInfoPwModify/>} />
+            <Route path={USER_EMAIL_UPDATE_PATH} element={<MyInfoEmailModify/>} />
         </Route>
 
-        <Route path={USER_RESERVATION_PATH} element={<MyReservation />} />
-        <Route path={USER_RESERVATION_DETAIL_PATH} element={<MyReservationDetail />} />
+        <Route path={USER_RESERVATION_PATH} element={<MyReservation/>} />
+        <Route path={USER_RESERVATION_DETAIL_PATH} element={<MyReservationDetail/>} />
+
         <Route path={USER_QNA_PATH} element={<MyInfoQnaList />} />
         </Route>
 

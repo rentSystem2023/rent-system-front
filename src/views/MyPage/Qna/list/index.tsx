@@ -173,17 +173,10 @@ export default function MyInfoQnaList() {
         };
     }, []);
 
-    useEffect (() => {
-        if (!cookies.accessToken || userId !== 'ROLE_USER') {
-            navigator(MAIN_ABSOLUTE_PATH);
-        };
-    }, []);
-
+    //                    render                    //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
-
     const filteredViewList = viewList.filter(item => item.writerId === loginUserId);
 
-    //                    render                    //
     return (
         <>        
         <div id='information-wrapper'>

@@ -163,7 +163,7 @@ export default function MyReservation() {
 
     //                    effect                    //
     useEffect (() => {
-        if (!cookies.accessToken || userId !== 'ROLE_USER') {
+        if (!cookies.accessToken) {
             return navigator(MAIN_ABSOLUTE_PATH);
         };
         getReservationMyListRequest(cookies.accessToken).then(getMyReservationListResponse);
