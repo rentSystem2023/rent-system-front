@@ -9,9 +9,7 @@ interface Props {
 }
 
 function SideBar ({ path } : Props) {
-
-    const [boardItem, setBoardItem] = useState(false);
-
+    
     const userClass = `admin-side-navigation-item${path === '회원 관리' ? ' active' : ''}`;
     const companyClass = `admin-side-navigation-item${path === '업체 관리' ? ' active' : ''}`;
     const reservationClass = `admin-side-navigation-item${path === '예약 관리' ? ' active' : ''}`;

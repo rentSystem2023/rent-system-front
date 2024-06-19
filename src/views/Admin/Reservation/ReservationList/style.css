@@ -1,3 +1,7 @@
+.table-list-table.reservation{
+    width: 1350px;
+}
+
 .table-list-table-th.reservation{
     gap: 63px
 }
@@ -50,5 +54,9 @@
 
 /* 상태 */
 .reservation-list-table-reservation-state{
-    width: 60px;
+    width: 100px;
+}
+
+.table-list-search-box.reservation{
+    margin-right: -52px;
 }
