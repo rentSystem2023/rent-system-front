@@ -30,12 +30,12 @@ export function Sns () {
 
     //                    render                    //
     return <></>;
-}
+};
 
 //                    interface                    //
 interface SnsContainerProps {
     title: string;
-}
+};
 
 //                    component                    //
 function SnsContainer({ title }: SnsContainerProps) {
@@ -55,24 +55,21 @@ function SnsContainer({ title }: SnsContainerProps) {
             </div>
         </div>
     );
-}
+};
 
 //                    component                    //
 export default function SignIn() {
 
     //                    state                    //
     const [cookies, setCookie] = useCookies();
-
     const [id, setId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-
     const [message, setMessage] = useState<string>('');
 
     //                    function                    //
     const navigator = useNavigate();
 
     const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' : 
@@ -82,6 +79,7 @@ export default function SignIn() {
         setMessage(message);
 
         const isSuccess = result && result.code === 'SU';
+
         if (!isSuccess) return;
 
         const { accessToken, expires } = result as SignInResponseDto;
@@ -112,20 +110,19 @@ export default function SignIn() {
         if (!id || !password) {
             setMessage('아이디와 비밀번호를 모두 입력하세요.');
             return;
-        }
+        };
 
         const requestBody: SignInRequestDto = {
             userId: id,
             userPassword: password
-        }
+        };
+
         SignInRequest(requestBody).then(signInResponse);
-        
     };
 
     const onSignUpButtonClickHandler = () => {
         navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-    }
-    
+    };
 
     //                    render                    //
     return (

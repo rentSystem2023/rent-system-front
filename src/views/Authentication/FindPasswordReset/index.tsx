@@ -33,6 +33,7 @@ export default function FindPasswordReset() {
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
 
         const isSuccess = result && result.code === 'SU';
+
         if (!isSuccess) {
             alert(message);
             return;
@@ -83,10 +84,11 @@ export default function FindPasswordReset() {
     const onFindPwResetButtonClickHandler = () => {
 
         if(!isFindPwActive || !userId) return;
+
         if(!password || !passwordCheck) {
             alert('모든 내용을 입력해주세요.');
             return;
-        }
+        };
 
         const requestBody: FindPasswordResetRequestDto = {
             userPassword: password
@@ -126,7 +128,7 @@ export default function FindPasswordReset() {
                     <div className={findPwResetButtonClass} onClick={ onFindPwResetButtonClickHandler }>확인</div>
                 </div>
             </div>
+            </div>
         </div>
-    </div>
-    )
+    );
 }
