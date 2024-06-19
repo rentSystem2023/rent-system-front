@@ -21,7 +21,6 @@ function UserSideBar({ path } : Props) {
   const onReservationClickHandler = () => navigator(USER_RESERVATION_ABSOLUTE_PATH);
   const onBoardClickHandler = () => navigator(USER_QNA_ABSOLUTE_PATH);
 
-
   return(
     <>   
     <div className="user-side-navigation-container">
@@ -49,7 +48,7 @@ export default function UserContainer() {
 
   useEffect(() => {
     const path = 
-        pathname === USER_INFO_ABSOLUTE_PATH ? '회원 정보' :
+        pathname ===USER_INFO_ABSOLUTE_PATH ? '회원 정보' :
         pathname === USER_RESERVATION_ABSOLUTE_PATH ? '예약 내역' :
         pathname === USER_QNA_ABSOLUTE_PATH ? '문의 내역' : '';
 
@@ -61,7 +60,7 @@ export default function UserContainer() {
     <div className='title-text'>마이페이지</div>
     <div id="user-wrapper">
       <UserSideBar path={path} />
-      <div id="user-main">
+      <div className="user-main">
         <Outlet/>
       </div>
     </div>
