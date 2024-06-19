@@ -199,7 +199,7 @@ import { getSearchReservationListRequest } from 'src/apis/reservation';
             <div className='table-list-top'>
                 <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>
-            <div className='table-list-table'>
+            <div className='table-list-table reservation'>
                 <div className='table-list-table-th reservation'>
                     <div className='reservation-list-table-list-number'>예약번호</div>
                     <div className='reservation-list-table-reservation-name'>업체 이름</div>
@@ -226,7 +226,7 @@ import { getSearchReservationListRequest } from 'src/apis/reservation';
                     </div>
                     <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
                 </div>
-                <div className='table-list-search-box'>
+                <div className='table-list-search-box reservation'>
                     <div className='table-list-search-input-box'>
                         <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
                     </div>
