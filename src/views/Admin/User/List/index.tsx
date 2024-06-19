@@ -209,14 +209,17 @@ export default function UserList() {
             <div style={{ width: '299px' }}></div>
             <div className='table-list-pagenation'>
                 
-            <div className='table-list-page-box'>
-                {pageList.map(page => 
-                page === currentPage ?
-                <div className='table-list-page-active'>{page}</div> :
-                <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
-                )}
+            <div className='table-list-pagenation'>
+                <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
+                <div className='table-list-page-box'>
+                    {pageList.map(page => 
+                    page === currentPage ?
+                    <div className='table-list-page-active'>{page}</div> :
+                    <div className='table-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+                    )}
+                </div>
+                <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
             </div>
-            <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         <div className='table-list-search-box'>
             <div className='table-list-search-input-box'>

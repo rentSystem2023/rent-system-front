@@ -22,6 +22,7 @@ export const RESERVATION_REQUEST_PATH = 'request/:rentCompany';
 
 // description: 마이 페이지 URL //
 export const USER_PATH = 'user';
+export const USER_INFO_PATH = 'info';
 export const USER_PW_UPDATE_PATH = 'password-update';
 export const USER_EMAIL_UPDATE_PATH = 'email-update';
 export const USER_RESERVATION_PATH = 'reservation';
@@ -93,13 +94,13 @@ export const RESERVATION_REQUEST_ABSOLUTE_PATH = (rentComapny: string) => `${MAI
 
 // description: 유저 //
 // description: 내 정보 페이지 절대 URL //
-export const USER_INFO_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}`;
+export const USER_INFO_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_INFO_PATH}`;
 // description: 내 정보 비밀번호 수정 페이지 절대 URL //
-export const USER_PW_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_PW_UPDATE_PATH}`;
+export const USER_PW_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_INFO_PATH}/${USER_PW_UPDATE_PATH}`;
 // description: 내 정보 이메일 수정 페이지 절대 URL //
-export const USER_EMAIL_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_EMAIL_UPDATE_PATH}`;
+export const USER_EMAIL_UPDATE_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_INFO_PATH}/${USER_EMAIL_UPDATE_PATH}`;
 // description: 내 정보 삭제 페이지 절대 URL //
-export const USER_INFO_DELETE_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}/${USER_PATH}/${userId}`;
+export const USER_INFO_DELETE_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}/${USER_PATH}/${USER_INFO_PATH}/${userId}`;
 // description: 나의 예약 내역 페이지 절대 URL //
 export const USER_RESERVATION_ABSOLUTE_PATH = `${MAIN_PATH}/${USER_PATH}/${USER_RESERVATION_PATH}`;
 // description: 나의 예약 상세 페이지 절대 URL //
