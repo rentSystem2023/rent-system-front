@@ -1,23 +1,21 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { getSearchQnaListRequest } from 'src/apis/qna/dto';
-import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/qna/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import {
     COUNT_PER_PAGE,
     COUNT_PER_SECTION,
-    MAIN_ABSOLUTE_PATH,
-    MAIN_PATH,
-    QNA_DETAIL_ABSOLUTE_PATH,
-    QNA_REGIST_ABSOLUTE_PATH
+    MAIN_PATH
 } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { QnaListItem } from 'src/types';
 import './style.css';
+import { GetMyInfoQnaListResponseDto } from 'src/apis/user/dto/response';
+import { getMyQnaListRequest } from 'src/apis/user';
 
-//                    component                    //
+// Component for a single list item
 function ListItem({
+    index,
     receptionNumber,
     writeDatetime,
     title,
@@ -26,23 +24,21 @@ function ListItem({
     category,
     publicState,
     status
-}: QnaListItem) {
+}: QnaListItem & { index: number }) {
     const navigator = useNavigate();
 
     const onClickHandler = () => {
+
+        // 나의 문의내역 페이지에서 상세 페이지로 이동할 때
         navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'MY_QNA_LIST' } });
     };
 
-    const coveredWriterId = writerId !== '' ? writerId[0] + '*'.repeat(writerId.length - 1) : '';
-
     return (
         <div className='table-list-table-tr qna' onClick={onClickHandler}>
-            <div className='qna-list-table-reception-number'>{receptionNumber}</div>
+            <div className='qna-list-table-reception-number'>{index + 1}</div>
             <div className='qna-list-table-write-date'>{writeDatetime}</div>
-            <div className={`qna-list-table-title ${publicState ? 'public' : 'private'}`} style={{ textAlign: 'left' }}>
-                {publicState ? title : '비공개글입니다.'}
-            </div>
-            <div className='qna-list-table-writer-id'>{coveredWriterId}</div>
+            <div className={`qna-list-table-title ${publicState ? 'public' : 'private'}`} style={{ textAlign: 'left' }}>{title}</div>
+            <div className='qna-list-table-writer-id'>{writerId}</div>
             <div className='qna-list-table-category'>{category}</div>
             <div className='qna-list-table-exposure'>{publicState ? '공개' : '비공개'}</div>
             <div className='qna-list-table-status'>
@@ -51,14 +47,10 @@ function ListItem({
             <div className='qna-list-table-viewcount'>{viewCount}</div>
         </div>
     );
-};
+}
 
-export default function MyInfoQnaList() { 
-
-    //                    state                    //
-    const { loginUserId, loginUserRole } = useUserStore();
-    
-    const [userId, setUserId] = useState<string>('');
+// Main component for the Q&A list
+export default function MyInfoQnaList() {
     const [cookies] = useCookies();
     const [qnaList, setQnaList] = useState<QnaListItem[]>([]);
     const [viewList, setViewList] = useState<QnaListItem[]>([]);
@@ -69,9 +61,7 @@ export default function MyInfoQnaList() {
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
     const [isToggleOn, setToggleOn] = useState<boolean>(false);
-    const [searchWord, setSearchWord] = useState<string>('');
 
-    //                    function                    //
     const navigator = useNavigate();
 
     const changePage = (boardList: QnaListItem[], totalLength: number) => {
@@ -110,12 +100,11 @@ export default function MyInfoQnaList() {
         changeSection(totalPage);
     };
 
-    const getSearchBoardListResponse = (result: GetSearchQnaBoardListResponseDto | ResponseDto | null) => {
+    const getMyQnaListResponse = (result: GetMyInfoQnaListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '검색어를 입력하세요.' :
-                    result.code === 'AF' ? '인증에 실패했습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'AF' ? '인증에 실패했습니다.' :
+                    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -123,14 +112,13 @@ export default function MyInfoQnaList() {
             return;
         }
 
-        const { qnaList } = result as GetSearchQnaBoardListResponseDto;
+        const { qnaList } = result as GetMyInfoQnaListResponseDto;
         changeBoardList(qnaList);
 
         setCurrentPage(!qnaList.length ? 0 : 1);
         setCurrentSection(!qnaList.length ? 0 : 1);
     };
 
-    //                    event handler                    //
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
@@ -147,35 +135,21 @@ export default function MyInfoQnaList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const searchWord = event.target.value;
-        setSearchWord(searchWord);
-    };
-
-    const onSearchButtonClickHandler = () => {
-        if (searchWord) {
-            if (cookies.accessToken) {
-                getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-            } else {
-                getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
-            }
-        } else {
-            getSearchQnaListRequest('', '').then(getSearchBoardListResponse);
-        };
-    };
-
-    //                  effect                      //
-    useEffect(() => {
-        if (!cookies.accessToken) {
-            getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
-        } else {
-            getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-        };
+    
+    useEffect (() => {
+        if (!cookies.accessToken) return;
+        getMyQnaListRequest(cookies.accessToken).then(getMyQnaListResponse);
     }, []);
 
-    //                    render                    //
-    const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
-    const filteredViewList = viewList.filter(item => item.writerId === loginUserId);
+    useEffect(() => {
+        if (!qnaList.length) return;
+        changePage(qnaList, totalLength);
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (!qnaList.length) return;
+        changeSection(totalPage);
+    }, [currentSection]);
 
     return (
         <>        
@@ -202,7 +176,7 @@ export default function MyInfoQnaList() {
                         <div className='qna-list-table-viewcount'>조회수</div>
                     </div>
                     <div className='table-list-table-body'>
-                        {filteredViewList.map(item => <ListItem key={item.receptionNumber} {...item} />)}
+                        {viewList.map((item, index) => <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.receptionNumber} />)}
                     </div>
                 </div>
 
@@ -218,12 +192,6 @@ export default function MyInfoQnaList() {
                             )}
                         </div>
                         <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
-                    </div>
-                    <div className='table-list-search-box'>
-                        <div className='table-list-search-input-box'>
-                            <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
-                        </div>
-                        <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
                     </div>
                 </div>
             </div>

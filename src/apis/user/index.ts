@@ -64,7 +64,7 @@ return result;
 };
 
 // function : 마이페이지 Q&A 전체 리스트 불러오기 API 함수
-export const getQnaListRequest = async(accessToken: string) => {
+export const getMyQnaListRequest = async(accessToken: string) => {
     const result = await axios.get(GET_MY_QNA_LIST_URL, bearerAuthorization(accessToken))
     .then(requestHandler<GetMyInfoQnaListResponseDto>)
     .catch(requestErrorHandler);
