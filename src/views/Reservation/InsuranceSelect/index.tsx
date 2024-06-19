@@ -78,7 +78,7 @@ function ListItem ({
 );
 }
 
-// 하늘
+// 이미지 클릭 시 이미지 상세보기 기능
 // func DetailImage ({ imageUrl, onClose }: { imageUrl: string, onClose: () => void }) {
 //   return (
 //     <div className='detail-image-container'>
@@ -95,8 +95,6 @@ function ListItem ({
 // };
 
 export default function InsuranceSelect() {
-
-  const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
   
   //                    state                    //
   const [priceList, setPriceList] = useState<ReservationCarPriceListItem[]>([]);
@@ -108,7 +106,7 @@ export default function InsuranceSelect() {
   const [currentSection, setCurrentSection] = useState<number>(1);
   const { address, reservationStart, reservationEnd, selectedCar, selectedInsurance } = useReservationStore();
   const [pageList, setPageList] = useState<number[]>([1]);
-  // const [imageDetail, setImageDetail] = useState(false);
+  // const [imageDetail, setImageDetail] = useState(false); => 이미지 클릭 시 이미지 상세보기 state
     
   //                    function                    //
   const navigator = useNavigate();
@@ -186,6 +184,7 @@ export default function InsuranceSelect() {
       setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
   };
 
+  // 이미지 클릭 시 이미지 상세보기 Handler
   // const closeImagePopupHandler = () => {
   //   setImageDetail(false);
   // };
@@ -211,11 +210,6 @@ export default function InsuranceSelect() {
   
   if (!selectedCar) return <></>;
 
-  // const insurance = 
-  //   selectedInsurance === 'normal' ? `${krw(selectedCar.lowNormalPrice)} ~ ${krw(selectedCar.highNormalPrice)}` :
-  //   selectedInsurance === 'luxury' ? `${krw(selectedCar.lowLuxuryPrice)} ~ ${krw(selectedCar.highLuxuryPrice)}` :
-  //   selectedInsurance === 'super' ? `${krw(selectedCar.lowSuperPrice)} ~ ${krw(selectedCar.highSuperPrice)}` : '';
-
     const insuranceType =
     selectedInsurance === 'normal' ? '완전자차' : 
     selectedInsurance === 'luxury' ? '고급자차' :
@@ -231,7 +225,7 @@ export default function InsuranceSelect() {
             <img 
               style={{ width: '200%', height: '120%'}} 
               src={selectedCar.carImageUrl} 
-              // onClick={() => setImageDetail(true)}
+              // onClick={() => setImageDetail(true)} => 이미지 클릭 시 상세보기 Click
             />
           </div>
 
@@ -241,11 +235,6 @@ export default function InsuranceSelect() {
               <div className='qna-detail-info-divider'>{'\|'}</div>
               <div className='selecet-info-cotents'>{selectedCar.carName}</div>
             </div>
-            {/* <div className='select-info-wrap'>
-              <div className='select-info'>연료</div>
-              <div className='qna-detail-info-divider'>{'\|'}</div>
-              <div className='selecet-info-cotents'>{fuelType}</div>
-            </div> */}
             <div className='select-info-wrap'>
               <div className='select-info'>보험</div>
               <div className='qna-detail-info-divider'>{'\|'}</div>
@@ -270,7 +259,7 @@ export default function InsuranceSelect() {
           </div>
         </div>
       </div>
-      {/* {imageDetail && <DetailImage imageUrl={selectedCar.carImageUrl} onClose={closeImagePopupHandler}/>} */}
+      {/* {imageDetail && <DetailImage imageUrl={selectedCar.carImageUrl} onClose={closeImagePopupHandler}/>} => 이미지 클릭 시 이미지 상세보기 render */}
     </div>
   );
 }
