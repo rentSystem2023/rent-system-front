@@ -60,11 +60,6 @@
     width: 550px;
 }
 
-.search-select-item.location:hover{
-    cursor: pointer;
-    opacity: 0.9;
-}
-
 .search-select-item.date{
     width: 100%;
     

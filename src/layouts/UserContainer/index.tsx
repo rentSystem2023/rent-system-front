@@ -26,7 +26,7 @@ function UserSideBar({ path } : Props) {
     <div className="user-side-navigation-container">
         <div className={myInfoClass} onClick={onUserClickHandler}>
           <div className="user-side-navigation-icon person"></div>
-          <div className="user-side-navigation-item-title" >회원 정보</div>
+          <div className="user-side-navigation-item-title">회원 정보</div>
         </div>
         <div className={reservationClass} onClick={onReservationClickHandler}>
           <div className="user-side-navigation-icon car"></div>
@@ -48,8 +48,8 @@ export default function UserContainer() {
 
   useEffect(() => {
     const path = 
-        pathname ===USER_INFO_ABSOLUTE_PATH ? '회원 정보' :
-        pathname === USER_RESERVATION_ABSOLUTE_PATH ? '예약 내역' :
+        pathname.startsWith(USER_INFO_ABSOLUTE_PATH) ? '회원 정보' :
+        pathname.startsWith(USER_RESERVATION_ABSOLUTE_PATH) ? '예약 내역' :
         pathname === USER_QNA_ABSOLUTE_PATH ? '문의 내역' : '';
 
     setPath(path);

@@ -6,7 +6,6 @@ import { CompanyListItem, PopularCarListItem, ReservationCarViewListItem } from 
 import { getYYYYMMDD } from 'src/utils';
 import { useReservationStore } from 'src/stores';
 import { DatePickerPopup } from 'src/components/DatePickerPopup';
-import { LocationPopup } from 'src/components/LocationPopup';
 import { GetReservationPopularListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getReservationPopularListRequest } from 'src/apis/reservation';
@@ -109,7 +108,7 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
                         <div className="search-select-box">
                             <div className="search-select-item location" onClick={openLocationPopupHandler}>
                                 <div className='location-image'></div>
-                                <div className='location-title'>{address || "제주공항"}</div>
+                                <div className='location-title'>{address || "제주국제공항"}</div>
                             </div>
                             <div className="search-select-item date" onClick={openDatePickerHandler}>                                
                                 <div className='date-image'></div>
@@ -132,7 +131,7 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
 
                 </div>
             </div>
-            {isLocationPopupOpen && <LocationPopup onClose={closeLocationPopupHandler} viewList={[]} />}
+            {/* {isLocationPopupOpen && <LocationPopup onClose={closeLocationPopupHandler} viewList={[]} />} */}
             {isDatePickerOpen && <DatePickerPopup onClose={closeDatePickerHandler} />}
         </div>
     );
