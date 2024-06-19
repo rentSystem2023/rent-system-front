@@ -14,6 +14,8 @@ import { useSearchParams } from "react-router-dom";
 export default function SignUp() {
 
     //                    state                    //
+    const { setJoinPath, setSnsId } = useAuthStore();
+
     const [searchParam, setSearchParam] = useSearchParams();
     
     const [id, setId] = useState<string>('');
@@ -21,8 +23,6 @@ export default function SignUp() {
     const [nickName, setNickName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
-
-    const { setJoinPath, setSnsId } = useAuthStore();
     
     const [passwordCheck, setPasswordCheck] = useState<string>('');
 
@@ -55,7 +55,6 @@ export default function SignUp() {
 
     //                    function                    //
     const idCheckResponse = (result: ResponseDto | null) => {
-
         const idMessage = 
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
@@ -71,7 +70,6 @@ export default function SignUp() {
     };
 
     const nickNameCheckResponse = (result: ResponseDto | null) => {
-
         const nickNameMessage = 
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
@@ -87,7 +85,6 @@ export default function SignUp() {
     };
 
     const emailAuthResponse = (result: ResponseDto | null) => {
-
         const emailMessage = 
             !result ? '서버에 문제가 있습니다.' : 
             result.code === 'VF' ? '이메일 형식이 아닙니다.' :
@@ -104,7 +101,6 @@ export default function SignUp() {
     };
 
     const emailAuthCheckResponse = (result: ResponseDto | null) => {
-
         const authNumberMessage = 
             !result ? '서버에 문제가 있습니다.' : 
             result.code === 'VF' ? '인증번호를 입력해주세요.' : 
@@ -120,7 +116,6 @@ export default function SignUp() {
     };
 
     const signUpResponse = (result: ResponseDto | null) => {
-
         const message = 
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
@@ -226,12 +221,13 @@ export default function SignUp() {
 
         const emailPattern = /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
         const isEmailPattern = emailPattern.test(email);
+
         if (!isEmailPattern) {
             setEmailMessage('이메일 형식이 아닙니다.');
             setEmailError(true);
             setEmailCheck(false);
             return;
-        }
+        };
 
         const requestBody: EmailAuthRequestDto = { userEmail: email };
         emailAuthRequest(requestBody).then(emailAuthResponse);
@@ -245,18 +241,19 @@ export default function SignUp() {
             userEmail: email,
             authNumber
         };
+
         emailAuthCheckRequest(requestBody).then(emailAuthCheckResponse);
     };
     
     const navigator = useNavigate();
 
     const onSignUpButtonClickHandler = () => {
-
         if(!isSignUpActive) return;
+
         if(!id || !password || !passwordCheck || !nickName ||  !email || !authNumber) {
             alert('모든 내용을 입력해주세요.');
             return;
-        }
+        };
 
         const requestBody: SignUpRequestDto = {
             userId: id,
@@ -264,14 +261,16 @@ export default function SignUp() {
             nickName: nickName,
             userEmail: email,
             authNumber,
-        }
+        };
         
         signUpRequest(requestBody).then(signUpResponse);
 
         const joinPath = searchParam.get('joinPath');
-    if (joinPath) setJoinPath(joinPath);
-    const snsId = searchParam.get('snsId');
-    if (snsId) setSnsId(snsId);
+
+        if (joinPath) setJoinPath(joinPath);
+        
+        const snsId = searchParam.get('snsId');
+        if (snsId) setSnsId(snsId);
 
         navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     };
@@ -279,7 +278,7 @@ export default function SignUp() {
     //                    render                    //
     return (
         <div id="authentication-wrapper">
-        <div className="title-text">회원가입</div>
+            <div className="title-text">회원가입</div>
             <div className="authentication-sign-up">
                 <div className="authentication-contents">
                     <div className="authentication-input-container">
