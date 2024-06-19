@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import './style.css';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH } from 'src/constant';
+import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { Cookies, useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { postCompanyRequest } from 'src/apis/company';
@@ -13,6 +13,8 @@ export default function CompanyRegist() {
 
     //                              state                              //
     const [cookies] = useCookies();
+    const {loginUserRole} = useUserStore();
+    
     const [companyCode, setCompanyCode] = useState<number | string>('');
     const [rentCompany, setRentCompany] = useState<string>('');
     const [address, setAddress] = useState<string>('');
@@ -89,6 +91,12 @@ export default function CompanyRegist() {
 
         postCompanyRequest(requestBody, cookies.accessToken).then(registCompanyResponse);
     };
+
+        //                    effect                    //
+        useEffect(() => {
+            if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
+
+        }, []);
 
 
     //                    render                    //
