@@ -1,34 +1,31 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { emailAuthRequest, putMyInfoEmailRequest } from 'src/apis/user';
 import { EmailAuthRequestDto, PutMyInfoEmailRequestDto } from 'src/apis/user/dto/request';
 import InputBox from 'src/components/Inputbox';
-import { AUTH_SIGN_IN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { AUTH_SIGN_IN_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
 
 export default function MyInfoEmailModify() {
     
+    //                    state                    //
+    const [cookies] = useCookies();
+    
+    const [userId, setUserId] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
-
     const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
     const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
-
     const [isEmailCheck, setEmailCheck] = useState<boolean>(false);
     const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
-
     const [emailMessage, setEmailMessage] = useState<string>('');
     const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
-
     const [isEmailError, setEmailError] = useState<boolean>(false);
     const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
 
-    const [cookies] = useCookies();
-
     //                    function                    //
     const emailAuthResponse = (result: ResponseDto | null) => {
-
         const emailMessage = 
             !result ? '서버에 문제가 있습니다.' : 
             result.code === 'VF' ? '이메일 형식이 아닙니다.' :
@@ -42,24 +39,22 @@ export default function MyInfoEmailModify() {
         setEmailMessage(emailMessage);
         setEmailCheck(emailCheck);
         setEmailError(emailError);
-
     };
 
     const emailAuthCheckResponse = (result: ResponseDto | null) => {
-
         const authNumberMessage = 
             !result ? '서버에 문제가 있습니다.' : 
             result.code === 'VF' ? '인증번호를 입력해주세요.' : 
             result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' :
             result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+
         const authNumberCheck = result !== null && result.code === 'SU';
         const authNumberError = !authNumberCheck;
 
         setAuthNumberMessage(authNumberMessage);
         setAuthNumberCheck(authNumberCheck);
         setAuthNumberError(authNumberError);
-
     };
 
     //                    event handler                    //
@@ -88,12 +83,13 @@ export default function MyInfoEmailModify() {
 
         const emailPattern = /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
         const isEmailPattern = emailPattern.test(email);
+
         if (!isEmailPattern) {
             setEmailMessage('이메일 형식이 아닙니다.');
             setEmailError(true);
             setEmailCheck(false);
             return;
-        }
+        };
 
         const requestBody: EmailAuthRequestDto = { userEmail: email };
         emailAuthRequest(requestBody).then(emailAuthResponse);
@@ -101,18 +97,35 @@ export default function MyInfoEmailModify() {
 
     const onAuthNumberButtonClickHandler = () => {
         if(!cookies.accessToken ||  !authNumberButtonStatus) return;
+        
         if(!authNumber) return;
 
         const requestBody: PutMyInfoEmailRequestDto = {
             userEmail: email,
             authNumber: authNumber
         };
+
         putMyInfoEmailRequest(requestBody, cookies.accessToken).then(emailAuthCheckResponse);
 
         alert('이메일이 변경되었습니다.');
         navigator(USER_INFO_ABSOLUTE_PATH);
     };
 
+    //                  effect                      //
+    useEffect (() => {
+        const requestBody: PutMyInfoEmailRequestDto = {
+            userEmail: email,
+            authNumber: authNumber
+        };
+
+        if (!cookies.accessToken || userId !== 'ROLE_USER') {
+            navigator(MAIN_ABSOLUTE_PATH);
+        } else {
+            putMyInfoEmailRequest(requestBody, cookies.accessToken).then(emailAuthCheckResponse);
+        };
+    }, []);
+
+    //                    render                    //
     return (
         <div id="information-wrapper">
             <div className='information-main'>
@@ -122,7 +135,6 @@ export default function MyInfoEmailModify() {
 
             <div className='information-container'>
                 <div className='infomation-contents'>
-
                 <InputBox 
                     label="변경할 이메일" 
                     type="text" value={email} 
@@ -133,7 +145,6 @@ export default function MyInfoEmailModify() {
                     onButtonClickHandler={onEmailButtonClickHandler} 
                     message={emailMessage} error={isEmailError} 
                 />
-                
                 {isEmailCheck && 
                     <InputBox 
                         label="인증번호" 
@@ -147,11 +158,6 @@ export default function MyInfoEmailModify() {
                         message={authNumberMessage} error={isAuthNumberError} 
                     />
                 }
-
-                {/* <div className="authentication-button-container">
-                    <div className={emailModifyButtonClass} onClick={ onEmailModifyButtonClickHandler }>확인</div>
-                </div> */}
-
                 </div>
             </div>
         </div>

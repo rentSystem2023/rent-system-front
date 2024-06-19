@@ -7,6 +7,7 @@ import ResponseDto from 'src/apis/response.dto';
 import {
     COUNT_PER_PAGE,
     COUNT_PER_SECTION,
+    MAIN_ABSOLUTE_PATH,
     MAIN_PATH,
     QNA_DETAIL_ABSOLUTE_PATH,
     QNA_REGIST_ABSOLUTE_PATH
@@ -15,7 +16,7 @@ import { useUserStore } from 'src/stores';
 import { QnaListItem } from 'src/types';
 import './style.css';
 
-// Component for a single list item
+//                    component                    //
 function ListItem({
     receptionNumber,
     writeDatetime,
@@ -27,17 +28,13 @@ function ListItem({
     status
 }: QnaListItem) {
     const navigator = useNavigate();
-    const { loginUserId } = useUserStore();
 
     const onClickHandler = () => {
-
-        // 나의 문의내역 페이지에서 상세 페이지로 이동할 때
         navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'MY_QNA_LIST' } });
-
-        // navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
     };
 
     const coveredWriterId = writerId !== '' ? writerId[0] + '*'.repeat(writerId.length - 1) : '';
+
     return (
         <div className='table-list-table-tr qna' onClick={onClickHandler}>
             <div className='qna-list-table-reception-number'>{receptionNumber}</div>
@@ -54,11 +51,14 @@ function ListItem({
             <div className='qna-list-table-viewcount'>{viewCount}</div>
         </div>
     );
-}
+};
 
-// Main component for the Q&A list
-export default function MyInfoQnaList() {
+export default function MyInfoQnaList() { 
+
+    //                    state                    //
     const { loginUserId, loginUserRole } = useUserStore();
+    
+    const [userId, setUserId] = useState<string>('');
     const [cookies] = useCookies();
     const [qnaList, setQnaList] = useState<QnaListItem[]>([]);
     const [viewList, setViewList] = useState<QnaListItem[]>([]);
@@ -71,6 +71,7 @@ export default function MyInfoQnaList() {
     const [isToggleOn, setToggleOn] = useState<boolean>(false);
     const [searchWord, setSearchWord] = useState<string>('');
 
+    //                    function                    //
     const navigator = useNavigate();
 
     const changePage = (boardList: QnaListItem[], totalLength: number) => {
@@ -109,25 +110,6 @@ export default function MyInfoQnaList() {
         changeSection(totalPage);
     };
 
-    const getBoardListResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '인증에 실패했습니다.' :
-                    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            if (result?.code === 'AF') navigator(MAIN_PATH);
-            return;
-        }
-
-        const { qnaList } = result as GetQnaBoardListResponseDto;
-        changeBoardList(qnaList);
-
-        setCurrentPage(!qnaList.length ? 0 : 1);
-        setCurrentSection(!qnaList.length ? 0 : 1);
-    };
-
     const getSearchBoardListResponse = (result: GetSearchQnaBoardListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -148,7 +130,7 @@ export default function MyInfoQnaList() {
         setCurrentSection(!qnaList.length ? 0 : 1);
     };
 
-
+    //                    event handler                    //
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
@@ -171,36 +153,37 @@ export default function MyInfoQnaList() {
     };
 
     const onSearchButtonClickHandler = () => {
-        // 검색어가 있는 경우
         if (searchWord) {
             if (cookies.accessToken) {
                 getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
             } else {
-                // 토큰이 없는 경우, 빈 문자열을 전달하여 검색
                 getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
             }
-        }
-        // 검색어가 없는 경우
-        else {
-            // 빈 문자열을 전달하여 검색
+        } else {
             getSearchQnaListRequest('', '').then(getSearchBoardListResponse);
-        }
+        };
     };
 
+    //                  effect                      //
     useEffect(() => {
         if (!cookies.accessToken) {
-            // 토큰이 없는 경우 처리
             getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
         } else {
             getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-        }
+        };
     }, []);
-    
+
+    useEffect (() => {
+        if (!cookies.accessToken || userId !== 'ROLE_USER') {
+            navigator(MAIN_ABSOLUTE_PATH);
+        };
+    }, []);
+
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
 
-    // 로그인 유저 아이디와 작성자 아이디가 일치하는 항목 필터링
     const filteredViewList = viewList.filter(item => item.writerId === loginUserId);
 
+    //                    render                    //
     return (
         <>        
         <div id='information-wrapper'>

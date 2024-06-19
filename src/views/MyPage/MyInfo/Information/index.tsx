@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_ABSOLUTE_PATH, USER_EMAIL_UPDATE_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH, USER_PW_UPDATE_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, USER_EMAIL_UPDATE_ABSOLUTE_PATH, USER_PW_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { deleteUserRequest, getMyInfoRequest } from 'src/apis/user';
@@ -30,15 +30,16 @@ export default function MyInfo() {
 
         if (!result || result.code !== 'SU') {
             alert(message);
+
             if (result?.code === 'AF') {
                 navigator(MAIN_ABSOLUTE_PATH);
                 return;
-            }
+            };
+            
+            if (!cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH);
             
             return;
-        }
-
-        if (!cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH);
+        };
 
         const { nickName, userId, userEmail, joinDate, userRole } = result as GetMyInfoResponseDto;
         setNickName(nickName);
@@ -46,13 +47,10 @@ export default function MyInfo() {
         setUserEmail(userEmail);
         setJoinDate(joinDate);
         setUserRole(userRole);
-
-        // 임의로 비밀번호를  '*'로 10개 나타나도록 함
-        setUserPassword(10);
+        setUserPassword(10); // 임의로 비밀번호를  '*'로 10개 나타나도록 함
     };
 
     const deleteUserResponse = (result: ResponseDto | null) => {
-
         const message =
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'AF' ? '권한이 없습니다.' :
@@ -63,23 +61,21 @@ export default function MyInfo() {
         if (!result || result.code !== 'SU'){
             alert(message);
             return;
-        }
+        };
 
-        // 삭제되면 그 게시물에 있으면 안되기 때문에 목록 페이지로 이동
-        removeCookie('accessToken', { path: '/' });
-        
+        removeCookie('accessToken', { path: '/' }); // 삭제되면 그 게시물에 있으면 안되기 때문에 목록 페이지로 이동
         navigator(MAIN_ABSOLUTE_PATH);
         window.location.reload();
-    }
+    };
 
     //                    event handler                    //
     const onPwModifyButtonClickHandler = () => {
         navigator(USER_PW_UPDATE_ABSOLUTE_PATH);
-    }
+    };
 
     const onEmailModifyButtonClickHandler = () => {
         navigator(USER_EMAIL_UPDATE_ABSOLUTE_PATH);
-    }
+    };
 
     const onDeleteButtonClickHandler = () => {
 
@@ -90,14 +86,18 @@ export default function MyInfo() {
         if (!isConfirm) return;
 
         deleteUserRequest(cookies.accessToken, userId).then(deleteUserResponse);
-    }
+    };
 
     //                  effect                      //
     useEffect (() => {
-        if (!cookies.accessToken) return;
-        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+        if (!cookies.accessToken || userId !== 'ROLE_USER') {
+            navigator(MAIN_ABSOLUTE_PATH);
+        } else {
+            getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+        }
     }, []);
 
+    //                    render                    //
     return (
         <div id='information-wrapper'>      
             <div className='information-main'>
@@ -139,5 +139,5 @@ export default function MyInfo() {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
