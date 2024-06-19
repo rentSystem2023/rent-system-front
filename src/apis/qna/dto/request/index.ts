@@ -1,4 +1,4 @@
-// description: Q&A 게시물 작성하기 Request Body DTO //
+// description: 문의사항 게시물 작성하기 Request Body DTO //
 export interface PostQnaBoardRequestDto {
     title: string;
     contents: string;
@@ -7,13 +7,13 @@ export interface PostQnaBoardRequestDto {
     imageUrl: string | null;
 }
 
-// description: Q&A 게시물 답글 작성하기 Request Body DTO //
+// description: 문의사항 게시물 답글 작성하기 Request Body DTO //
 export interface PostQnaRequestDto {
     title: string;
     comment : string;
 }
 
-// description: Q&A 게시물 수정하기 Request Body DTO //
+// description: 문의사항 게시물 수정하기 Request Body DTO //
 export interface PutQnaRequestDto {
     title: string;
     contents: string;
@@ -22,6 +22,7 @@ export interface PutQnaRequestDto {
     imageUrl:string | null;
 }
 
+// description: 문의사항 댓글 달기 Request Body DTO //
 export interface PostQnaCommentRequestDto {
     comment : string;
 }
