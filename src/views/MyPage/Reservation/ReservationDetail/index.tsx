@@ -127,6 +127,8 @@ export default function MyReservationDetail() {
     insuranceType === 'luxury' ? '고급자차' :
     insuranceType === 'super' ? '슈퍼자차' : '';
 
+    const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
+
     return (
         <div id='information-wrapper'>
             <div className='information-main'>
@@ -195,7 +197,7 @@ export default function MyReservationDetail() {
                             <div className='reservation-car-container detail'>
                                 <div className='reservation-side-title'>결제금액</div>
                                 <div className='qna-detail-info-divider list'>{'\|'}</div>
-                                <div className='reservation-content'>{insurancePrice}</div>
+                                <div className='reservation-content'>{`${krw(insurancePrice)}`}</div>
                             </div>
                         </div>
                     </div>
