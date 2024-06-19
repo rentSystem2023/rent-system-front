@@ -5,7 +5,7 @@
         / 280px minmax(1182px, 1fr);
 }
 
-#user-main {
+.user-main {
     grid-area: main;
 
     min-width: 1182px;
@@ -47,11 +47,6 @@
 .user-side-navigation-item.active {
     background-color: rgba(138, 146, 166, 0.6);
     color: rgba(255, 255, 255, 1);
-
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;  
 }
 
 .user-side-navigation-icon {
