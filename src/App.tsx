@@ -43,6 +43,7 @@ RESERVATION_REQUEST_PATH,
 SNS_PATH,
 TERMS_OF_USE,
 USER_EMAIL_UPDATE_PATH,
+USER_INFO_PATH,
 USER_PATH,
 USER_PW_UPDATE_PATH,
 USER_QNA_PATH,
@@ -188,9 +189,13 @@ return (
 
         {/* // route : 마이 페이지 */}
         <Route path={USER_PATH} element={<UserContainer />}>
-        <Route index element={<MyInfo />} />
-        <Route path={USER_PW_UPDATE_PATH} element={<MyInfoPwModify />} />
-        <Route path={USER_EMAIL_UPDATE_PATH} element={<MyInfoEmailModify />} />
+
+        <Route path={USER_INFO_PATH}>
+            <Route index element={<MyInfo/>}/>
+            <Route path={USER_PW_UPDATE_PATH} element={<MyInfoPwModify />} />
+            <Route path={USER_EMAIL_UPDATE_PATH} element={<MyInfoEmailModify />} />
+        </Route>
+
         <Route path={USER_RESERVATION_PATH} element={<MyReservation />} />
         <Route path={USER_RESERVATION_DETAIL_PATH} element={<MyReservationDetail />} />
         <Route path={USER_QNA_PATH} element={<MyInfoQnaList />} />
@@ -234,19 +239,6 @@ return (
             <Route path={ADMIN_RESERVATION_UPDATE_PATH} element={<ReservationDetail/>} />
         </Route>
 
-        {/* // route : 관리자 - 게시물관리 페이지 */}
-        <Route path={ADMIN_BOARD_PATH}>
-            <Route index element={<AdminBoardIndex />} />
-            {/* // route : 관리자 - 게시물 (공지사항) 관리 페이지 */}
-            <Route path={ADMIN_BOARD_NOTICE_PATH}>
-            <Route index element={<NoticeDetail/>} />
-            <Route path={ADMIN_BOARD_NOTICE_REGIST_PATH} element={<NoticeWrite/>} />
-            <Route path={ADMIN_BOARD_NOTICE_UPDATE_PATH} element={<NoticeUpdate/>} />
-            </Route>
-
-            {/* // route : 관리자 - 게시물 (Q&A) 관리 페이지 */}
-            <Route path={ADMIN_BOARD_QNA_PATH} element={<>관리자 Q&A 리스트 페이지</>} />
-        </Route>
         </Route>
     </Route>
     </Routes>

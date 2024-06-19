@@ -4,7 +4,6 @@ import { Outlet, useNavigate } from 'react-router';
 import { RESERVATION_CAR_ABSOLUTE_PATH, RESERVATION_COMPANY_ABSOLUTE_PATH } from 'src/constant';
 import { useReservationStore } from 'src/stores';
 import { DatePickerPopup } from 'src/components/DatePickerPopup';
-import { LocationPopup } from 'src/components/LocationPopup';
 
 export default function SelectContainer() {
 
@@ -47,7 +46,7 @@ export default function SelectContainer() {
                     <div className="search-select-box">
                         <div className="search-select-item location" onClick={openLocationPopupHandler}>
                             <div className='location-image'></div>
-                            <div className='location-title'>{address || "제주공항"}</div>
+                            <div className='location-title'>{address || "제주국제공항"}</div>
                         </div>
                         <div className="search-select-item date" onClick={openDatePickerHandler}>                                
                             <div className='date-image'></div>
@@ -64,7 +63,6 @@ export default function SelectContainer() {
                     <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>
                 </div>      
             </div>
-            {isLocationPopupOpen && <LocationPopup onClose={closeLocationPopupHandler} viewList={[]} />}
             {isDatePickerOpen && <DatePickerPopup onClose={closeDatePickerHandler} />}
             <div className="main-container">
                 <Outlet />
