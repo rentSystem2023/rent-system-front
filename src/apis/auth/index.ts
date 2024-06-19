@@ -1,25 +1,7 @@
 import { POST_FIND_PASSWORD_REQUEST_URL, PUT_FIND_PW_RESET_REQUEST_URL } from './../../constant/index';
 import axios from "axios";
-import {
-    POST_EMAIL_AUTH_REQUEST_URL,
-    POST_EMAIL_AUTH_CHECK_REQUEST_URL,
-    POST_ID_CHECK_REQUEST_URL,
-    POST_NICKNAME_CHECK_REQUEST_URL,
-    POST_SIGN_UP_REQUEST_URL,
-    POST_SIGN_IN_REQUEST_URL,
-    POST_FIND_ID_REQUEST_URL,
-} from "src/constant";
-import {
-    EmailAuthCheckRequestDto,
-    EmailAuthRequestDto,
-    FindIdRequestDto,
-    FindPasswordRequestDto,
-    FindPasswordResetRequestDto,
-    IdCheckRequestDto,
-    NickNameCheckRequestDto,
-    SignInRequestDto,
-    SignUpRequestDto,
-} from "./dto/request";
+import {POST_EMAIL_AUTH_REQUEST_URL,POST_EMAIL_AUTH_CHECK_REQUEST_URL,POST_ID_CHECK_REQUEST_URL,POST_NICKNAME_CHECK_REQUEST_URL,POST_SIGN_UP_REQUEST_URL,POST_SIGN_IN_REQUEST_URL,POST_FIND_ID_REQUEST_URL} from "src/constant";
+import {EmailAuthCheckRequestDto,EmailAuthRequestDto,FindIdRequestDto,FindPasswordRequestDto,FindPasswordResetRequestDto,IdCheckRequestDto,NickNameCheckRequestDto,SignInRequestDto,SignUpRequestDto} from "./dto/request";
 import { FindIdResponseDto, SignInResponseDto } from "./dto/response";
 import ResponseDto from "../response.dto";
 import { requestErrorHandler, requestHandler } from "..";
@@ -89,7 +71,7 @@ export const findIdRequest = async (requestBody: FindIdRequestDto) => {
     return result;
 }
 
-// fundtion: 비밀번호 찾기 API 함수
+// function: 비밀번호 찾기 API 함수
 export const findPasswordRequest = async (requestBody: FindPasswordRequestDto) => {
     const result = await axios
         .post(POST_FIND_PASSWORD_REQUEST_URL, requestBody)
@@ -101,7 +83,7 @@ export const findPasswordRequest = async (requestBody: FindPasswordRequestDto) =
 // function: 비밀번호 찾기 비밀번호 재설정 API 함수
 export const findPwResetRequest = async (userId: string, requestBody: FindPasswordResetRequestDto) => {
     const result = await axios
-    .put(PUT_FIND_PW_RESET_REQUEST_URL(userId), requestBody)
+        .put(PUT_FIND_PW_RESET_REQUEST_URL(userId), requestBody)
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;

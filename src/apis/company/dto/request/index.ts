@@ -1,6 +1,6 @@
 import ResponseDto from "src/apis/response.dto";
 
-// description: 업체 등록하기 Response Body DTO
+// description: 업체 등록하기 Resquest Body DTO
 export interface PostCompanyRequestDto {
     companyCode : number | string;
     rentCompany : string;
@@ -10,12 +10,7 @@ export interface PostCompanyRequestDto {
     companyRule : string;
 }
 
-// 댓글
-export interface PostCommentRequestDto {
-    comment : string;
-}
-
-// description: 업체 수정하기 Response Body DTO
+// description: 업체 수정하기 Resquest Body DTO
 export interface PutCompanyRequestDto {
     companyCode : number | string;
     rentCompany : string;

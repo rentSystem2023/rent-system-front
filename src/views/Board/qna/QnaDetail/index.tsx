@@ -5,12 +5,12 @@ import './style.css'
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, QNA_UPDATE_ABSOLUTE_PATH, USER_QNA_ABSOLUTE_PATH } from 'src/constant';
-import { PostCommentRequestDto } from 'src/apis/company/dto/request';
+import { MAIN_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, USER_QNA_ABSOLUTE_PATH } from 'src/constant';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
 import { PostCommentRequest,    deleteBoardRequest,    getQnaRequest, increaseViewCountRequest } from 'src/apis/qna/dto';
 import {  } from 'src/apis/notice/dto';
 import useUserStore from 'src/stores/user.store';
+import { PostQnaCommentRequestDto } from 'src/apis/qna/dto/request';
 
 
 
@@ -151,7 +151,7 @@ export default function QnaDetail() {
         if (!comment || !comment.trim()) return;
         if (!receptionNumber || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
 
-        const requestBody: PostCommentRequestDto = { comment };
+        const requestBody: PostQnaCommentRequestDto = { comment };
         PostCommentRequest(receptionNumber, requestBody, cookies.accessToken).then(postCommentResponse);
     };
 

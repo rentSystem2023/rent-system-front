@@ -31,7 +31,6 @@ export interface GetReservationDetailResponseDto extends ResponseDto {
     insurancePrice : number;
 }
 
-
 // description: 예약 검색 리스트 불러오기 Response Body DTO
 export interface GetSearchReservationListResponseDto extends ResponseDto {
     reservationUserList : ReservationUserListItem[];
