@@ -3,14 +3,14 @@ import { DELETE_RESERVATION_LIST_URL, GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL, GET_
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import { PatchReservationCancelRequestDto, PostReservationRequestDto } from "./dto/request";
 import ResponseDto from "../response.dto";
-import { GetReservationCancelListResponseDto, GetReservationDetailResponseDto, GetReservationListResponseDto, GetReservationPopularListResponseDto, GetSearchDetailListResponseDto, GetSearchReservationCarListResponseDto, GetSearchReservationCarPriceListResponseDto, GetSearchReservationListResponseDto } from "./dto/response";
+import { GetReservationCancelListResponseDto, GetReservationDetailResponseDto, GetReservationListResponseDto, GetReservationPopularListResponseDto, GetSearchDetailListResponseDto, GetSearchReservationCarListResponseDto, GetSearchReservationCarPriceListResponseDto, GetSearchReservationListResponseDto, PostReservationResponseDto } from "./dto/response";
 
 
 
 // function : 예약 하기 API 함수
 export const postReservationRequest = async (requestBody: PostReservationRequestDto, accessToken: string) => {
     const result = await axios.post(POST_RESERVATION_URL, requestBody, bearerAuthorization(accessToken))
-        .then(requestHandler<ResponseDto>)
+        .then(requestHandler<PostReservationResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };

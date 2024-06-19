@@ -3,7 +3,7 @@ import './style.css'
 import { useReservationStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { GetSearchDetailListResponseDto } from 'src/apis/reservation/dto/response';
+import { GetSearchDetailListResponseDto, PostReservationResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { AUTH_SIGN_IN_ABSOLUTE_PATH, RESERVATION_CAR_ABSOLUTE_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { getSearchDetailListRequest, postReservationRequest } from 'src/apis/reservation';
@@ -37,6 +37,7 @@ export default function SearchDetail() {
   const [companyLng, setCompanyLng] = useState<number>();
   const [companyLat, setCompantLat] = useState<number>();
   const [displayCarInfo, setDisplayCarInfo] = useState(true);
+  
 
   //                    function                    //
   const navigator = useNavigate();
@@ -74,7 +75,7 @@ export default function SearchDetail() {
     setCompanyLng(companyLng);
   };
 
-  const postReservationResponse = (result: ResponseDto | null) => {
+  const postReservationResponse = (result: PostReservationResponseDto | ResponseDto | null) => {
     const message =
     !result ? '서버에 문제가 있습니다.' :
         result.code === 'AF' ? '권한이 없습니다.' :
@@ -82,9 +83,12 @@ export default function SearchDetail() {
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
-        alert(message);
-        return;
-        }
+      alert(message);
+      return;
+    }
+
+    const { redirectUrl } = result as PostReservationResponseDto;
+    window.location.href = redirectUrl;
   };
 
   //                    event handler                   //
@@ -106,12 +110,13 @@ export default function SearchDetail() {
     
     if (!isConfirm) return;
 
-    const requestBody: PostReservationRequestDto = {insuranceType: selectedInsurance, reservationStart, reservationEnd, companyCarCode};
-    postReservationRequest(requestBody, cookies.accessToken).then(postReservationResponse);
+    const price = 
+      selectedInsurance === 'normal' && normalPrice ? normalPrice * daysDifference :
+      selectedInsurance === 'luxury' && luxuryPrice ? luxuryPrice * daysDifference :
+      selectedInsurance === 'super' && superPrice ? superPrice * daysDifference : 0;
 
-    alert('예약이 완료되었습니다.');
-    
-    navigator(USER_RESERVATION_ABSOLUTE_PATH);
+    const requestBody: PostReservationRequestDto = {insuranceType: selectedInsurance, reservationStart, reservationEnd, companyCarCode, price};
+    postReservationRequest(requestBody, cookies.accessToken).then(postReservationResponse);
   };
 
   //                    effect                    //
@@ -122,11 +127,6 @@ export default function SearchDetail() {
   }, [selectedCar, rentCompany]);
 
   if (!selectedCar) return <></>;
-
-  const insuranceType =
-    selectedInsurance === 'normal' ? '완전자차' :
-    selectedInsurance === 'luxury' ? '고급자차' :
-    selectedInsurance === 'super' ? '슈퍼자차' : '';
 
   const calculateDateDifference = (start: string, end: string) => {
     const startDate = new Date(start);
@@ -142,6 +142,11 @@ export default function SearchDetail() {
     selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice * daysDifference)}` :
     selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
     selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
+
+  const insuranceType =
+    selectedInsurance === 'normal' ? '완전자차' :
+    selectedInsurance === 'luxury' ? '고급자차' :
+    selectedInsurance === 'super' ? '슈퍼자차' : '';
 
   //                    render                    //
   return (
