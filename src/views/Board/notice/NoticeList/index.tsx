@@ -8,6 +8,7 @@ import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
 import { GetSearchNoticeBoardListResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { noticeListItem } from 'src/types';
+import { usePagination } from 'src/hooks';
     //                    component                    //
 function ListItem ({
     index,
@@ -33,63 +34,32 @@ function ListItem ({
             <div className='notice-list-table-viewcount'>{viewCount}</div>
         </div>
     );
-}
+};
+
 //                    component                    //
 export default function NoticeList() {
     
     //                    state                    //
+    const {
+        viewList,
+        pageList,
+        totalPage,
+        currentPage,
+        totalLength,
+        setCurrentPage,
+        setCurrentSection,
+        changeBoardList,
+        onPageClickHandler,
+        onPreSectionClickHandler,
+        onNextSectionClickHandler
+    } = usePagination<noticeListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
+
     const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
-    const [noticeList, setNoticeList] = useState<noticeListItem[]>([]);
-    const [viewList, setViewList] = useState<noticeListItem[]>([]);
-    const [totalPage, setTotalPage] = useState<number>(1);
-    const [totalLength, setTotalLength] = useState<number>(0);
-    const [currentSection, setCurrentSection] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [totalSection, setTotalSection] = useState<number>(1);
-    const [pageList, setPageList] = useState<number[]>([1]);
     const [searchWord, setSearchWord] = useState<string>('');
 
-        //                    function                    //
-        const navigator = useNavigate();
-
-    const changePage = (noticeList: noticeListItem[], totalLenght: number) => {
-        if (!currentPage) return;
-        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-        let endIndex = currentPage * COUNT_PER_PAGE;
-        if (endIndex > totalLenght - 1) endIndex = totalLenght;
-        const viewList = noticeList.slice(startIndex, endIndex);
-        setViewList(viewList);
-    };
-
-    const changeSection = (totalPage: number) => {
-        if (!currentPage) return;
-        const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-        let endPage = currentSection * COUNT_PER_SECTION;
-        if (endPage > totalPage) endPage = totalPage;
-        const pageList: number[] = [];
-        for (let page = startPage; page <= endPage; page++) pageList.push(page);
-        setPageList(pageList);
-    };
-
-    const changeBoardList = (noticeList: noticeListItem[]) => {
-        
-        setNoticeList(noticeList);
-
-        const totalLenght = noticeList.length;
-        setTotalLength(totalLenght);
-
-        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
-        setTotalPage(totalPage);
-
-        const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-        setTotalSection(totalSection);
-
-        changePage(noticeList, totalLenght);
-
-        changeSection(totalPage);
-    };
-
+    //                    function                    //
+    const navigator = useNavigate();
 
     const getSearchBoardListResponse = (result: GetSearchNoticeBoardListResponseDto | ResponseDto | null) => {
 
@@ -114,24 +84,9 @@ export default function NoticeList() {
 
     //                    event handler                    //
     const onWriteButtonClickHandler = () => {
-        if (loginUserRole !== 'ROLE_ADMIN') return; 
+        if (loginUserRole !== 'ROLE_ADMIN') return;
+        
         navigator(ADMIN_NOTICE_REGIST_ABSOLUTE_PATH);
-    };
-
-    const onPreSectionClickHandler = () => {
-        if (currentSection <= 1) return;
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-    };
-
-    const onPageClickHandler = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const onNextSectionClickHandler = () => {
-        if (currentSection === totalSection) return;
-        setCurrentSection(currentSection + 1);
-        setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
     const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -149,31 +104,16 @@ export default function NoticeList() {
     };
 
     //                    effect                    //
-
     useEffect(() => {
         if (!cookies.accessToken) {
-            // 토큰이 없는 경우 처리
             getSearcNoticeListRequest(searchWord, '').then(getSearchBoardListResponse);
         } else {
             getSearcNoticeListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
         }
     }, []);
-
-    useEffect(() => {
-        if (!noticeList.length) return;
-        changePage(noticeList, totalLength);
-    }, [currentPage]);
-
-    useEffect(() => {
-        if (!noticeList.length) return;
-        changeSection(totalPage);
-    }, [currentSection]);
-    
     
     //                    render                    //
-
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
-
 
     return (
     <>  

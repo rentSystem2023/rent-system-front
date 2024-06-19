@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 import { GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from 'src/apis/company/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchCompanyListRequest } from 'src/apis/company';
+import { usePagination } from 'src/hooks';
 
 //                    component                    //
 function ListItem ({
@@ -42,80 +43,29 @@ registDate
 
 //                    component                    //
 export default function CompanyList() {
+    
     //                    state                    //
+    const {
+        viewList,
+        pageList,
+        totalPage,
+        currentPage,
+        totalLength,
+        setCurrentPage,
+        setCurrentSection,
+        changeBoardList,
+        onPageClickHandler,
+        onPreSectionClickHandler,
+        onNextSectionClickHandler
+    } = usePagination<CompanyListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
+
     const {loginUserRole} = useUserStore();
-
     const [cookies] = useCookies();
-
     const [companyList, setCompanyList] = useState<CompanyListItem[]>([]);
-    const [viewList, setViewList] = useState<CompanyListItem[]>([]);
-    const [totalLenght, setTotalLength] = useState<number>(0);
-    const [totalPage, setTotalPage] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [pageList, setPageList] = useState<number[]>([1]);
-    const [totalSection, setTotalSection] = useState<number>(1);
-    const [currentSection, setCurrentSection] = useState<number>(1);
-
     const [searchWord, setSearchWord] = useState<string>('');
-
 
     //                    function                    //
     const navigator = useNavigate();
-
-    const changePage = (companyList: CompanyListItem[], totalLenght: number) => {
-        if (!currentPage) return;
-        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-        let endIndex = currentPage * COUNT_PER_PAGE;
-        if (endIndex > totalLenght - 1) endIndex = totalLenght;
-        const viewList = companyList.slice(startIndex, endIndex);
-        setViewList(viewList);
-    };
-
-    const changeSection = (totalPage: number) => {
-        if (!currentPage) return;
-        const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-        let endPage = currentSection * COUNT_PER_SECTION;
-        if (endPage > totalPage) endPage = totalPage;
-        const pageList: number[] = [];
-        for (let page = startPage; page <= endPage; page++) pageList.push(page);
-        setPageList(pageList);
-    };
-
-    const changeCompanyList = (companyList: CompanyListItem[]) => {
-        setCompanyList(companyList);
-
-        const totalLenght = companyList.length;
-        setTotalLength(totalLenght);
-
-        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
-        setTotalPage(totalPage);
-
-        const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-        setTotalSection(totalSection);
-
-        changePage(companyList, totalLenght);
-
-        changeSection(totalPage);
-    };
-
-    const getCompanyListResponse = (result: GetCompanyListResponseDto | ResponseDto | null) => {
-        const message = 
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '인증에 실패했습니다.' : 
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            if (result?.code === 'AF') navigator(MAIN_PATH);
-            return;
-        }
-
-        const { companyList } = result as GetCompanyListResponseDto;
-        changeCompanyList(companyList);
-
-        setCurrentPage(!companyList.length ? 0 : 1);
-        setCurrentSection(!companyList.length ? 0 : 1);
-    };
 
     const getSearchCompanyListResponse = (result: GetSearchCompanyListResponseDto | ResponseDto | null) => {
 
@@ -132,7 +82,7 @@ export default function CompanyList() {
         }
 
         const { companyList } = result as GetSearchCompanyListResponseDto;
-        changeCompanyList(companyList);
+        changeBoardList(companyList);
 
         setCurrentPage(!companyList.length ? 0 : 1);
         setCurrentSection(!companyList.length ? 0 : 1);
@@ -142,22 +92,6 @@ export default function CompanyList() {
     const onRegistButtonClickHandler = () => {
         if (loginUserRole !== 'ROLE_ADMIN') return; 
         navigator(ADMIN_COMPANY_REGIST_ABSOLUTE_PATH);
-    };
-
-    const onPageClickHandler = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const onPreSectionClickHandler = () => {
-        if (currentSection <= 1) return;
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-    };
-
-    const onNextSectionClickHandler = () => {
-        if (currentSection === totalSection) return;
-        setCurrentSection(currentSection + 1);
-        setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
     const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -180,16 +114,6 @@ export default function CompanyList() {
         getSearchCompanyListRequest(searchWord,cookies.accessToken).then(getSearchCompanyListResponse);
     }, []);
 
-    useEffect(() => {
-        if (!companyList.length) return;
-        changePage(companyList, totalLenght);
-    }, [currentPage]);
-
-    useEffect(() => {
-        if (!companyList.length) return;
-        changeSection(totalPage);
-    }, [currentSection]);
-
     //                    render                    //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return (
@@ -197,7 +121,7 @@ export default function CompanyList() {
     <div id='table-list-wrapper'>
         <div className="my-info-title">업체 관리</div>
         <div className='table-list-top'>
-            <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+            <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             <div className='table-list-top-right'>
                 <div className='primary-button' onClick={onRegistButtonClickHandler}>업체등록</div>
             </div>
@@ -212,7 +136,7 @@ export default function CompanyList() {
                 <div className='company-list-table-company-telnumber'>연락처</div>
                 <div className='company-list-table-company-date'>등록일</div>
             </div>
-            {viewList.map((item, index) => <ListItem key={index} index={totalLenght - ((currentPage - 1) * COUNT_PER_PAGE + index)} {...item} />)}
+            {viewList.map((item, index) => <ListItem key={index} index={totalLength - ((currentPage - 1) * COUNT_PER_PAGE + index)} {...item} />)}
         </div>
         <div className='table-list-bottom'>
             <div style={{ width: '299px' }}></div>

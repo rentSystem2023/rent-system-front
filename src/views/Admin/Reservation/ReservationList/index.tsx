@@ -8,6 +8,7 @@
     import { GetReservationListResponseDto, GetSearchReservationListResponseDto } from 'src/apis/reservation/dto/response';
 import { getSearchReservationListRequest } from 'src/apis/reservation';
 import { useUserStore } from 'src/stores';
+import { usePagination } from 'src/hooks';
 
     //                    component                    //
     function ListItem ({
@@ -54,76 +55,26 @@ import { useUserStore } from 'src/stores';
     export default function ReservationList() {
 
     //                    state                    //
+    const {
+        viewList,
+        pageList,
+        totalPage,
+        currentPage,
+        totalLength,
+        setCurrentPage,
+        setCurrentSection,
+        changeBoardList,
+        onPageClickHandler,
+        onPreSectionClickHandler,
+        onNextSectionClickHandler
+    } = usePagination<ReservationUserListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
+
     const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
-
-    const [reservationList, setReservationList] = useState<ReservationUserListItem[]>([]);
-    const [viewList, setViewList] = useState<ReservationUserListItem[]>([]);
-    const [totalLenght, setTotalLength] = useState<number>(0);
-    const [totalPage, setTotalPage] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [pageList, setPageList] = useState<number[]>([1]);
-    const [totalSection, setTotalSection] = useState<number>(1);
-    const [currentSection, setCurrentSection] = useState<number>(1);
     const [searchWord, setSearchWord] = useState<string | number>('');
 
     //                    function                    //
     const navigator = useNavigate();
-
-    const changePage = (reservationList: ReservationUserListItem[], totalLenght: number) => {
-        if (!currentPage) return;
-        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-        let endIndex = currentPage * COUNT_PER_PAGE;
-        if (endIndex > totalLenght - 1) endIndex = totalLenght;
-        const viewList = reservationList.slice(startIndex, endIndex);
-        setViewList(viewList);
-    };
-
-    const changeSection = (totalPage: number) => {
-        if (!currentPage) return;
-        const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-        let endPage = currentSection * COUNT_PER_SECTION;
-        
-        if (endPage > totalPage) endPage = totalPage;
-        const pageList: number[] = [];
-        for (let page = startPage; page <= endPage; page++) pageList.push(page);
-        setPageList(pageList);
-    };
-
-    const changeReservationList = (reservationList: ReservationUserListItem[]) => {
-        setReservationList(reservationList);
-
-        const totalLenght = reservationList.length;
-        setTotalLength(totalLenght);
-
-        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
-        setTotalPage(totalPage);
-
-        const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-        setTotalSection(totalSection);
-
-        changePage(reservationList, totalLenght);
-        changeSection(totalPage);
-    };
-
-    const getReservationListResponse = (result: GetReservationListResponseDto | ResponseDto | null) => {
-        const message = 
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '인증에 실패했습니다.' : 
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            if (result?.code === 'AF') navigator(MAIN_PATH);
-            return;
-        }
-
-        const { reservationList } = result as GetReservationListResponseDto;
-        changeReservationList(reservationList);
-
-        setCurrentPage(!reservationList.length ? 0 : 1);
-        setCurrentSection(!reservationList.length ? 0 : 1);
-    };
 
     const getSearchReservationListResponse = (result: GetSearchReservationListResponseDto | ResponseDto | null) => {
         const message =
@@ -139,29 +90,13 @@ import { useUserStore } from 'src/stores';
         }
 
         const { reservationUserList } = result as GetSearchReservationListResponseDto;
-        changeReservationList(reservationUserList);
+        changeBoardList(reservationUserList);
 
-        setCurrentPage(!reservationList.length ? 0 : 1);
-        setCurrentSection(!reservationList.length ? 0 : 1);
+        setCurrentPage(!reservationUserList.length ? 0 : 1);
+        setCurrentSection(!reservationUserList.length ? 0 : 1);
     };
 
     //                    event handler                    //
-    const onPageClickHandler = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const onPreSectionClickHandler = () => {
-        if (currentSection <= 1) return;
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-    };
-
-    const onNextSectionClickHandler = () => {
-        if (currentSection === totalSection) return;
-        setCurrentSection(currentSection + 1);
-        setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
-    };
-
     const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const searchWord = event.target.value;
         setSearchWord(searchWord);
@@ -182,16 +117,6 @@ import { useUserStore } from 'src/stores';
         getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
     }, []);
 
-    useEffect(() => {
-        if (!reservationList.length) return;
-        changePage(reservationList, totalLenght);
-    }, [currentPage]);
-
-    useEffect(() => {
-        if (!reservationList.length) return;
-        changeSection(totalPage);
-    }, [currentSection]);
-
     //                    render                    //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return (
@@ -199,7 +124,7 @@ import { useUserStore } from 'src/stores';
         <div id='table-list-wrapper'>
         <div className="my-info-title">예약 관리</div>
             <div className='table-list-top'>
-                <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+                <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>
             <div className='table-list-table reservation'>
                 <div className='table-list-table-th reservation'>

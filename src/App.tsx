@@ -51,7 +51,7 @@ USER_RESERVATION_DETAIL_PATH,
 USER_RESERVATION_PATH
 } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
-import UserList from "./views/Admin/User/List";
+import UserList from "./views/Admin/User/UserList";
 import QnaList from "./views/Board/qna/QnaList";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
@@ -62,15 +62,14 @@ import MyInfo from "./views/MyPage/MyInfo/Information";
 import AdminContainer from "./layouts/AdminContainer";
 import UserContainer from "./layouts/UserContainer";
 import NoticeList from "./views/Board/notice/NoticeList";
-import CompanyList from "./views/Admin/Company/list";
+import CompanyList from "./views/Admin/Company/CompanyList";
 import FindId from "./views/Authentication/FindId";
-import CompanyRegist from "./views/Admin/Company/regist";
+import CompanyRegist from "./views/Admin/Company/CompanyRegist";
 import QnaDetail from "./views/Board/qna/QnaDetail";
 import QnAWrite from "./views/Board/qna/QnaWrite";
 import QnaUpdate from "./views/Board/qna/QnaUpdate";
 import CompanyDetail from "./views/Admin/Company/CompanyDetail";
 import MyReservation from "./views/MyPage/Reservation/ReservationList";
-import MyQna from "./views/MyPage/Qna/list";
 import FindPassword from "./views/Authentication/FindPassword";
 import FindPasswordReset from "./views/Authentication/FindPasswordReset";
 import CompanyUpdate from "./views/Admin/Company/CompanyUpdate";
@@ -82,8 +81,7 @@ import CarSelect from "./views/Reservation/CarSelect";
 import InsuranceSelect from "./views/Reservation/InsuranceSelect";
 import MyInfoPwModify from "./views/MyPage/MyInfo/PasswordModify";
 import MyInfoEmailModify from "./views/MyPage/MyInfo/EmailModify";
-import DetailUserList from "./views/Admin/User/DetailUserList";
-import SelectContainer from "./layouts/SelectContainer";
+import DetailUserList from "./views/Admin/User/UserDetail";
 import ReservationDetail from "./views/Admin/Reservation/ReservationDetail";
 import SearchDetail from "./views/Reservation/SearchDetail";
 import MyInfoQnaList from "./views/MyPage/Qna/list";
@@ -240,6 +238,18 @@ return (
             <Route path={ADMIN_RESERVATION_UPDATE_PATH} element={<ReservationDetail/>} />
         </Route>
 
+        {/* // route : 관리자 - 게시물관리 페이지 */}
+        <Route path={ADMIN_BOARD_PATH}>
+            <Route index element={<AdminBoardIndex />} />
+            
+            {/* // route : 관리자 - 게시물 (공지사항) 관리 페이지 */}
+            <Route path={ADMIN_BOARD_NOTICE_PATH}>
+            <Route index element={<NoticeDetail/>} />
+            <Route path={ADMIN_BOARD_NOTICE_REGIST_PATH} element={<NoticeWrite/>} />
+            <Route path={ADMIN_BOARD_NOTICE_UPDATE_PATH} element={<NoticeUpdate/>} />
+            </Route>
+
+        </Route>
         </Route>
     </Route>
     </Routes>
