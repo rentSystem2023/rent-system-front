@@ -154,7 +154,7 @@ export default function ReservationDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!reservationCode || !cookies.accessToken) return;
+        if (!reservationCode || !cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH);
 
         getReservationDetailRequest(reservationCode, cookies.accessToken).then(GetReservationDetailResponse);
     }, []);
