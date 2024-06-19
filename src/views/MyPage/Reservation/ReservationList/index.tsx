@@ -7,6 +7,7 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH, USER_
 import { GetMyReservationListResponseDto } from 'src/apis/user/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getReservationMyListRequest } from 'src/apis/user';
+import { useUserStore } from 'src/stores';
 
 //                    component                    //
 function ListItem ({
@@ -75,7 +76,7 @@ export default function MyReservation() {
 
     //                    state                    //
     const [cookies] = useCookies();
-
+    const { loginUserRole } = useUserStore();
     const [userId, setUserId] = useState<string>('');
     const [reservationList, setReservationList] = useState<MyReservationListItem[]>([]);
     const [viewList, setViewList] = useState<MyReservationListItem[]>([]);
@@ -163,7 +164,7 @@ export default function MyReservation() {
 
     //                    effect                    //
     useEffect (() => {
-        if (!cookies.accessToken) {
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
             return navigator(MAIN_ABSOLUTE_PATH);
         };
         getReservationMyListRequest(cookies.accessToken).then(getMyReservationListResponse);

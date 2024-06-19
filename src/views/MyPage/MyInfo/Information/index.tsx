@@ -6,12 +6,14 @@ import { MAIN_ABSOLUTE_PATH, USER_EMAIL_UPDATE_ABSOLUTE_PATH, USER_PW_UPDATE_ABS
 import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { deleteUserRequest, getMyInfoRequest } from 'src/apis/user';
+import { useUserStore } from 'src/stores';
 
 //                    component                    //
 export default function MyInfo() {
 
     //                    state                    //
     const [cookies, setCookie, removeCookie] = useCookies();
+    const { loginUserRole } = useUserStore();
     const [nickName, setNickName] = useState<string>('');
     const [userId, setUserId] = useState<string>('');
     const [userPassword, setUserPassword] = useState<number>(5); 
@@ -35,8 +37,6 @@ export default function MyInfo() {
                 navigator(MAIN_ABSOLUTE_PATH);
                 return;
             };
-            
-            if (!cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH);
             
             return;
         };
@@ -90,7 +90,7 @@ export default function MyInfo() {
 
     //                  effect                      //
     useEffect (() => {
-        if (!cookies.accessToken) {
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
             navigator(MAIN_ABSOLUTE_PATH);
         } else {
             getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
