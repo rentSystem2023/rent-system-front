@@ -122,8 +122,8 @@ export default function ReservationDetail() {
 
     const onReservationCancelClickHandler = () => {
         if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
-        if (reservationState !== 'cancel') {
-            alert('cancel 상태에서만 예약 취소할 수 있습니다.')
+        if (reservationState !== 'watingCancel') {
+            alert('예약 취소 대기 상태에서만 예약 취소할 수 있습니다.')
             return;
         }
         const isConfirm = window.confirm('취소 승인하시겠습니까?');
