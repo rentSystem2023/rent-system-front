@@ -90,11 +90,11 @@ export default function MyInfo() {
 
     //                  effect                      //
     useEffect (() => {
-        if (!cookies.accessToken || userId !== 'ROLE_USER') {
+        if (!cookies.accessToken) {
             navigator(MAIN_ABSOLUTE_PATH);
         } else {
             getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
-        }
+        };
     }, []);
 
     //                    render                    //
