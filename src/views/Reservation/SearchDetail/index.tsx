@@ -104,8 +104,10 @@ export default function SearchDetail() {
 
   // 예약하기
   const reservationButtonClickHandler = () => {
-    if (!cookies.accessToken) return;
-
+    if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
+      alert('로그인 해주세요.'); 
+      return;
+    }
     const isConfirm = window.confirm('예약하시겠습니까?');
     if (!isConfirm) return;
 

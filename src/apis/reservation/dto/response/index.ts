@@ -22,6 +22,8 @@ export interface GetReservationDetailResponseDto extends ResponseDto {
     userId : string;
     nickName : string;
     reservationState : string;
+    insuranceType : string;
+    insurancePrice : number;
 }
 
 
