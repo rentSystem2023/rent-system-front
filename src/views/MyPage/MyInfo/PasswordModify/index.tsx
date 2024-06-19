@@ -98,17 +98,17 @@ export default function MyInfoPwModify() {
     };
 
     //                  effect                      //
-    useEffect (() => {
-        const requestBody: PutMyInfoPwRequestDto = {
-            userPassword: password
-        };
+    // useEffect (() => {
+    //     const requestBody: PutMyInfoPwRequestDto = {
+    //         userPassword: password
+    //     };
 
-        if (!cookies.accessToken || userId !== 'ROLE_USER') {
-            navigator(MAIN_ABSOLUTE_PATH);
-        } else {
-            putMyInfoPwRequest(requestBody, cookies.accessToken).then(putMyInfoPwModifyResponse);
-        }
-    }, []);
+    //     if (!cookies.accessToken) {
+    //         navigator(MAIN_ABSOLUTE_PATH);
+    //     } else {
+    //         putMyInfoPwRequest(requestBody, cookies.accessToken).then(putMyInfoPwModifyResponse);
+    //     }
+    // }, []);
 
     //                    render                    //
     return (

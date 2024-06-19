@@ -118,7 +118,7 @@ export default function MyInfoEmailModify() {
             authNumber: authNumber
         };
 
-        if (!cookies.accessToken || userId !== 'ROLE_USER') {
+        if (!cookies.accessToken) {
             navigator(MAIN_ABSOLUTE_PATH);
         } else {
             putMyInfoEmailRequest(requestBody, cookies.accessToken).then(emailAuthCheckResponse);
