@@ -11,6 +11,7 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_PATH, R
 import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';
 
+//                    component                    //
 function ListItem (props: ReservationCarViewListItem) {
 
     const {

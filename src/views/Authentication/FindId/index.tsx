@@ -11,7 +11,6 @@ import { AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH, AUTH_SIGN
 export default function FindId() {
 
     //                    state                    //
-
     const [userEmail, setUserEmail] = useState<string>('');
     const [userId, setUserId] = useState<string>('');
     const [message, setMessage] = useState<string>('');
@@ -37,45 +36,45 @@ export default function FindId() {
         if (!result || (result.code !== 'SU')) {
             alert(message);
             return;
-        }
+        };
 
         const { userId } = result as GetMyInfoResponseDto;
         setUserEmail(userEmail);
         setUserId(userId);
         setEmailError(emailError);
-        setIsEmailCheck(true);  // 아이디 찾기 성공 시 상태 업데이트
+        setIsEmailCheck(true); // 아이디 찾기 성공 시 상태 업데이트
     };
 
     //                    event handler                    //
-
     const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setUserEmail(value);
         setEmailButtonStatus(value !== '');
         setIsEmailCheck(false); // 이메일 변경 시 아이디 찾기 상태 초기화
         setEmailMessage('');
-
     };
 
     const onFindIdButtonClickHandler = () => {
-
         if (!userEmail) {
             setMessage('이메일을 입력하세요.');
             return;
         }
+
         if (!emailButtonStatus) return;
 
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         const isEmailPattern = emailPattern.test(userEmail);
+
         if (!isEmailPattern) {
             setEmailMessage('이메일 형식이 아닙니다.');
             setEmailError(true);
             return;
-        }
+        };
 
         const getFindIdRequest: FindIdRequestDto = {
             userEmail: userEmail
         };
+
         findIdRequest(getFindIdRequest).then(findIdResponse);
     };
 
@@ -92,6 +91,7 @@ export default function FindId() {
         onFindIdButtonClickHandler();
     };
 
+    //                    render                    //
     return (
         <div id="authentication-wrapper">
             <div className="title-text">아이디 찾기</div>
@@ -126,5 +126,5 @@ export default function FindId() {
                 )}
             </div>
         </div>
-    )
+    );
 }
