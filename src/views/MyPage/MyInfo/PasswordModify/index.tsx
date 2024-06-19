@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/Inputbox';
-import { USER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { PutMyInfoPwRequestDto } from 'src/apis/user/dto/request';
 import { putMyInfoPwRequest } from 'src/apis/user';
 
@@ -12,14 +12,13 @@ import { putMyInfoPwRequest } from 'src/apis/user';
 export default function MyInfoPwModify() {
 
     //                    state                    //
-    const [password, setPassword] = useState<string>('');
-    // const [userId] = useState<string>('');
     const [cookies] = useCookies();
 
+    const [userId, setUserId] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
     const [passwordCheck, setPasswordCheck] = useState<string>('');
     const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
-    const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
     const [passwordMessage, setPasswordMessage] = useState<string>('');
     const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
     
@@ -27,22 +26,20 @@ export default function MyInfoPwModify() {
     const pwUpdateButtonClass = `${isPwUpdateActive ? 'primary' : 'disable'}-button full-width`;
 
     //                    function                    //
-
     const navigator = useNavigate();
 
     const putMyInfoPwModifyResponse = (result: ResponseDto | null) => {
-
         const message = 
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
 
         const isSuccess = result && result.code === 'SU';
+
         if (!isSuccess) {
             alert(message);
             return;
         }
-
     };
 
     //                    event handler                    //
@@ -84,10 +81,11 @@ export default function MyInfoPwModify() {
     const onPwUpdateButtonClickHandler = () => {
 
         if(!cookies.accessToken || !isPwUpdateActive) return;
+
         if(!password || !passwordCheck) {
             alert('모든 내용을 입력해주세요.');
             return;
-        }
+        };
 
         const requestBody: PutMyInfoPwRequestDto = {
             userPassword: password
@@ -97,9 +95,22 @@ export default function MyInfoPwModify() {
 
         alert('비밀번호가 변경되었습니다.');
         navigator(USER_INFO_ABSOLUTE_PATH);
+    };
 
-    }
+    //                  effect                      //
+    useEffect (() => {
+        const requestBody: PutMyInfoPwRequestDto = {
+            userPassword: password
+        };
 
+        if (!cookies.accessToken || userId !== 'ROLE_USER') {
+            navigator(MAIN_ABSOLUTE_PATH);
+        } else {
+            putMyInfoPwRequest(requestBody, cookies.accessToken).then(putMyInfoPwModifyResponse);
+        }
+    }, []);
+
+    //                    render                    //
     return (
         <div id="information-wrapper">
             <div className='information-main'>
@@ -129,6 +140,7 @@ export default function MyInfoPwModify() {
                     <div className="authentication-button-container">
                         <div className={pwUpdateButtonClass} onClick={ onPwUpdateButtonClickHandler }>확인</div>
                     </div>
+                    
                     </div>
                 </div>
             </div>
