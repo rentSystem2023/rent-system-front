@@ -2,6 +2,11 @@ import ResponseDto from "src/apis/response.dto";
 import { PopularCarListItem, ReservationCancelListItem, ReservationCarListItem, ReservationCarPriceListItem, ReservationUserListItem } from "src/types";
 
 // description: 취소 신청 예약 리스트 불러오기 Response Body DTO
+export interface PostReservationResponseDto extends ResponseDto {
+    redirectUrl: string;
+}
+
+// description: 취소 신청 예약 리스트 불러오기 Response Body DTO
 export interface GetReservationCancelListResponseDto extends ResponseDto {
     reservationCancelList: ReservationCancelListItem[];
 }
