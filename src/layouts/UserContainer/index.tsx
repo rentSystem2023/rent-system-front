@@ -8,7 +8,7 @@ type Path = '회원 정보' | '예약 내역' | '문의 내역' | '' ;
 interface Props {
   path: Path;
 }
-
+    //                    component                    //
 function UserSideBar({ path } : Props) {
 
   const myInfoClass = `user-side-navigation-item${path === '회원 정보' ? ' active' : ''}`;
@@ -21,6 +21,7 @@ function UserSideBar({ path } : Props) {
   const onReservationClickHandler = () => navigator(USER_RESERVATION_ABSOLUTE_PATH);
   const onBoardClickHandler = () => navigator(USER_QNA_ABSOLUTE_PATH);
 
+    //                    Render                       //
   return(
     <>   
     <div className="user-side-navigation-container">
@@ -40,12 +41,13 @@ function UserSideBar({ path } : Props) {
     </>
   );
 }
-
+    //                    component                    //
 export default function UserContainer() {
 
   const { pathname } = useLocation();
   const [path, setPath] = useState<Path>('');
 
+    //                    effect                       //
   useEffect(() => {
     const path = 
         pathname.startsWith(USER_INFO_ABSOLUTE_PATH) ? '회원 정보' :
@@ -55,6 +57,7 @@ export default function UserContainer() {
     setPath(path);
 }, [pathname]);
 
+    //                    Render                       //
   return (
     <>
     <div className='title-text'>마이페이지</div>

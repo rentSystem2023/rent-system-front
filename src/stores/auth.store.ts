@@ -8,13 +8,10 @@ interface AuthStore {
 }
 
 const useAuthStore = create<AuthStore>(set => ({
-
     joinPath: 'HOME',
     setJoinPath: (joinPath: string) => set(state => ({...state, joinPath})),
-    
     snsId: undefined,
     setSnsId: (snsId: string | undefined) => set(state => ({...state, snsId})),
-
 }))
 
 export default useAuthStore;

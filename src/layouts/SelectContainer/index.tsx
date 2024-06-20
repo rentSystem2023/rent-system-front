@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import './style.css'
 import { Outlet, useNavigate } from 'react-router';
-import { RESERVATION_CAR_ABSOLUTE_PATH, RESERVATION_COMPANY_ABSOLUTE_PATH } from 'src/constant';
+import { RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
 import { useReservationStore } from 'src/stores';
 import { DatePickerPopup } from 'src/components/DatePickerPopup';
 
+    //                    component                    //
 export default function SelectContainer() {
-
+    //                      state                      //
     const { address, reservationStart, reservationEnd } = useReservationStore();
     const [isLocationPopupOpen, setIsLocationPopupOpen] = useState(false);
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
@@ -16,6 +17,7 @@ export default function SelectContainer() {
         setIsDatePickerOpen(true);
     };
 
+    //                event handler                    //
     const closeDatePickerHandler = () => {
         setIsDatePickerOpen(false);
     };
@@ -23,22 +25,10 @@ export default function SelectContainer() {
     const openLocationPopupHandler = () => {
         setIsLocationPopupOpen(true);
     };
-
-    const closeLocationPopupHandler = () => {
-        setIsLocationPopupOpen(false);
-    };
     
     const onSearchButtonClickHandler = () => navigator(RESERVATION_CAR_ABSOLUTE_PATH);
 
-    // const onSearchButtonClickHandler = () => {
-    //     const currentPath = location.pathname;
-    //     if (currentPath === RESERVATION_CAR_ABSOLUTE_PATH) {
-    //         navigator(RESERVATION_CAR_ABSOLUTE_PATH);
-    //     } else if (currentPath === RESERVATION_COMPANY_ABSOLUTE_PATH) {
-    //         navigator(RESERVATION_COMPANY_ABSOLUTE_PATH);
-    //     }
-    // };
-
+    //                    Render                        //
     return (
         <div id="reservation-search-wrapper">
             <div className='reservation-container'>

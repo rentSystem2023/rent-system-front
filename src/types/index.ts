@@ -15,7 +15,7 @@ export interface CompanyListItem{
     companyRule : string | null;
 }
 
-export interface noticeListItem{
+export interface NoticeListItem{
     registNumber : number;
     title : string;
     writeDatetime : string;
@@ -63,7 +63,6 @@ export interface ReservationCarPriceListItem {
     superPrice : number;
 }
 
-// 나의 문의내역
 export interface MyReservationListItem{
     carImageUrl : string;
     nickName : string;
@@ -98,7 +97,6 @@ export interface ReservationCarViewListItem{
     highSuperPrice : number;
     lowSuperPrice : number;
 }
-
 
 export interface ReservationCarPriceListItem{
     carName : string;
