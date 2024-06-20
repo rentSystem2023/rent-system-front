@@ -246,12 +246,3 @@ export default function InsuranceSelect() {
     </div>
   );
 }
-
-  // 이미지 클릭 시 이미지 상세보기 Handler
-  // const closeImagePopupHandler = () => {
-  //   setImageDetail(false);
-  // };
-
-  // onClick={() => setImageDetail(true)} => 이미지 클릭 시 상세보기 Click
-
-   {/* {imageDetail && <DetailImage imageUrl={selectedCar.carImageUrl} onClose={closeImagePopupHandler}/>} => 이미지 클릭 시 이미지 상세보기 render */}

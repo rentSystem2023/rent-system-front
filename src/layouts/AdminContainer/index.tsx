@@ -68,39 +68,3 @@ export default function AdminContainer() {
         </div>
     )
 }
-
-
-
-//참고
-
-    // const boardClass = `admin-side-navigation-item${path === '게시판 관리' || path === '공지사항 관리' || path === 'Q&A 관리' ? ' active' : ''}`;
-    // const noticeBoardClass = `admin-side-navigation-sub-item${path === '공지사항 관리' ? ' active' : ''}`;
-    // const qnaBoardClass = `admin-side-navigation-sub-item${path === 'Q&A 관리' ? ' active' : ''}`;
-
-
-        // const onBoardClickHandler = () => {
-    //     setBoardItem(!boardItem);
-    // navigator(ADMIN_NOTICE_LIST_ABSOLUTE_PATH);
-    // }
-    // const onBoardNoticeClickHandler = () => navigator(ADMIN_NOTICE_LIST_ABSOLUTE_PATH);
-    // const onBoardQnaClickHandler = () => navigator(ADMIN_QNA_LIST_ABSOLUTE_PATH);
-
-
-                {/* <div className={boardClass} onClick={onBoardClickHandler}>
-                <div className="admin-side-navigation-icon board"></div>
-                <div className="admin-side-navigation-item-title">게시판 관리</div>
-            </div>
-            {boardItem && (
-            <div className="admin-side-navigation-sub-item">
-                <div className={noticeBoardClass} onClick={onBoardNoticeClickHandler}>
-                    <div className="admin-side-navigation-sub-item-title">공지사항 관리</div>
-                </div>
-                <div className={qnaBoardClass} onClick={onBoardQnaClickHandler}>
-                    <div className="admin-side-navigation-sub-item-title">Q&A 관리</div>
-                </div>
-            </div>
-            )} */}
-
-
-            // pathname === ADMIN_NOTICE_LIST_ABSOLUTE_PATH ? '공지사항 관리' : 
-            // pathname === ADMIN_QNA_LIST_ABSOLUTE_PATH ? 'Q&A 관리' : '';
