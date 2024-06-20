@@ -113,9 +113,15 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
                         </div>
                         <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>
                     </div>
-
-                    <div className="popular-car-list-box">
-                    {popularList.map((item, index) => <ListItem key={index} {...item} />)}
+                    <div className='popular-car-wrap'>
+                        <div className='popular-car-title-container'>
+                            <div className='popular-car-list-image'></div>
+                            <div className='popular-car-list-title'>차탕갑서 인기차량</div>
+                        </div>
+                        
+                        <div className="popular-car-list-box">
+                        {popularList.map((item, index) => <ListItem key={index} {...item} />)}
+                        </div>
                     </div>
 
                 </div>
