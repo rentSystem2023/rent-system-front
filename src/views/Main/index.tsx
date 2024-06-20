@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router';
-import { COUNT_PER_SECTION, RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
-import { CompanyListItem, PopularCarListItem, ReservationCarViewListItem } from 'src/types';
-import { getYYYYMMDD } from 'src/utils';
+import { RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
+import { PopularCarListItem } from 'src/types';
 import { useReservationStore } from 'src/stores';
 import { DatePickerPopup } from 'src/components/DatePickerPopup';
 import { GetReservationPopularListResponseDto } from 'src/apis/reservation/dto/response';

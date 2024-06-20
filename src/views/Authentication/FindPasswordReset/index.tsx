@@ -5,7 +5,6 @@ import { FindPasswordResetRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/Inputbox'
 import { AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
-import useAuthStore from 'src/stores/auth.store';
 
 //                    component                    //
 export default function FindPasswordReset() {

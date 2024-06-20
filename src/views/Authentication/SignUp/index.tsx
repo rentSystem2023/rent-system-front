@@ -4,9 +4,8 @@ import InputBox from "src/components/Inputbox";
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, NickNameCheckRequestDto, SignUpRequestDto } from "src/apis/auth/dto/request";
 import { IdCheckRequest, NickNameCheckRequest, emailAuthCheckRequest, emailAuthRequest, signUpRequest } from "src/apis/auth";
 import ResponseDto from "src/apis/response.dto";
-import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_PATH } from "src/constant";
+import { AUTH_SIGN_IN_ABSOLUTE_PATH } from "src/constant";
 import useAuthStore from "src/stores/auth.store";
 import { useSearchParams } from "react-router-dom";
 

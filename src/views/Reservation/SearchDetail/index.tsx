@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetSearchDetailListResponseDto, PostReservationResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { AUTH_SIGN_IN_ABSOLUTE_PATH, RESERVATION_CAR_ABSOLUTE_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+import { AUTH_SIGN_IN_ABSOLUTE_PATH, RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
 import { getSearchDetailListRequest, postReservationRequest } from 'src/apis/reservation';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { PostReservationRequestDto } from 'src/apis/reservation/dto/request';

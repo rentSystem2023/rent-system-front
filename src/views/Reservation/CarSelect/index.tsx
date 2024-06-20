@@ -1,13 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import SelectContainer from 'src/layouts/SelectContainer';
-import { useCookies } from 'react-cookie';
 import { getSearchReservationCarListRequest } from 'src/apis/reservation';
-import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
 import { GetSearchReservationCarListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { ReservationCarListItem, ReservationCarViewListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_PATH, RESERVATION_CAR_ABSOLUTE_PATH, RESERVATION_COMPANY_ABSOLUTE_PATH } from 'src/constant';
+import { ReservationCarViewListItem } from 'src/types';
+import { COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, RESERVATION_CAR_ABSOLUTE_PATH, RESERVATION_COMPANY_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';
 import { usePagination } from 'src/hooks';

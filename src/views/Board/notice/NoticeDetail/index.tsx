@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import './style.css'
 import { useNavigate, useParams } from 'react-router';
-import { deleteNoticeBoardRequest, getNoticeRequest, increaseViewCountRequest, putNoticeRequest } from 'src/apis/notice/dto';
+import { deleteNoticeBoardRequest, getNoticeRequest, increaseViewCountRequest } from 'src/apis/notice/dto';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';

@@ -6,7 +6,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { getReservationDetailMyListRequest, patchReservationRequest } from 'src/apis/user';
 import { PatchReservationRequestDto } from 'src/apis/user/dto/request';
 import { GetMyReservationDetailResponseDto } from 'src/apis/user/dto/response';
-import { GET_MY_RESERVATION_LIST_URL, MAIN_ABSOLUTE_PATH, USER_RESERVATION_ABSOLUTE_PATH, USER_RESERVATION_DETAIL_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 
     //                    component                    //
@@ -32,7 +32,6 @@ export default function MyReservationDetail() {
 
     const [carName, setCarName] = useState<string>('');
     const [carNumber, setCarNumber] = useState<string>('');
-    const [userId, setUserId] = useState<string>('');
     const [reservationState, setReservationState] = useState<string>('');
 
     //                    function                    //
@@ -66,7 +65,6 @@ export default function MyReservationDetail() {
         setCompanyTelnumber(companyTelnumber);
         setAddress(address);
         setInsurancePrice(insurancePrice);
-        setUserId(userId);
         setCarName(carName);
         setCarNumber(carNumber)
         setReservationState(reservationState);

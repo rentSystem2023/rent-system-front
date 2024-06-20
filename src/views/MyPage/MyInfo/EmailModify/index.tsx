@@ -5,7 +5,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { emailAuthRequest, putMyInfoEmailRequest } from 'src/apis/user';
 import { EmailAuthRequestDto, PutMyInfoEmailRequestDto } from 'src/apis/user/dto/request';
 import InputBox from 'src/components/Inputbox';
-import { AUTH_SIGN_IN_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 
     //                    component                    //
