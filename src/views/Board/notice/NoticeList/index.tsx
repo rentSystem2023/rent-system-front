@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie';
 import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
 import { GetSearchNoticeBoardListResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { noticeListItem } from 'src/types';
+import { NoticeListItem } from 'src/types';
 import { usePagination } from 'src/hooks';
     //                    component                    //
 function ListItem ({
@@ -17,7 +17,7 @@ function ListItem ({
     writerId,
     writeDatetime,
     viewCount
-}:noticeListItem & { index: number }) {
+}:NoticeListItem & { index: number }) {
     
     //                    function                    //
     const navigator = useNavigate();
@@ -52,7 +52,7 @@ export default function NoticeList() {
         onPageClickHandler,
         onPreSectionClickHandler,
         onNextSectionClickHandler
-    } = usePagination<noticeListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
+    } = usePagination<NoticeListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 
     const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();

@@ -82,7 +82,7 @@ export const AUTH_FIND_ID_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND
 // description: 비밀번호 찾기 페이지 절대 URL //
 export const AUTH_FIND_PASSWORD_ABSOLUTE_PATH = `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND_PASSWORD_PATH}`;
 // description: 비밀번호 찾기 비번 재설정 페이지 절대 URL //
-export const AUTH_FIND_PW_RESET_ABSOLUTE_PATH =  (userId: string) => `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND_PASSWORD_PATH}/${userId}`;
+export const AUTH_FIND_PW_RESET_ABSOLUTE_PATH = (userId: string) => `${MAIN_PATH}/${AUTH_PATH}/${AUTH_FIND_PASSWORD_PATH}/${userId}`;
 
 // description: 예약 //
 // description: 차량 선택 페이지 절대 URL //
@@ -123,7 +123,6 @@ export const QNA_REGIST_ABSOLUTE_PATH = `${MAIN_PATH}/${QNA_PATH}/${QNA_REGIST_P
 export const QNA_DETAIL_ABSOLUTE_PATH = (receptionNumber: string | number) => `${MAIN_PATH}/${QNA_PATH}/${receptionNumber}`;
 // description: Q&A 수정 페이지 절대 URL //
 export const QNA_UPDATE_ABSOLUTE_PATH = (receptionNumber: string | number) => `${MAIN_PATH}/${QNA_PATH}/update/${receptionNumber}`;
-
 
 // description: 관리자 - 회원 관리 //
 // description: 회원 리스트 페이지 절대 URL //
@@ -173,7 +172,7 @@ export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
 // 로그인 URL
 export const POST_SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-in`;
 // SNS 로그인 URL
-export const SNS_SIGN_IN_REQUEST_URL = (type : string) => `${SERVER_AUTH_MODULE_URL}/oauth2/${type}`;
+export const SNS_SIGN_IN_REQUEST_URL = (type: string) => `${SERVER_AUTH_MODULE_URL}/oauth2/${type}`;
 // 아이디 중복 확인 URL
 export const POST_ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
 // 닉네임 중복 확인 URL
@@ -222,31 +221,31 @@ export const POST_RESERVATION_URL = `${SERVER_RESERVATION_MODULE_URL}/regist`;
 // 마이페이지 예약 내역 리스트 URL
 export const GET_MY_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/mylist`;
 // 마이페이지 예약 상세 내역 URL
-export const GET_MY_RESERVATION_DETAIL_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
+export const GET_MY_RESERVATION_DETAIL_URL = (reservationCode: string | number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}`;
 // 마이페이지 예약 취소 URL
-export const PATCH_MY_RESERVATION_DETAIL_URL = (reservationCode : string | number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}/cancel`;
+export const PATCH_MY_RESERVATION_DETAIL_URL = (reservationCode: string | number) => `${GET_MY_RESERVATION_LIST_URL}/${reservationCode}/cancel`;
 // 취소 신청 예약 리스트 URL
 export const GET_RESERVATION_CANCEL_LIST_URL = (reservationState: string) => `${SERVER_RESERVATION_MODULE_URL}/cancel/${reservationState}`;
 // 예약 취소 신청 승인 URL
-export const PATCH_RESERVATION_CANCEL_URL = (reservationCode : string | number) => `${SERVER_RESERVATION_MODULE_URL}/cancel/${reservationCode}`;
+export const PATCH_RESERVATION_CANCEL_URL = (reservationCode: string | number) => `${SERVER_RESERVATION_MODULE_URL}/cancel/${reservationCode}`;
 // 예약 신청 승인 URL
-export const PATCH_RESERVATION_APPROVE_URL = (reservationCode : string | number) => `${SERVER_RESERVATION_MODULE_URL}/${reservationCode}/approve`;
+export const PATCH_RESERVATION_APPROVE_URL = (reservationCode: string | number) => `${SERVER_RESERVATION_MODULE_URL}/${reservationCode}/approve`;
 // 예약 전체 리스트 URL
 export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
 // 예약 상세 URL
-export const GET_RESERVATION_DETAIL_URL = (reservationCode : string | number) =>  `${SERVER_RESERVATION_MODULE_URL}/${reservationCode}`;
+export const GET_RESERVATION_DETAIL_URL = (reservationCode: string | number) => `${SERVER_RESERVATION_MODULE_URL}/${reservationCode}`;
 // 예약 검색 리스트 URL
 export const GET_RESERVATION_LIST_SEARCH_URL = `${GET_RESERVATION_LIST_URL}/search`;
 // 예약 목록 리스트 삭제 URL
-export const DELETE_RESERVATION_LIST_URL = (reservationCode : string | number) => `${SERVER_RESERVATION_MODULE_URL}/${reservationCode}`;
+export const DELETE_RESERVATION_LIST_URL = (reservationCode: string | number) => `${SERVER_RESERVATION_MODULE_URL}/${reservationCode}`;
 // 인기 차량 리스트 URL
 export const GET_POPULAR_CAR_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/popular`;
 // 차량 검색 결과 URL
-export const GET_CAR_SEARCH_LIST_URL =  `${SERVER_RESERVATION_MODULE_URL}/search`;
+export const GET_CAR_SEARCH_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/search`;
 // 보험별 가격 검색 결과 URL
-export const GET_CAR_PRICE_SEARCH_LIST_URL = (carName : string) => `${GET_CAR_SEARCH_LIST_URL}/${carName}`;
+export const GET_CAR_PRICE_SEARCH_LIST_URL = (carName: string) => `${GET_CAR_SEARCH_LIST_URL}/${carName}`;
 // 보험별 가격 상세 검색 결과 URL
-export const GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL = (carName: string, rentCompany : string) =>  `${GET_CAR_SEARCH_LIST_URL}/${carName}/${rentCompany}`;
+export const GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL = (carName: string, rentCompany: string) => `${GET_CAR_SEARCH_LIST_URL}/${carName}/${rentCompany}`;
 
 // description: NOTICE MODULE
 export const SERVER_NOTICE_MODULE_URL = `${SERVER_API_URL}/notice`;
@@ -256,15 +255,15 @@ export const GET_NOTICE_LIST_URL = `${SERVER_NOTICE_MODULE_URL}/list`;
 // 공지사항 검색 목록 URL
 export const NOTICE_LIST_SEARCH_URL = `${SERVER_NOTICE_MODULE_URL}/list/search`;
 // 공지사항 게시물 상세 URL
-export const GET_NOTICE_DETAIL_URL = (registNumber : number | string ) => `${GET_NOTICE_LIST_URL}/${registNumber}`;
+export const GET_NOTICE_DETAIL_URL = (registNumber: number | string) => `${GET_NOTICE_LIST_URL}/${registNumber}`;
 // 공지사항 게시물 조회수 증가 URL
-export const INCREASE_NOTICE_VIEW_COUNT_URL = (registNumber : number | string  ) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/increase-view-count`;
+export const INCREASE_NOTICE_VIEW_COUNT_URL = (registNumber: number | string) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/increase-view-count`;
 // 공지사항 게시물 작성 URL
 export const POST_NOTICE_REQUESURL = `${SERVER_NOTICE_MODULE_URL}/regist`;
 // 공지사항 게시물 수정 URL
-export const PUT_NOTICE_REGIST_URL = (registNumber : number | string ) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/modify`;
+export const PUT_NOTICE_REGIST_URL = (registNumber: number | string) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/modify`;
 // 공지사항 게시물 삭제 URL
-export const DELETE_NOTICE_URL = (registNumber : number | string ) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/delete`;
+export const DELETE_NOTICE_URL = (registNumber: number | string) => `${SERVER_NOTICE_MODULE_URL}/${registNumber}/delete`;
 
 // description: Q&A MODULE
 export const SERVER_QNA_MODULE_URL = `${SERVER_API_URL}/qna`;
@@ -283,14 +282,14 @@ export const GET_QNA_LIST_URL = `${SERVER_QNA_MODULE_URL}/list`;
 // Q&A 게시물 검색 리스트 URL
 export const GET_QNA_LIST_SEARCH_URL = `${GET_QNA_LIST_URL}/search`;
 // Q&A 게시물 상세 URL
-export const GET_QNA_DETAIL_URL = (receptionNumber : number | string) => `${GET_QNA_LIST_URL}/${receptionNumber}`;
+export const GET_QNA_DETAIL_URL = (receptionNumber: number | string) => `${GET_QNA_LIST_URL}/${receptionNumber}`;
 // Q&A 게시물 작성 URL
 export const POST_QNA_REGIST_URL = `${SERVER_QNA_MODULE_URL}/regist`;
 // Q&A 게시물 조회수 증가 URL
 export const INCREASE_QNA_VIEW_COUNT_URL = (receptionNumber: number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/increase-view-count`;
 
 // Q&A 답변 URL
-export const POST_COMMENT_REQUEST_URL = (receptionNumber : number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/comment`;
+export const POST_COMMENT_REQUEST_URL = (receptionNumber: number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/comment`;
 
 // description: COMPANY MODULE
 export const SERVER_COMPANY_MODULE = `${SERVER_API_URL}/company`;
@@ -298,17 +297,17 @@ export const SERVER_COMPANY_MODULE = `${SERVER_API_URL}/company`;
 // 업체 정보 전체 리스트 URL
 export const GET_COMPANY_LIST_URL = `${SERVER_COMPANY_MODULE}/list`;
 // 업체 정보 상세 URL
-export const GET_COMPANY_DETAIL_URL = (companyCode : string | number) => `${GET_COMPANY_LIST_URL}/${companyCode}`;
+export const GET_COMPANY_DETAIL_URL = (companyCode: string | number) => `${GET_COMPANY_LIST_URL}/${companyCode}`;
 // 업체 정보 검색 리스트 URL
 export const GET_COMPANY_LIST_SEARCH_URL = `${GET_COMPANY_LIST_URL}/search`;
 // 업체 정보 등록 URL
 export const POST_COMPANY_REGIST_URL = `${SERVER_COMPANY_MODULE}/regist`;
 // 업체 정보 수정 URL
-export const PUT_COMPANY_UPDATE_URL = (companyCode : string | number) => `${SERVER_COMPANY_MODULE}/${companyCode}`;
+export const PUT_COMPANY_UPDATE_URL = (companyCode: string | number) => `${SERVER_COMPANY_MODULE}/${companyCode}`;
 // 업체 정보 삭제 URL
-export const DELETE_COMPANY_LIST_URL = (companyCode : string | number) => `${SERVER_COMPANY_MODULE}/${companyCode}`;
+export const DELETE_COMPANY_LIST_URL = (companyCode: string | number) => `${SERVER_COMPANY_MODULE}/${companyCode}`;
 
 //description: PAGE
-export const COUNT_PER_PAGE = 10; 
+export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
 export const COUNT_RESERVATION_PAGE = 6;

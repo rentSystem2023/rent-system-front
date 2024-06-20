@@ -1,14 +1,14 @@
 import ResponseDto from "src/apis/response.dto";
-import { noticeListItem } from "src/types";
+import { NoticeListItem } from "src/types";
 
 // description:  공지사항 전체 게시물 리스트 불러오기 Response Body DTO
 export interface GetNoticeBoardListResponseDto extends ResponseDto {
-    noticeList: noticeListItem[];
+    noticeList: NoticeListItem[];
 }
 
 // description: 공지사항 검색 게시물 리스트 불러오기 Response Body DTO
 export interface GetSearchNoticeBoardListResponseDto extends ResponseDto {
-    noticeList: noticeListItem[];
+    noticeList: NoticeListItem[];
 }
 
 // description: 공지사항 게시물 불러오기 Response Body DTO

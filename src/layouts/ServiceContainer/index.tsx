@@ -8,8 +8,9 @@ import { GetMyInfoResponseDto, GetSignInUserResponseDto } from "src/apis/user/dt
 import ResponseDto from "src/apis/response.dto";
 import { getMyInfoRequest, getSignInUserRequest } from "src/apis/user";
 
+    //                    component                    //
 function TopBar() {
-
+    //                      state                      //
     const [nickName, setNickName] = useState<string>('');
 
     const navigator = useNavigate();
@@ -17,22 +18,23 @@ function TopBar() {
     const { pathname } = useLocation();
     const { loginUserRole, setLoginUserId, setLoginUserRole } = useUserStore();
 
+    //                    function                     //
     const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
 
         if (!result) return;
 
         const { nickName } = result as GetMyInfoResponseDto;
         setNickName(nickName);
-
     };
     
+    //                    effect                       //
     useEffect (() => {
         if (!cookies.accessToken) return;
 
         getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
     }, [cookies.accessToken]);
 
-    // 로그아웃 처리 시 원래 있던 쿠키 값을 제거
+    //                event handler                    //
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
         setLoginUserId('');
@@ -53,6 +55,7 @@ function TopBar() {
     const onMyPageClickHandler = () => navigator(USER_INFO_ABSOLUTE_PATH);
     const onAdminPageClickHandler = () => navigator(ADMIN_USER_LIST_ABSOLUTE_PATH)
 
+    //                    Render                        //
     return (
         <>
         <div className="logo-container" onClick={onLogoClickHandler}>
@@ -95,15 +98,18 @@ function TopBar() {
     );
 }
 
+    //                    component                    //
 function BottomBar() {
     const [cookies, setCookie] = useCookies();
     const navigator = useNavigate();
 
+    //                event handler                    //
     const onMyPageButtonClickHandler = () => {
         if (!cookies.accessToken) return navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
         navigator(USER_INFO_ABSOLUTE_PATH);
     }
 
+    //                    Render                       //
     return (
         <div className="bottom-container">
             <div className="bottom-content">
