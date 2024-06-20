@@ -10,7 +10,6 @@
     import './style.css';
 import { usePagination } from 'src/hooks';
 
-
     //                    component                    //
     function ListItem ({ 
     index,
@@ -18,7 +17,7 @@ import { usePagination } from 'src/hooks';
     writeDatetime,
     title,
     writerId,
-    viewCount,
+    viewCount, 
     category,
     publicState,
     status
