@@ -133,3 +133,9 @@
 
     color: rgba(64, 64, 64, 1);
 }
+
+.qna-detail-owner-button-box{
+    display: flex;
+
+    gap: 10px;
+}

@@ -223,7 +223,7 @@ export default function QnaDetail() {
                 {loginUserId === writerId && loginUserRole === 'ROLE_USER' &&
                     <div className='qna-detail-owner-button-box'>
                         {!status &&
-                            <div className='primary-button' onClick={onUpdateClickHandler}>수정</div>
+                            <div className='primary-button list' onClick={onUpdateClickHandler}>수정</div>
                         }
                         <div className='error-button delete' onClick={onDeleteClickHandler}>삭제</div>
                     </div>
