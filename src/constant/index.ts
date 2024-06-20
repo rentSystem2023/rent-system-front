@@ -192,6 +192,7 @@ export const PUT_FIND_PW_RESET_REQUEST_URL = (userId: string) => `${POST_FIND_PA
 
 // description: USER MODULE
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
+export const SERVER_ADMIN_MODULE_URL = `${SERVER_API_URL}/admin`
 
 // 사용자 정보 반환 URL
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
@@ -205,7 +206,7 @@ export const PUT_MY_INFO_EMAIL_MODIFY_URL = `${SERVER_USER_MODULE_URL}/informati
 export const DELETE_MY_INFO_URL = (userId: string) => `${GET_MY_INFO_URL}/${userId}`;
 
 // 관리자페이지 회원 목록 리스트 URL
-export const GET_USER_LIST_URL = `${SERVER_USER_MODULE_URL}/list`;
+export const GET_USER_LIST_URL = `${SERVER_ADMIN_MODULE_URL}/list`;
 // 관리자페이지 회원 목록 상세 URL
 export const GET_USER_DETAIL_URL = (userId: string) => `${GET_USER_LIST_URL}/${userId}`;
 // 관리자페이지 회원 정보 삭제 URL
