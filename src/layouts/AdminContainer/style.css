@@ -1,7 +1,7 @@
 #admin-wrapper {
     display: grid;
     grid-template: 
-        "sidenav main" minmax(900px, auto)
+        "sidenav main" minmax(1000px, auto)
         / 280px minmax(1182px, 1fr);
 }
 

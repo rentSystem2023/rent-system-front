@@ -1,7 +1,7 @@
 #wrapper {
     display: grid;
     grid-template-columns: 280px minmax(1182px, 1fr);
-    grid-template-rows: 85px minmax(944px, auto) 350px;
+    grid-template-rows: 85px minmax(1000px, auto) 320px;
     grid-template-areas:
         "logo topbar"
         "main main"
@@ -135,7 +135,7 @@
 
     background-color: rgba(233, 236, 239, 1);
 
-    padding: 50px 200px;
+    padding: 40px 200px;
     color: rgba(64, 64, 64, 1);
 }
 

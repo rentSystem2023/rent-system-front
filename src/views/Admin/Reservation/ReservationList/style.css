@@ -50,6 +50,10 @@
 /* 아이디 */
 .reservation-list-table-reservation-user-id{
     width: 60px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* 상태 */
