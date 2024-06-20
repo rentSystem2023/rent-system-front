@@ -1,7 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css'
-
-
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -12,17 +10,13 @@ import {  } from 'src/apis/notice/dto';
 import useUserStore from 'src/stores/user.store';
 import { PostQnaCommentRequestDto } from 'src/apis/qna/dto/request';
 
-
-
-//                    component                    //
+    //                    component                    //
 export default function QnaDetail() {
 
-    //                    state                    //
-
-
+    //                      state                      //
     const { loginUserId, loginUserRole } = useUserStore();
     const { receptionNumber } = useParams();
-    const location = useLocation(); // location 객체를 가져옵니다.
+    const location = useLocation(); 
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
@@ -34,7 +28,6 @@ export default function QnaDetail() {
     const [commentRows, setCommentRows] = useState<number>(1);
     const [imageUrl , setImageUrl] = useState<string>('');
     const [category, setCategory] = useState<string>('');
-
 
     //                    function                    //
     const navigator = useNavigate();
@@ -90,7 +83,6 @@ export default function QnaDetail() {
         setComment(comment);
         setImageUrl(imageUrl);
         setCategory(category);
-
     };
 
     const postCommentResponse = (result: ResponseDto | null) => {
@@ -110,7 +102,6 @@ export default function QnaDetail() {
 
         if (!receptionNumber) return;
         getQnaRequest(receptionNumber).then(getBoardResponse);
-
     };
 
     const deleteQnaRequest = (result: ResponseDto | null) => {
@@ -127,17 +118,15 @@ export default function QnaDetail() {
             return;
         }
 
-        // 삭제되면 이전 페이지 정보에 따라 이동
         const previousPage = location.state?.previousPage;
         if (previousPage === 'MY_QNA_LIST') {
             navigator(USER_QNA_ABSOLUTE_PATH);
         } else {
             navigator(QNA_LIST_ABSOLUTE_PATH);
         }
-        // navigator(QNA_LIST_ABSOLUTE_PATH);
     }
 
-    //                    event handler                    //
+    //                event handler                    //
     const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         if (status || loginUserRole !== 'ROLE_ADMIN') return;
         const comment = event.target.value;
@@ -155,29 +144,22 @@ export default function QnaDetail() {
         PostCommentRequest(receptionNumber, requestBody, cookies.accessToken).then(postCommentResponse);
     };
 
-    // 목록
     const onListClickHandler = () => {
-
-        // location.state에서 previousPage 값을 확인하고 해당 경로로 이동합니다.
         const previousPage = location.state?.previousPage;
         if (previousPage === 'MY_QNA_LIST') {
             navigator(USER_QNA_ABSOLUTE_PATH);
         } else {
             navigator(QNA_LIST_ABSOLUTE_PATH);
         }
-
     }
 
-    // 수정
     const onUpdateClickHandler = () => {
         if (!receptionNumber || loginUserId !== writerId || status) return;
 
         const previousPage = location.state?.previousPage;
         navigator(`/rentcar/qna/update/${receptionNumber}`, { state: { previousPage } });
-        // navigator(QNA_UPDATE_ABSOLUTE_PATH(receptionNumber));
     }
 
-    // 삭제
     const onDeleteClickHandler = () => {
         if (!receptionNumber || loginUserId !== writerId || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
@@ -190,18 +172,17 @@ export default function QnaDetail() {
     //                    effect                    //
     useEffect(() => {
         if (!receptionNumber ) return;
-        // 토큰 없이 게시글 상세 정보를 가져오도록 수정
+
         getQnaRequest(receptionNumber).then(getBoardResponse);
     }, []);
 
 
     useEffect(() => {
         if (!cookies.accessToken || !receptionNumber) return;
+
         increaseViewCountRequest(receptionNumber, cookies.accessToken)
             .then(increaseViewCountResponse);
     }, []);
-
-
 
     //                    render                    //
     const coverdWriterId = writerId !== '' && (writerId[0] + '*'.repeat(writerId.length - 1));

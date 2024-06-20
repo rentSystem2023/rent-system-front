@@ -11,9 +11,10 @@ import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/ap
 import { getNoticeRequest, putNoticeRequest } from 'src/apis/notice/dto';
 import { PutNoticeBoardRequestDto } from 'src/apis/notice/dto/request';
 
+    //                    component                    //
 export default function NoticeUpdate() {
 
-    //                    state                    //
+    //                      state                      //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserId, loginUserRole } = useUserStore();
 
@@ -75,7 +76,7 @@ export default function NoticeUpdate() {
         navigator(NOTICE_DETAIL_ABSOLUTE_PATH(registNumber));
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -102,7 +103,7 @@ export default function NoticeUpdate() {
             imageUrlToUpdate = await axios.post('http://localhost:4000/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                 .then(response => response.data ? response.data : '');
         } else {
-            imageUrlToUpdate = initialImageUrl; // 새로운 파일이 없으면 초기 이미지 URL 유지
+            imageUrlToUpdate = initialImageUrl; 
         }
 
         const requestBody: PutNoticeBoardRequestDto = {
@@ -112,7 +113,7 @@ export default function NoticeUpdate() {
         }
         putNoticeRequest(registNumber, requestBody, cookies.accessToken).then(putNoticeResponse);
     };
-// description: 이미지 변경 시 이미지 미리보기 //
+
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const fileInput = event.target;
         if (fileInput.files && fileInput.files.length > 0) {
@@ -123,7 +124,7 @@ export default function NoticeUpdate() {
         }
     };
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!registNumber || !cookies.accessToken) return;
         if (!loginUserRole) return;
@@ -134,7 +135,7 @@ export default function NoticeUpdate() {
         getNoticeRequest(registNumber, cookies.accessToken).then(getNoticeResponse); // accessToken 추가
     }, [loginUserRole]);
 
-    //                    render                    //
+    //                    Render                       //
     return (
         <div id="qna-write-wrapper">
             <div className='qna-write-top'>

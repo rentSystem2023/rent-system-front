@@ -10,11 +10,11 @@ import { getSearchDetailListRequest, postReservationRequest } from 'src/apis/res
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { PostReservationRequestDto } from 'src/apis/reservation/dto/request';
 
-//                    component                   //
+    //                    component                    //
 export default function SearchDetail() {
   const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
 
-  //                    state                   //
+    //                      state                      //
   const { rentCompany } = useParams();
   const { loginUserId, loginUserRole } = useUserStore();
   const { selectedInsurance, selectedAddress, reservationStart, reservationEnd, selectedCar } = useReservationStore();
@@ -38,8 +38,7 @@ export default function SearchDetail() {
   const [companyLat, setCompantLat] = useState<number>();
   const [displayCarInfo, setDisplayCarInfo] = useState(true);
   
-
-  //                    function                    //
+    //                    function                     //
   const navigator = useNavigate();
 
   const GetSearchDetailListResponse = (result: GetSearchDetailListResponseDto | ResponseDto | null) => {
@@ -91,7 +90,7 @@ export default function SearchDetail() {
     window.location.href = redirectUrl;
   };
 
-  //                    event handler                   //
+    //                event handler                    //
   const carInformationClickHandler = () => {
     setDisplayCarInfo(true);
   };
@@ -119,7 +118,7 @@ export default function SearchDetail() {
     postReservationRequest(requestBody, cookies.accessToken).then(postReservationResponse);
   };
 
-  //                    effect                    //
+    //                    effect                       //
   useEffect(() => {
     if (!selectedCar || !rentCompany) return;
 
@@ -148,7 +147,7 @@ export default function SearchDetail() {
     selectedInsurance === 'luxury' ? '고급자차' :
     selectedInsurance === 'super' ? '슈퍼자차' : '';
 
-  //                    render                    //
+    //                    Render                       //
   return (
     <div id="user-page-wrapper">
       <div className="search-datail-wrapper">
@@ -277,9 +276,8 @@ export default function SearchDetail() {
                     style={{ width: '100%', height: '400px' }}
                     level={6}
                   >
-                    <MapMarker // 마커를 생성합니다
+                    <MapMarker
                       position={{
-                        // 마커가 표시될 위치입니다
                         lat: companyLat, lng: companyLng
                       }}
                       image={{

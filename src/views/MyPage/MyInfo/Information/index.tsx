@@ -8,10 +8,10 @@ import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { deleteUserRequest, getMyInfoRequest } from 'src/apis/user';
 import { useUserStore } from 'src/stores';
 
-//                    component                    //
+    //                    component                    //
 export default function MyInfo() {
 
-    //                    state                    //
+    //                      state                      //
     const [cookies, setCookie, removeCookie] = useCookies();
     const { loginUserRole } = useUserStore();
     const [nickName, setNickName] = useState<string>('');
@@ -21,7 +21,7 @@ export default function MyInfo() {
     const [joinDate, setJoinDate] = useState<string>('');
     const [userRole, setUserRole] = useState<String>('');
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
@@ -47,7 +47,7 @@ export default function MyInfo() {
         setUserEmail(userEmail);
         setJoinDate(joinDate);
         setUserRole(userRole);
-        setUserPassword(10); // 임의로 비밀번호를  '*'로 10개 나타나도록 함
+        setUserPassword(10);
     };
 
     const deleteUserResponse = (result: ResponseDto | null) => {
@@ -68,7 +68,7 @@ export default function MyInfo() {
         window.location.reload();
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onPwModifyButtonClickHandler = () => {
         navigator(USER_PW_UPDATE_ABSOLUTE_PATH);
     };
@@ -88,7 +88,7 @@ export default function MyInfo() {
         deleteUserRequest(cookies.accessToken, userId).then(deleteUserResponse);
     };
 
-    //                  effect                      //
+    //                    effect                       //
     useEffect (() => {
         if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
             navigator(MAIN_ABSOLUTE_PATH);
@@ -97,7 +97,7 @@ export default function MyInfo() {
         };
     }, []);
 
-    //                    render                    //
+    //                    Render                       //
     return (
         <div id='information-wrapper'>      
             <div className='information-main'>

@@ -9,9 +9,10 @@ import { GetMyReservationDetailResponseDto } from 'src/apis/user/dto/response';
 import { GET_MY_RESERVATION_LIST_URL, MAIN_ABSOLUTE_PATH, USER_RESERVATION_ABSOLUTE_PATH, USER_RESERVATION_DETAIL_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 
+    //                    component                    //
 export default function MyReservationDetail() {
 
-    //                    state                    //
+    //                      state                      //
     const { loginUserRole } = useUserStore();
     const { reservationCode } = useParams();
 
@@ -87,7 +88,7 @@ export default function MyReservationDetail() {
         }
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onListClickHandler = () => {
         navigator(USER_RESERVATION_ABSOLUTE_PATH);
     }
@@ -115,7 +116,7 @@ export default function MyReservationDetail() {
         navigator(USER_RESERVATION_ABSOLUTE_PATH);
     }
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!reservationCode || !cookies.accessToken || loginUserRole !== 'ROLE_USER') {
             return navigator(MAIN_ABSOLUTE_PATH);

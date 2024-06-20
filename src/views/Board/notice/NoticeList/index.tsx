@@ -9,6 +9,7 @@ import { GetSearchNoticeBoardListResponseDto } from 'src/apis/notice/dto/respons
 import ResponseDto from 'src/apis/response.dto';
 import { NoticeListItem } from 'src/types';
 import { usePagination } from 'src/hooks';
+
     //                    component                    //
 function ListItem ({
     index,
@@ -19,27 +20,27 @@ function ListItem ({
     viewCount
 }:NoticeListItem & { index: number }) {
     
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
-    //                    event handler                    //
+    //                event handler                    //
     const onClickHandler = () => navigator(NOTICE_DETAIL_ABSOLUTE_PATH(registNumber));
 
-    //                    render                    //
+    //                    Render                       //
     return (
         <div className='table-list-table-tr notice' onClick={onClickHandler}>
             <div className='notice-list-table-reception-number'>{index + 1}</div>
             <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{title}</div>
-            <div className='notice-list-table-writer-Id'>{writerId}</div>
+            <div className='notice-list-table-writer-Id'>관리자</div>
             <div className='notice-list-table-write-date'>{writeDatetime}</div>
             <div className='notice-list-table-viewcount'>{viewCount}</div>
         </div>
     );
 };
 
-//                    component                    //
+    //                    component                    //
 export default function NoticeList() {
     
-    //                    state                    //
+    //                      state                      //
     const {
         viewList,
         pageList,
@@ -58,7 +59,7 @@ export default function NoticeList() {
     const [cookies] = useCookies();
     const [searchWord, setSearchWord] = useState<string>('');
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const getSearchBoardListResponse = (result: GetSearchNoticeBoardListResponseDto | ResponseDto | null) => {
@@ -82,7 +83,7 @@ export default function NoticeList() {
         setCurrentSection(!noticeList.length ? 0 : 1);
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onWriteButtonClickHandler = () => {
         if (loginUserRole !== 'ROLE_ADMIN') return;
         
@@ -103,7 +104,7 @@ export default function NoticeList() {
         }
     };
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!cookies.accessToken) {
             getSearcNoticeListRequest(searchWord, '').then(getSearchBoardListResponse);
@@ -112,7 +113,7 @@ export default function NoticeList() {
         }
     }, []);
     
-    //                    render                    //
+    //                    Render                       //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
 
     return (

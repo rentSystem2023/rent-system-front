@@ -11,13 +11,14 @@ import ResponseDto from 'src/apis/response.dto';
 import { getReservationPopularListRequest } from 'src/apis/reservation';
 import { useCookies } from 'react-cookie';
 
+    //                    component                    //
 function ListItem ({
     carImageUrl,
     carName,
     totalReservationCount
 }: PopularCarListItem) {
 
-    //                    function                    //
+    //                    Render                       //
     return (
         <div className='popular-car-list-wrap'>
             <div className='popular-car-image'>
@@ -27,9 +28,6 @@ function ListItem ({
             <div style={{border: '1px solid rgba(238, 238, 238, 1)', width: '100%'}}></div>
 
             <div className='popular-car-info-list'>
-                {/* <div className='popular-car-info-contents-carname'>
-                    <div className='poppular-car-company'>{carRentCompany}</div>
-                </div> */}
                 <div className='popular-car-info-container'>
                     <div className='popular-car-info-contents'>
                         <div className='popular-car-title'>차량명</div>
@@ -47,7 +45,7 @@ function ListItem ({
     );
 }
 
-//                    component                    //
+    //                    component                    //
 export default function Main() {
     const { address, reservationStart, reservationEnd } = useReservationStore();
     const [isLocationPopupOpen, setIsLocationPopupOpen] = useState(false);
@@ -58,25 +56,19 @@ export default function Main() {
 
 const handlePopularCarListResponse = (result: GetReservationPopularListResponseDto | ResponseDto | null) => {
     if (!result || result.code !== 'SU') {
-        // 처리할 오류가 있는 경우
         return;
     }
-    // Popular Car 목록을 업데이트
     const { popularList } = result as GetReservationPopularListResponseDto;
     setPopularCarList(popularList);
 };
 
-//                  event handler                   //
+    //                event handler                    //
     const onSearchButtonClickHandler = () => {
         if (!reservationStart || !reservationEnd) {
             alert("위치와 날짜를 선택하세요.");
             return;
         }
         navigator(RESERVATION_CAR_ABSOLUTE_PATH);
-    };
-
-    const closeLocationPopupHandler = () => {
-        setIsLocationPopupOpen(false);
     };
 
     const openLocationPopupHandler = () => {
@@ -91,14 +83,12 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
         setIsDatePickerOpen(false);
     };
 
-
-    //                  effect                        //
+    //                    effect                       //
     useEffect(() => {
         getReservationPopularListRequest().then(handlePopularCarListResponse);
-    }, [reservationStart, reservationEnd]); // reservationStart, reservationEnd가 변경될 때마다 실행
+    }, [reservationStart, reservationEnd]);
 
-        
-    //                    render                    //
+    //                    Render                       //
     return (
         <div id="main-page-wrapper">
             <div className="main-container-box">
@@ -131,7 +121,6 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
 
                 </div>
             </div>
-            {/* {isLocationPopupOpen && <LocationPopup onClose={closeLocationPopupHandler} viewList={[]} />} */}
             {isDatePickerOpen && <DatePickerPopup onClose={closeDatePickerHandler} />}
         </div>
     );

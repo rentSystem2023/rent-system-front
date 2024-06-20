@@ -12,8 +12,10 @@ import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';
 import { usePagination } from 'src/hooks';
 
+    //                    component                    //
 function ListItem (props: ReservationCarViewListItem) {
 
+    //                      state                      //
     const {
         carName,
         carImageUrl,
@@ -27,7 +29,7 @@ function ListItem (props: ReservationCarViewListItem) {
     
     const { setSelectedCar, setSelectedInsurance, reservationStart, reservationEnd } = useReservationStore();
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
@@ -42,13 +44,14 @@ function ListItem (props: ReservationCarViewListItem) {
 
     const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
 
-    //                    event handler                    //
+    //                event handler                    //
     const onClickHandler = (insurance: string) => {
         setSelectedCar(props);
         setSelectedInsurance(insurance);
         navigator(RESERVATION_COMPANY_ABSOLUTE_PATH(carName));
     };
 
+    //                    Render                       //
     return(
         <>
         <div className='car-list-card'>
@@ -82,10 +85,10 @@ function ListItem (props: ReservationCarViewListItem) {
     );
 };
 
+    //                    component                    //
 export default function CarSelect() {
 
-    //                    state                    //
-
+    //                      state                      //
     const {
         viewList,
         pageList,
@@ -143,7 +146,7 @@ export default function CarSelect() {
         changeBoardList(list);
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const searchWord = event.target.value;
         setSearchWord(searchWord);
@@ -158,12 +161,12 @@ export default function CarSelect() {
         };
     };
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         getSearchReservationCarListRequest(address, reservationStart, reservationEnd).then(getSearchReservationCarListResponse)
     }, [address, reservationStart, reservationEnd]);
 
-    //                    render                    //
+    //                    Render                       //
 
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
 

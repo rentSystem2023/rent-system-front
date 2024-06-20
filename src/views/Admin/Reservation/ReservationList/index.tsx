@@ -23,14 +23,13 @@ import { usePagination } from 'src/hooks';
     reservationState
     }: ReservationUserListItem) {
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
-    //                    event handler                    //
-
+    //                event handler                    //
     const onClickHandler = () => navigator(ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH(reservationCode));
 
-    //                    render                    //
+    //                    Render                        //
     const reservationStateWord =
     reservationState === 'reservationComplete' ? '예약 완료' :
     reservationState === 'watingCancel' ? '예약 취소 대기' :
@@ -54,7 +53,7 @@ import { usePagination } from 'src/hooks';
     //                    component                    //
     export default function ReservationList() {
 
-    //                    state                    //
+    //                      state                      //
     const {
         viewList,
         pageList,
@@ -96,7 +95,7 @@ import { usePagination } from 'src/hooks';
         setCurrentSection(!reservationUserList.length ? 0 : 1);
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const searchWord = event.target.value;
         setSearchWord(searchWord);
@@ -111,13 +110,14 @@ import { usePagination } from 'src/hooks';
     }
     };
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
+
         getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
     }, []);
 
-    //                    render                    //
+    //                    Render                        //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return (
         <>

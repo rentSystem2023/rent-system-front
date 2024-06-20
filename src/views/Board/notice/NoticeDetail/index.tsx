@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import './style.css'
 import { useNavigate, useParams } from 'react-router';
@@ -8,10 +8,10 @@ import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 
-//                    component                    //
+    //                    component                    //
 export default function NoticeDetail() {
 
-    //                    state                    //
+    //                      state                      //
     const { loginUserId, loginUserRole } = useUserStore();
     const { registNumber } = useParams();
 
@@ -23,7 +23,7 @@ export default function NoticeDetail() {
     const [contents, setContents] = useState<string>('');
     const [imageUrl, setImageUrl] = useState<string>('');
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
@@ -76,7 +76,6 @@ export default function NoticeDetail() {
         setImageUrl(imageUrl);
     };
 
-
     const deleteNoticeRequest = (result: ResponseDto | null) => {
 
         const message =
@@ -91,25 +90,19 @@ export default function NoticeDetail() {
             return;
         }
 
-        // 삭제되면 그 게시물에 있으면 안되기 때문에 목록 페이지로 이동
         navigator(NOTICE_LIST_ABSOLUTE_PATH);
-    }
+    };
 
-    //                    event handler                    //
-
-
-    // 목록
+    //                event handler                    //
     const onListClickHandler = () => {
         navigator(NOTICE_LIST_ABSOLUTE_PATH);
     }
 
-    // 수정
     const onUpdateClickHandler = () => {
         if (!registNumber || loginUserId !== writerId) return;
         navigator(ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH(registNumber));
     }
 
-    // 삭제
     const onDeleteClickHandler = () => {
         if (!registNumber || loginUserId !== writerId || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
@@ -119,13 +112,12 @@ export default function NoticeDetail() {
             .then(deleteNoticeRequest)
     }
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!registNumber) return;
-        // 토큰 없이 게시글 상세 정보를 가져오도록 수정
+
         getNoticeRequest(registNumber, cookies.accessToken).then(getNoticeResponse);
     }, []);
-
 
     useEffect(() => {
         if (!cookies.accessToken || !registNumber) return;
@@ -133,9 +125,7 @@ export default function NoticeDetail() {
             .then(increaseViewCountResponse);
     }, []);
 
-
-
-    //                    render                    //
+    //                    Render                       //
     return (
         <div id='notice-detail-wrapper'>
             <div className='notice-detail-main-box'>
@@ -145,7 +135,7 @@ export default function NoticeDetail() {
                     <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
 
                     <div className='notice-detail-info-box'>
-                        <div className='notice-detail-info'>작성자 : {writerId}</div>
+                        <div className='notice-detail-info'>작성자 : 관리자</div>
                         <div className='notice-detail-info-divider'>{'\|'}</div>
                         <div className='notice-detail-info'>작성일 {writeDate}</div>
                         <div className='notice-detail-info-divider'>{'\|'}</div>

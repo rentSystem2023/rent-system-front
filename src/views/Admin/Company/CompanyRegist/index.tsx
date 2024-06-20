@@ -11,7 +11,7 @@ import InputBox from 'src/components/Inputbox';
 
 export default function CompanyRegist() {
 
-    //                              state                              //
+    //                      state                      //
     const [cookies] = useCookies();
     const {loginUserRole} = useUserStore();
     
@@ -23,7 +23,7 @@ export default function CompanyRegist() {
     const [companyRule, setCompanyRule] = useState<string>('');
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
 
-    //                              function                              //
+    //                    function                     //
     const navigator = useNavigate();
 
     const registCompanyResponse = (result: ResponseDto | null) => {
@@ -40,7 +40,7 @@ export default function CompanyRegist() {
         navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
     };
 
-    //                              event Handler                              //
+    //                event handler                    //
     const onCompanyCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const companyCode = event.target.value;
         setCompanyCode(companyCode)
@@ -92,14 +92,13 @@ export default function CompanyRegist() {
         postCompanyRequest(requestBody, cookies.accessToken).then(registCompanyResponse);
     };
 
-        //                    effect                    //
+    //                    effect                       //
         useEffect(() => {
             if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
 
         }, []);
 
-
-    //                    render                    //
+    //                    Render                        //
     return (
         <div id="admin-detail-wrapper">
         <div className="my-info-title">업체 정보 등록</div>
@@ -169,18 +168,9 @@ export default function CompanyRegist() {
                                 value={companyTelnumber} 
                                 onChangeHandler={onCompanyTelnumberChangeHandler} 
                             />
-
+                            
                             </div>
                         </div>
-
-                        {/* <div className='admin-contents-wrap'>
-                            <div className='admin-title-wrap'>
-                                <div className='admin-detail-title'>업체 등록일</div>
-                            </div>
-                            <div className='admin-content-wrap'>
-                                <div className='admin-detail-content'>{registDate}</div>
-                            </div>
-                        </div> */}
 
                         <div className='admin-contents-wrap rule'>
                             <div className='admin-title-wrap rule'>

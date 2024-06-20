@@ -1,6 +1,8 @@
 import React from 'react'
-
+    //                    component                    //
 export default function TermsOfUse() {
+  
+    //                    Render                       //
   return (
     <div id='main-bottom'>
         <div className='title-text'>렌터카 이용약관</div>

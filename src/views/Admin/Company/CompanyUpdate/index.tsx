@@ -10,11 +10,9 @@ import InputBox from "src/components/Inputbox";
 import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 
-
-//                    component                    //
+    //                    component                    //
 export default function CompanyUpdate() {
-
-    //                              state                              //
+    //                      state                      //
     const { loginUserRole } = useUserStore();
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const [cookies] = useCookies();
@@ -26,7 +24,7 @@ export default function CompanyUpdate() {
     const [registDate, setRegistDate] = useState<string>('');
     const [companyRule, setCompanyRule] = useState<string>('');
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const registCompanyResponse = (result: GetCompanyListResponseDto | ResponseDto | null) => {
@@ -43,7 +41,7 @@ export default function CompanyUpdate() {
             return;
         }
 
-        const { companyCode, rentCompany, address, owner, companyTelnumber, registDate, companyRule } = result as GetCompanyDetailResponseDto;
+        const { rentCompany, address, owner, companyTelnumber, registDate, companyRule } = result as GetCompanyDetailResponseDto;
         if (loginUserRole !== 'ROLE_ADMIN') {
             alert('권한이 없습니다.');
             navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
@@ -75,7 +73,7 @@ export default function CompanyUpdate() {
         navigator(ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH(companyCode));
     };
 
-    //                              event Handler                              //
+    //                event handler                    //
     const onRentCompanyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const rentCompany = event.target.value;
         setRentCompany(rentCompany)
@@ -109,18 +107,19 @@ export default function CompanyUpdate() {
         
     };
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!companyCode || !cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH) ;
         if (!loginUserRole) return;
         if (loginUserRole !== 'ROLE_ADMIN') {
             navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
+
             return;
         }
         getCompanyDetailRequest(companyCode, cookies.accessToken).then(registCompanyResponse);
     }, [companyCode, cookies.accessToken, loginUserRole]);
 
-    //                    render                    //
+    //                    Render                        //
     return (
         <div id="admin-detail-wrapper">
         <div className="my-info-title">업체 정보 수정</div>

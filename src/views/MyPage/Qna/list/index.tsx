@@ -13,7 +13,7 @@ import './style.css';
 import { GetMyInfoQnaListResponseDto } from 'src/apis/user/dto/response';
 import { getMyQnaListRequest } from 'src/apis/user';
 
-//                    component                    //
+    //                    component                    //
 function ListItem({
     index,
     receptionNumber,
@@ -26,12 +26,15 @@ function ListItem({
     status
 }: QnaListItem & { index: number }) {
 
+    //                    function                     //
     const navigator = useNavigate();
 
+    //                event handler                    //
     const onClickHandler = () => {
         navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'MY_QNA_LIST' } });
     };
 
+    //                    Render                       //
     return (
         <div className='table-list-table-tr qna' onClick={onClickHandler}>
             <div className='qna-list-table-reception-number'>{index + 1}</div>
@@ -47,10 +50,10 @@ function ListItem({
         </div>
     );
 }
-
+    //                    component                    //
 export default function MyInfoQnaList() {
 
-    //                    state                    //
+    //                      state                      //
     const [cookies] = useCookies();
     const { loginUserRole } = useUserStore();
     const [qnaList, setQnaList] = useState<QnaListItem[]>([]);
@@ -63,7 +66,7 @@ export default function MyInfoQnaList() {
     const [currentSection, setCurrentSection] = useState<number>(1);
     const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const changePage = (boardList: QnaListItem[], totalLength: number) => {
@@ -121,7 +124,7 @@ export default function MyInfoQnaList() {
         setCurrentSection(!qnaList.length ? 0 : 1);
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
@@ -138,7 +141,7 @@ export default function MyInfoQnaList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    //                  effect                      //
+    //                    effect                       //
     useEffect (() => {
         if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') return;
         getMyQnaListRequest(cookies.accessToken).then(getMyQnaListResponse);
@@ -154,7 +157,7 @@ export default function MyInfoQnaList() {
         changeSection(totalPage);
     }, [currentSection]);
 
-    //                    render                    //
+    //                    Render                       //
     return (
         <>        
         <div id='information-wrapper'>

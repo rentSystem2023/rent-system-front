@@ -1,7 +1,9 @@
 import React from 'react'
 import './style.css'
-
+    //                    component                    //
 export default function GuideOfUse() {
+
+    //                    Render                       //
   return (
     <div id='main-bottom'>
         <div className='title-text'>렌터카 이용안내</div>
