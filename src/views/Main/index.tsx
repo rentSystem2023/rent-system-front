@@ -17,6 +17,14 @@ function ListItem ({
     totalReservationCount
 }: PopularCarListItem) {
 
+    //                    function                     //
+    const navigator = useNavigate();
+
+    //                event handler                    //
+        const popularOnClickHandler = () => {
+
+        };
+
     //                    Render                       //
     return (
         <div className='popular-car-list-wrap'>
@@ -53,6 +61,7 @@ export default function Main() {
     const [cookies] = useCookies();
     const [popularList, setPopularCarList] = useState<PopularCarListItem[]>([]);
 
+    const [currentSlide, setCurrentSlide] = useState(0);
 const handlePopularCarListResponse = (result: GetReservationPopularListResponseDto | ResponseDto | null) => {
     if (!result || result.code !== 'SU') {
         return;
@@ -81,6 +90,19 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
     const closeDatePickerHandler = () => {
         setIsDatePickerOpen(false);
     };
+    
+    const nextSlide = () => {
+        if (currentSlide < Math.ceil(popularList.length / 4) - 1) {
+            setCurrentSlide((prev) => prev + 1);
+        }
+    };
+
+    const prevSlide = () => {
+        if (currentSlide > 0) {
+            setCurrentSlide((prev) => prev - 1);
+        }
+    };
+
 
     //                    effect                       //
     useEffect(() => {
@@ -99,7 +121,7 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
                                 <div className='location-image'></div>
                                 <div className='location-title'>{address || "제주국제공항"}</div>
                             </div>
-                            <div className="search-select-item date" onClick={openDatePickerHandler}>                                
+                            <div className="search-select-item date" onClick={openDatePickerHandler}>
                                 <div className='date-image'></div>
                                 {reservationStart && reservationEnd ? 
                                     <div className='search-date-wrap'>
@@ -109,7 +131,7 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
                                     </div> 
                                     : "날짜선택"
                                 }
-                        </div>
+                            </div>
                         </div>
                         <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>
                     </div>
@@ -118,12 +140,16 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
                             <div className='popular-car-list-image'></div>
                             <div className='popular-car-list-title'>차탕갑서 인기차량</div>
                         </div>
-                        
-                        <div className="popular-car-list-box">
-                        {popularList.map((item, index) => <ListItem key={index} {...item} />)}
+                        <div className="popular-car-slider">
+                            <button className="prev-slide" onClick={prevSlide}>{"<"}</button>
+                            <div className="popular-car-list-box">
+                                {popularList.slice(currentSlide * 4, currentSlide * 4 + 4).map((item, index) => (
+                                    <ListItem key={index} {...item} />
+                                ))}
+                            </div>
+                            <button className="next-slide" onClick={nextSlide}>{">"}</button>
                         </div>
                     </div>
-
                 </div>
             </div>
             {isDatePickerOpen && <DatePickerPopup onClose={closeDatePickerHandler} />}
