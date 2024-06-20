@@ -8,6 +8,7 @@ import { useUserStore } from 'src/stores';
 import { postCompanyRequest } from 'src/apis/company';
 import { PostCompanyRequestDto } from 'src/apis/company/dto/request';
 import InputBox from 'src/components/Inputbox';
+import { CompanyListItem } from 'src/types';
 
 export default function CompanyRegist() {
 
@@ -15,6 +16,7 @@ export default function CompanyRegist() {
     const [cookies] = useCookies();
     const {loginUserRole} = useUserStore();
     
+    const [companyList, setCompanyList] = useState<CompanyListItem[]>([]);
     const [companyCode, setCompanyCode] = useState<number | string>('');
     const [rentCompany, setRentCompany] = useState<string>('');
     const [address, setAddress] = useState<string>('');
@@ -29,7 +31,8 @@ export default function CompanyRegist() {
     const registCompanyResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '내용을 올바르게 입력해주세요.' :
+            result.code === 'VF' ? '내용을 올바르게 입력해주세요.' : 
+            result.code === 'RC' ? '이미 등록된 업체입니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다' : '';
 
@@ -37,6 +40,7 @@ export default function CompanyRegist() {
             alert(message);
             return;
         }
+
         navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
     };
 
@@ -76,10 +80,12 @@ export default function CompanyRegist() {
             alert('권한이 없습니다.');
             return;
         }
+        
         if (!companyCode || !rentCompany || !address || !owner || !companyTelnumber) {
             alert('필드를 채워주세요.');
             return;
         }
+
         const requestBody: PostCompanyRequestDto = {
             companyCode,
             rentCompany,
@@ -93,10 +99,9 @@ export default function CompanyRegist() {
     };
 
     //                    effect                       //
-        useEffect(() => {
-            if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
-
-        }, []);
+    useEffect(() => {
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
+    }, []);
 
     //                    Render                        //
     return (

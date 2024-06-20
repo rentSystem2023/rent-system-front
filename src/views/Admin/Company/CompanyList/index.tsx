@@ -61,7 +61,6 @@ export default function CompanyList() {
 
     const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
-    const [companyList, setCompanyList] = useState<CompanyListItem[]>([]);
     const [searchWord, setSearchWord] = useState<string>('');
 
     //                    function                     //
