@@ -9,7 +9,7 @@ import { useReservationStore } from 'src/stores';
 import { getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_ABSOLUTE_PATH, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
 
-    //                    component                    //
+//                    component                    //
 function ListItem ({
   rentCompany,
   carYear,
@@ -18,7 +18,6 @@ function ListItem ({
   luxuryPrice,
   superPrice,
 }: ReservationCarPriceListItem){
-
 
     //                      state                      //
   const selectedInsurance = useReservationStore(state => state.selectedInsurance);
@@ -46,7 +45,7 @@ function ListItem ({
   selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
   selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
 
-    //                    Render                       //
+  //                    Render                       //
   return(
     <>
     <div className='insurance-list-container' onClick={onClickHandler}>
@@ -84,10 +83,10 @@ function ListItem ({
 );
 }
 
-    //                    component                    //
+//                    component                    //
 export default function InsuranceSelect() {
   
-    //                      state                      //
+  //                      state                      //
   const [priceList, setPriceList] = useState<ReservationCarPriceListItem[]>([]);
   const [viewList, setViewList] = useState<ReservationCarPriceListItem[]>([]);
   const [totalLenght, setTotalLength] = useState<number>(0);
@@ -98,7 +97,7 @@ export default function InsuranceSelect() {
   const { address, reservationStart, reservationEnd, selectedCar, selectedInsurance } = useReservationStore();
   const [pageList, setPageList] = useState<number[]>([1]);
 
-    //                    function                     //
+  //                    function                     //
   const navigator = useNavigate();
 
   const changePage = (priceList: ReservationCarPriceListItem[], totalLenght: number) => {
@@ -174,7 +173,7 @@ export default function InsuranceSelect() {
       setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
   };
 
-    //                    effect                       //
+  //                    effect                       //
   useEffect(() => {
     if (!priceList.length) return;
     changePage(priceList, totalLenght);
@@ -200,7 +199,7 @@ export default function InsuranceSelect() {
     selectedInsurance === 'luxury' ? '고급자차' :
     selectedInsurance === 'super' ? '슈퍼자차' : '';
 
-    //                    Render                       //
+  //                    Render                       //
   return (
     <div id='user-page-wrapper'>
       <div className='reservation-select-container'>{<SelectContainer/>}</div>
@@ -247,7 +246,6 @@ export default function InsuranceSelect() {
     </div>
   );
 }
-
 
   // 이미지 클릭 시 이미지 상세보기 Handler
   // const closeImagePopupHandler = () => {

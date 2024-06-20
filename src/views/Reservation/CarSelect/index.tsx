@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';
 import { usePagination } from 'src/hooks';
 
-    //                    component                    //
+//                    component                    //
 function ListItem (props: ReservationCarViewListItem) {
 
     //                      state                      //
@@ -83,7 +83,7 @@ function ListItem (props: ReservationCarViewListItem) {
     );
 };
 
-    //                    component                    //
+//                    component                    //
 export default function CarSelect() {
 
     //                      state                      //

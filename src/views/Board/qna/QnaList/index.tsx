@@ -8,7 +8,7 @@
     import { useUserStore } from 'src/stores';
     import { QnaListItem } from 'src/types';
     import './style.css';
-import { usePagination } from 'src/hooks';
+    import { usePagination } from 'src/hooks';
 
     //                    component                    //
     function ListItem ({ 
@@ -45,20 +45,20 @@ import { usePagination } from 'src/hooks';
 
     return (
         <div className='table-list-table-tr qna' onClick={onClickHandler}>
-                <div className='qna-list-table-reception-number'>{index + 1}</div>
-                <div className='qna-list-table-write-date'>{writeDatetime}</div>
-                <div className={`qna-list-table-title ${publicState ? 'public' : 'private'}`} style={{ textAlign: 'left' }}>{publicState ? title : '비공개글입니다.'}</div>
-                <div className='qna-list-table-writer-id'>{coverdWriterId}</div>
-                <div className='qna-list-table-category'>{category}</div>
-                <div className='qna-list-table-exposure'>{publicState ? '공개' : '비공개'}</div>
-                <div className='qna-list-table-status'>
-                        {status ? 
-                        <div className='disable-bedge'>완료</div> :
-                        <div className='primary-bedge'>접수</div>
-                        }
-                </div>
-                <div className='qna-list-table-viewcount'>{viewCount}</div>
+            <div className='qna-list-table-reception-number'>{index + 1}</div>
+            <div className='qna-list-table-write-date'>{writeDatetime}</div>
+            <div className={`qna-list-table-title ${publicState ? 'public' : 'private'}`} style={{ textAlign: 'left' }}>{publicState ? title : '비공개글입니다.'}</div>
+            <div className='qna-list-table-writer-id'>{coverdWriterId}</div>
+            <div className='qna-list-table-category'>{category}</div>
+            <div className='qna-list-table-exposure'>{publicState ? '공개' : '비공개'}</div>
+            <div className='qna-list-table-status'>
+                    {status ? 
+                    <div className='disable-bedge'>완료</div> :
+                    <div className='primary-bedge'>접수</div>
+                    }
             </div>
+            <div className='qna-list-table-viewcount'>{viewCount}</div>
+        </div>
     );
 }
 
