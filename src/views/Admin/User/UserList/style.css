@@ -14,11 +14,19 @@
 /* 아이디 */
 .user-list-table-id {
     width: 200px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* 닉네임 */
 .user-list-table-nickname {
     width: 150px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* 이메일 */
