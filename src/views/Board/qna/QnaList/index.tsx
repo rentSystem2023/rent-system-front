@@ -104,7 +104,7 @@ import { usePagination } from 'src/hooks';
         }
 
         const { qnaList } = result as GetSearchQnaBoardListResponseDto;
-        changeBoardList(qnaList);
+        changeBoardList(qnaList, isToggleOn);
 
         setCurrentPage(!qnaList.length ? 0 : 1);
         setCurrentSection(!qnaList.length ? 0 : 1);
@@ -129,6 +129,7 @@ import { usePagination } from 'src/hooks';
         const searchWord = event.target.value;
         setSearchWord(searchWord);
     };
+    
     const onSearchButtonClickHandler = () => {
         if (searchWord) {
             if (cookies.accessToken) {
@@ -171,7 +172,7 @@ import { usePagination } from 'src/hooks';
                     <>
                     <div className={toggleClass} onClick={onToggleClickHandler}></div>
                     <div className='qna-list-top-admin-text'>미완료 보기</div>
-                    </> :                    
+                    </> :
                     <>
                     <div className='primary-button' onClick={onWriteButtonClickHandler}>글쓰기</div>
                     </>
