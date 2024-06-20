@@ -293,7 +293,7 @@ export const INCREASE_QNA_VIEW_COUNT_URL = (receptionNumber: number | string) =>
 export const POST_COMMENT_REQUEST_URL = (receptionNumber: number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/comment`;
 
 // description: COMPANY MODULE
-export const SERVER_COMPANY_MODULE = `${SERVER_API_URL}/company`;
+export const SERVER_COMPANY_MODULE = `${SERVER_ADMIN_MODULE_URL}/company`;
 
 // 업체 정보 전체 리스트 URL
 export const GET_COMPANY_LIST_URL = `${SERVER_COMPANY_MODULE}/list`;
