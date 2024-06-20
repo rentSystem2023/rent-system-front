@@ -11,12 +11,10 @@ import { PutQnaRequestDto } from 'src/apis/qna/dto/request';
 import { getQnaRequest, putQnaRequest } from 'src/apis/qna/dto';
 import axios from 'axios';
 
-
-
-//                    component                    //
+    //                    component                    //
 export default function QnaUpdate() {
 
-    //                    state                    //
+    //                      state                      //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserId, loginUserRole } = useUserStore();
 
@@ -33,7 +31,7 @@ export default function QnaUpdate() {
     const { receptionNumber } = useParams();
     const location = useLocation();
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const getQnaResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
@@ -87,15 +85,11 @@ export default function QnaUpdate() {
 
         if (!receptionNumber) return;
         
-        // 수정 작업을 수행한 후 상세 페이지로 이동합니다.
         const previousPage = location.state?.previousPage;
         navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber), { state: { previousPage } });
-        // navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber));
     };
 
-    
-
-    //                    event handler                    //
+    //                event handler                    //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -136,10 +130,6 @@ export default function QnaUpdate() {
         putQnaRequest(receptionNumber, requestBody, cookies.accessToken).then(putQnaResponse);
     }
 
-    
-
-
-// description: 이미지 변경 시 이미지 미리보기 //
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const fileInput = event.target;
         if (fileInput.files && fileInput.files.length > 0) {
@@ -156,10 +146,10 @@ export default function QnaUpdate() {
 
     
     const onPublicStateChangeHandler = () => {
-        setPublicState(!publicState); // 체크 여부에 따라 값을 반대로 설정
+        setPublicState(!publicState); 
     };
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!receptionNumber || !cookies.accessToken) return;
         if (!loginUserRole) return;
@@ -170,7 +160,7 @@ export default function QnaUpdate() {
         getQnaRequest(receptionNumber).then(getQnaResponse);  // accessToken 추가
     }, [loginUserRole]);
 
-    //                    render                    //
+    //                    Render                       //
     return (
         <div id="qna-write-wrapper">
             <div className='qna-write-top'>
@@ -193,7 +183,6 @@ export default function QnaUpdate() {
             </div>
 
             <div className='qna-write-contents-box'>
-                {/*  두줄이상 작성할때 textarea 사용,  row로 기본값 10줄짜리 작성, 1000자 제한 가능 */}
                 <textarea ref={contentsRef} className='qna-write-contents-textarea' rows={10} placeholder='내용을 입력해주세요/ 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
                 <div className='dd'>파일첨부  <input type="file" onChange={onFileChangeHandler} />
                 </div>

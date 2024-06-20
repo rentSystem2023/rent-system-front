@@ -8,10 +8,9 @@ import { useUserStore } from 'src/stores';
 import { GetCompanyDetailResponseDto } from 'src/apis/company/dto/response';
 import { deleteCompanyRequest, getCompanyDetailRequest } from 'src/apis/company';
 
-//                    component                    //
+    //                    component                    //
 export default function CompanyDetail() {
-
-    //                    state                    //
+    //                      state                      //
     const { loginUserRole } = useUserStore();
     const { companyCode } = useParams();
 
@@ -42,8 +41,8 @@ export default function CompanyDetail() {
             }
         }
 
-        const { companyCode, rentCompany, address, owner, companyTelnumber, registDate, companyRule } = result as GetCompanyDetailResponseDto;
-        // setCompanyCode(companyCode);
+        const { rentCompany, address, owner, companyTelnumber, registDate, companyRule } = result as GetCompanyDetailResponseDto;
+
         setRentCompany(rentCompany);
         setAddress(address);
         setOwner(owner);
@@ -69,7 +68,7 @@ export default function CompanyDetail() {
         navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onListClickHandler = () => {
         navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
     }
@@ -88,14 +87,14 @@ export default function CompanyDetail() {
         .then(deleteBoardResponse)
     }
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!companyCode || !cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
 
         getCompanyDetailRequest(companyCode, cookies.accessToken).then(getCompanyDetailResponse);
     }, []);
 
-    //                    render                    //
+    //                    Render                        //
     return (
         <div id="admin-detail-wrapper">
         <div className="my-info-title">업체 정보 상세</div>

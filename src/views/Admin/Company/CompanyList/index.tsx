@@ -10,7 +10,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { getSearchCompanyListRequest } from 'src/apis/company';
 import { usePagination } from 'src/hooks';
 
-//                    component                    //
+    //                    component                    //
 function ListItem ({
 index,
 companyCode,
@@ -21,10 +21,10 @@ companyTelnumber,
 registDate
 }: CompanyListItem & {index: number}) {
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
-    //                    event handler                    //
+    //                event handler                    //
     const onClickHandler = () => navigator(ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH(companyCode));
 
     //                    render                    //
@@ -41,10 +41,10 @@ registDate
     );
 }
 
-//                    component                    //
+    //                    component                    //
 export default function CompanyList() {
     
-    //                    state                    //
+    //                      state                      //
     const {
         viewList,
         pageList,
@@ -64,7 +64,7 @@ export default function CompanyList() {
     const [companyList, setCompanyList] = useState<CompanyListItem[]>([]);
     const [searchWord, setSearchWord] = useState<string>('');
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const getSearchCompanyListResponse = (result: GetSearchCompanyListResponseDto | ResponseDto | null) => {

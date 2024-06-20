@@ -8,9 +8,10 @@ import InputBox from 'src/components/Inputbox';
 import { AUTH_SIGN_IN_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 
+    //                    component                    //
 export default function MyInfoEmailModify() {
     
-    //                    state                    //
+    //                      state                      //
     const [cookies] = useCookies();
     const { loginUserRole } = useUserStore();
     const [email, setEmail] = useState<string>('');
@@ -24,7 +25,7 @@ export default function MyInfoEmailModify() {
     const [isEmailError, setEmailError] = useState<boolean>(false);
     const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
 
-    //                    function                    //
+    //                    function                     //
     const emailAuthResponse = (result: ResponseDto | null) => {
         const emailMessage = 
             !result ? '서버에 문제가 있습니다.' : 
@@ -58,7 +59,7 @@ export default function MyInfoEmailModify() {
         setAuthNumberError(authNumberError);
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setEmail(value);
@@ -76,7 +77,7 @@ export default function MyInfoEmailModify() {
         setAuthNumberMessage('');
     };
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const onEmailButtonClickHandler = () => {
@@ -112,7 +113,7 @@ export default function MyInfoEmailModify() {
         navigator(USER_INFO_ABSOLUTE_PATH);
     };
 
-    //                  effect                      //
+    //                    effect                       //
     useEffect (() => {
         const requestBody: PutMyInfoEmailRequestDto = {
             userEmail: email,
@@ -126,7 +127,7 @@ export default function MyInfoEmailModify() {
         }
     }, []);
 
-    //                    render                    //
+    //                    Render                       //
     return (
         <div id="information-wrapper">
             <div className='information-main'>

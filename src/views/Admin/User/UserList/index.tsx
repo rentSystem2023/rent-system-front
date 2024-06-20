@@ -5,10 +5,10 @@ import { UserListItem } from 'src/types';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { ADMIN_USER_DETAIL_ABSOLUTE_PATH, ADMIN_USER_LIST_ABSOLUTE_PATH, ADMIN_USER_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { ADMIN_USER_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import { getSearchUserListRequest, getUserListRequest } from 'src/apis/userList';
-import { GetSearchUserListResponseDto, GetUserListResponseDto } from 'src/apis/userList/dto/response';
+import { getSearchUserListRequest } from 'src/apis/userList';
+import { GetSearchUserListResponseDto } from 'src/apis/userList/dto/response';
 import { usePagination } from 'src/hooks';
 
 function ListItem ({
@@ -19,13 +19,13 @@ function ListItem ({
     joinDate
     }: UserListItem & {index: number}) {
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
-    //                    event handler                    //
+    //                event handler                    //
     const onClickHandler = () => navigator(ADMIN_USER_DETAIL_ABSOLUTE_PATH(userId));
 
-    //                    render                    //
+    //                    Render                        //
     return (
         <div className='table-list-table-tr user' onClick={onClickHandler}>
             <div className='user-list-table-list-number'>{index}</div>
@@ -37,9 +37,9 @@ function ListItem ({
     );
 }
 
+    //                    component                    //
 export default function UserList() {
-
-    //                    state                    //
+    //                      state                      //
     const {
         viewList,
         pageList,
@@ -105,7 +105,6 @@ export default function UserList() {
     }, []);
 
     //                    render                    //
-
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
 
     return (

@@ -1,6 +1,8 @@
 import React from 'react'
-
+    //                    component                    //
 export default function PersonalInformationPolicy() {
+  
+    //                    Render                       //
   return (
     <div id='main-bottom'>
         <div className='title-text'>개인정보처리방침</div>

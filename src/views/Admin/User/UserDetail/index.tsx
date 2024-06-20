@@ -7,16 +7,17 @@ import {  ADMIN_USER_LIST_ABSOLUTE_PATH,  MAIN_ABSOLUTE_PATH,  MAIN_PATH } from 
 import { GetDetailUserListResponseDto } from 'src/apis/userList/dto/response';
 import { getDetailUserListRequest, deleteUserRequest } from 'src/apis/userList';
 
+    //                    component                    //
 export default function DetailUserList() {
-
-    //                    state                    //
+    //                      state                      //
     const [cookies] = useCookies();
     const { userId } = useParams();
+
     const [userEmail, setUserEmail] = useState<string>('');
     const [nickName, setNickName] = useState<string>('');
     const [joinDate, setJoinDate] = useState<string>('');
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const getDetailUserListResponse = (result: GetDetailUserListResponseDto | ResponseDto | null) => {
@@ -33,8 +34,7 @@ export default function DetailUserList() {
             return;
         }
 
-        const { userId, userEmail, nickName, joinDate } = result as GetDetailUserListResponseDto;
-        // setUserId(userId);
+        const { userEmail, nickName, joinDate } = result as GetDetailUserListResponseDto;
         setUserEmail(userEmail);
         setNickName(nickName);
         setJoinDate(joinDate);
@@ -57,8 +57,7 @@ export default function DetailUserList() {
         navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);
     };
 
-
-    //                    event handler                    //
+    //                event handler                    //
     const onListClickHandler = () => {
         navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);
     };
@@ -72,7 +71,7 @@ export default function DetailUserList() {
         .then(deleteUserListResponse)
     };
     
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!userId || !cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH);
 

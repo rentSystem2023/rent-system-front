@@ -9,10 +9,10 @@ import { PutMyInfoPwRequestDto } from 'src/apis/user/dto/request';
 import { putMyInfoPwRequest } from 'src/apis/user';
 import { useUserStore } from 'src/stores';
 
-//                    component                    //
+    //                    component                    //
 export default function MyInfoPwModify() {
 
-    //                    state                    //
+    //                      state                      //
     const [cookies] = useCookies();
     const { loginUserRole } = useUserStore();
     const [password, setPassword] = useState<string>('');
@@ -25,7 +25,7 @@ export default function MyInfoPwModify() {
     const isPwUpdateActive = isPasswordPattern && isEqualPassword;
     const pwUpdateButtonClass = `${isPwUpdateActive ? 'primary' : 'disable'}-button full-width`;
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const putMyInfoPwModifyResponse = (result: ResponseDto | null) => {
@@ -42,7 +42,7 @@ export default function MyInfoPwModify() {
         };
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setPassword(value);
@@ -97,7 +97,7 @@ export default function MyInfoPwModify() {
         navigator(USER_INFO_ABSOLUTE_PATH);
     };
 
-    //                  effect                      //
+    //                    effect                       //
     useEffect (() => {
         const requestBody: PutMyInfoPwRequestDto = {
             userPassword: password

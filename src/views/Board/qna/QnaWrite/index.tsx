@@ -10,9 +10,10 @@ import ResponseDto from 'src/apis/response.dto';
 import { PostQnaRequest } from 'src/apis/qna/dto';
 import axios from 'axios';
 
+    //                    component                    //
 export default function QnAWrite() {
 
-    //                              state                              //
+    //                      state                      //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
@@ -20,11 +21,10 @@ export default function QnAWrite() {
     const [contents, setContents] = useState<string>('');
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const [publicState, setPublicState] = useState<boolean>(true); // 공개 여부 상태 추가
-    const [category, setCategory] = useState<string>('문의'); // 카테고리 상태 추가
-    //                              function                              //
+    const [publicState, setPublicState] = useState<boolean>(true);
+    const [category, setCategory] = useState<string>('문의');
 
-
+    //                    function                     //
     const navigator = useNavigate();
 
     const postQnaResponse = (result: ResponseDto | null) => {
@@ -39,13 +39,9 @@ export default function QnAWrite() {
             return;
         }
         navigator(QNA_LIST_ABSOLUTE_PATH);
-
     };
 
-
-
-
-    //                              event Handler                              //
+    //                event handler                    //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -61,7 +57,7 @@ export default function QnAWrite() {
     }
 
     const onPostButtonClickHandler = async () => {
-        if (!title.trim() || !contents.trim()) return; // 비어있으면 return
+        if (!title.trim() || !contents.trim()) return; 
         if (!cookies.accessToken) return;
 
         let imageUrl = '';
@@ -84,7 +80,6 @@ export default function QnAWrite() {
 
     };
 
-
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const fileInput = event.target;
         if (fileInput.files && fileInput.files.length > 0) {
@@ -95,18 +90,15 @@ export default function QnAWrite() {
         }
     };
 
-
     const onCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         setCategory(event.target.value);
     };
 
     const onPublicStateChangeHandler = () => {
-        setPublicState(!publicState); // 체크 여부에 따라 값을 반대로 설정
+        setPublicState(!publicState);
     };
 
-
-
-    //                              effect                              //
+    //                    effect                       //
     // 화면이 전환될때 작성
     useEffect(() => {
 
@@ -116,7 +108,7 @@ export default function QnAWrite() {
         }
     }, [loginUserRole])
 
-    //                              render                              //
+    //                    Render                       //
     return (
         <div id="qna-write-wrapper">
             <div className='qna-wrap'>
@@ -139,7 +131,6 @@ export default function QnAWrite() {
                 </div>
 
                 <div className='qna-write-contents-box'>
-                    {/*  두줄이상 작성할때 textarea 사용,  row로 기본값 10줄짜리 작성, 1000자 제한 가능 */}
                     <textarea ref={contentsRef} className='qna-write-contents-textarea' rows={10} placeholder='내용을 입력해주세요/ 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
                     
                     <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>

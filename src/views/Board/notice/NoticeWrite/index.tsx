@@ -10,7 +10,7 @@ import { NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 export default function NoticeWrite() {
 
-    //                              state                              //
+    //                      state                      //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
@@ -18,8 +18,8 @@ export default function NoticeWrite() {
     const [contents, setContents] = useState<string>('');
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
-    //                              function                              //
-
+    
+    //                    function                    //
     const navigator = useNavigate();
 
     const PostNotceResponse = (result: ResponseDto | null) => {
@@ -36,9 +36,7 @@ export default function NoticeWrite() {
         navigator(NOTICE_LIST_ABSOLUTE_PATH);
     };
 
-
-
-    //                              event Handler                              //
+    //                event handler                    //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -71,10 +69,7 @@ export default function NoticeWrite() {
         }
 
         PostNoticeRequest(requestBody, cookies.accessToken).then(PostNotceResponse);
-
     };    
-    
-    
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const fileInput = event.target;
         if (fileInput.files && fileInput.files.length > 0) {
@@ -85,9 +80,7 @@ export default function NoticeWrite() {
         }
     };
 
-    //                              effect                              //
-
-    // 화면이 전환될때 작성
+    //                    effect                       //
     useEffect(() => {
 
         if (loginUserRole === 'ROLE_USER') {
@@ -98,8 +91,7 @@ export default function NoticeWrite() {
 
     }, [loginUserRole])
 
-    //                              render                              //
-
+    //                    Render                       //
     return (
         <div id="notice-write-wrapper">
             <div className='notice-write-top'>
@@ -115,7 +107,6 @@ export default function NoticeWrite() {
                 
                 <div className='file-select'>파일첨부<input type="file" onChange={onFileChangeHandler} />
                 </div>
-
                 {imageUrl && (
                     <div className='file-upload'>
                         <img src={imageUrl} alt="Preview" className='file-image' />

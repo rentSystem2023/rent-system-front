@@ -9,6 +9,7 @@ import { useReservationStore } from 'src/stores';
 import { getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_ABSOLUTE_PATH, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
 
+    //                    component                    //
 function ListItem ({
   rentCompany,
   carYear,
@@ -18,9 +19,13 @@ function ListItem ({
   superPrice,
 }: ReservationCarPriceListItem){
 
-  const navigator = useNavigate();
+
+    //                      state                      //
   const selectedInsurance = useReservationStore(state => state.selectedInsurance);
   const { reservationStart, reservationEnd } = useReservationStore();
+
+    //                    function                     //
+  const navigator = useNavigate();
 
   const onClickHandler = () => navigator(RESERVATION_REQUEST_ABSOLUTE_PATH(rentCompany));
 
@@ -40,7 +45,8 @@ function ListItem ({
   selectedInsurance === 'normal' && normalPrice ? `${krw(normalPrice * daysDifference)}` :
   selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
   selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
-  
+
+    //                    Render                       //
   return(
     <>
     <div className='insurance-list-container' onClick={onClickHandler}>
@@ -78,25 +84,10 @@ function ListItem ({
 );
 }
 
-// 이미지 클릭 시 이미지 상세보기 기능
-// func DetailImage ({ imageUrl, onClose }: { imageUrl: string, onClose: () => void }) {
-//   return (
-//     <div className='detail-image-container'>
-//       <div className='detail-image-wrap'>
-//         <div className='detail-image-close-button'>
-//           <div className='detail-image-close' onClick={onClose}>X</div>
-//         </div>
-//         <div className='detail-image-content'>
-//           <img src={imageUrl} alt="detail" style={{ width: '200%' }} />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
+    //                    component                    //
 export default function InsuranceSelect() {
   
-  //                    state                    //
+    //                      state                      //
   const [priceList, setPriceList] = useState<ReservationCarPriceListItem[]>([]);
   const [viewList, setViewList] = useState<ReservationCarPriceListItem[]>([]);
   const [totalLenght, setTotalLength] = useState<number>(0);
@@ -106,9 +97,8 @@ export default function InsuranceSelect() {
   const [currentSection, setCurrentSection] = useState<number>(1);
   const { address, reservationStart, reservationEnd, selectedCar, selectedInsurance } = useReservationStore();
   const [pageList, setPageList] = useState<number[]>([1]);
-  // const [imageDetail, setImageDetail] = useState(false); => 이미지 클릭 시 이미지 상세보기 state
-    
-  //                    function                    //
+
+    //                    function                     //
   const navigator = useNavigate();
 
   const changePage = (priceList: ReservationCarPriceListItem[], totalLenght: number) => {
@@ -184,12 +174,7 @@ export default function InsuranceSelect() {
       setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
   };
 
-  // 이미지 클릭 시 이미지 상세보기 Handler
-  // const closeImagePopupHandler = () => {
-  //   setImageDetail(false);
-  // };
-
-  //                    effect                    //
+    //                    effect                       //
   useEffect(() => {
     if (!priceList.length) return;
     changePage(priceList, totalLenght);
@@ -215,6 +200,7 @@ export default function InsuranceSelect() {
     selectedInsurance === 'luxury' ? '고급자차' :
     selectedInsurance === 'super' ? '슈퍼자차' : '';
 
+    //                    Render                       //
   return (
     <div id='user-page-wrapper'>
       <div className='reservation-select-container'>{<SelectContainer/>}</div>
@@ -225,7 +211,6 @@ export default function InsuranceSelect() {
             <img 
               style={{ width: '200%', height: '120%'}} 
               src={selectedCar.carImageUrl} 
-              // onClick={() => setImageDetail(true)} => 이미지 클릭 시 상세보기 Click
             />
           </div>
 
@@ -259,7 +244,16 @@ export default function InsuranceSelect() {
           </div>
         </div>
       </div>
-      {/* {imageDetail && <DetailImage imageUrl={selectedCar.carImageUrl} onClose={closeImagePopupHandler}/>} => 이미지 클릭 시 이미지 상세보기 render */}
     </div>
   );
 }
+
+
+  // 이미지 클릭 시 이미지 상세보기 Handler
+  // const closeImagePopupHandler = () => {
+  //   setImageDetail(false);
+  // };
+
+  // onClick={() => setImageDetail(true)} => 이미지 클릭 시 상세보기 Click
+
+   {/* {imageDetail && <DetailImage imageUrl={selectedCar.carImageUrl} onClose={closeImagePopupHandler}/>} => 이미지 클릭 시 이미지 상세보기 render */}

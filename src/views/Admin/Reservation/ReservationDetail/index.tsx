@@ -10,9 +10,9 @@ import { ADMIN_RESERVATION_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/co
 import { PatchReservationCancelRequest, deleteReservationListRequest, getReservationDetailRequest } from 'src/apis/reservation';
 import { PatchReservationCancelRequestDto} from 'src/apis/reservation/dto/request';
 
+    //                    component                    //
 export default function ReservationDetail() {
-
-    //                    state                    //
+    //                      state                      //
     const { loginUserRole } = useUserStore();
     const { reservationCode } = useParams();
 
@@ -27,7 +27,6 @@ export default function ReservationDetail() {
     const [reservationState, setReservationState] = useState<string>('');
     const [insuranceType, setInsuranceType] = useState<string>('');
     const [insurancePrice, setInsurancePrice] = useState<number>(0);
-
 
     //                    function                    //
     const navigator = useNavigate();
@@ -60,22 +59,6 @@ export default function ReservationDetail() {
         setInsuranceType(insuranceType);
         setInsurancePrice(insurancePrice);
     };
-
-    // 예약승인 삭제예정
-    // const patchReservaitonApproveResponse = (result: ResponseDto | null) => {
-    //     const message =
-    //     !result ? '서버에 문제가 있습니다.' :
-    //     result.code === 'AF' ? '권한이 없습니다.' :
-    //     result.code === 'VF' ? '올바르지 않은 예약번호입니다.' :
-    //     result.code === 'NR' ? '존재하지 않는 예약입니다.' :
-    //     result.code === 'NW' ? '예약대기 상태가 아닙니다.' :
-    //     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-    // if (!result || result.code !== 'SU') {
-    //     alert(message);
-    //     return;
-    //     }
-    // };
 
     const patchReservaitonCancelResponse = (result: ResponseDto | null) => {
         const message =
@@ -112,18 +95,6 @@ export default function ReservationDetail() {
     const onListClickHandler = () => {
         navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
     }
-
-    // 예약승인 삭제예정
-    // const onReservationApproveClickHandler = () => {
-    //     if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
-    //     const isConfirm = window.confirm('예약 승인하시겠습니까?');
-    //     if (!isConfirm) return;
-
-    //     const requestBody: PatchReservationApproveRequestDto = { reservationState: '예약완료' };
-    //     PatchReservationApproveRequest(reservationCode, requestBody, cookies.accessToken)
-    //     .then(patchReservaitonApproveResponse); 
-    // }
-
 
     const onReservationCancelClickHandler = () => {
         if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
@@ -249,15 +220,6 @@ export default function ReservationDetail() {
                         </div>
                     </div>
 
-                    {/* <div className='admin-contents-wrap'>
-                        <div className='admin-title-wrap'>
-                            <div className='admin-detail-title'>예약자 닉네임</div>
-                        </div>
-                        <div className='admin-content-wrap'>
-                            <div className='admin-detail-content'>{nickName}</div>
-                        </div>
-                    </div> */}
-
                     <div className='admin-contents-wrap state'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>예약상태</div>
@@ -265,7 +227,6 @@ export default function ReservationDetail() {
                         <div className='admin-content-wrap reser'>
                             <div className='admin-detail-content'>{reservationStateWord}</div>
                             <div className='admin-reservation-state'>
-                                {/* <div className='reservation-button confirm' onClick={onReservationApproveClickHandler} >예약승인</div> */}
                                 <div className='reservation-button cancle' onClick={onReservationCancelClickHandler} >취소승인</div>
                             </div>
                         </div>

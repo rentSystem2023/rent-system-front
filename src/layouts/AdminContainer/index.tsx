@@ -8,13 +8,14 @@ interface Props {
     path: Path;
 }
 
-//                          Component                       //
+    //                    component                    //
 function SideBar ({ path } : Props) {
     
     const userClass = `admin-side-navigation-item${path === '회원 관리' ? ' active' : ''}`;
     const companyClass = `admin-side-navigation-item${path === '업체 관리' ? ' active' : ''}`;
     const reservationClass = `admin-side-navigation-item${path === '예약 관리' ? ' active' : ''}`;
 
+    //                    function                    //
     const navigator = useNavigate(); 
     //                event handler                    //
     const onUserClickHandler = () => navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);

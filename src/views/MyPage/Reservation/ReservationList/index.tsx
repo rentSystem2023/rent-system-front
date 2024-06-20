@@ -9,7 +9,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { getReservationMyListRequest } from 'src/apis/user';
 import { useUserStore } from 'src/stores';
 
-//                    component                    //
+    //                    component                    //
 function ListItem ({
     carImageUrl,
     reservationDate,
@@ -21,10 +21,10 @@ function ListItem ({
     reservationState
     }: MyReservationListItem) {
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
-    //                    event handler                    //
+    //                event handler                    //
     const onClickHandler = () => navigator(USER_RESERVATION_DETAIL_ABSOLUTE_PATH(reservationCode));
 
     const reservationStateWord =
@@ -32,7 +32,7 @@ function ListItem ({
     reservationState === 'watingCancel' ? '예약 취소 대기' :
     reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
 
-    //                    render                    //
+    //                    Render                       //
     return (
         <div className='my-reservation-list-table' onClick={onClickHandler}>
             <div className='my-reservation-state'>{reservationStateWord}</div>
@@ -72,9 +72,10 @@ function ListItem ({
     );
 }
 
+    //                    component                    //
 export default function MyReservation() {
 
-    //                    state                    //
+    //                      state                      //
     const [cookies] = useCookies();
     const { loginUserRole } = useUserStore();
     const [userId, setUserId] = useState<string>('');

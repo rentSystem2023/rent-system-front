@@ -24,12 +24,13 @@ import { usePagination } from 'src/hooks';
     status
     }: QnaListItem & { index: number }) {
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
-        //                    state                    //
+    //                      state                      //
     const {loginUserId} = useUserStore();
     const {loginUserRole} = useUserStore();
-    //                    event handler                    //
+
+    //                event handler                    //
     const onClickHandler = () => {
         if (!publicState && (loginUserRole !== 'ROLE_ADMIN' && loginUserId !== writerId )) { 
             alert("비공개글은 작성자 혹은 관리자만 볼 수 있습니다.");
@@ -39,7 +40,8 @@ import { usePagination } from 'src/hooks';
         }
         navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'ALL_QNA_LIST' } });
     }
-    //                    render                    //
+
+    //                    Render                       //
     const coverdWriterId = writerId !== '' && (writerId[0] + '*'.repeat(writerId.length - 1));
 
     return (
@@ -64,7 +66,7 @@ import { usePagination } from 'src/hooks';
     //                    component                    //
     export default function QnaList() {
 
-    //                    state                    //
+    //                      state                      //
     const {
         viewList,
         pageList,
@@ -85,7 +87,7 @@ import { usePagination } from 'src/hooks';
 
     const [searchWord, setSearchWord] = useState<string>('');
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const getSearchBoardListResponse = (result: GetSearchQnaBoardListResponseDto | ResponseDto | null) => {
@@ -109,7 +111,7 @@ import { usePagination } from 'src/hooks';
         setCurrentSection(!qnaList.length ? 0 : 1);
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onWriteButtonClickHandler = () => {
         if (loginUserRole !== 'ROLE_USER'){
             alert('Q&A 등록은 로그인 후 가능 합니다.');
@@ -129,25 +131,21 @@ import { usePagination } from 'src/hooks';
         setSearchWord(searchWord);
     };
     const onSearchButtonClickHandler = () => {
-        // 검색어가 있는 경우
         if (searchWord) {
             if (cookies.accessToken) {
                 getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
             } else {
-                // 토큰이 없는 경우, 빈 문자열을 전달하여 검색
                 getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
             }
         }
-        // 검색어가 없는 경우
         else {
-            // 빈 문자열을 전달하여 검색
             getSearchQnaListRequest('', '').then(getSearchBoardListResponse);
         }
     };
-    //                    effect                    //
+
+    //                    effect                       //
     useEffect(() => {
         if (!cookies.accessToken) {
-            // 토큰이 없는 경우 처리
             getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
         } else {
             getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
@@ -188,7 +186,7 @@ import { usePagination } from 'src/hooks';
                     <div className='qna-list-table-write-date'>작성일</div>
                     <div className='qna-list-table-title'>제목</div>
                     <div className='qna-list-table-writer-id'>작성자</div>
-                    <div className='qna-list-table-category'> 문의</div>
+                    <div className='qna-list-table-category'>유형</div>
                     <div className='qna-list-table-exposure'> 노출여부</div>
                     <div className='qna-list-table-status'>상태</div>
                     <div className='qna-list-table-viewcount'>조회수</div>
