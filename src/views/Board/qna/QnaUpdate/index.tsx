@@ -22,11 +22,11 @@ export default function QnaUpdate() {
     const [writerId, setWriterId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
-    const [category, setCategory] = useState<string>('');  // 카테고리 state 추가
-    const [publicState, setPublicState] = useState<boolean>(true);  // 퍼블릭 스테이트 state 추가
-    const [selectedFile, setSelectedFile] = useState<File | null>(null); // 파일 state 추가
-    const [imageUrl, setImageUrl] = useState<string | null>(null); // 이미지 미리보기 URL 추가
-    const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null); // 초기 이미지 URL을 저장
+    const [category, setCategory] = useState<string>(''); 
+    const [publicState, setPublicState] = useState<boolean>(true);  
+    const [selectedFile, setSelectedFile] = useState<File | null>(null); 
+    const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null); 
 
     const { receptionNumber } = useParams();
     const location = useLocation();
@@ -157,7 +157,7 @@ export default function QnaUpdate() {
             navigator(QNA_LIST_ABSOLUTE_PATH);
             return;
         }
-        getQnaRequest(receptionNumber).then(getQnaResponse);  // accessToken 추가
+        getQnaRequest(receptionNumber).then(getQnaResponse); 
     }, [loginUserRole]);
 
     //                    Render                       //

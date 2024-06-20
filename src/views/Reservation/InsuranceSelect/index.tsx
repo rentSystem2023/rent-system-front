@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css'
 import SelectContainer from 'src/layouts/SelectContainer';
 import { ReservationCarPriceListItem } from 'src/types';
-import { GetSearchDetailListResponseDto, GetSearchReservationCarPriceListResponseDto } from 'src/apis/reservation/dto/response';
+import { GetSearchReservationCarPriceListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores';

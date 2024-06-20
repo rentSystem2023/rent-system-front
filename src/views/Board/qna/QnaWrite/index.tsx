@@ -3,7 +3,7 @@ import './style.css'
 import { useUserStore } from 'src/stores';
 import { useNavigate } from 'react-router';
 import { QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { PostQnaBoardRequestDto, PostQnaRequestDto, PutQnaRequestDto } from 'src/apis/qna/dto/request';
+import { PostQnaBoardRequestDto } from 'src/apis/qna/dto/request';
 import { } from 'src/apis/qna/dto/request';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';

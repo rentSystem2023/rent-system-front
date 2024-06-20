@@ -5,7 +5,7 @@
     import { ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
     import { useCookies } from 'react-cookie';
     import ResponseDto from 'src/apis/response.dto';
-    import { GetReservationListResponseDto, GetSearchReservationListResponseDto } from 'src/apis/reservation/dto/response';
+    import { GetSearchReservationListResponseDto } from 'src/apis/reservation/dto/response';
 import { getSearchReservationListRequest } from 'src/apis/reservation';
 import { useUserStore } from 'src/stores';
 import { usePagination } from 'src/hooks';

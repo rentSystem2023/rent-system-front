@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
-import { MyReservationListItem, ReservationUserListItem } from 'src/types';
+import { MyReservationListItem} from 'src/types';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH, USER_RESERVATION_DETAIL_ABSOLUTE_PATH } from 'src/constant';
