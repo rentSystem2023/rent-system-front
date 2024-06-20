@@ -47,7 +47,8 @@ function TopBar() {
             window.location.reload();
         } else {
         navigator(MAIN_ABSOLUTE_PATH);}
-    }        
+    }
+
     const onNoticeClickHandler = () => navigator(NOTICE_LIST_ABSOLUTE_PATH);
     const onQnaClickHandler = () => navigator(QNA_LIST_ABSOLUTE_PATH);
     const onSignInClickHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
@@ -165,7 +166,6 @@ function BottomBar() {
 export default function ServiceContainer() {
 
     const { setLoginUserId, setLoginUserRole } = useUserStore();
-    const navigator = useNavigate();
     const [cookies] = useCookies();
     
     const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
@@ -177,7 +177,6 @@ export default function ServiceContainer() {
     };
 
     useEffect(() => {
-
         if (!cookies.accessToken) {
             return;
         }

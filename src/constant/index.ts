@@ -192,7 +192,6 @@ export const PUT_FIND_PW_RESET_REQUEST_URL = (userId: string) => `${POST_FIND_PA
 
 // description: USER MODULE
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
-export const SERVER_ADMIN_MODULE_URL = `${SERVER_API_URL}/admin`
 
 // 사용자 정보 반환 URL
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
@@ -206,7 +205,7 @@ export const PUT_MY_INFO_EMAIL_MODIFY_URL = `${SERVER_USER_MODULE_URL}/informati
 export const DELETE_MY_INFO_URL = (userId: string) => `${GET_MY_INFO_URL}/${userId}`;
 
 // 관리자페이지 회원 목록 리스트 URL
-export const GET_USER_LIST_URL = `${SERVER_ADMIN_MODULE_URL}/list`;
+export const GET_USER_LIST_URL = `${SERVER_USER_MODULE_URL}/list`;
 // 관리자페이지 회원 목록 상세 URL
 export const GET_USER_DETAIL_URL = (userId: string) => `${GET_USER_LIST_URL}/${userId}`;
 // 관리자페이지 회원 정보 삭제 URL
@@ -293,7 +292,7 @@ export const INCREASE_QNA_VIEW_COUNT_URL = (receptionNumber: number | string) =>
 export const POST_COMMENT_REQUEST_URL = (receptionNumber: number | string) => `${SERVER_QNA_MODULE_URL}/${receptionNumber}/comment`;
 
 // description: COMPANY MODULE
-export const SERVER_COMPANY_MODULE = `${SERVER_ADMIN_MODULE_URL}/company`;
+export const SERVER_COMPANY_MODULE = `${SERVER_API_URL}/company`;
 
 // 업체 정보 전체 리스트 URL
 export const GET_COMPANY_LIST_URL = `${SERVER_COMPANY_MODULE}/list`;
