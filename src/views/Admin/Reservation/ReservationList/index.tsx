@@ -32,7 +32,7 @@ function ListItem ({
     //                    Render                        //
     const reservationStateWord =
     reservationState === 'reservationComplete' ? '예약 완료' :
-    reservationState === 'watingCancel' ? '예약 취소 대기' :
+    reservationState === 'waitingCancel' ? '예약 취소 대기' :
     reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
 
     return (
