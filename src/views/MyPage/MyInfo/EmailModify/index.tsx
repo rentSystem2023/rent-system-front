@@ -55,6 +55,11 @@ export default function MyInfoEmailModify() {
         const authNumberCheck = result !== null && result.code === 'SU';
         const authNumberError = !authNumberCheck;
 
+        if(authNumberCheck) {
+            alert('이메일이 변경되었습니다.');
+            navigator(USER_INFO_ABSOLUTE_PATH);
+        }
+
         setAuthNumberMessage(authNumberMessage);
         setAuthNumberError(authNumberError);
     };
@@ -106,21 +111,13 @@ export default function MyInfoEmailModify() {
         };
 
         putMyInfoEmailRequest(requestBody, cookies.accessToken).then(emailAuthCheckResponse);
-
-        alert('이메일이 변경되었습니다.');
-        navigator(USER_INFO_ABSOLUTE_PATH);
     };
 
     //                    effect                       //
     useEffect (() => {
-        const requestBody: PutMyInfoEmailRequestDto = {
-            userEmail: email,
-            authNumber: authNumber
-        };
-
-        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') navigator(MAIN_ABSOLUTE_PATH);
-        else putMyInfoEmailRequest(requestBody, cookies.accessToken).then(emailAuthCheckResponse);
-
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
+            navigator(MAIN_ABSOLUTE_PATH);
+        }
     }, []);
 
     //                    Render                       //
