@@ -1,30 +1,25 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './style.css'
 import { Outlet, useNavigate } from 'react-router';
 import { RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
-import { useReservationStore } from 'src/stores';
+import { useReservationStore } from 'src/stores/car.reservation.store';
 import { DatePickerPopup } from 'src/components/DatePickerPopup';
 
-    //                    component                    //
+//                    component                    //
 export default function SelectContainer() {
+
     //                      state                      //
     const { address, reservationStart, reservationEnd } = useReservationStore();
-    const [isLocationPopupOpen, setIsLocationPopupOpen] = useState(false);
+    
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
+    //                    function                    //
     const navigator = useNavigate();
-    const openDatePickerHandler = () => {
-        setIsDatePickerOpen(true);
-    };
-
+    
     //                event handler                    //
-    const closeDatePickerHandler = () => {
-        setIsDatePickerOpen(false);
-    };
+    const openDatePickerHandler = () => { setIsDatePickerOpen(true); };
 
-    const openLocationPopupHandler = () => {
-        setIsLocationPopupOpen(true);
-    };
+    const closeDatePickerHandler = () => { setIsDatePickerOpen(false); };
     
     const onSearchButtonClickHandler = () => navigator(RESERVATION_CAR_ABSOLUTE_PATH);
 
@@ -34,7 +29,7 @@ export default function SelectContainer() {
             <div className='reservation-container'>
                 <div className="search-box">
                     <div className="search-select-box">
-                        <div className="search-select-item location" onClick={openLocationPopupHandler}>
+                        <div className="search-select-item location">
                             <div className='location-image'></div>
                             <div className='location-title'>{address || "제주국제공항"}</div>
                         </div>
@@ -48,7 +43,7 @@ export default function SelectContainer() {
                                 </div> 
                                 : "날짜선택"
                             }
-                    </div>
+                        </div>
                     </div>
                     <div className="car-search-button" onClick={onSearchButtonClickHandler}>차량검색</div>
                 </div>      
@@ -58,5 +53,5 @@ export default function SelectContainer() {
                 <Outlet />
             </div>
         </div>
-    )
+    );
 }
