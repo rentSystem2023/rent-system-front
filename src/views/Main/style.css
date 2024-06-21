@@ -15,7 +15,7 @@
 }
 
 .top-image.jeju {
-    background-image: url('../../assets/jejuImage/car.jpg');
+    background-image: url('../../assets/image/main-car.jpg');
 }
 
 .container-box{
@@ -145,7 +145,7 @@
     width: 35px;
     height: 35px;
 
-    background-image: url('../../assets/image/popularCar.png');
+    background-image: url('../../assets/image/popular-car.png');
 }
 
 .popular-car-list-title{
@@ -164,7 +164,7 @@
     width: 45px;
     height: 45px;
 
-    background-image: url('../../assets/image/preButton.png');
+    background-image: url('../../assets/image/pre-button.png');
     background-size: 100% 100%;
 
     cursor: pointer;
@@ -174,7 +174,7 @@
     width: 45px;
     height: 45px;
 
-    background-image: url('../../assets/image/nextButton.png');
+    background-image: url('../../assets/image/next-button.png');
     background-size: 100% 100%;
 
     cursor: pointer;

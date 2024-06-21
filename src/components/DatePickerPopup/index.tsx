@@ -1,18 +1,16 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { useReservationStore } from "src/stores";
 import { getYYYYMMDD } from "src/utils";
 import './style.css'
 
-    //                    component                    //
+//                    component                    //
 export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
+
     //                    state                        //
-    const { reservationStart, reservationEnd, setReservationStart, setReservationEnd } = useReservationStore();
-
     const tomorrow =  new Date(new Date().setDate(new Date().getDate() + 1));
-
-    const [startDate, setStartDate] = useState<Date | null>(tomorrow);
+    
+    const startDateInputRef = useRef<HTMLInputElement>(null);
     const [endDate, setEndDate] = useState<Date | null>(tomorrow); 
-    const startDateInputRef = useRef<HTMLInputElement>(null); 
+    const [startDate, setStartDate] = useState<Date | null>(tomorrow);
 
     //                    effect                       //
     useEffect(() => {
@@ -26,11 +24,9 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
         const { value } = event.target;
         const date = new Date(value);
         setStartDate(date);
-        setReservationStart(value);
 
         if (endDate && date.getTime() >= endDate.getTime()) {
             setEndDate(null);
-            setReservationEnd('');
         }
     };
 
@@ -38,11 +34,9 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
         const { value } = event.target;
         const date = new Date(value);
         setEndDate(date);
-        setReservationEnd(value);
         
         if (startDate && date.getTime() <= startDate.getTime()) {
             setEndDate(null);
-            setReservationEnd('');
         }
     };
 
@@ -54,6 +48,15 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
             alert("당일 예약은 불가합니다.\r시작날짜와 종료날짜를 선택해주세요.");
             return; 
         }
+
+        if(startDate && endDate) {
+            alert("시작날짜와 종료날짜를 모두 선택해주세요.");
+            return;
+        }
+
+        // if(startDate >= today && endDate <= maxEndDate) {
+
+        // }
     
         if (startDate && endDate) {
             if (startDate >= today && endDate <= maxEndDate) {
