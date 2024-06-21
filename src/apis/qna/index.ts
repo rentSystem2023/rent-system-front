@@ -15,7 +15,7 @@ export const PostQnaRequest = async(requestBody: PostQnaBoardRequestDto, accessT
 };
 
 // function : Q&A 답글 작성 API 함수
-export const PostCommentRequest = async(receptionNumber: number | string, requestBody: PostQnaCommentRequestDto, accessToken:string) => {
+export const PostCommentRequest = async(receptionNumber: number | string, requestBody: PostQnaCommentRequestDto, accessToken: string) => {
     const result = await axios
         .post(POST_COMMENT_REQUEST_URL(receptionNumber), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
@@ -33,7 +33,7 @@ export const getQnaListRequest = async(accessToken: string) => {
 };
 
 // function : Q&A 검색 리스트 불러오기 API 함수
-export const getSearchQnaListRequest = async(word:string, accessToken:string) => {
+export const getSearchQnaListRequest = async(word: string, accessToken: string) => {
     const config = {...bearerAuthorization(accessToken), params: {word}}
     const result = await axios
         .get(GET_QNA_LIST_SEARCH_URL,config)
@@ -43,7 +43,7 @@ export const getSearchQnaListRequest = async(word:string, accessToken:string) =>
 };
 
 // function : Q&A 게시물 불러오기 API 함수
-export const getQnaRequest = async(receptionNumber:number | string) => {
+export const getQnaRequest = async(receptionNumber: number | string) => {
     const result = await axios
         .get(GET_QNA_DETAIL_URL(receptionNumber))
         .then(requestHandler<GetQnaBoardResponseDto>)
@@ -52,7 +52,7 @@ export const getQnaRequest = async(receptionNumber:number | string) => {
 };
 
 // function : Q&A 게시물 수정 API 함수
-export const putQnaRequest = async(receptionNumber: number | string , requestBody: PutQnaRequestDto , accessToken:string) =>{
+export const putQnaRequest = async(receptionNumber: number | string, requestBody: PutQnaRequestDto, accessToken: string) =>{
     const result = await axios
         .put(PUT_QNA_REGIST_URL(receptionNumber), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
@@ -61,7 +61,7 @@ export const putQnaRequest = async(receptionNumber: number | string , requestBod
 };
 
 // function : Q&A 게시물 조회수 증가 API 함수
-export const increaseViewCountRequest = async (receptionNumber: number | string , accessToken: string) => {
+export const increaseViewCountRequest = async (receptionNumber: number | string, accessToken: string) => {
     const result = await axios
         .patch(INCREASE_QNA_VIEW_COUNT_URL(receptionNumber), {}, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)

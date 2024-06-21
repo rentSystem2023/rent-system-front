@@ -24,7 +24,7 @@ export const PutCompanyRequest = async (companyCode: string | number, requestBod
 };
 
 // function : 업체 삭제 API 함수
-export const deleteCompanyRequest = async(companyCode: string | number, accessToken: string)=>{
+export const deleteCompanyRequest = async(companyCode: string | number, accessToken: string) => {
     const result = await axios
         .delete(DELETE_COMPANY_LIST_URL(companyCode), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)

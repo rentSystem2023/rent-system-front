@@ -43,9 +43,7 @@ export const emailAuthRequest = async (requestBody: EmailAuthRequestDto) => {
 };
 
 // function: 이메일 인증 확인 API 함수
-export const emailAuthCheckRequest = async (
-    requestBody: EmailAuthCheckRequestDto
-) => {
+export const emailAuthCheckRequest = async (requestBody: EmailAuthCheckRequestDto) => {
     const result = await axios
         .post(POST_EMAIL_AUTH_CHECK_REQUEST_URL, requestBody)
         .then(requestHandler<ResponseDto>)
