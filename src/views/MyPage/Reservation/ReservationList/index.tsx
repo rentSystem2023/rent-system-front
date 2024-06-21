@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './style.css'
 import { MyReservationListItem} from 'src/types';
 import { useNavigate } from 'react-router';
@@ -28,9 +28,9 @@ function ListItem ({
     const onClickHandler = () => navigator(USER_RESERVATION_DETAIL_ABSOLUTE_PATH(reservationCode));
 
     const reservationStateWord =
-    reservationState === 'reservationComplete' ? '예약 완료' :
-    reservationState === 'watingCancel' ? '예약 취소 대기' :
-    reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
+        reservationState === 'reservationComplete' ? '예약 완료' :
+        reservationState === 'watingCancel' ? '예약 취소 대기' :
+        reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
 
     //                    Render                       //
     return (
@@ -78,7 +78,6 @@ export default function MyReservation() {
     //                      state                      //
     const [cookies] = useCookies();
     const { loginUserRole } = useUserStore();
-    const [userId, setUserId] = useState<string>('');
     const [reservationList, setReservationList] = useState<MyReservationListItem[]>([]);
     const [viewList, setViewList] = useState<MyReservationListItem[]>([]);
     const [totalLenght, setTotalLength] = useState<number>(0);
@@ -95,6 +94,7 @@ export default function MyReservation() {
         if (!currentPage) return;
         const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
         let endIndex = currentPage * COUNT_PER_PAGE;
+
         if (endIndex > totalLenght - 1) endIndex = totalLenght;
         const viewList = reservationList.slice(startIndex, endIndex);
         setViewList(viewList);
@@ -104,8 +104,10 @@ export default function MyReservation() {
         if (!currentPage) return;
         const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
         let endPage = currentSection * COUNT_PER_SECTION;
+
         if (endPage > totalPage) endPage = totalPage;
         const pageList: number[] = [];
+
         for (let page = startPage; page <= endPage; page++) pageList.push(page);
         setPageList(pageList);
     };
@@ -147,9 +149,7 @@ export default function MyReservation() {
     };
 
     //                    event handler                    //
-    const onPageClickHandler = (page: number) => {
-        setCurrentPage(page);
-    };
+    const onPageClickHandler = (page: number) => setCurrentPage(page);
 
     const onPreSectionClickHandler = () => {
         if (currentSection <= 1) return;
@@ -165,9 +165,7 @@ export default function MyReservation() {
 
     //                    effect                    //
     useEffect (() => {
-        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
-            return navigator(MAIN_ABSOLUTE_PATH);
-        };
+        if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') return navigator(MAIN_ABSOLUTE_PATH);
         getReservationMyListRequest(cookies.accessToken).then(getMyReservationListResponse);
     }, []);
 
@@ -187,26 +185,22 @@ export default function MyReservation() {
         <div id='information-wrapper'>
             <div className='information-main'>
                 <div className="my-info-title">예약 내역</div>
-
                 <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-                
                 <div className='my-reservation-card-list'>
                     <div className='table-list-top'>
                         <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                     </div>
-
                     <div className='my-reservation-card'>
                         {viewList.map((item) => <ListItem {...item} />)}
                     </div>
-
                     <div className='table-reservation-list-bottom'>
                         <div className='table-list-pagenation'>
                             <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
                             <div className='table-list-page-box'>
                                 {pageList.map(page => 
-                                page === currentPage ?
-                                <div className='table-list-page-active'>{page}</div> :
-                                <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
+                                    page === currentPage ?
+                                    <div className='table-list-page-active'>{page}</div> :
+                                    <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
                                 )}
                             </div>
                             <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>

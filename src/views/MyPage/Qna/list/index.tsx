@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE,COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
+import { COUNT_PER_PAGE,COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { QnaListItem } from 'src/types';
 import './style.css';
@@ -10,24 +10,24 @@ import { GetMyInfoQnaListResponseDto } from 'src/apis/user/dto/response';
 import { getMyQnaListRequest } from 'src/apis/user';
 
     //                    component                    //
-function ListItem({
-    index,
-    receptionNumber,
-    writeDatetime,
-    title,
-    writerId,
-    viewCount,
-    category,
-    publicState,
-    status
-}: QnaListItem & { index: number }) {
+    function ListItem({
+        index,
+        receptionNumber,
+        writeDatetime,
+        title,
+        writerId,
+        viewCount,
+        category,
+        publicState,
+        status
+    }: QnaListItem & { index: number }) {
 
     //                    function                     //
     const navigator = useNavigate();
 
     //                event handler                    //
     const onClickHandler = () => {
-        navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'MY_QNA_LIST' } });
+        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber), { state: { previousPage: 'MY_QNA_LIST' } });
     };
 
     //                    Render                       //
@@ -50,17 +50,18 @@ function ListItem({
 export default function MyInfoQnaList() {
 
     //                      state                      //
-    const [cookies] = useCookies();
     const { loginUserRole } = useUserStore();
-    const [qnaList, setQnaList] = useState<QnaListItem[]>([]);
-    const [viewList, setViewList] = useState<QnaListItem[]>([]);
-    const [totalLength, setTotalLength] = useState<number>(0);
+
+    const [cookies] = useCookies();
+
+    const [qnaList] = useState<QnaListItem[]>([]);
     const [totalPage, setTotalPage] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageList, setPageList] = useState<number[]>([1]);
+    const [totalLength, setTotalLength] = useState<number>(0);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [viewList, setViewList] = useState<QnaListItem[]>([]);
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
-    const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
     //                    function                     //
     const navigator = useNavigate();
@@ -69,6 +70,7 @@ export default function MyInfoQnaList() {
         if (!currentPage) return;
         const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
         let endIndex = currentPage * COUNT_PER_PAGE;
+
         if (endIndex > totalLength - 1) endIndex = totalLength;
         const viewList = boardList.slice(startIndex, endIndex);
         setViewList(viewList);
@@ -78,15 +80,15 @@ export default function MyInfoQnaList() {
         if (!currentPage) return;
         const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
         let endPage = currentSection * COUNT_PER_SECTION;
+
         if (endPage > totalPage) endPage = totalPage;
         const pageList: number[] = [];
+
         for (let page = startPage; page <= endPage; page++) pageList.push(page);
         setPageList(pageList);
     };
 
     const changeBoardList = (boardList: QnaListItem[]) => {
-        if (isToggleOn) boardList = boardList.filter(board => !board.status);
-        setQnaList(boardList);
 
         const totalLength = boardList.length;
         setTotalLength(totalLength);
@@ -121,9 +123,7 @@ export default function MyInfoQnaList() {
     };
 
     //                event handler                    //
-    const onPageClickHandler = (page: number) => {
-        setCurrentPage(page);
-    };
+    const onPageClickHandler = (page: number) => setCurrentPage(page);
 
     const onPreSectionClickHandler = () => {
         if (currentSection <= 1) return;
@@ -156,49 +156,45 @@ export default function MyInfoQnaList() {
     //                    Render                       //
     return (
         <>        
-        <div id='information-wrapper'>
-            <div className='information-main'>
-            <div className="my-info-title">문의내역</div>
-            
-            <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-
-            <div id='table-list-wrapper'>
-                <div className='table-list-top'>
-                    <div className='table-list-size-text'></div>
-                </div>
-
-                <div className='table-list-table'>
-                    <div className='table-list-table-th qna'>
-                        <div className='qna-list-table-reception-number'>순번</div>
-                        <div className='qna-list-table-write-date'>작성일</div>
-                        <div className='qna-list-table-title'>제목</div>
-                        <div className='qna-list-table-writer-id'>작성자</div>
-                        <div className='qna-list-table-category'>문의</div>
-                        <div className='qna-list-table-exposure'>노출여부</div>
-                        <div className='qna-list-table-status'>상태</div>
-                        <div className='qna-list-table-viewcount'>조회수</div>
-                    </div>
-                    <div className='table-list-table-body'>
-                        {viewList.map((item, index) => <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.receptionNumber} />)}
-                    </div>
-                </div>
-
-                <div className='table-list-bottom'>
-                    <div style={{ width: '299px' }}></div>
-                    <div className='table-list-pagenation'>
-                        <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
-                        <div className='table-list-page-box'>
-                            {pageList.map(page =>
-                                page === currentPage ?
-                                    <div key={page} className='table-list-page-active'>{page}</div> :
-                                    <div key={page} className='table-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
-                            )}
+            <div id='information-wrapper'>
+                <div className='information-main'>
+                    <div className="my-info-title">문의내역</div>
+                    <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
+                    <div id='table-list-wrapper'>
+                        <div className='table-list-top'>
+                            <div className='table-list-size-text'></div>
                         </div>
-                        <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
+                        <div className='table-list-table'>
+                            <div className='table-list-table-th qna'>
+                                <div className='qna-list-table-reception-number'>순번</div>
+                                <div className='qna-list-table-write-date'>작성일</div>
+                                <div className='qna-list-table-title'>제목</div>
+                                <div className='qna-list-table-writer-id'>작성자</div>
+                                <div className='qna-list-table-category'>문의</div>
+                                <div className='qna-list-table-exposure'>노출여부</div>
+                                <div className='qna-list-table-status'>상태</div>
+                                <div className='qna-list-table-viewcount'>조회수</div>
+                            </div>
+                            <div className='table-list-table-body'>
+                                {viewList.map((item, index) => <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.receptionNumber} />)}
+                            </div>
+                        </div>
+                        <div className='table-list-bottom'>
+                            <div style={{ width: '299px' }}></div>
+                            <div className='table-list-pagenation'>
+                                <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
+                                <div className='table-list-page-box'>
+                                    {pageList.map(page =>
+                                        page === currentPage ?
+                                            <div key={page} className='table-list-page-active'>{page}</div> :
+                                            <div key={page} className='table-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+                                    )}
+                                </div>
+                                <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            </div>
             </div>
         </>
     );
