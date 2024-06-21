@@ -108,15 +108,6 @@ function ListItem ({
         if (!cookies.accessToken) return;
         getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
     };
-    
-    // const onSearchButtonClickHandler = () => {
-    //     if (!searchWord) {
-    //         getSearchReservationListRequest('', cookies.accessToken).then(getSearchReservationListResponse);
-    //     } else {
-    //         if (!cookies.accessToken) return;
-    //         getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
-    //     }
-    // };
 
     //                    effect                       //
     useEffect(() => {
