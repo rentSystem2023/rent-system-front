@@ -1,5 +1,5 @@
 
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import './style.css';
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
@@ -10,23 +10,24 @@ import { ADMIN_RESERVATION_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/co
 import { PatchReservationCancelRequest, deleteReservationListRequest, getReservationDetailRequest } from 'src/apis/reservation';
 import { PatchReservationCancelRequestDto} from 'src/apis/reservation/dto/request';
 
-    //                    component                    //
+//                    component                    //
 export default function ReservationDetail() {
+    
     //                      state                      //
     const { loginUserRole } = useUserStore();
     const { reservationCode } = useParams();
 
     const [cookies] = useCookies();
-    const [rentCompany, setRentCompany] = useState<string>('');
+    
+    const [userId, setUserId] = useState<string>('');
     const [carName, setCarName] = useState<string>('');
     const [carNumber, setCarNumber] = useState<string>('');
-    const [reservationStart, setReservationStart] = useState<string>('');
-    const [reservationEnd, setReservationEnd] = useState<string>('');
-    const [userId, setUserId] = useState<string>('');
-    const [nickName, setNickName] = useState<string>('');
-    const [reservationState, setReservationState] = useState<string>('');
+    const [rentCompany, setRentCompany] = useState<string>('');
     const [insuranceType, setInsuranceType] = useState<string>('');
     const [insurancePrice, setInsurancePrice] = useState<number>(0);
+    const [reservationEnd, setReservationEnd] = useState<string>('');
+    const [reservationStart, setReservationStart] = useState<string>('');
+    const [reservationState, setReservationState] = useState<string>('');
 
     //                    function                    //
     const navigator = useNavigate();
@@ -47,14 +48,13 @@ export default function ReservationDetail() {
             }
         }
 
-        const { rentCompany, carName, carNumber, reservationStart, reservationEnd, userId, nickName, reservationState, insuranceType, insurancePrice } = result as GetReservationDetailResponseDto;
+        const { rentCompany, carName, carNumber, reservationStart, reservationEnd, userId, reservationState, insuranceType, insurancePrice } = result as GetReservationDetailResponseDto;
         setRentCompany(rentCompany);
         setCarName(carName);
         setCarNumber(carNumber);
         setReservationStart(reservationStart);
         setReservationEnd(reservationEnd);
         setUserId(userId);
-        setNickName(nickName);
         setReservationState(reservationState);
         setInsuranceType(insuranceType);
         setInsurancePrice(insurancePrice);
@@ -76,7 +76,6 @@ export default function ReservationDetail() {
     };
 
     const deleteReservationResponse = (result: ResponseDto | null) => {
-
         const message =
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'AF' ? '권한이 없습니다.' :
@@ -92,9 +91,7 @@ export default function ReservationDetail() {
     };
 
     //                    event handler                    //
-    const onListClickHandler = () => {
-        navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
-    }
+    const onListClickHandler = () => navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
 
     const onReservationCancelClickHandler = () => {
         if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
@@ -106,27 +103,23 @@ export default function ReservationDetail() {
         if (!isConfirm) return;
 
         const requestBody: PatchReservationCancelRequestDto = { reservationState: 'cancelComplete' };
-        PatchReservationCancelRequest(reservationCode, requestBody, cookies.accessToken)
-        .then(patchReservaitonCancelResponse); 
-
+        PatchReservationCancelRequest(reservationCode, requestBody, cookies.accessToken).then(patchReservaitonCancelResponse); 
         alert('해당 예약 내역이 취소되었습니다.');
 
         navigator(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH);
-    }
+    };
 
     const onDeleteClickHandler = () => {
         if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
 
-        deleteReservationListRequest(reservationCode, cookies.accessToken) 
-        .then(deleteReservationResponse)    
-    }
+        deleteReservationListRequest(reservationCode, cookies.accessToken).then(deleteReservationResponse)    
+    };
 
     //                    effect                    //
     useEffect(() => {
         if (!reservationCode || !cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH);
-
         getReservationDetailRequest(reservationCode, cookies.accessToken).then(GetReservationDetailResponse);
     }, []);
 
@@ -156,7 +149,6 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{reservationCode}</div>
                         </div>
                     </div>
-                    
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>업체이름</div>
@@ -165,7 +157,6 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{rentCompany}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>차종</div>
@@ -174,7 +165,6 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{carName}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>차량번호</div>
@@ -183,7 +173,6 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{carNumber}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>예약날짜</div>
@@ -192,7 +181,6 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{reservationStart} ~ {reservationEnd}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>보험타입</div>
@@ -201,7 +189,6 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{insuranceTypes}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>결제금액</div>
@@ -210,7 +197,6 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{`${krw(insurancePrice)}`}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>예약자 아이디</div>
@@ -219,7 +205,6 @@ export default function ReservationDetail() {
                             <div className='admin-detail-content'>{userId}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap state'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>예약상태</div>
@@ -233,7 +218,6 @@ export default function ReservationDetail() {
                     </div>
                 </div>
             </div>
-
             <div className='admin-button-box reservation'>  
                 <div className='reservation-primary-button'>
                     <div className='primary-button list' onClick={onListClickHandler}>목록</div>                    

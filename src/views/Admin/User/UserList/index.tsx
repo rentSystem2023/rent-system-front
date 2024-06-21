@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_USER_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { getSearchUserListRequest } from 'src/apis/userList';
 import { GetSearchUserListResponseDto } from 'src/apis/userList/dto/response';
 import { usePagination } from 'src/hooks';

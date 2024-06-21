@@ -1,4 +1,4 @@
-    import React, { ChangeEvent, useEffect, useState } from 'react'
+    import { ChangeEvent, useEffect, useState } from 'react'
     import './style.css'
     import { ReservationUserListItem } from 'src/types';
     import { useNavigate } from 'react-router';
@@ -7,11 +7,11 @@
     import ResponseDto from 'src/apis/response.dto';
     import { GetSearchReservationListResponseDto } from 'src/apis/reservation/dto/response';
 import { getSearchReservationListRequest } from 'src/apis/reservation';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { usePagination } from 'src/hooks';
 
-    //                    component                    //
-    function ListItem ({
+//                    component                    //
+function ListItem ({
     reservationCode,
     rentCompany,
     carName,
@@ -21,7 +21,7 @@ import { usePagination } from 'src/hooks';
     userId,
     nickName,
     reservationState
-    }: ReservationUserListItem) {
+}: ReservationUserListItem) {
 
     //                    function                     //
     const navigator = useNavigate();
@@ -69,7 +69,9 @@ import { usePagination } from 'src/hooks';
     } = usePagination<ReservationUserListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 
     const {loginUserRole} = useUserStore();
+
     const [cookies] = useCookies();
+
     const [searchWord, setSearchWord] = useState<string | number>('');
 
     //                    function                    //
@@ -102,23 +104,29 @@ import { usePagination } from 'src/hooks';
     };
 
     const onSearchButtonClickHandler = () => {
-    if (!searchWord) {
-        getSearchReservationListRequest('', cookies.accessToken).then(getSearchReservationListResponse);
-    } else {
+        if (!searchWord) return;
         if (!cookies.accessToken) return;
         getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
-    }
     };
+    
+    // const onSearchButtonClickHandler = () => {
+    //     if (!searchWord) {
+    //         getSearchReservationListRequest('', cookies.accessToken).then(getSearchReservationListResponse);
+    //     } else {
+    //         if (!cookies.accessToken) return;
+    //         getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
+    //     }
+    // };
 
     //                    effect                       //
     useEffect(() => {
         if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
-
         getSearchReservationListRequest(searchWord, cookies.accessToken).then(getSearchReservationListResponse);
     }, []);
 
     //                    Render                        //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+    
     return (
         <>
         <div id='table-list-wrapper'>

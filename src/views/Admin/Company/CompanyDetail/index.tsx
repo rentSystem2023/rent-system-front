@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { GetCompanyDetailResponseDto } from 'src/apis/company/dto/response';
 import { deleteCompanyRequest, getCompanyDetailRequest } from 'src/apis/company';
 
