@@ -51,7 +51,7 @@ export const getReservationDetailRequest = async(reservationCode: string | numbe
 };
 
 // function : 예약 검색 리스트 불러오기 API 함수
-export const getSearchReservationListRequest = async(word: string | number , accessToken: string) => {
+export const getSearchReservationListRequest = async(word: string | number, accessToken: string) => {
     const config = { ...bearerAuthorization(accessToken), params: { word } };
     const result = await axios
         .get(GET_RESERVATION_LIST_SEARCH_URL, config)
@@ -79,7 +79,7 @@ export const getReservationPopularListRequest = async() => {
 };
 
 // function : 차량 검색 결과 불러오기 API 함수
-export const getSearchReservationCarListRequest  = async(address : string, reservationStart : string, reservationEnd : string) => {
+export const getSearchReservationCarListRequest  = async(address: string, reservationStart: string, reservationEnd: string) => {
     const config = { params: { address, reservationStart, reservationEnd } };
     const result = await axios
         .get(GET_CAR_SEARCH_LIST_URL, config)
@@ -89,7 +89,7 @@ export const getSearchReservationCarListRequest  = async(address : string, reser
 };
 
 // function : 보험별(업체) 가격 결과 불러오기 API 함수
-export const getSearchReservationCarPriceListRequest  = async(address : string, reservationStart : string, reservationEnd : string, carName : string) => {
+export const getSearchReservationCarPriceListRequest  = async(address: string, reservationStart: string, reservationEnd: string, carName: string) => {
     const config = { params: { address, reservationStart, reservationEnd } };
     const result = await axios
         .get(GET_CAR_PRICE_SEARCH_LIST_URL(carName), config)
@@ -99,7 +99,7 @@ export const getSearchReservationCarPriceListRequest  = async(address : string, 
 };
 
 // function : 보험별 가격 상세 검색 결과 불러오기 API 함수
-export const getSearchDetailListRequest  = async(address : string, reservationStart : string, reservationEnd : string, rentComapny:string,carName : string) => {
+export const getSearchDetailListRequest  = async(address: string, reservationStart: string, reservationEnd: string, rentComapny: string, carName: string) => {
     const config = { params: { address, reservationStart, reservationEnd } };
     const result = await axios
         .get(GET_CAR_PRICE_SEARCH_DETAIL_LIST_URL(carName, rentComapny) ,config)

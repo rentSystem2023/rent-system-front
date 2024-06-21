@@ -33,9 +33,7 @@ export const getMyInfoRequest = async (accessToken: string) => {
 };
 
 // function: 내정보 패스워드 수정 API 함수
-export const putMyInfoPwRequest = async (
-    requestBody: PutMyInfoPwRequestDto, accessToken: string
-) => {
+export const putMyInfoPwRequest = async (requestBody: PutMyInfoPwRequestDto, accessToken: string) => {
     const result = await axios
         .put(PUT_MY_INFO_PW_MODIFY_URL, requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
@@ -44,9 +42,7 @@ return result;
 };
 
 // function: 내정보 이메일 수정 API 함수
-export const putMyInfoEmailRequest = async (
-requestBody: PutMyInfoEmailRequestDto, accessToken: string
-) => {
+export const putMyInfoEmailRequest = async (requestBody: PutMyInfoEmailRequestDto, accessToken: string) => {
     const result = await axios
         .put(PUT_MY_INFO_EMAIL_MODIFY_URL, requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)

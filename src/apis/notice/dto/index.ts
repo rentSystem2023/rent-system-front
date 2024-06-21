@@ -24,7 +24,7 @@ export const getNoticeListRequest = async(accessToken: string) => {
 };
 
 // function : 공지사항 검색 리스트 불러오기 API 함수
-export const getSearcNoticeListRequest = async(word:string, accessToken:string) => {
+export const getSearcNoticeListRequest = async(word: string, accessToken: string) => {
     const config = {...bearerAuthorization(accessToken), params: {word}}
     const result = await axios
         .get(NOTICE_LIST_SEARCH_URL, config)
@@ -34,7 +34,7 @@ export const getSearcNoticeListRequest = async(word:string, accessToken:string) 
 };
 
 // function : 공지사항 게시물 불러오기 API 함수
-export const getNoticeRequest = async(registNumber:number | string, accessToken:string) => {
+export const getNoticeRequest = async(registNumber: number | string) => {
     const result = await axios
         .get(GET_NOTICE_DETAIL_URL(registNumber))
         .then(requestHandler<GetNoticeBoardResponseDto>)
@@ -43,7 +43,7 @@ export const getNoticeRequest = async(registNumber:number | string, accessToken:
 };
 
 // function : 공지사항 게시물 수정 API 함수
-export const putNoticeRequest = async(registNumber: number | string, requestBody: PutNoticeBoardRequestDto , accessToken:string) =>{
+export const putNoticeRequest = async(registNumber: number | string, requestBody: PutNoticeBoardRequestDto , accessToken: string) =>{
     const result = await axios
         .put(PUT_NOTICE_REGIST_URL(registNumber), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
