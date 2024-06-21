@@ -1,11 +1,11 @@
-    import { ChangeEvent, useEffect, useState } from 'react'
-    import './style.css'
-    import { ReservationUserListItem } from 'src/types';
-    import { useNavigate } from 'react-router';
-    import { ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-    import { useCookies } from 'react-cookie';
-    import ResponseDto from 'src/apis/response.dto';
-    import { GetSearchReservationListResponseDto } from 'src/apis/reservation/dto/response';
+import { ChangeEvent, useEffect, useState } from 'react'
+import './style.css'
+import { ReservationUserListItem } from 'src/types';
+import { useNavigate } from 'react-router';
+import { ADMIN_RESERVATION_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { useCookies } from 'react-cookie';
+import ResponseDto from 'src/apis/response.dto';
+import { GetSearchReservationListResponseDto } from 'src/apis/reservation/dto/response';
 import { getSearchReservationListRequest } from 'src/apis/reservation';
 import { useUserStore } from 'src/stores/car.reservation.store';
 import { usePagination } from 'src/hooks';
@@ -50,10 +50,14 @@ function ListItem ({
     );
 }
 
-    //                    component                    //
-    export default function ReservationList() {
+//                    component                    //
+export default function ReservationList() {
 
     //                      state                      //
+    const {loginUserRole} = useUserStore();
+
+    const [cookies] = useCookies();
+
     const {
         viewList,
         pageList,
@@ -67,10 +71,6 @@ function ListItem ({
         onPreSectionClickHandler,
         onNextSectionClickHandler
     } = usePagination<ReservationUserListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
-
-    const {loginUserRole} = useUserStore();
-
-    const [cookies] = useCookies();
 
     const [searchWord, setSearchWord] = useState<string | number>('');
 

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import "./style.css";
 import { UserListItem } from 'src/types';
 import { useNavigate } from 'react-router';
@@ -10,7 +10,7 @@ import { getSearchUserListRequest } from 'src/apis/userList';
 import { GetSearchUserListResponseDto } from 'src/apis/userList/dto/response';
 import { usePagination } from 'src/hooks';
 
-    //                    component                    //
+//                    component                    //
 function ListItem ({
     index,
     userId,
@@ -37,9 +37,14 @@ function ListItem ({
     );
 }
 
-    //                    component                    //
+//                    component                    //
 export default function UserList() {
+    
     //                      state                      //
+    const {loginUserRole} = useUserStore();
+
+    const [cookies] = useCookies();
+
     const {
         viewList,
         pageList,
@@ -54,16 +59,12 @@ export default function UserList() {
         onNextSectionClickHandler
     } = usePagination<UserListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 
-    const {loginUserRole} = useUserStore();
-    const [cookies] = useCookies();
-
     const [searchWord, setSearchWord] = useState<string>('');
 
     //                    function                    //
     const navigator = useNavigate();
 
     const getSearchUserListResponse = (result: GetSearchUserListResponseDto | ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '검색어를 입력하세요.' : 
@@ -101,6 +102,7 @@ export default function UserList() {
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
+
         getSearchUserListRequest(searchWord,cookies.accessToken).then(getSearchUserListResponse);
     }, []);
 
@@ -110,42 +112,41 @@ export default function UserList() {
     return (
         <>
         <div id='table-list-wrapper'>
-        <div className="my-info-title">회원 관리</div>
+            <div className="my-info-title">회원 관리</div>
             <div className='table-list-top'>
                 <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
-            </div>        
-
-        <div className='table-list-table'>
-            <div className='table-list-table-th user'>
-                <div className='user-list-table-number'>순번</div>
-                <div className='user-list-table-id'>아이디</div>
-                <div className='user-list-table-nickname'>닉네임</div>
-                <div className='user-list-table-email'> 이메일</div>
-                <div className='user-list-table-join-date'> 가입날짜</div>
             </div>
-            {viewList.map((item, index) => <ListItem key={index} index={totalLength - ((currentPage - 1) * COUNT_PER_PAGE + index)} {...item} />)}
-        </div>
-        <div className='table-list-bottom'>
-            <div style={{ width: '299px' }}></div>
-            <div className='table-list-pagenation'>
-            <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
-            <div className='table-list-page-box'>
-                {pageList.map(page => 
-                page === currentPage ?
-                <div className='table-list-page-active'>{page}</div> :
-                <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
-                )}
+            <div className='table-list-table'>
+                <div className='table-list-table-th user'>
+                    <div className='user-list-table-number'>순번</div>
+                    <div className='user-list-table-id'>아이디</div>
+                    <div className='user-list-table-nickname'>닉네임</div>
+                    <div className='user-list-table-email'> 이메일</div>
+                    <div className='user-list-table-join-date'> 가입날짜</div>
+                </div>
+                {viewList.map((item, index) => <ListItem key={index} index={totalLength - ((currentPage - 1) * COUNT_PER_PAGE + index)} {...item} />)}
             </div>
-            <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
-        </div>
-        <div className='table-list-search-box'>
-            <div className='table-list-search-input-box'>
-                <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+            <div className='table-list-bottom'>
+                <div style={{ width: '299px' }}></div>
+                <div className='table-list-pagenation'>
+                <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
+                <div className='table-list-page-box'>
+                    {pageList.map(page => 
+                    page === currentPage ?
+                    <div className='table-list-page-active'>{page}</div> :
+                    <div className='table-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
+                    )}
+                </div>
+                <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
             </div>
-            <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+            <div className='table-list-search-box'>
+                <div className='table-list-search-input-box'>
+                    <input className='table-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+                </div>
+                <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+            </div>
+            </div>
         </div>
-    </div>
-    </div>
-    </>
+        </>
     )
 }
