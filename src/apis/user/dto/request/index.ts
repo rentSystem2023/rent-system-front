@@ -1,6 +1,3 @@
-import ResponseDto from "src/apis/response.dto";
-
-
 // description: 이메일 인증 Request Body DTO 
 export interface EmailAuthRequestDto {
     userEmail: string;

@@ -21,16 +21,16 @@ export const PutCompanyRequest = async (companyCode: string | number, requestBod
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler)
     return result;
-}
+};
 
 // function : 업체 삭제 API 함수
 export const deleteCompanyRequest = async(companyCode: string | number, accessToken: string)=>{
     const result = await axios
-        .delete(DELETE_COMPANY_LIST_URL(companyCode),bearerAuthorization(accessToken))
+        .delete(DELETE_COMPANY_LIST_URL(companyCode), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 업체 전체 리스트 불러오기 API 함수 
 export const getCompanyListRequest = async (accessToken: string) => {

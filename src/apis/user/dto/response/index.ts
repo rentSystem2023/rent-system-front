@@ -1,7 +1,6 @@
 import ResponseDto from "src/apis/response.dto";
 import { MyReservationListItem, QnaListItem, QnaMyListItem } from "src/types";
 
-
 // description: 로그인 유저 정보 불러오기 Response Body DTO
 export interface GetSignInUserResponseDto extends ResponseDto{
     userId: string;

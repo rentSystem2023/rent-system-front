@@ -11,7 +11,7 @@ export const getUserListRequest = async(accessToken: string) => {
         .then(requestHandler<GetUserListResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function : 회원 검색 리스트 불러오기 API 함수
 export const getSearchUserListRequest = async(word: string, accessToken: string) => { 
@@ -21,7 +21,7 @@ export const getSearchUserListRequest = async(word: string, accessToken: string)
         .then(requestHandler<GetSearchUserListResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function : 회원 상세 불러오기 API 함수
 export const getDetailUserListRequest = async(userId: string, accessToken: string) => {
@@ -30,7 +30,7 @@ export const getDetailUserListRequest = async(userId: string, accessToken: strin
         .then(requestHandler<GetDetailUserListResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 회원 삭제하기 API 함수 
 export const deleteUserRequest = async (userId: string, accessToken: string) => {
@@ -39,4 +39,4 @@ export const deleteUserRequest = async (userId: string, accessToken: string) => 
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-    };
+};
