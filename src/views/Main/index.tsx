@@ -55,9 +55,7 @@ export default function Main() {
     const navigator = useNavigate();
 
     const handlePopularCarListResponse = (result: GetReservationPopularListResponseDto | ResponseDto | null) => {
-        if (!result || result.code !== 'SU') {
-            return;
-        }
+        if (!result || result.code !== 'SU') return;
         
         const { popularList } = result as GetReservationPopularListResponseDto;
         setPopularCarList(popularList);
