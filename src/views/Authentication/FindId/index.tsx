@@ -8,7 +8,7 @@ import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import InputBox from 'src/components/Inputbox'
 import { AUTH_FIND_PASSWORD_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
-    //                    component                    //
+//                    component                    //
 export default function FindId() {
 
     //                    state                    //
@@ -49,7 +49,7 @@ export default function FindId() {
         const { value } = event.target;
         setUserEmail(value);
         setEmailButtonStatus(value !== '');
-        setIsEmailCheck(false); // 이메일 변경 시 아이디 찾기 상태 초기화
+        setIsEmailCheck(false);
         setEmailMessage('');
     };
 

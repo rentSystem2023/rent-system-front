@@ -9,7 +9,7 @@ import { AUTH_SIGN_IN_ABSOLUTE_PATH } from "src/constant";
 import useAuthStore from "src/stores/auth.store";
 import { useSearchParams } from "react-router-dom";
 
-    //                    component                    //
+//                    component                    //
 export default function SignUp() {
 
     //                      state                      //
@@ -43,9 +43,6 @@ export default function SignUp() {
     const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
     const [nickNameButtonStatus, setNickNameButtonStatus] = useState<boolean>(false);
     const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
-
-    const isSignUpActive = isIdCheck && isNickNameCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqualPassword;
-    const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
 
     //                    function                    //
     const navigator = useNavigate();
@@ -267,6 +264,9 @@ export default function SignUp() {
     };
 
     //                    render                       //
+    const isSignUpActive = isIdCheck && isNickNameCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqualPassword;
+    const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
+    
     return (
         <div id="authentication-wrapper">
             <div className="title-text">회원가입</div>

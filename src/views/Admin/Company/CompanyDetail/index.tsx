@@ -8,8 +8,9 @@ import { useUserStore } from 'src/stores/car.reservation.store';
 import { GetCompanyDetailResponseDto } from 'src/apis/company/dto/response';
 import { deleteCompanyRequest, getCompanyDetailRequest } from 'src/apis/company';
 
-    //                    component                    //
+//                    component                    //
 export default function CompanyDetail() {
+
     //                      state                      //
     const { companyCode } = useParams();
     const { loginUserRole } = useUserStore();

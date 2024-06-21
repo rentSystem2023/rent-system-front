@@ -76,7 +76,6 @@ function TopBar() {
                     <div className="user-button" onClick={onMyPageClickHandler}>{nickName}님</div>
                 </div>
                 <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-                
             </div>
             }
             {loginUserRole === 'ROLE_ADMIN' && 
@@ -120,7 +119,6 @@ function BottomBar() {
         <div className="bottom-container">
             <div className="bottom-content">
                 <div className="bottom-image-content"></div>
-
                 <div className="bottom-contents-wrapper">
                     <div className="bottom-info-contents">
                         <div className="bttom-link-contents">

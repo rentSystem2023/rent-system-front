@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
 import { AUTH_SIGN_UP_ABSOLUTE_PATH, AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH, SNS_SIGN_IN_REQUEST_URL, MAIN_ABSOLUTE_PATH } from "src/constant";
 
-    //                    component                    //
+//                    component                    //
 export function Sns () {
 
     //                      state                      //
@@ -106,7 +106,6 @@ export default function SignIn() {
     };
 
     const onSignInButtonClickHandler = () => {
-        
         if (!id || !password) {
             setMessage('아이디와 비밀번호를 모두 입력하세요.');
             return;

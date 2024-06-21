@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { NOTICE_DETAIL_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
-import { getNoticeRequest, putNoticeRequest } from 'src/apis/notice/dto';
+import { getNoticeRequest, putNoticeRequest } from 'src/apis/notice';
 import { PutNoticeBoardRequestDto } from 'src/apis/notice/dto/request';
 import { uploadFile } from 'src/apis/imageUrl';
 
