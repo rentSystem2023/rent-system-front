@@ -7,7 +7,7 @@ import { PostNoticeRequest } from 'src/apis/notice/dto';
 import { PostNoticeBoardRequestDto } from 'src/apis/notice/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 export default function NoticeWrite() {
 
     //                      state                      //

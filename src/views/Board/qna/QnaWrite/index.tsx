@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css'
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { useNavigate } from 'react-router';
 import { QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PostQnaBoardRequestDto } from 'src/apis/qna/dto/request';
