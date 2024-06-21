@@ -1,29 +1,25 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { getYYYYMMDD } from "src/utils";
 import './style.css'
+import { useReservationStore } from "src/stores";
 
 //                    component                    //
 export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
 
-    //                    state                        //
     const tomorrow =  new Date(new Date().setDate(new Date().getDate() + 1));
-    
+
+    //                    state                        //    
     const startDateInputRef = useRef<HTMLInputElement>(null);
     const [endDate, setEndDate] = useState<Date | null>(tomorrow); 
     const [startDate, setStartDate] = useState<Date | null>(tomorrow);
-
-    //                    effect                       //
-    useEffect(() => {
-        if (startDateInputRef.current) {
-            startDateInputRef.current.focus();
-        }
-    }, []);
+    const { setReservationStart, setReservationEnd } = useReservationStore();
 
     //                  Event Handlers                   //
     const handleStartDateSelecthandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         const date = new Date(value);
         setStartDate(date);
+        setReservationStart(value);
 
         if (endDate && date.getTime() >= endDate.getTime()) {
             setEndDate(null);
@@ -34,6 +30,7 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
         const { value } = event.target;
         const date = new Date(value);
         setEndDate(date);
+        setReservationEnd(value);
         
         if (startDate && date.getTime() <= startDate.getTime()) {
             setEndDate(null);
@@ -43,36 +40,38 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
     const handleConfirmhandler = () => {
         const today = new Date(); 
         const maxEndDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
-    
+
         if (startDate && !endDate) {
             alert("당일 예약은 불가합니다.\r시작날짜와 종료날짜를 선택해주세요.");
             return; 
         }
 
-        if(startDate && endDate) {
+        if(!startDate || !endDate) {
             alert("시작날짜와 종료날짜를 모두 선택해주세요.");
             return;
         }
 
-        // if(startDate >= today && endDate <= maxEndDate) {
-
-        // }
-    
-        if (startDate && endDate) {
-            if (startDate >= today && endDate <= maxEndDate) {
-                if (startDate.toISOString().split('T')[0] === endDate.toISOString().split('T')[0]) {
-                    alert("시작날짜와 종료날짜를 모두 선택해주세요.");
-                    return;
-                } else if (startDate.getTime() <= endDate.getTime()) {
-                    onClose();
-                }
-            } else {
-                alert("당일 예약은 불가능하며, 오늘 날짜 기준으로 최대 30일 이내여야 합니다.");
-            }
-        } else {
+        if(!(startDate >= today && endDate <= maxEndDate)) {
             alert("시작날짜와 종료날짜를 모두 선택해주세요.");
+            return;
+        }
+
+        if(startDate.toISOString().split('T')[0] === endDate.toISOString().split('T')[0]) {
+            alert("시작날짜와 종료날짜를 모두 선택해주세요.");
+            return;
+        }
+
+        if (startDate.getTime() <= endDate.getTime()) {
+            onClose();
         }
     };
+
+    //                    effect                       //
+    useEffect(() => {
+        if (startDateInputRef.current) {
+            startDateInputRef.current.focus();
+        }
+    }, []);
 
     //                    Render                       //
     return (
@@ -83,13 +82,13 @@ export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {
                     <div className="date-popup-content">
                         <div className="date-popup-title">시작일</div>
                         <div className="date-popup-calender">
-                        <input
-                            className="date-calender"
-                            ref={startDateInputRef} 
-                            type="date" 
-                            min={getYYYYMMDD(tomorrow)}
-                            onChange={handleStartDateSelecthandler} 
-                        />
+                            <input
+                                className="date-calender"
+                                ref={startDateInputRef} 
+                                type="date" 
+                                min={getYYYYMMDD(tomorrow)}
+                                onChange={handleStartDateSelecthandler} 
+                            />
                         </div>
                     </div>
                     <div className="date-popup-content">

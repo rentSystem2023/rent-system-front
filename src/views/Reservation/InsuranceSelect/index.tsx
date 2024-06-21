@@ -5,7 +5,7 @@ import { ReservationCarPriceListItem } from 'src/types';
 import { GetSearchReservationCarPriceListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { useNavigate } from 'react-router';
-import { useReservationStore } from 'src/stores';
+import { useReservationStore } from 'src/stores/';
 import { getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_ABSOLUTE_PATH, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
 

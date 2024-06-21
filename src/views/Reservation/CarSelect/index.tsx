@@ -7,7 +7,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { ReservationCarViewListItem } from 'src/types';
 import { COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, RESERVATION_CAR_ABSOLUTE_PATH, RESERVATION_COMPANY_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
-import { useReservationStore } from 'src/stores';
+import { useReservationStore } from 'src/stores/';
 import { usePagination } from 'src/hooks';
 
 //                    component                    //

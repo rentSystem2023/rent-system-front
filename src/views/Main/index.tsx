@@ -3,14 +3,14 @@ import './style.css';
 import { useNavigate } from 'react-router';
 import { RESERVATION_CAR_ABSOLUTE_PATH } from 'src/constant';
 import { PopularCarListItem } from 'src/types';
-import { useReservationStore } from 'src/stores';
+import { useReservationStore } from 'src/stores/car.reservation.store';
 import { DatePickerPopup } from 'src/components/DatePickerPopup';
 import { GetReservationPopularListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getReservationPopularListRequest } from 'src/apis/reservation';
 import { useCookies } from 'react-cookie';
 
-    //                    component                    //
+//                    component                    //
 function ListItem ({
     carImageUrl,
     carName,
@@ -52,7 +52,7 @@ function ListItem ({
     );
 }
 
-    //                    component                    //
+//                    component                    //
 export default function Main() {
     const { address, reservationStart, reservationEnd } = useReservationStore();
     const [isLocationPopupOpen, setIsLocationPopupOpen] = useState(false);

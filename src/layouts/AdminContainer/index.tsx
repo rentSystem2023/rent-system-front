@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_RESERVATION_LIST_ABSOLUTE_PATH, ADMIN_USER_LIST_ABSOLUTE_PATH } from 'src/constant';
@@ -8,15 +8,16 @@ interface Props {
     path: Path;
 }
 
-    //                    component                    //
+//                    component                    //
 function SideBar ({ path } : Props) {
-    
+
     const userClass = `admin-side-navigation-item${path === '회원 관리' ? ' active' : ''}`;
     const companyClass = `admin-side-navigation-item${path === '업체 관리' ? ' active' : ''}`;
     const reservationClass = `admin-side-navigation-item${path === '예약 관리' ? ' active' : ''}`;
 
     //                    function                    //
     const navigator = useNavigate(); 
+
     //                event handler                    //
     const onUserClickHandler = () => navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);
     const onCompanyClickHandler = () => navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
@@ -38,13 +39,15 @@ function SideBar ({ path } : Props) {
                 <div className="admin-side-navigation-item-title">예약 관리</div>
             </div>
         </div>
-    )
+    );
 }
 
-    //                    component                    //
+//                    component                    //
 export default function AdminContainer() {
 
+    //                      state                      //
     const { pathname } = useLocation();
+
     const [path, setPath] = useState<Path>('');
 
     //                    effect                       //
@@ -54,7 +57,6 @@ export default function AdminContainer() {
             pathname.startsWith(ADMIN_COMPANY_LIST_ABSOLUTE_PATH) ? '업체 관리' :
             pathname.startsWith(ADMIN_RESERVATION_LIST_ABSOLUTE_PATH) ? '예약 관리' : '';
 
-    
         setPath(path);
     }, [pathname]);
 
@@ -66,5 +68,5 @@ export default function AdminContainer() {
                 <Outlet />
             </div>
         </div>
-    )
+    );
 }

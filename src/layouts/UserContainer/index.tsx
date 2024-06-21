@@ -8,23 +8,26 @@ type Path = '회원 정보' | '예약 내역' | '문의 내역' | '' ;
 interface Props {
   path: Path;
 }
-    //                    component                    //
+
+//                    component                    //
 function UserSideBar({ path } : Props) {
 
   const myInfoClass = `user-side-navigation-item${path === '회원 정보' ? ' active' : ''}`;
   const reservationClass = `user-side-navigation-item${path === '예약 내역' ? ' active' : ''}`;
   const boardClass = `user-side-navigation-item${path === '문의 내역' ? ' active' : ''}`;
 
+  //                    function                    //
   const navigator = useNavigate();
 
+  //                event handler                    //
   const onUserClickHandler = () => navigator(USER_INFO_ABSOLUTE_PATH);
   const onReservationClickHandler = () => navigator(USER_RESERVATION_ABSOLUTE_PATH);
   const onBoardClickHandler = () => navigator(USER_QNA_ABSOLUTE_PATH);
 
-    //                    Render                       //
+  //                    Render                       //
   return(
     <>   
-    <div className="user-side-navigation-container">
+      <div className="user-side-navigation-container">
         <div className={myInfoClass} onClick={onUserClickHandler}>
           <div className="user-side-navigation-icon person"></div>
           <div className="user-side-navigation-item-title">회원 정보</div>
@@ -41,13 +44,16 @@ function UserSideBar({ path } : Props) {
     </>
   );
 }
-    //                    component                    //
+
+//                    component                    //
 export default function UserContainer() {
 
+  //                      state                      //
   const { pathname } = useLocation();
+  
   const [path, setPath] = useState<Path>('');
 
-    //                    effect                       //
+  //                    effect                       //
   useEffect(() => {
     const path = 
         pathname.startsWith(USER_INFO_ABSOLUTE_PATH) ? '회원 정보' :
@@ -55,18 +61,18 @@ export default function UserContainer() {
         pathname === USER_QNA_ABSOLUTE_PATH ? '문의 내역' : '';
 
     setPath(path);
-}, [pathname]);
+  }, [pathname]);
 
-    //                    Render                       //
+  //                    Render                       //
   return (
     <>
-    <div className='title-text'>마이페이지</div>
-    <div id="user-wrapper">
-      <UserSideBar path={path} />
-      <div className="user-main">
-        <Outlet/>
+      <div className='title-text'>마이페이지</div>
+      <div id="user-wrapper">
+        <UserSideBar path={path} />
+        <div className="user-main">
+          <Outlet/>
+        </div>
       </div>
-    </div>
     </>
-  )
+  );
 }

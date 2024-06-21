@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { COUNT_PER_PAGE, COUNT_PER_SECTION } from "src/constant";
+import { COUNT_PER_SECTION } from "src/constant";
 
 const usePagination = <T>(countPerPage: number, countPerSection: number) => {
 
+    //                      state                      //
     const [boardList, setBoardList] = useState<T[]>([]);
     const [viewList, setViewList] = useState<T[]>([]);
     const [totalLength, setTotalLength] = useState<number>(0);
@@ -12,6 +13,7 @@ const usePagination = <T>(countPerPage: number, countPerSection: number) => {
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
 
+    //                    function                     //
     const changePage = (boardList: T[], totalLenght: number) => {
         if (!currentPage) return;
         const startIndex = (currentPage - 1) * countPerPage;
@@ -52,6 +54,7 @@ const usePagination = <T>(countPerPage: number, countPerSection: number) => {
         changeSection(totalPage);
     };
 
+    //                event handler                    //
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
@@ -68,6 +71,7 @@ const usePagination = <T>(countPerPage: number, countPerSection: number) => {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
+    //                    effect                       //
     useEffect(() => {
         if (!boardList.length) return;
         changePage(boardList, totalLength);
@@ -78,6 +82,7 @@ const usePagination = <T>(countPerPage: number, countPerSection: number) => {
         changeSection(totalPage);
     }, [currentSection]);
 
+    //                    Render                       //
     return {
         viewList,
         pageList,

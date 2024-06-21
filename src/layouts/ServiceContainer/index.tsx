@@ -10,17 +10,19 @@ import { getMyInfoRequest, getSignInUserRequest } from "src/apis/user";
 
     //                    component                    //
 function TopBar() {
-    //                      state                      //
-    const [nickName, setNickName] = useState<string>('');
 
-    const navigator = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies();
+    //                      state                      //
     const { pathname } = useLocation();
     const { loginUserRole, setLoginUserId, setLoginUserRole } = useUserStore();
 
-    //                    function                     //
-    const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
+    const [cookies, setCookie, removeCookie] = useCookies();
 
+    const [nickName, setNickName] = useState<string>('');    
+
+    //                    function                     //
+    const navigator = useNavigate();
+
+    const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
         if (!result) return;
 
         const { nickName } = result as GetMyInfoResponseDto;
@@ -30,11 +32,17 @@ function TopBar() {
     //                    effect                       //
     useEffect (() => {
         if (!cookies.accessToken) return;
-
         getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
     }, [cookies.accessToken]);
 
     //                event handler                    //
+    const onLogoClickHandler = () => {
+        if(pathname === MAIN_ABSOLUTE_PATH){
+            window.location.reload();
+        } else {
+        navigator(MAIN_ABSOLUTE_PATH);}
+    };
+
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
         setLoginUserId('');
@@ -42,19 +50,12 @@ function TopBar() {
         navigator(MAIN_ABSOLUTE_PATH);
     };
 
-    const onLogoClickHandler = () => {
-        if(pathname === MAIN_ABSOLUTE_PATH){
-            window.location.reload();
-        } else {
-        navigator(MAIN_ABSOLUTE_PATH);}
-    }
-
-    const onNoticeClickHandler = () => navigator(NOTICE_LIST_ABSOLUTE_PATH);
     const onQnaClickHandler = () => navigator(QNA_LIST_ABSOLUTE_PATH);
+    const onMyPageClickHandler = () => navigator(USER_INFO_ABSOLUTE_PATH);
+    const onNoticeClickHandler = () => navigator(NOTICE_LIST_ABSOLUTE_PATH);
     const onSignInClickHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     const onSignUpClickHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-    const onMyPageClickHandler = () => navigator(USER_INFO_ABSOLUTE_PATH);
-    const onAdminPageClickHandler = () => navigator(ADMIN_USER_LIST_ABSOLUTE_PATH)
+    const onAdminPageClickHandler = () => navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);
 
     //                    Render                        //
     return (
@@ -101,14 +102,18 @@ function TopBar() {
 
     //                    component                    //
 function BottomBar() {
-    const [cookies, setCookie] = useCookies();
+
+    //                      state                      //
+    const [cookies] = useCookies();
+
+    //                    function                    //
     const navigator = useNavigate();
 
     //                event handler                    //
     const onMyPageButtonClickHandler = () => {
         if (!cookies.accessToken) return navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
         navigator(USER_INFO_ABSOLUTE_PATH);
-    }
+    };
 
     //                    Render                       //
     return (
@@ -126,14 +131,12 @@ function BottomBar() {
                             <div className="bttom-links-page" onClick={() => navigator(GUIDE_OF_USE_ABSOLUTE_PATH)} >이용안내</div>
                             <div className="bttom-links-page" onClick={() => navigator(PERSONAL_INFORMATION_POLICY_ABSOLUTE_PATH)} >개인정보처리방침</div>
                         </div>
-
                         <div className="bottom-company-info">
                             <div>(주)차탕갑서 {'\|'} 대표 : 김민철,장현아,우하늘,한성윤 {'\|'} 제주도 제주시 제주군 제주동</div>
                             <div>사업자등록번호 : 100-100-10000 {'\|'} 통신판매업신고번호 : 2024-경남부산-0613</div>
                             <div>개인정보보호책임자 : 장현아 {'\|'} 이메일 : janghyuna@naver.com</div>
                         </div>
                     </div>
-                    
                     <div className="bottom-media-info">
                         <div className="bottom-media-contents">
                             <div className="bottom-media-titles">
@@ -147,7 +150,6 @@ function BottomBar() {
                                 <div className="media-content-list">휴무 : 주말/공휴일</div>
                             </div>
                         </div>
-
                         <div className="bottom-account-contents">
                             <div className="media-title">입금 계좌 안내</div>
                             <div className="media-content">
@@ -165,26 +167,31 @@ function BottomBar() {
 
 export default function ServiceContainer() {
 
+    //                      state                      //
     const { setLoginUserId, setLoginUserRole } = useUserStore();
+
     const [cookies] = useCookies();
     
+    //                    function                    //
     const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
         if (!result) return;
     
         const { userId, userRole } = result as GetSignInUserResponseDto;
+
         setLoginUserId(userId);
         setLoginUserRole(userRole);
     };
 
+    //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) {
             return;
         }
 
         getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-
     }, [cookies.accessToken]);
     
+    //                    render                    //
     return (
         <div id="wrapper">
         <TopBar />
