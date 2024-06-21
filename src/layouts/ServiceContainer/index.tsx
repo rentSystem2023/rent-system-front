@@ -2,7 +2,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useEffect, useState } from "react";
 import { ADMIN_USER_LIST_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, GUIDE_OF_USE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH, PERSONAL_INFORMATION_POLICY_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, TERMS_OF_USE_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from "src/constant";
-import { useUserStore } from "src/stores";
+import { useUserStore } from "src/stores/car.reservation.store";
 import { useCookies } from "react-cookie";
 import { GetMyInfoResponseDto, GetSignInUserResponseDto } from "src/apis/user/dto/response";
 import ResponseDto from "src/apis/response.dto";
@@ -28,12 +28,6 @@ function TopBar() {
         const { nickName } = result as GetMyInfoResponseDto;
         setNickName(nickName);
     };
-    
-    //                    effect                       //
-    useEffect (() => {
-        if (!cookies.accessToken) return;
-        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
-    }, [cookies.accessToken]);
 
     //                event handler                    //
     const onLogoClickHandler = () => {
@@ -56,6 +50,12 @@ function TopBar() {
     const onSignInClickHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     const onSignUpClickHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
     const onAdminPageClickHandler = () => navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);
+
+    //                    effect                       //
+    useEffect (() => {
+        if (!cookies.accessToken) return;
+        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+    }, [cookies.accessToken]);
 
     //                    Render                        //
     return (

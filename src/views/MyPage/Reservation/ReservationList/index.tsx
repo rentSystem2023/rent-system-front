@@ -8,8 +8,9 @@ import { GetMyReservationListResponseDto } from 'src/apis/user/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getReservationMyListRequest } from 'src/apis/user';
 import { useUserStore } from 'src/stores/car.reservation.store';
+import { usePagination } from 'src/hooks';
 
-    //                    component                    //
+//                    component                    //
 function ListItem ({
     carImageUrl,
     reservationDate,
@@ -72,62 +73,30 @@ function ListItem ({
     );
 }
 
-    //                    component                    //
+//                    component                    //
 export default function MyReservation() {
 
     //                      state                      //
-    const [cookies] = useCookies();
     const { loginUserRole } = useUserStore();
-    const [reservationList, setReservationList] = useState<MyReservationListItem[]>([]);
-    const [viewList, setViewList] = useState<MyReservationListItem[]>([]);
-    const [totalLenght, setTotalLength] = useState<number>(0);
-    const [totalPage, setTotalPage] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [pageList, setPageList] = useState<number[]>([1]);
-    const [totalSection, setTotalSection] = useState<number>(1);
-    const [currentSection, setCurrentSection] = useState<number>(1);
+    
+    const [cookies] = useCookies();
+
+    const {
+        viewList,
+        pageList,
+        totalPage,
+        currentPage,
+        totalLength,
+        setCurrentPage,
+        setCurrentSection,
+        changeBoardList,
+        onPageClickHandler,
+        onPreSectionClickHandler,
+        onNextSectionClickHandler
+    } = usePagination<MyReservationListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 
     //                    function                    //
     const navigator = useNavigate();
-
-    const changePage = (reservationList: MyReservationListItem[], totalLenght: number) => {
-        if (!currentPage) return;
-        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-        let endIndex = currentPage * COUNT_PER_PAGE;
-
-        if (endIndex > totalLenght - 1) endIndex = totalLenght;
-        const viewList = reservationList.slice(startIndex, endIndex);
-        setViewList(viewList);
-    };
-
-    const changeSection = (totalPage: number) => {
-        if (!currentPage) return;
-        const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-        let endPage = currentSection * COUNT_PER_SECTION;
-
-        if (endPage > totalPage) endPage = totalPage;
-        const pageList: number[] = [];
-
-        for (let page = startPage; page <= endPage; page++) pageList.push(page);
-        setPageList(pageList);
-    };
-
-    const changeReservationList = (reservationList: MyReservationListItem[]) => {
-        setReservationList(reservationList);
-
-        const totalLenght = reservationList.length;
-        setTotalLength(totalLenght);
-
-        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
-        setTotalPage(totalPage);
-
-        const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-        setTotalSection(totalSection);
-
-        changePage(reservationList, totalLenght);
-
-        changeSection(totalPage);
-    };
 
     const getMyReservationListResponse = (result: GetMyReservationListResponseDto | ResponseDto | null) => {
         const message = 
@@ -142,25 +111,10 @@ export default function MyReservation() {
         }
 
         const { reservationList } = result as GetMyReservationListResponseDto;
-        changeReservationList(reservationList);
+        changeBoardList(reservationList);
 
         setCurrentPage(!reservationList.length ? 0 : 1);
         setCurrentSection(!reservationList.length ? 0 : 1);
-    };
-
-    //                    event handler                    //
-    const onPageClickHandler = (page: number) => setCurrentPage(page);
-
-    const onPreSectionClickHandler = () => {
-        if (currentSection <= 1) return;
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-    };
-
-    const onNextSectionClickHandler = () => {
-        if (currentSection === totalSection) return;
-        setCurrentSection(currentSection + 1);
-        setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
     //                    effect                    //
@@ -168,17 +122,6 @@ export default function MyReservation() {
         if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') return navigator(MAIN_ABSOLUTE_PATH);
         getReservationMyListRequest(cookies.accessToken).then(getMyReservationListResponse);
     }, []);
-
-    useEffect(() => {
-        if (!reservationList.length) return;
-        changePage(reservationList, totalLenght);
-    }, [currentPage]);
-
-    useEffect(() => {
-        if (!reservationList.length) return;
-        changeSection(totalPage);
-    }, [currentSection]);
-
 
 //                    render                    //
     return (
@@ -188,7 +131,7 @@ export default function MyReservation() {
                 <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
                 <div className='my-reservation-card-list'>
                     <div className='table-list-top'>
-                        <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+                        <div className='table-list-size-text'>전체 <span className='emphasis'>{totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
                     </div>
                     <div className='my-reservation-card'>
                         {viewList.map((item) => <ListItem {...item} />)}
