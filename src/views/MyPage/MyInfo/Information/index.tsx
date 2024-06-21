@@ -6,7 +6,7 @@ import { MAIN_ABSOLUTE_PATH, USER_EMAIL_UPDATE_ABSOLUTE_PATH, USER_PW_UPDATE_ABS
 import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { deleteUserRequest, getMyInfoRequest } from 'src/apis/user';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 
     //                    component                    //
 export default function MyInfo() {

@@ -7,7 +7,7 @@ import { getReservationDetailMyListRequest, patchReservationRequest } from 'src/
 import { PatchReservationRequestDto } from 'src/apis/user/dto/request';
 import { GetMyReservationDetailResponseDto } from 'src/apis/user/dto/response';
 import { MAIN_ABSOLUTE_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 
     //                    component                    //
 export default function MyReservationDetail() {

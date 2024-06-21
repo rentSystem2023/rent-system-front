@@ -7,7 +7,7 @@ import InputBox from 'src/components/Inputbox';
 import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { PutMyInfoPwRequestDto } from 'src/apis/user/dto/request';
 import { putMyInfoPwRequest } from 'src/apis/user';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 
     //                    component                    //
 export default function MyInfoPwModify() {

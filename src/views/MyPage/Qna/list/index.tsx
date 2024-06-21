@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE,COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { QnaListItem } from 'src/types';
 import './style.css';
 import { GetMyInfoQnaListResponseDto } from 'src/apis/user/dto/response';

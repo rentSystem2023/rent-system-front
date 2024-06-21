@@ -7,7 +7,7 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH, USER_
 import { GetMyReservationListResponseDto } from 'src/apis/user/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getReservationMyListRequest } from 'src/apis/user';
-import { useUserStore } from 'src/stores/';
+import { useUserStore } from 'src/stores/car.reservation.store';
 
     //                    component                    //
 function ListItem ({

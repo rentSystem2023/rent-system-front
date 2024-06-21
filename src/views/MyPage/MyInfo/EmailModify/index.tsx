@@ -6,7 +6,7 @@ import { emailAuthRequest, putMyInfoEmailRequest } from 'src/apis/user';
 import { EmailAuthRequestDto, PutMyInfoEmailRequestDto } from 'src/apis/user/dto/request';
 import InputBox from 'src/components/Inputbox';
 import { MAIN_ABSOLUTE_PATH, USER_INFO_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 
     //                    component                    //
 export default function MyInfoEmailModify() {
