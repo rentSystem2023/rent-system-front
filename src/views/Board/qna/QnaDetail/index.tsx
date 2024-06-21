@@ -173,17 +173,12 @@ export default function QnaDetail() {
 
     //                    effect                    //
     useEffect(() => {
-
         if (!receptionNumber ) return;
-
         getQnaRequest(receptionNumber).then(getBoardResponse);
     }, []);
 
-
     useEffect(() => {
-
         if (!cookies.accessToken || !receptionNumber) return;
-
         increaseViewCountRequest(receptionNumber, cookies.accessToken).then(increaseViewCountResponse);
     }, []);
 

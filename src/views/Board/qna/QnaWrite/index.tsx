@@ -1,16 +1,15 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import './style.css'
+import './style.css';
 import { useUserStore } from 'src/stores/car.reservation.store';
 import { useNavigate } from 'react-router';
 import { QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PostQnaBoardRequestDto } from 'src/apis/qna/dto/request';
-import { } from 'src/apis/qna/dto/request';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import axios from 'axios';
 import { PostQnaRequest } from 'src/apis/qna';
+import { uploadFile } from 'src/apis/imageUrl'; 
 
-    //                    component                    //
+//                    component                    //
 export default function QnAWrite() {
 
     //                      state                      //
@@ -62,11 +61,8 @@ export default function QnAWrite() {
 
         let imageUrl = '';
         if (selectedFile) {
-            const formData = new FormData();
-            formData.append('file', selectedFile);
-            imageUrl = await axios.post('http://localhost:4000/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(response => response.data ? response.data : '').catch(error => '');
+            imageUrl = await uploadFile(selectedFile);
         }
-        
 
         const requestBody: PostQnaBoardRequestDto = {
             title,
@@ -74,10 +70,9 @@ export default function QnAWrite() {
             category,
             publicState,
             imageUrl
-        }
+        };
 
         PostQnaRequest(requestBody, cookies.accessToken).then(postQnaResponse);
-
     };
 
     const onFileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -99,14 +94,12 @@ export default function QnAWrite() {
     };
 
     //                    effect                       //
-    // 화면이 전환될때 작성
     useEffect(() => {
-
         if (loginUserRole === 'ROLE_ADMIN') {
             navigator(QNA_LIST_ABSOLUTE_PATH);
             return;
         }
-    }, [loginUserRole])
+    }, [loginUserRole, navigator]);
 
     //                    Render                       //
     return (
@@ -118,8 +111,8 @@ export default function QnAWrite() {
                     </div>
                     <div className='qna-category-box'>
                         <div className='public-state-toggle'>
-                            공개 여부:<input type="checkbox" onChange={onPublicStateChangeHandler} />
-                            {publicState ? '비공개' : '비공개'}
+                            공개 여부:<input type="checkbox" onChange={onPublicStateChangeHandler} checked={publicState} />
+                            {publicState ? '공개' : '비공개'}
                         </div>
                         <select value={category} onChange={onCategoryChangeHandler} className='qna-category-select'>
                             <option value="문의">문의</option>

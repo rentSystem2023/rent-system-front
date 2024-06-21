@@ -311,3 +311,6 @@ export const DELETE_COMPANY_LIST_URL = (companyCode: string | number) => `${SERV
 export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
 export const COUNT_RESERVATION_PAGE = 6;
+
+// description : IMAGE
+export const IMAGE_URL = `${SERVER_DOMAIN_URL}/upload`;

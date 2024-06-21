@@ -25,6 +25,7 @@
 
     //                    function                     //
     const navigator = useNavigate();
+
     //                      state                      //
     const {loginUserId} = useUserStore();
     const {loginUserRole} = useUserStore();
@@ -66,6 +67,10 @@
     export default function QnaList() {
 
     //                      state                      //
+    const {loginUserRole} = useUserStore();
+
+    const [cookies] = useCookies();
+
     const {
         viewList,
         pageList,
@@ -80,11 +85,8 @@
         onNextSectionClickHandler
     } = usePagination<QnaListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 
-    const {loginUserRole} = useUserStore();
-    const [cookies] = useCookies();
-    const [isToggleOn, setToggleOn] = useState<boolean>(false);
-
     const [searchWord, setSearchWord] = useState<string>('');
+    const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
     //                    function                     //
     const navigator = useNavigate();
@@ -131,24 +133,14 @@
     };
     
     const onSearchButtonClickHandler = () => {
-        if (searchWord) {
-            if (cookies.accessToken) {
-                getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-            } else {
-                getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
-            }
-        }
-        else {
-            getSearchQnaListRequest('', '').then(getSearchBoardListResponse);
-        }
+            getSearchQnaListRequest(searchWord).then(getSearchBoardListResponse);
     };
-
     //                    effect                       //
     useEffect(() => {
         if (!cookies.accessToken) {
-            getSearchQnaListRequest(searchWord, '').then(getSearchBoardListResponse);
+            getSearchQnaListRequest(searchWord).then(getSearchBoardListResponse);
         } else {
-            getSearchQnaListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
+            getSearchQnaListRequest(searchWord).then(getSearchBoardListResponse);
         }
     }, [isToggleOn]);
     
