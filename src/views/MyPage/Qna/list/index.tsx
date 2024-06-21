@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import ResponseDto from 'src/apis/response.dto';
-import {
-    COUNT_PER_PAGE,
-    COUNT_PER_SECTION,
-    MAIN_PATH
-} from 'src/constant';
+import { COUNT_PER_PAGE,COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { QnaListItem } from 'src/types';
 import './style.css';

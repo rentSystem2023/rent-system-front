@@ -17,6 +17,7 @@ export default function CompanyUpdate() {
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const [cookies] = useCookies();
     const { companyCode } = useParams();
+
     const [rentCompany, setRentCompany] = useState<string>('');
     const [address, setAddress] = useState<string>('');
     const [owner, setOwner] = useState<string>('');
@@ -74,11 +75,6 @@ export default function CompanyUpdate() {
     };
 
     //                event handler                    //
-    const onRentCompanyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const rentCompany = event.target.value;
-        setRentCompany(rentCompany)
-    };
-
     const onAddressChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const address = event.target.value;
         setAddress(address);

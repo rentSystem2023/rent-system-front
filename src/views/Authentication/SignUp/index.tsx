@@ -4,15 +4,15 @@ import InputBox from "src/components/Inputbox";
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, NickNameCheckRequestDto, SignUpRequestDto } from "src/apis/auth/dto/request";
 import { IdCheckRequest, NickNameCheckRequest, emailAuthCheckRequest, emailAuthRequest, signUpRequest } from "src/apis/auth";
 import ResponseDto from "src/apis/response.dto";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { AUTH_SIGN_IN_ABSOLUTE_PATH } from "src/constant";
 import useAuthStore from "src/stores/auth.store";
 import { useSearchParams } from "react-router-dom";
 
-//                    component                    //
+    //                    component                    //
 export default function SignUp() {
 
-    //                    state                    //
+    //                      state                      //
     const { setJoinPath, setSnsId } = useAuthStore();
 
     const [searchParam, setSearchParam] = useSearchParams();
@@ -48,6 +48,7 @@ export default function SignUp() {
     const [isNickNameError, setNickNameError] = useState<boolean>(false);
     const [isEmailError, setEmailError] = useState<boolean>(false);
     const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
+    const navigator = useNavigate();
 
     const isSignUpActive = isIdCheck && isNickNameCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqualPassword;
     const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
@@ -130,7 +131,7 @@ export default function SignUp() {
         }
     };
 
-    //                    event handler                    //
+    //                    event handler                //
     const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setId(value);
@@ -244,8 +245,6 @@ export default function SignUp() {
         emailAuthCheckRequest(requestBody).then(emailAuthCheckResponse);
     };
     
-    const navigator = useNavigate();
-
     const onSignUpButtonClickHandler = () => {
         if(!isSignUpActive) return;
 
@@ -274,7 +273,7 @@ export default function SignUp() {
         navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     };
 
-    //                    render                    //
+    //                    render                       //
     return (
         <div id="authentication-wrapper">
             <div className="title-text">회원가입</div>

@@ -2,13 +2,12 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import './style.css';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
-import { Cookies, useCookies } from 'react-cookie';
+import { ADMIN_COMPANY_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
+import { useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { postCompanyRequest } from 'src/apis/company';
 import { PostCompanyRequestDto } from 'src/apis/company/dto/request';
 import InputBox from 'src/components/Inputbox';
-import { CompanyListItem } from 'src/types';
 
 export default function CompanyRegist() {
 
@@ -16,7 +15,6 @@ export default function CompanyRegist() {
     const [cookies] = useCookies();
     const {loginUserRole} = useUserStore();
     
-    const [companyList, setCompanyList] = useState<CompanyListItem[]>([]);
     const [companyCode, setCompanyCode] = useState<number | string>('');
     const [rentCompany, setRentCompany] = useState<string>('');
     const [address, setAddress] = useState<string>('');

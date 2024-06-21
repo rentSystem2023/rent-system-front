@@ -4,12 +4,9 @@ import { useNavigate, useParams } from 'react-router';
 import { findPasswordRequest } from 'src/apis/auth';
 import { FindPasswordRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
-import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import InputBox from 'src/components/Inputbox'
 import { AUTH_FIND_PASSWORD_ABSOLUTE_PATH, AUTH_FIND_PW_RESET_ABSOLUTE_PATH, AUTH_FIND_PW_RESET_PATH } from 'src/constant';
-import { useSearchParams } from "react-router-dom";
 import { FindIdResponseDto } from 'src/apis/auth/dto/response';
-
 
 //                    component                    //
 export default function FindPassword() {

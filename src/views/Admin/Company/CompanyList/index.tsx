@@ -2,10 +2,10 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { CompanyListItem } from 'src/types';
 import { useNavigate } from 'react-router';
-import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_LIST_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { GetCompanyListResponseDto, GetSearchCompanyListResponseDto } from 'src/apis/company/dto/response';
+import { GetSearchCompanyListResponseDto } from 'src/apis/company/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchCompanyListRequest } from 'src/apis/company';
 import { usePagination } from 'src/hooks';
@@ -27,7 +27,7 @@ registDate
     //                event handler                    //
     const onClickHandler = () => navigator(ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH(companyCode));
 
-    //                    render                    //
+    //                    render                       //
     return (
         <div className='table-list-table-tr company' onClick={onClickHandler} >
             <div className='company-list-table-list-number'>{index}</div>
@@ -87,7 +87,7 @@ export default function CompanyList() {
         setCurrentSection(!companyList.length ? 0 : 1);
     };
 
-    //                    event handler                    //
+    //                    event handler                //
     const onRegistButtonClickHandler = () => {
         if (loginUserRole !== 'ROLE_ADMIN') return; 
         navigator(ADMIN_COMPANY_REGIST_ABSOLUTE_PATH);
@@ -107,13 +107,13 @@ export default function CompanyList() {
         }
     };
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
         getSearchCompanyListRequest(searchWord,cookies.accessToken).then(getSearchCompanyListResponse);
     }, []);
 
-    //                    render                    //
+    //                    render                       //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return (
     <div>
