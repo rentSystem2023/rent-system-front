@@ -66,6 +66,10 @@
     line-height: 175%;
 
     color:rgba(0, 0, 0, 0.7);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .infomation-modify-wrap{

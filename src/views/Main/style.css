@@ -160,6 +160,26 @@
     gap: 10px;
 }
 
+.popular-car-page-left{
+    width: 45px;
+    height: 45px;
+
+    background-image: url('../../assets/image/preButton.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.popular-car-page-right{
+    width: 45px;
+    height: 45px;
+
+    background-image: url('../../assets/image/nextButton.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
 .popular-car-list-box{
     display: flex;
     justify-content: center;

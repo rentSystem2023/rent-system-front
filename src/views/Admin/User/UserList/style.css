@@ -1,9 +1,9 @@
 .table-list-table-th.user{
-    gap: 76px;
+    gap: 95px;
 }
 
 .table-list-table-tr.user{
-    gap: 76px;
+    gap: 95px;
 }
 
 /* 순번 */
@@ -31,7 +31,7 @@
 
 /* 이메일 */
 .user-list-table-email {
-    width: 300px;
+    width: 200px;
 
     flex-grow: 1;
     flex-shrink: 0;
