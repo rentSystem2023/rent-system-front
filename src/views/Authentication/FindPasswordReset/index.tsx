@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, KeyboardEvent } from 'react'
+import { ChangeEvent, useState, KeyboardEvent } from 'react'
 import { useNavigate, useParams } from 'react-router';
 import { findPwResetRequest } from 'src/apis/auth';
 import { FindPasswordResetRequestDto } from 'src/apis/auth/dto/request';
@@ -10,13 +10,13 @@ import { AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 export default function FindPasswordReset() {
 
     //                      state                      //
-    const [password, setPassword] = useState<string>('');
     const { userId } = useParams();
 
-    const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
+    const [password, setPassword] = useState<string>('');
     const [passwordCheck, setPasswordCheck] = useState<string>('');
-    const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
     const [passwordMessage, setPasswordMessage] = useState<string>('');
+    const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
+    const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
     const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
     
     const isFindPwActive = isPasswordPattern && isEqualPassword;
@@ -89,9 +89,7 @@ export default function FindPasswordReset() {
             return;
         };
 
-        const requestBody: FindPasswordResetRequestDto = {
-            userPassword: password
-        };
+        const requestBody: FindPasswordResetRequestDto = { userPassword: password };
         
         findPwResetRequest(userId, requestBody).then(findPwResetResponse);
 
@@ -104,7 +102,6 @@ export default function FindPasswordReset() {
     return (
         <div id="authentication-wrapper">
             <div className="title-text">비밀번호 재설정</div>
-
             <div className='authentication-sign-up'>
                 <div className='authentication-find-password'>
                     <InputBox 
@@ -122,7 +119,6 @@ export default function FindPasswordReset() {
                         onkeydownhandler={onPasswordKeydownHandler} 
                         message={passwordCheckMessage} error 
                     />
-
                 <div className="authentication-button-container">
                     <div className={findPwResetButtonClass} onClick={ onFindPwResetButtonClickHandler }>확인</div>
                 </div>

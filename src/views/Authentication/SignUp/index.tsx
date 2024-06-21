@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./style.css";
 import InputBox from "src/components/Inputbox";
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, NickNameCheckRequestDto, SignUpRequestDto } from "src/apis/auth/dto/request";
@@ -15,45 +15,41 @@ export default function SignUp() {
     //                      state                      //
     const { setJoinPath, setSnsId } = useAuthStore();
 
-    const [searchParam, setSearchParam] = useSearchParams();
+    const [searchParam ] = useSearchParams();
     
     const [id, setId] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [nickName, setNickName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
+    const [idMessage, setIdMessage] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
-    
-    const [passwordCheck, setPasswordCheck] = useState<string>('');
-
-    const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
-    const [nickNameButtonStatus, setNickNameButtonStatus] = useState<boolean>(false);
-    const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
-    const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
-
     const [isIdCheck, setIdCheck] = useState<boolean>(false);
-    const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
+    const [isIdError, setIdError] = useState<boolean>(false);
+    const [emailMessage, setEmailMessage] = useState<string>('');
+    const [isEmailCheck, setEmailCheck] = useState<boolean>(false);
+    const [isEmailError, setEmailError] = useState<boolean>(false);
+    const [passwordCheck, setPasswordCheck] = useState<string>('');
+    const [passwordMessage, setPasswordMessage] = useState<string>('');
+    const [nickNameMessage, setNickNameMessage] = useState<string>('');
+    const [isNickNameError, setNickNameError] = useState<boolean>(false);
+    const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
     const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
     const [isNickNameCheck, setNickNameCheck] = useState<boolean>(false);
-    const [isEmailCheck, setEmailCheck] = useState<boolean>(false);
-    const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
-
-    const [idMessage, setIdMessage] = useState<string>('');
-    const [passwordMessage, setPasswordMessage] = useState<string>('');
-    const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
-    const [nickNameMessage, setNickNameMessage] = useState<string>('');
-    const [emailMessage, setEmailMessage] = useState<string>('');
     const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
-
-    const [isIdError, setIdError] = useState<boolean>(false);
-    const [isNickNameError, setNickNameError] = useState<boolean>(false);
-    const [isEmailError, setEmailError] = useState<boolean>(false);
+    const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
+    const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
     const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
-    const navigator = useNavigate();
+    const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
+    const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
+    const [nickNameButtonStatus, setNickNameButtonStatus] = useState<boolean>(false);
+    const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
 
     const isSignUpActive = isIdCheck && isNickNameCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqualPassword;
     const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
 
     //                    function                    //
+    const navigator = useNavigate();
+
     const idCheckResponse = (result: ResponseDto | null) => {
         const idMessage = 
             !result ? '서버에 문제가 있습니다.' :
@@ -201,16 +197,14 @@ export default function SignUp() {
     };
 
     const onIdButtonClickHandler = () => {
-        if(!idButtonStatus) return;
-        if(!id || !id.trim()) return;
+        if(!idButtonStatus || !id || !id.trim()) return;
 
         const requestBody: IdCheckRequestDto = { userId: id };
         IdCheckRequest(requestBody).then(idCheckResponse);
     };
 
     const onNickNameButtonClickHandler = () => {
-        if(!nickNameButtonStatus) return;
-        if(!nickName || !nickName.trim()) return;
+        if(!nickNameButtonStatus || !nickName || !nickName.trim()) return;
 
         const requestBody: NickNameCheckRequestDto = { nickName: nickName };
         NickNameCheckRequest(requestBody).then(nickNameCheckResponse);
@@ -234,8 +228,7 @@ export default function SignUp() {
     };
 
     const onAuthNumberButtonClickHandler = () => {
-        if(!authNumberButtonStatus) return;
-        if(!authNumber) return;
+        if(!authNumberButtonStatus || !authNumber) return;
 
         const requestBody: EmailAuthCheckRequestDto = {
             userEmail: email,

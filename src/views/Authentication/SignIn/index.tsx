@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import "./style.css";
 import InputBox from "src/components/Inputbox";
 import { SignInRequestDto } from "src/apis/auth/dto/request";
@@ -14,6 +14,7 @@ export function Sns () {
 
     //                      state                      //
     const { accessToken, expires } = useParams();
+
     const [cookie, setCookie] = useCookies();
 
     //                    function                     //
@@ -41,10 +42,8 @@ interface SnsContainerProps {
 function SnsContainer({ title }: SnsContainerProps) {
 
     //                    event handler                //
-    const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-        window.location.href = SNS_SIGN_IN_REQUEST_URL(type);
-    };
-
+    const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => window.location.href = SNS_SIGN_IN_REQUEST_URL(type);
+    
     //                    render                       //
     return (
         <div className="authentication-sns-container">
@@ -62,9 +61,10 @@ export default function SignIn() {
 
     //                      state                      //
     const [cookies, setCookie] = useCookies();
+
     const [id, setId] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
     const [message, setMessage] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     //                    function                     //
     const navigator = useNavigate();
@@ -120,9 +120,7 @@ export default function SignIn() {
         SignInRequest(requestBody).then(signInResponse);
     };
 
-    const onSignUpButtonClickHandler = () => {
-        navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-    };
+    const onSignUpButtonClickHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
 
     //                    render                       //
     return (

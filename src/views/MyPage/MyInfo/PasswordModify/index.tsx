@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import './style.css';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -13,13 +13,15 @@ import { useUserStore } from 'src/stores';
 export default function MyInfoPwModify() {
 
     //                      state                      //
-    const [cookies] = useCookies();
     const { loginUserRole } = useUserStore();
+
+    const [cookies] = useCookies();
+
     const [password, setPassword] = useState<string>('');
-    const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
     const [passwordCheck, setPasswordCheck] = useState<string>('');
-    const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
     const [passwordMessage, setPasswordMessage] = useState<string>('');
+    const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
+    const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
     const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
     
     const isPwUpdateActive = isPasswordPattern && isEqualPassword;
@@ -87,9 +89,7 @@ export default function MyInfoPwModify() {
             return;
         };
 
-        const requestBody: PutMyInfoPwRequestDto = {
-            userPassword: password
-        };
+        const requestBody: PutMyInfoPwRequestDto = { userPassword: password };
         
         putMyInfoPwRequest(requestBody, cookies.accessToken).then(putMyInfoPwModifyResponse);
 
@@ -99,10 +99,6 @@ export default function MyInfoPwModify() {
 
     //                    effect                       //
     useEffect (() => {
-        const requestBody: PutMyInfoPwRequestDto = {
-            userPassword: password
-        };
-
         if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') {
             navigator(MAIN_ABSOLUTE_PATH);
         }
@@ -113,11 +109,9 @@ export default function MyInfoPwModify() {
         <div id="information-wrapper">
             <div className='information-main'>
                 <div className='my-info-title'>비밀번호 변경</div>
-                
                 <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-
                 <div className='information-container'>
-                    <div className='infomation-contents'>
+                    <div className='information-contents'>
                         <InputBox 
                             label="비밀번호" 
                             type="password" 
@@ -134,11 +128,9 @@ export default function MyInfoPwModify() {
                             onChangeHandler={onPasswordCheckChangeHandler} 
                             message={passwordCheckMessage} error 
                         />
-
                     <div className="authentication-button-container">
                         <div className={pwUpdateButtonClass} onClick={ onPwUpdateButtonClickHandler }>확인</div>
                     </div>
-                    
                     </div>
                 </div>
             </div>

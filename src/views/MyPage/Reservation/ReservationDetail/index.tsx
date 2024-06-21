@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
@@ -17,36 +17,36 @@ export default function MyReservationDetail() {
     const { reservationCode } = useParams();
 
     const [cookies] = useCookies();
-    const [carImageUrl, setCarImageUrl] = useState<string>('');
-    const [nickName, setNickName] = useState<string>('');
-    const [reservationStart, setReservationStart] = useState<string>('');
-    const [reservationEnd, setReservationEnd] = useState<string>('');
-    const [insuranceType, setInsuranceType] = useState<string>('');
-    
-    const [carOil, setCarOil] = useState<number>(0);
-    const [grade, setGrade] = useState<string>('');
-    const [rentCompany, setRentCompany] = useState<string>('');
-    const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
-    const [address, setAddress] = useState<string>('');
-    const [insurancePrice, setInsurancePrice] = useState<number>(0);
 
+    const [grade, setGrade] = useState<string>('');
+    const [carOil, setCarOil] = useState<number>(0);
+    const [address, setAddress] = useState<string>('');
     const [carName, setCarName] = useState<string>('');
+    const [nickName, setNickName] = useState<string>('');
     const [carNumber, setCarNumber] = useState<string>('');
+    const [carImageUrl, setCarImageUrl] = useState<string>('');
+    const [rentCompany, setRentCompany] = useState<string>('');
+    const [insuranceType, setInsuranceType] = useState<string>('');
+    const [insurancePrice, setInsurancePrice] = useState<number>(0);
+    const [reservationEnd, setReservationEnd] = useState<string>('');
+    const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
     const [reservationState, setReservationState] = useState<string>('');
+    const [reservationStart, setReservationStart] = useState<string>('');
 
     //                    function                    //
     const navigator = useNavigate();
 
     const GetMyReservationDetailResponse = (result: GetMyReservationDetailResponseDto | ResponseDto | null) => {
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 예약 번호입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NR' ? '존재하지 않는 예약입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '잘못된 예약 번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NR' ? '존재하지 않는 예약입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
+
             if (result?.code === 'AF') {
                 navigator(MAIN_ABSOLUTE_PATH);
                 return;
@@ -87,9 +87,7 @@ export default function MyReservationDetail() {
     };
 
     //                event handler                    //
-    const onListClickHandler = () => {
-        navigator(USER_RESERVATION_ABSOLUTE_PATH);
-    }
+    const onListClickHandler = () => navigator(USER_RESERVATION_ABSOLUTE_PATH);
 
     const onReservationCancelClickHandler = () => {
 
@@ -129,12 +127,12 @@ export default function MyReservationDetail() {
     insuranceType === 'super' ? '슈퍼자차' : '';
 
     const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
-
+    
+    //                    Render                       //
     return (
         <div id='information-wrapper'>
             <div className='information-main'>
                 <div className="my-info-title">예약내역 상세</div>
-                
                 <div className='reservation-car-container'>
                     <div className='reservation-up-title'>닉네임</div>
                     <div className='qna-detail-info-divider'>{'\|'}</div>
@@ -145,15 +143,12 @@ export default function MyReservationDetail() {
                     <div className='qna-detail-info-divider'>{'\|'}</div>
                     <div className='reservation-content'>{reservationStart} ~ {reservationEnd}</div>
                 </div>
-
                 <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-
                 <div className='my-reservation-detail-info'>
                     <div className='my-reservation-list-wrap'>                
                         <div className='my-reservation-car-image detail'>
                             <img style={{ width: '180%', height: '100%'}} src={carImageUrl} />
                         </div>
-                        
                         <div className='my-reservation-detail-list'>
                             <div className='reservation-car-container detail'>
                                 <div className='reservation-side-title'>차량명</div>
@@ -202,7 +197,6 @@ export default function MyReservationDetail() {
                             </div>
                         </div>
                     </div>
-
                     <div className='my-reservation-button'>
                         <div className='primary-button list' onClick={onListClickHandler}>목록</div>
                         <div className='error-button delete' onClick={onReservationCancelClickHandler}>예약취소</div>
