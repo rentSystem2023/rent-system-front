@@ -7,8 +7,8 @@ import { PostQnaBoardRequestDto } from 'src/apis/qna/dto/request';
 import { } from 'src/apis/qna/dto/request';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { PostQnaRequest } from 'src/apis/qna/dto';
 import axios from 'axios';
+import { PostQnaRequest } from 'src/apis/qna';
 
     //                    component                    //
 export default function QnAWrite() {

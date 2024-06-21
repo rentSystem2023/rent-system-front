@@ -8,8 +8,8 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
 import { QNA_DETAIL_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PutQnaRequestDto } from 'src/apis/qna/dto/request';
-import { getQnaRequest, putQnaRequest } from 'src/apis/qna/dto';
 import axios from 'axios';
+import { getQnaRequest, putQnaRequest } from 'src/apis/qna';
 
     //                    component                    //
 export default function QnaUpdate() {

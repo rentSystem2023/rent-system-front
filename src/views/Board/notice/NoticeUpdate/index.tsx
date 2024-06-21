@@ -132,7 +132,7 @@ export default function NoticeUpdate() {
             navigator(NOTICE_LIST_ABSOLUTE_PATH);
             return;
         }
-        getNoticeRequest(registNumber, cookies.accessToken).then(getNoticeResponse); // accessToken 추가
+        getNoticeRequest(registNumber).then(getNoticeResponse);
     }, [loginUserRole]);
 
     //                    Render                       //
