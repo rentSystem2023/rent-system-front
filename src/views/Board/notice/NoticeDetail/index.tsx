@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import './style.css'
 import { useNavigate, useParams } from 'react-router';
@@ -16,6 +16,7 @@ export default function NoticeDetail() {
     const { registNumber } = useParams();
 
     const [cookies] = useCookies();
+    
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
     const [writeDate, setWriteDate] = useState<string>('');
@@ -28,11 +29,11 @@ export default function NoticeDetail() {
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 접수번호입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '잘못된 접수번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -45,12 +46,12 @@ export default function NoticeDetail() {
         }
 
         if (!registNumber) return;
-        getNoticeRequest(registNumber, cookies.accessToken)
+        getNoticeRequest(registNumber)
             .then(getNoticeResponse);
     };
 
     const getNoticeResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
-    const message =
+        const message =
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '잘못된 접수번호입니다.' :
         result.code === 'AF' ? '인증에 실패했습니다.' :
@@ -67,23 +68,22 @@ export default function NoticeDetail() {
             return;
         }
 
-        const { title, writeDatetime, viewCount, writerId, imageUrl,contents } = result as GetNoticeBoardResponseDto;
+        const { title, writerId, writeDatetime, viewCount, contents, imageUrl } = result as GetNoticeBoardResponseDto;
         setTitle(title);
+        setWriterId(writerId);
         setWriteDate(writeDatetime);
         setViewCount(viewCount);
         setContents(contents);
-        setWriterId(writerId);
         setImageUrl(imageUrl);
     };
 
     const deleteNoticeRequest = (result: ResponseDto | null) => {
-
         const message =
-            !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '권한이 없습니다.' :
-                    result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-                        result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+        result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -96,33 +96,29 @@ export default function NoticeDetail() {
     //                event handler                    //
     const onListClickHandler = () => {
         navigator(NOTICE_LIST_ABSOLUTE_PATH);
-    }
+    };
 
     const onUpdateClickHandler = () => {
         if (!registNumber || loginUserId !== writerId) return;
         navigator(ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH(registNumber));
-    }
+    };
 
     const onDeleteClickHandler = () => {
         if (!registNumber || loginUserId !== writerId || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
-
-        deleteNoticeBoardRequest(registNumber, cookies.accessToken)
-            .then(deleteNoticeRequest)
-    }
+        deleteNoticeBoardRequest(registNumber, cookies.accessToken).then(deleteNoticeRequest)
+    };
 
     //                    effect                       //
     useEffect(() => {
         if (!registNumber) return;
-
-        getNoticeRequest(registNumber, cookies.accessToken).then(getNoticeResponse);
+        getNoticeRequest(registNumber).then(getNoticeResponse);
     }, []);
 
     useEffect(() => {
         if (!cookies.accessToken || !registNumber) return;
-        increaseViewCountRequest(registNumber, cookies.accessToken)
-            .then(increaseViewCountResponse);
+        increaseViewCountRequest(registNumber, cookies.accessToken).then(increaseViewCountResponse);
     }, []);
 
     //                    Render                       //
@@ -131,9 +127,7 @@ export default function NoticeDetail() {
             <div className='notice-detail-main-box'>
                 <div className='notice-detail-top-box'>
                     <div className='notice-detail-title-box'>{title}</div>
-                    
                     <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-
                     <div className='notice-detail-info-box'>
                         <div className='notice-detail-info'>작성자 : 관리자</div>
                         <div className='notice-detail-info-divider'>{'\|'}</div>
@@ -141,14 +135,10 @@ export default function NoticeDetail() {
                         <div className='notice-detail-info-divider'>{'\|'}</div>
                         <div className='notice-detail-info'>조회수 {viewCount}</div>
                     </div>
-
                     <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
                 </div>
-                
                 <div className='notice-detail-contents-box'>{contents}</div>
-
                 <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-
                 {imageUrl && <img src={imageUrl} alt="Database Image" className="file-image" />}
             </div>
             <div className='notice-detail-button-box'>

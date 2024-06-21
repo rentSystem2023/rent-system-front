@@ -1,14 +1,14 @@
     import React, { ChangeEvent, useEffect, useState } from 'react';
     import { useCookies } from 'react-cookie';
     import { useNavigate } from 'react-router-dom';
-    import { getSearchQnaListRequest } from 'src/apis/qna/dto';
-    import { GetSearchQnaBoardListResponseDto } from 'src/apis/qna/dto/response';
     import ResponseDto from 'src/apis/response.dto';
     import { AUTH_SIGN_IN_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_REGIST_ABSOLUTE_PATH} from 'src/constant';
     import { useUserStore } from 'src/stores';
     import { QnaListItem } from 'src/types';
     import './style.css';
     import { usePagination } from 'src/hooks';
+    import { getSearchQnaListRequest } from 'src/apis/qna';
+import { GetSearchQnaBoardListResponseDto } from 'src/apis/qna/dto/response';
 
     //                    component                    //
     function ListItem ({ 

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { useUserStore } from 'src/stores';
 import { ADMIN_NOTICE_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, NOTICE_DETAIL_ABSOLUTE_PATH } from 'src/constant';
@@ -15,13 +15,13 @@ function ListItem ({
     index,
     registNumber,
     title,
-    writerId,
     writeDatetime,
     viewCount
 }:NoticeListItem & { index: number }) {
     
     //                    function                     //
     const navigator = useNavigate();
+    
     //                event handler                    //
     const onClickHandler = () => navigator(NOTICE_DETAIL_ABSOLUTE_PATH(registNumber));
 
@@ -56,7 +56,9 @@ export default function NoticeList() {
     } = usePagination<NoticeListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 
     const {loginUserRole} = useUserStore();
+
     const [cookies] = useCookies();
+    
     const [searchWord, setSearchWord] = useState<string>('');
 
     //                    function                     //
