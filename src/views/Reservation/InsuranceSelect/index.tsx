@@ -83,14 +83,16 @@ function ListItem ({
 export default function InsuranceSelect() {
   
   //                      state                      //
+  const { address, reservationStart, reservationEnd, selectedCar, selectedInsurance } = useReservationStore();
+  
   const [priceList, setPriceList] = useState<ReservationCarPriceListItem[]>([]);
+
   const [viewList, setViewList] = useState<ReservationCarPriceListItem[]>([]);
   const [totalLenght, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  const { address, reservationStart, reservationEnd, selectedCar, selectedInsurance } = useReservationStore();
   const [pageList, setPageList] = useState<number[]>([1]);
 
   //                    function                     //
