@@ -2,8 +2,8 @@ import axios from "axios";
 import ResponseDto from "src/apis/response.dto";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "src/apis";
 import { DELETE_NOTICE_URL, GET_NOTICE_DETAIL_URL, GET_NOTICE_LIST_URL, INCREASE_NOTICE_VIEW_COUNT_URL,NOTICE_LIST_SEARCH_URL,POST_NOTICE_REQUESURL, PUT_NOTICE_REGIST_URL } from "src/constant";
-import { PostNoticeBoardRequestDto, PutNoticeBoardRequestDto } from "./request";
-import { GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto } from "./response";
+import { PostNoticeBoardRequestDto, PutNoticeBoardRequestDto } from "./dto/request";
+import { GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto } from "./dto/response";
 
 // function : 공지사항 작성 API 함수 
 export const PostNoticeRequest = async(requestBody: PostNoticeBoardRequestDto, accessToken: string) => {

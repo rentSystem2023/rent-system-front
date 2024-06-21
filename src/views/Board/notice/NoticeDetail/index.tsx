@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import './style.css'
 import { useNavigate, useParams } from 'react-router';
-import { deleteNoticeBoardRequest, getNoticeRequest, increaseViewCountRequest } from 'src/apis/notice/dto';
+import { deleteNoticeBoardRequest, getNoticeRequest, increaseViewCountRequest } from 'src/apis/notice';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores/car.reservation.store';
 
-    //                    component                    //
+//                    component                    //
 export default function NoticeDetail() {
 
     //                      state                      //
@@ -52,11 +52,11 @@ export default function NoticeDetail() {
 
     const getNoticeResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 접수번호입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '잘못된 접수번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -79,11 +79,11 @@ export default function NoticeDetail() {
 
     const deleteNoticeRequest = (result: ResponseDto | null) => {
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-        result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);

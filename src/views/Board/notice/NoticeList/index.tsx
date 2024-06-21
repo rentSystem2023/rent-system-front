@@ -4,7 +4,7 @@ import { useUserStore } from 'src/stores/car.reservation.store';
 import { ADMIN_NOTICE_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, NOTICE_DETAIL_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { getSearcNoticeListRequest } from 'src/apis/notice/dto';
+import { getSearcNoticeListRequest } from 'src/apis/notice';
 import { GetSearchNoticeBoardListResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { NoticeListItem } from 'src/types';

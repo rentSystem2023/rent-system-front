@@ -3,7 +3,7 @@ import './style.css';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { PostNoticeRequest } from 'src/apis/notice/dto';
+import { PostNoticeRequest } from 'src/apis/notice';
 import { PostNoticeBoardRequestDto } from 'src/apis/notice/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';

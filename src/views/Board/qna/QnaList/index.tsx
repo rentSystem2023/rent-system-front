@@ -38,6 +38,7 @@
             console.log(loginUserId);
             return;
         }
+        // 수정해야 됨
         navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'ALL_QNA_LIST' } });
     }
 
@@ -135,13 +136,10 @@
     const onSearchButtonClickHandler = () => {
             getSearchQnaListRequest(searchWord).then(getSearchBoardListResponse);
     };
+
     //                    effect                       //
     useEffect(() => {
-        if (!cookies.accessToken) {
             getSearchQnaListRequest(searchWord).then(getSearchBoardListResponse);
-        } else {
-            getSearchQnaListRequest(searchWord).then(getSearchBoardListResponse);
-        }
     }, [isToggleOn]);
     
     //                    render                    //
@@ -151,7 +149,6 @@
     return (
     <>  
     <div className="title-text">문의사항</div>
-        
         <div id='table-list-wrapper'>
             <div className="qna-board-text">
                 <div className="qna-board-image help"></div>
@@ -171,7 +168,6 @@
                     }
                 </div>
             </div>
-
             <div className='table-list-table'>
                 <div className='table-list-table-th qna'>
                     <div className='qna-list-table-reception-number'>순번</div>

@@ -35,7 +35,7 @@ export default function QnaDetail() {
     const increaseViewCountResponse = (result: ResponseDto | null) => {
 
         const message =
-        !result ? '서버에 문제가 있습니다.' :
+            !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '잘못된 접수번호입니다.' :
             result.code === 'AF' ? '인증에 실패했습니다.' :
             result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
@@ -58,11 +58,11 @@ export default function QnaDetail() {
     const getBoardResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
 
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 접수번호입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '잘못된 접수번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
     
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -87,14 +87,13 @@ export default function QnaDetail() {
     };
 
     const postCommentResponse = (result: ResponseDto | null) => {
-
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
-        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-        result.code === 'WC' ? '이미 답글이 작성된 게시물입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'WC' ? '이미 답글이 작성된 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -106,13 +105,12 @@ export default function QnaDetail() {
     };
 
     const deleteQnaRequest = (result: ResponseDto | null) => {
-
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-        result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU'){
             alert(message);
@@ -129,14 +127,12 @@ export default function QnaDetail() {
 
     //                event handler                    //
     const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-
         if (status || loginUserRole !== 'ROLE_ADMIN') return;
         const comment = event.target.value;
         setComment(comment);
     };
 
     const onCommentSubmitClickHandler = () => {
-
         if (!comment || !comment.trim()) return;
         if (!receptionNumber || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
 
@@ -145,7 +141,6 @@ export default function QnaDetail() {
     };
 
     const onListClickHandler = () => {
-
         const previousPage = location.state?.previousPage;
         if (previousPage === 'MY_QNA_LIST') {
             navigator(USER_QNA_ABSOLUTE_PATH);
@@ -155,7 +150,6 @@ export default function QnaDetail() {
     };
 
     const onUpdateClickHandler = () => {
-
         if (!receptionNumber || loginUserId !== writerId || status) return;
 
         const previousPage = location.state?.previousPage;
@@ -163,7 +157,6 @@ export default function QnaDetail() {
     };
 
     const onDeleteClickHandler = () => {
-
         if (!receptionNumber || loginUserId !== writerId || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
@@ -207,7 +200,6 @@ export default function QnaDetail() {
                     <div className='qna-detail-comment-textarea-box'>
                         <textarea style={{ height: `100px` }} className='qna-detail-comment-textarea' placeholder='답글을 작성해주세요.' value={comment === null ? '' : comment} onChange={onCommentChangeHandler} />
                     </div>
-                    
                     <div className='primary-button' onClick={onCommentSubmitClickHandler}>답글달기</div>
                 </div>
             }

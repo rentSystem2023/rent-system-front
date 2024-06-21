@@ -1,4 +1,4 @@
-import { POST_FIND_PASSWORD_REQUEST_URL, PUT_FIND_PW_RESET_REQUEST_URL } from './../../constant/index';
+import { POST_FIND_PASSWORD_REQUEST_URL, PUT_FIND_PW_RESET_REQUEST_URL } from 'src/constant/index';
 import axios from "axios";
 import {POST_EMAIL_AUTH_REQUEST_URL,POST_EMAIL_AUTH_CHECK_REQUEST_URL,POST_ID_CHECK_REQUEST_URL,POST_NICKNAME_CHECK_REQUEST_URL,POST_SIGN_UP_REQUEST_URL,POST_SIGN_IN_REQUEST_URL,POST_FIND_ID_REQUEST_URL} from "src/constant";
 import {EmailAuthCheckRequestDto,EmailAuthRequestDto,FindIdRequestDto,FindPasswordRequestDto,FindPasswordResetRequestDto,IdCheckRequestDto,NickNameCheckRequestDto,SignInRequestDto,SignUpRequestDto} from "./dto/request";
