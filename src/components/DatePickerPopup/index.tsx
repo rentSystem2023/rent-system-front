@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { getYYYYMMDD } from "src/utils";
 import './style.css'
-import { useReservationStore } from "src/stores";
+import { useReservationStore } from "src/stores/car.reservation.store";
 
 //                    component                    //
 export const DatePickerPopup = ({ onClose }: { onClose: () => void }) => {

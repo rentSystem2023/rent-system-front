@@ -3,7 +3,7 @@ export interface UserListItem {
     nickName: string;
     userEmail: string;
     joinDate: string;
-}
+};
 
 export interface CompanyListItem{
     companyCode : number;
@@ -13,7 +13,7 @@ export interface CompanyListItem{
     companyTelnumber : string;
     registDate : string;
     companyRule : string | null;
-}
+};
 
 export interface NoticeListItem{
     registNumber : number;
@@ -22,7 +22,7 @@ export interface NoticeListItem{
     viewCount : number;
     writerId : string;
     imageUrl : string;
-}
+};
 
 export interface QnaListItem {
     receptionNumber: number;
@@ -49,7 +49,7 @@ export interface PopularCarListItem {
     carImageUrl: string;
     carName: string;
     totalReservationCount: number;
-}
+};
 
 export interface ReservationCarPriceListItem {
     carName : string;
@@ -61,7 +61,7 @@ export interface ReservationCarPriceListItem {
     normalPrice : number;
     luxuryPrice : number;
     superPrice : number;
-}
+};
 
 export interface MyReservationListItem{
     carImageUrl : string;
@@ -72,12 +72,12 @@ export interface MyReservationListItem{
     reservationStart: string;
     reservationEnd: string;
     reservationState: string;
-}
+};
 
 export interface ReservationCancelListItem{
     userId : string;
     reservationState : string;
-}
+};
 
 export interface ReservationCarListItem{
     carName : string;
@@ -85,7 +85,7 @@ export interface ReservationCarListItem{
     normalPrice : number;
     luxuryPrice : number;
     superPrice : number;
-}
+};
 
 export interface ReservationCarViewListItem{
     carName : string;
@@ -96,7 +96,7 @@ export interface ReservationCarViewListItem{
     lowLuxuryPrice : number;
     highSuperPrice : number;
     lowSuperPrice : number;
-}
+};
 
 export interface ReservationCarPriceListItem{
     carName : string;
@@ -108,7 +108,7 @@ export interface ReservationCarPriceListItem{
     normalPrice : number;
     luxuryPrice : number;
     superPrice : number;
-}
+};
 
 export interface ReservationUserListItem{
     reservationCode : number;
@@ -120,4 +120,4 @@ export interface ReservationUserListItem{
     userId : string;
     nickName : string;
     reservationState : string;
-}
+};

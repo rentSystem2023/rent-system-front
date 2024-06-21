@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './style.css';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { USER_INFO_ABSOLUTE_PATH, USER_QNA_ABSOLUTE_PATH, USER_RESERVATION_ABSOLUTE_PATH } from 'src/constant';

@@ -8,6 +8,7 @@ import { QnaListItem } from 'src/types';
 import './style.css';
 import { GetMyInfoQnaListResponseDto } from 'src/apis/user/dto/response';
 import { getMyQnaListRequest } from 'src/apis/user';
+import { usePagination } from 'src/hooks';
 
     //                    component                    //
     function ListItem({
@@ -54,54 +55,22 @@ export default function MyInfoQnaList() {
 
     const [cookies] = useCookies();
 
-    const [qnaList] = useState<QnaListItem[]>([]);
-    const [totalPage, setTotalPage] = useState<number>(1);
-    const [pageList, setPageList] = useState<number[]>([1]);
-    const [totalLength, setTotalLength] = useState<number>(0);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [viewList, setViewList] = useState<QnaListItem[]>([]);
-    const [totalSection, setTotalSection] = useState<number>(1);
-    const [currentSection, setCurrentSection] = useState<number>(1);
+    const {
+        viewList,
+        pageList,
+        totalPage,
+        currentPage,
+        totalLength,
+        setCurrentPage,
+        setCurrentSection,
+        changeBoardList,
+        onPageClickHandler,
+        onPreSectionClickHandler,
+        onNextSectionClickHandler
+    } = usePagination<QnaListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 
     //                    function                     //
     const navigator = useNavigate();
-
-    const changePage = (boardList: QnaListItem[], totalLength: number) => {
-        if (!currentPage) return;
-        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-        let endIndex = currentPage * COUNT_PER_PAGE;
-
-        if (endIndex > totalLength - 1) endIndex = totalLength;
-        const viewList = boardList.slice(startIndex, endIndex);
-        setViewList(viewList);
-    };
-
-    const changeSection = (totalPage: number) => {
-        if (!currentPage) return;
-        const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-        let endPage = currentSection * COUNT_PER_SECTION;
-
-        if (endPage > totalPage) endPage = totalPage;
-        const pageList: number[] = [];
-
-        for (let page = startPage; page <= endPage; page++) pageList.push(page);
-        setPageList(pageList);
-    };
-
-    const changeBoardList = (boardList: QnaListItem[]) => {
-
-        const totalLength = boardList.length;
-        setTotalLength(totalLength);
-
-        const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
-        setTotalPage(totalPage);
-
-        const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-        setTotalSection(totalSection);
-
-        changePage(boardList, totalLength);
-        changeSection(totalPage);
-    };
 
     const getMyQnaListResponse = (result: GetMyInfoQnaListResponseDto | ResponseDto | null) => {
         const message =
@@ -122,36 +91,11 @@ export default function MyInfoQnaList() {
         setCurrentSection(!qnaList.length ? 0 : 1);
     };
 
-    //                event handler                    //
-    const onPageClickHandler = (page: number) => setCurrentPage(page);
-
-    const onPreSectionClickHandler = () => {
-        if (currentSection <= 1) return;
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-    };
-
-    const onNextSectionClickHandler = () => {
-        if (currentSection === totalSection) return;
-        setCurrentSection(currentSection + 1);
-        setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
-    };
-
     //                    effect                       //
     useEffect (() => {
         if (!cookies.accessToken || loginUserRole !== 'ROLE_USER') return;
         getMyQnaListRequest(cookies.accessToken).then(getMyQnaListResponse);
     }, []);
-
-    useEffect(() => {
-        if (!qnaList.length) return;
-        changePage(qnaList, totalLength);
-    }, [currentPage]);
-
-    useEffect(() => {
-        if (!qnaList.length) return;
-        changeSection(totalPage);
-    }, [currentSection]);
 
     //                    Render                       //
     return (
