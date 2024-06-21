@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 import { useReservationStore } from 'src/stores/car.reservation.store';
 import { getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_ABSOLUTE_PATH, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
+import { usePagination } from 'src/hooks';
 
 //                    component                    //
 function ListItem ({
@@ -85,55 +86,22 @@ export default function InsuranceSelect() {
   //                      state                      //
   const { address, reservationStart, reservationEnd, selectedCar, selectedInsurance } = useReservationStore();
   
-  const [priceList, setPriceList] = useState<ReservationCarPriceListItem[]>([]);
-
-  const [viewList, setViewList] = useState<ReservationCarPriceListItem[]>([]);
-  const [totalLenght, setTotalLength] = useState<number>(0);
-  const [totalPage, setTotalPage] = useState<number>(1);
-  const [totalSection, setTotalSection] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentSection, setCurrentSection] = useState<number>(1);
-  const [pageList, setPageList] = useState<number[]>([1]);
+  const {
+    viewList,
+    pageList,
+    totalPage,
+    currentPage,
+    totalLength,
+    setCurrentPage,
+    setCurrentSection,
+    changeBoardList,
+    onPageClickHandler,
+    onPreSectionClickHandler,
+    onNextSectionClickHandler
+} = usePagination<ReservationCarPriceListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 
   //                    function                     //
   const navigator = useNavigate();
-
-  const changePage = (priceList: ReservationCarPriceListItem[], totalLenght: number) => {
-    if (!currentPage) return;
-    const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-    let endIndex = currentPage * COUNT_RESERVATION_PAGE;
-    if (endIndex > totalLenght - 1) endIndex = totalLenght;
-    const viewList = priceList.slice(startIndex, endIndex);
-    setViewList(viewList);
-};
-
-  const changeSection = (totalPage: number) => {
-    if (!currentPage) return;
-    const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-    let endPage = currentSection * COUNT_PER_SECTION;
-    if (endPage > totalPage) endPage = totalPage;
-    const pageList: number[] = [];
-    for (let page = startPage; page <= endPage; page++) pageList.push(page);
-    setPageList(pageList);
-  };
-
-  const changePriceList = (priceList: ReservationCarPriceListItem[]) => {
-
-    setPriceList(priceList);
-
-    const totalLenght = priceList.length;
-    setTotalLength(totalLenght);
-
-    const totalPage = Math.floor((totalLenght - 1) / COUNT_RESERVATION_PAGE) + 1;
-    setTotalPage(totalPage);
-
-    const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-    setTotalSection(totalSection);
-
-    changePage(priceList, totalLenght);
-
-    changeSection(totalPage);
-  };
 
   const getCompanyListResponse = (result: GetSearchReservationCarPriceListResponseDto | ResponseDto | null) => {
     const message =
@@ -149,39 +117,12 @@ export default function InsuranceSelect() {
 
       const { reservationCarPriceList } = result as GetSearchReservationCarPriceListResponseDto;
 
-      setPriceList(reservationCarPriceList);
       setCurrentPage(!reservationCarPriceList.length ? 0 : 1);
       setCurrentSection(!reservationCarPriceList.length ? 0 : 1);
-      changePriceList(reservationCarPriceList);
-  };
-
-  const onPageClickHandler = (page: number) => {
-      setCurrentPage(page);
-  };
-
-  const onPreSectionClickHandler = () => {
-      if (currentSection <= 1) return;
-      setCurrentSection(currentSection - 1);
-      setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-  };
-
-  const onNextSectionClickHandler = () => {
-      if (currentSection === totalSection) return;
-      setCurrentSection(currentSection + 1);
-      setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+      changeBoardList(reservationCarPriceList);
   };
 
   //                    effect                       //
-  useEffect(() => {
-    if (!priceList.length) return;
-    changePage(priceList, totalLenght);
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (!priceList.length) return;
-    changeSection(totalPage);
-  }, [currentSection]);
-
   useEffect(() => {
     if (!selectedCar) {
       navigator(MAIN_ABSOLUTE_PATH) 
@@ -192,10 +133,10 @@ export default function InsuranceSelect() {
   
   if (!selectedCar) return <></>;
 
-    const insuranceType =
-    selectedInsurance === 'normal' ? '완전자차' : 
-    selectedInsurance === 'luxury' ? '고급자차' :
-    selectedInsurance === 'super' ? '슈퍼자차' : '';
+  const insuranceType =
+  selectedInsurance === 'normal' ? '완전자차' : 
+  selectedInsurance === 'luxury' ? '고급자차' :
+  selectedInsurance === 'super' ? '슈퍼자차' : '';
 
   //                    Render                       //
   return (
