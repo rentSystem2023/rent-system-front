@@ -6,8 +6,7 @@ import { deleteNoticeBoardRequest, getNoticeRequest, increaseViewCountRequest } 
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
-
+import { useUserStore } from 'src/stores/car.reservation.store';
     //                    component                    //
 export default function NoticeDetail() {
 
@@ -19,10 +18,10 @@ export default function NoticeDetail() {
     
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
-    const [writeDate, setWriteDate] = useState<string>('');
-    const [viewCount, setViewCount] = useState<number>(0);
     const [contents, setContents] = useState<string>('');
     const [imageUrl, setImageUrl] = useState<string>('');
+    const [viewCount, setViewCount] = useState<number>(0);
+    const [writeDate, setWriteDate] = useState<string>('');
 
     //                    function                     //
     const navigator = useNavigate();
@@ -94,10 +93,8 @@ export default function NoticeDetail() {
     };
 
     //                event handler                    //
-    const onListClickHandler = () => {
-        navigator(NOTICE_LIST_ABSOLUTE_PATH);
-    };
-
+    const onListClickHandler = () => navigator(NOTICE_LIST_ABSOLUTE_PATH);
+    
     const onUpdateClickHandler = () => {
         if (!registNumber || loginUserId !== writerId) return;
         navigator(ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH(registNumber));
@@ -106,6 +103,7 @@ export default function NoticeDetail() {
     const onDeleteClickHandler = () => {
         if (!registNumber || loginUserId !== writerId || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
+        
         if (!isConfirm) return;
         deleteNoticeBoardRequest(registNumber, cookies.accessToken).then(deleteNoticeRequest)
     };

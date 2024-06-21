@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 
@@ -16,27 +16,27 @@ export default function NoticeUpdate() {
 
     //                      state                      //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
+    const { registNumber } = useParams();
     const { loginUserId, loginUserRole } = useUserStore();
 
     const [cookies] = useCookies();
-    const [writerId, setWriterId] = useState<string>('');
+
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null);
 
-    const { registNumber } = useParams();
     //                    function                    //
     const navigator = useNavigate();
 
     const getNoticeResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -44,7 +44,7 @@ export default function NoticeUpdate() {
             return;
         }
 
-        const { writerId, title, contents, imageUrl } = result as GetNoticeBoardResponseDto;
+        const { title, writerId, contents, imageUrl } = result as GetNoticeBoardResponseDto;
         if (writerId !== loginUserId) {
             alert('권한이 없습니다.');
             navigator(NOTICE_LIST_ABSOLUTE_PATH);
@@ -53,7 +53,6 @@ export default function NoticeUpdate() {
 
         setTitle(title);
         setContents(contents);
-        setWriterId(writerId);
         setImageUrl(imageUrl);
         setInitialImageUrl(imageUrl);
     };
@@ -61,11 +60,11 @@ export default function NoticeUpdate() {
     const putNoticeResponse = (result: ResponseDto | null) => {
         const message =
         !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'VF' ? '모든 값을 입력해주세요.' :
-        result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-        result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '모든 값을 입력해주세요.' :
+            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+            result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);

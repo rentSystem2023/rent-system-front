@@ -24,8 +24,8 @@ export const getNoticeListRequest = async(accessToken: string) => {
 };
 
 // function : 공지사항 검색 리스트 불러오기 API 함수
-export const getSearcNoticeListRequest = async(word: string, accessToken: string) => {
-    const config = {...bearerAuthorization(accessToken), params: {word}}
+export const getSearcNoticeListRequest = async(word: string) => {
+    const config = { params: {word}}
     const result = await axios
         .get(NOTICE_LIST_SEARCH_URL, config)
         .then(requestHandler<GetSearchNoticeBoardListResponseDto>) 

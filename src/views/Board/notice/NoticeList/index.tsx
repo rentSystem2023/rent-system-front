@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { ADMIN_NOTICE_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, NOTICE_DETAIL_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
@@ -19,7 +19,7 @@ function ListItem ({
     viewCount
 }:NoticeListItem & { index: number }) {
     
-    //                    function                     //
+    //                    function                     // 
     const navigator = useNavigate();
     
     //                event handler                    //
@@ -65,7 +65,6 @@ export default function NoticeList() {
     const navigator = useNavigate();
 
     const getSearchBoardListResponse = (result: GetSearchNoticeBoardListResponseDto | ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '검색어를 입력하세요.' : 
@@ -88,7 +87,7 @@ export default function NoticeList() {
     //                event handler                    //
     const onWriteButtonClickHandler = () => {
         if (loginUserRole !== 'ROLE_ADMIN') return;
-        
+
         navigator(ADMIN_NOTICE_REGIST_ABSOLUTE_PATH);
     };
 
@@ -98,21 +97,13 @@ export default function NoticeList() {
     };
 
     const onSearchButtonClickHandler = () => {
-        if (!searchWord) {
-            getSearcNoticeListRequest('', cookies.accessToken).then(getSearchBoardListResponse);
-        } else {
-            if (!cookies.accessToken) return;
-            getSearcNoticeListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-        }
+            getSearcNoticeListRequest(searchWord).then(getSearchBoardListResponse);
+
     };
 
     //                    effect                       //
     useEffect(() => {
-        if (!cookies.accessToken) {
-            getSearcNoticeListRequest(searchWord, '').then(getSearchBoardListResponse);
-        } else {
-            getSearcNoticeListRequest(searchWord, cookies.accessToken).then(getSearchBoardListResponse);
-        }
+            getSearcNoticeListRequest(searchWord).then(getSearchBoardListResponse);
     }, []);
     
     //                    Render                       //
@@ -130,7 +121,6 @@ export default function NoticeList() {
                     }
                 </div>
             </div>
-
             <div className='table-list-table'>
                 <div className='table-list-table-th notice'>
                     <div className='notice-list-table-reception-number'>순번</div>

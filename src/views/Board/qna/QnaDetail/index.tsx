@@ -6,7 +6,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { MAIN_ABSOLUTE_PATH, QNA_LIST_ABSOLUTE_PATH, USER_QNA_ABSOLUTE_PATH } from 'src/constant';
 import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qna/dto/response';
 import { PostCommentRequest, deleteBoardRequest, getQnaRequest, increaseViewCountRequest } from 'src/apis/qna';
-import useUserStore from 'src/stores/user.store';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { PostQnaCommentRequestDto } from 'src/apis/qna/dto/request';
 
     //                    component                    //
