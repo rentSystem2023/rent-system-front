@@ -6,12 +6,12 @@ import { useNavigate, useParams } from 'react-router';
 
 import ResponseDto from 'src/apis/response.dto';
 import { NOTICE_DETAIL_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
-import axios from 'axios';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/notice/dto/response';
 import { getNoticeRequest, putNoticeRequest } from 'src/apis/notice/dto';
 import { PutNoticeBoardRequestDto } from 'src/apis/notice/dto/request';
+import { uploadFile } from 'src/apis/imageUrl';
 
-    //                    component                    //
+//                    component                    //
 export default function NoticeUpdate() {
 
     //                      state                      //
@@ -59,7 +59,7 @@ export default function NoticeUpdate() {
 
     const putNoticeResponse = (result: ResponseDto | null) => {
         const message =
-        !result ? '서버에 문제가 있습니다.' :
+            !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
             result.code === 'VF' ? '모든 값을 입력해주세요.' :
             result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
@@ -77,8 +77,7 @@ export default function NoticeUpdate() {
 
     //                event handler                    //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const title = event.target.value;
-        setTitle(title);
+        setTitle(event.target.value);
     };
 
     const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -97,19 +96,16 @@ export default function NoticeUpdate() {
 
         let imageUrlToUpdate = imageUrl;
         if (selectedFile) {
-            const formData = new FormData();
-            formData.append('file', selectedFile);
-            imageUrlToUpdate = await axios.post('http://localhost:4000/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-                .then(response => response.data ? response.data : '');
+            imageUrlToUpdate = await uploadFile(selectedFile);
         } else {
-            imageUrlToUpdate = initialImageUrl; 
+            imageUrlToUpdate = initialImageUrl;
         }
 
         const requestBody: PutNoticeBoardRequestDto = {
             title,
             contents,
             imageUrl: imageUrlToUpdate
-        }
+        };
         putNoticeRequest(registNumber, requestBody, cookies.accessToken).then(putNoticeResponse);
     };
 
@@ -132,23 +128,38 @@ export default function NoticeUpdate() {
             return;
         }
         getNoticeRequest(registNumber).then(getNoticeResponse);
-    }, [loginUserRole]);
+    }, [loginUserRole, registNumber, cookies.accessToken, navigator]);
 
     //                    Render                       //
     return (
         <div id="qna-write-wrapper">
             <div className='qna-write-top'>
                 <div className='qna-write-title-box'>
-                    <input className='qna-write-title-input' placeholder='제목을 입력해 주세요' value={title} onChange={onTitleChangeHandler} />
+                    <input
+                        className='qna-write-title-input'
+                        placeholder='제목을 입력해 주세요'
+                        value={title}
+                        onChange={onTitleChangeHandler}
+                    />
                 </div>
-                <div className='primary-button' onClick={onUpdateButtonClickHandler}>올리기</div>
+                <div className='primary-button' onClick={onUpdateButtonClickHandler}>
+                    올리기
+                </div>
             </div>
             <div className='qna-write-contents-box'>
-                <textarea ref={contentsRef} className='qna-write-contents-textarea' rows={10} placeholder='내용을 입력해주세요/ 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
-                
-                <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-
-                <div className='file-select'>파일첨부<input type="file" onChange={onFileChangeHandler} />
+                <textarea
+                    ref={contentsRef}
+                    className='qna-write-contents-textarea'
+                    rows={10}
+                    placeholder='내용을 입력해주세요 / 1000자'
+                    maxLength={1000}
+                    value={contents}
+                    onChange={onContentsChangeHandler}
+                />
+                <div style={{ border: '1px solid rgba(238, 238, 238, 1)' }}></div>
+                <div className='file-select'>
+                    파일첨부
+                    <input type="file" onChange={onFileChangeHandler} />
                 </div>
                 {imageUrl && (
                     <div className='file-upload'>

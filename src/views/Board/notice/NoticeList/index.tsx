@@ -41,6 +41,8 @@ function ListItem ({
 export default function NoticeList() {
     
     //                      state                      //
+    const {loginUserRole} = useUserStore();
+
     const {
         viewList,
         pageList,
@@ -54,10 +56,6 @@ export default function NoticeList() {
         onPreSectionClickHandler,
         onNextSectionClickHandler
     } = usePagination<NoticeListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
-
-    const {loginUserRole} = useUserStore();
-
-    const [cookies] = useCookies();
     
     const [searchWord, setSearchWord] = useState<string>('');
 
@@ -98,7 +96,6 @@ export default function NoticeList() {
 
     const onSearchButtonClickHandler = () => {
             getSearcNoticeListRequest(searchWord).then(getSearchBoardListResponse);
-
     };
 
     //                    effect                       //
@@ -110,7 +107,7 @@ export default function NoticeList() {
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
 
     return (
-    <>  
+    <>
     <div className="title-text">공지사항</div>
         <div id='table-list-wrapper'>
             <div className='table-list-top'>

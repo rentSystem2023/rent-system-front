@@ -7,6 +7,7 @@ import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/ap
 import ResponseDto from 'src/apis/response.dto';
 import { ADMIN_NOTICE_UPDATE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores/car.reservation.store';
+
     //                    component                    //
 export default function NoticeDetail() {
 
