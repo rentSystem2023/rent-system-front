@@ -141,13 +141,13 @@ const handlePopularCarListResponse = (result: GetReservationPopularListResponseD
                             <div className='popular-car-list-title'>차탕갑서 인기차량</div>
                         </div>
                         <div className="popular-car-slider">
-                            <div className='table-list-page-left' onClick={prevSlide}></div>
+                            <div className='popular-car-page-left' onClick={prevSlide}></div>
                             <div className="popular-car-list-box">
                                 {popularList.slice(currentSlide * 4, currentSlide * 4 + 4).map((item, index) => (
                                     <ListItem key={index} {...item} />
                                 ))}
                             </div>
-                            <div className='table-list-page-right' onClick={nextSlide}></div>
+                            <div className='popular-car-page-right' onClick={nextSlide}></div>
                         </div>
                     </div>
                 </div>
