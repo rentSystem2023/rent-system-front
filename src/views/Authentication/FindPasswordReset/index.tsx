@@ -6,10 +6,10 @@ import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/Inputbox'
 import { AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
-//                    component                    //
+    //                    component                    //
 export default function FindPasswordReset() {
 
-    //                    state                    //
+    //                      state                      //
     const [password, setPassword] = useState<string>('');
     const { userId } = useParams();
 
@@ -22,7 +22,7 @@ export default function FindPasswordReset() {
     const isFindPwActive = isPasswordPattern && isEqualPassword;
     const findPwResetButtonClass = `${isFindPwActive ? 'primary' : 'disable'}-button full-width`;
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const findPwResetResponse = (result: ResponseDto | null) => {
@@ -39,7 +39,7 @@ export default function FindPasswordReset() {
         }
     };
 
-    //                    event handler                    //
+    //                event handler                    //
     const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setPassword(value);
@@ -100,7 +100,7 @@ export default function FindPasswordReset() {
     };
     
 
-    //                    render                    //
+    //                    render                       //
     return (
         <div id="authentication-wrapper">
             <div className="title-text">비밀번호 재설정</div>

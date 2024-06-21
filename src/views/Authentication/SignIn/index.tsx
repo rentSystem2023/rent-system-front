@@ -9,17 +9,17 @@ import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
 import { AUTH_SIGN_UP_ABSOLUTE_PATH, AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH, SNS_SIGN_IN_REQUEST_URL, MAIN_ABSOLUTE_PATH } from "src/constant";
 
-//                    component                    //
+    //                    component                    //
 export function Sns () {
 
-    //                    state                    //
+    //                      state                      //
     const { accessToken, expires } = useParams();
     const [cookie, setCookie] = useCookies();
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
-    //                    effect                    //
+    //                    effect                       //
     useEffect(() => {
         if (!accessToken || !expires) return;
         const expiration = new Date(Date.now() + (Number(expires) * 1000));
@@ -28,24 +28,24 @@ export function Sns () {
         navigator(MAIN_ABSOLUTE_PATH);
     }, []);
 
-    //                    render                    //
+    //                    render                       //
     return <></>;
 };
 
-//                    interface                    //
+    //                    interface                    //
 interface SnsContainerProps {
     title: string;
 };
 
-//                    component                    //
+    //                    component                    //
 function SnsContainer({ title }: SnsContainerProps) {
 
-    //                    event handler                    //
+    //                    event handler                //
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
         window.location.href = SNS_SIGN_IN_REQUEST_URL(type);
     };
 
-    //                    render                    //
+    //                    render                       //
     return (
         <div className="authentication-sns-container">
             <div className="sns-container-title label">{title}</div>
@@ -57,16 +57,16 @@ function SnsContainer({ title }: SnsContainerProps) {
     );
 };
 
-//                    component                    //
+    //                    component                    //
 export default function SignIn() {
 
-    //                    state                    //
+    //                      state                      //
     const [cookies, setCookie] = useCookies();
     const [id, setId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [message, setMessage] = useState<string>('');
 
-    //                    function                    //
+    //                    function                     //
     const navigator = useNavigate();
 
     const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
@@ -89,7 +89,7 @@ export default function SignIn() {
         navigator(MAIN_ABSOLUTE_PATH);
     };
 
-    //                    event handler                    //
+    //                    event handler                //
     const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setId(event.target.value);
         setMessage('');
@@ -124,7 +124,7 @@ export default function SignIn() {
         navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
     };
 
-    //                    render                    //
+    //                    render                       //
     return (
         <div id="authentication-wrapper">
             <div className="title-text">로그인</div>

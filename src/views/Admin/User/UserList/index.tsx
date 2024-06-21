@@ -10,6 +10,7 @@ import { getSearchUserListRequest } from 'src/apis/userList';
 import { GetSearchUserListResponseDto } from 'src/apis/userList/dto/response';
 import { usePagination } from 'src/hooks';
 
+    //                    component                    //
 function ListItem ({
     index,
     userId,

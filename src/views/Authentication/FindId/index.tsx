@@ -6,8 +6,9 @@ import { FindIdRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import InputBox from 'src/components/Inputbox'
-import { AUTH_FIND_ID_ABSOLUTE_PATH, AUTH_FIND_PASSWORD_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { AUTH_FIND_PASSWORD_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
+    //                    component                    //
 export default function FindId() {
 
     //                    state                    //
