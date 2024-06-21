@@ -13,17 +13,19 @@ import { useUserStore } from "src/stores/car.reservation.store";
     //                    component                    //
 export default function CompanyUpdate() {
     //                      state                      //
-    const { loginUserRole } = useUserStore();
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-    const [cookies] = useCookies();
-    const { companyCode } = useParams();
 
-    const [rentCompany, setRentCompany] = useState<string>('');
-    const [address, setAddress] = useState<string>('');
+    const { companyCode } = useParams();
+    const { loginUserRole } = useUserStore();
+    
+    const [cookies] = useCookies();
+
     const [owner, setOwner] = useState<string>('');
-    const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
+    const [address, setAddress] = useState<string>('');
     const [registDate, setRegistDate] = useState<string>('');
+    const [rentCompany, setRentCompany] = useState<string>('');
     const [companyRule, setCompanyRule] = useState<string>('');
+    const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
 
     //                    function                     //
     const navigator = useNavigate();
@@ -100,16 +102,16 @@ export default function CompanyUpdate() {
     
         const requestBody: PutCompanyRequestDto = { companyCode, rentCompany, address, owner, companyTelnumber, companyRule  };
         PutCompanyRequest(companyCode, requestBody, cookies.accessToken).then(putCompanyResponse); 
-        
     };
 
     //                    effect                       //
     useEffect(() => {
         if (!companyCode || !cookies.accessToken) return navigator(MAIN_ABSOLUTE_PATH) ;
+
         if (!loginUserRole) return;
+
         if (loginUserRole !== 'ROLE_ADMIN') {
             navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
-
             return;
         }
         getCompanyDetailRequest(companyCode, cookies.accessToken).then(registCompanyResponse);
@@ -129,7 +131,6 @@ export default function CompanyUpdate() {
                                 <div className='admin-detail-content'>{companyCode}</div>
                             </div>
                         </div>
-                        
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체명</div>
@@ -142,7 +143,6 @@ export default function CompanyUpdate() {
                                 />
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 주소</div>
@@ -155,7 +155,6 @@ export default function CompanyUpdate() {
                                 />
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>담당자명</div>
@@ -168,7 +167,6 @@ export default function CompanyUpdate() {
                                 />
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 전화번호</div>
@@ -181,7 +179,6 @@ export default function CompanyUpdate() {
                                 />
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 등록일</div>
@@ -190,7 +187,6 @@ export default function CompanyUpdate() {
                                 <div className='admin-detail-content'>{registDate}</div>
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap rule'>
                             <div className='admin-title-wrap rule'>
                                 <div className='admin-detail-title'>영업 방침</div>
@@ -210,8 +206,7 @@ export default function CompanyUpdate() {
                             </div>
                         </div>
                     </div>
-            </div>
-            
+                </div>
             <div className="company-update-button-box">
                 <div className="primary-button comup" onClick={onUpdateButtonClickHandler}>수정</div>
             </div>

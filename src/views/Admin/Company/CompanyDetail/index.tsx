@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -11,27 +11,28 @@ import { deleteCompanyRequest, getCompanyDetailRequest } from 'src/apis/company'
     //                    component                    //
 export default function CompanyDetail() {
     //                      state                      //
-    const { loginUserRole } = useUserStore();
     const { companyCode } = useParams();
+    const { loginUserRole } = useUserStore();
 
     const [cookies] = useCookies();
-    const [rentCompany, setRentCompany] = useState<string>('');
-    const [address, setAddress] = useState<string>('');
+
     const [owner, setOwner] = useState<string>('');
-    const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
+    const [address, setAddress] = useState<string>('');
     const [registDate, setRegistDate] = useState<string>('');
+    const [rentCompany, setRentCompany] = useState<string>('');
     const [companyRule, setCompanyRule] = useState<string | null>('');
+    const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
 
     //                    function                    //
     const navigator = useNavigate();
 
     const getCompanyDetailResponse = (result: GetCompanyDetailResponseDto | ResponseDto | null) => {
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 업체 번호입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NC' ? '존재하지 않는 업체입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '잘못된 업체 번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NC' ? '존재하지 않는 업체입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -42,7 +43,6 @@ export default function CompanyDetail() {
         }
 
         const { rentCompany, address, owner, companyTelnumber, registDate, companyRule } = result as GetCompanyDetailResponseDto;
-
         setRentCompany(rentCompany);
         setAddress(address);
         setOwner(owner);
@@ -52,13 +52,12 @@ export default function CompanyDetail() {
     };
 
     const deleteBoardResponse = (result: ResponseDto | null) => {
-
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'VF' ? '올바르지 않은 업체입니다.' :
-        result.code === 'NC' ? '존재하지 않는 업체입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '올바르지 않은 업체입니다.' :
+            result.code === 'NC' ? '존재하지 않는 업체입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU'){
             alert(message);
@@ -69,9 +68,7 @@ export default function CompanyDetail() {
     };
 
     //                event handler                    //
-    const onListClickHandler = () => {
-        navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
-    }
+    const onListClickHandler = () => navigator(ADMIN_COMPANY_LIST_ABSOLUTE_PATH);
 
     const onUpdateClickHandler = () => {
         if (!companyCode || loginUserRole !== 'ROLE_ADMIN' ) return;
@@ -80,17 +77,17 @@ export default function CompanyDetail() {
 
     const onDeleteClickHandler = () => {
         if (!companyCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
+        
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
 
-        deleteCompanyRequest(companyCode, cookies.accessToken) 
-        .then(deleteBoardResponse)
-    }
+        deleteCompanyRequest(companyCode, cookies.accessToken).then(deleteBoardResponse)
+    };
 
     //                    effect                       //
     useEffect(() => {
         if (!companyCode || !cookies.accessToken || loginUserRole !== 'ROLE_ADMIN') return navigator(MAIN_ABSOLUTE_PATH);
-
+        
         getCompanyDetailRequest(companyCode, cookies.accessToken).then(getCompanyDetailResponse);
     }, []);
 
@@ -108,7 +105,6 @@ export default function CompanyDetail() {
                                 <div className='admin-detail-content'>{companyCode}</div>
                             </div>
                         </div>
-                        
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체명</div>
@@ -117,7 +113,6 @@ export default function CompanyDetail() {
                                 <div className='admin-detail-content'>{rentCompany}</div>
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 주소</div>
@@ -126,7 +121,6 @@ export default function CompanyDetail() {
                                 <div className='admin-detail-content'>{address}</div>
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>담당자명</div>
@@ -135,7 +129,6 @@ export default function CompanyDetail() {
                                 <div className='admin-detail-content'>{owner}</div>
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 전화번호</div>
@@ -144,7 +137,6 @@ export default function CompanyDetail() {
                                 <div className='admin-detail-content'>{companyTelnumber}</div>
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 등록일</div>
@@ -153,7 +145,6 @@ export default function CompanyDetail() {
                                 <div className='admin-detail-content'>{registDate}</div>
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap date'>
                             <div className='admin-title-wrap rule'>
                                 <div className='admin-detail-title'>업체 방침</div>
@@ -164,7 +155,6 @@ export default function CompanyDetail() {
                         </div>
                     </div>
             </div>
-
             <div className='admin-button-box company'>
                 <div className='primary-button list' onClick={onListClickHandler}>목록</div>
                 <div className='admin-button-active'>

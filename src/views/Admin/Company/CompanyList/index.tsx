@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { CompanyListItem } from 'src/types';
 import { useNavigate } from 'react-router';
@@ -10,7 +10,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { getSearchCompanyListRequest } from 'src/apis/company';
 import { usePagination } from 'src/hooks';
 
-    //                    component                    //
+//                    component                    //
 function ListItem ({
 index,
 companyCode,
@@ -41,10 +41,14 @@ registDate
     );
 }
 
-    //                    component                    //
+//                    component                    //
 export default function CompanyList() {
     
     //                      state                      //
+    const {loginUserRole} = useUserStore();
+    
+    const [cookies] = useCookies();
+
     const {
         viewList,
         pageList,
@@ -58,16 +62,12 @@ export default function CompanyList() {
         onPreSectionClickHandler,
         onNextSectionClickHandler
     } = usePagination<CompanyListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
-
-    const {loginUserRole} = useUserStore();
-    const [cookies] = useCookies();
     const [searchWord, setSearchWord] = useState<string>('');
 
     //                    function                     //
     const navigator = useNavigate();
 
     const getSearchCompanyListResponse = (result: GetSearchCompanyListResponseDto | ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '검색어를 입력하세요.' : 
@@ -99,12 +99,9 @@ export default function CompanyList() {
     };
 
     const onSearchButtonClickHandler = () => {
-        if (!searchWord) {
-            getSearchCompanyListRequest('', cookies.accessToken).then(getSearchCompanyListResponse);
-        } else {
-            if (!cookies.accessToken) return;
-            getSearchCompanyListRequest(searchWord, cookies.accessToken).then(getSearchCompanyListResponse);
-        }
+        if (!searchWord) return;
+        if (!cookies.accessToken) return;
+        getSearchCompanyListRequest(searchWord, cookies.accessToken).then(getSearchCompanyListResponse);
     };
 
     //                    effect                       //
@@ -116,7 +113,6 @@ export default function CompanyList() {
     //                    render                       //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return (
-    <div>
     <div id='table-list-wrapper'>
         <div className="my-info-title">업체 관리</div>
         <div className='table-list-top'>
@@ -157,7 +153,6 @@ export default function CompanyList() {
                 <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
             </div>
         </div>
-    </div>
     </div>
     );
 }

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import './style.css';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -9,19 +9,22 @@ import { postCompanyRequest } from 'src/apis/company';
 import { PostCompanyRequestDto } from 'src/apis/company/dto/request';
 import InputBox from 'src/components/Inputbox';
 
+//                    component                    //
 export default function CompanyRegist() {
 
     //                      state                      //
-    const [cookies] = useCookies();
-    const {loginUserRole} = useUserStore();
-    
-    const [companyCode, setCompanyCode] = useState<number | string>('');
-    const [rentCompany, setRentCompany] = useState<string>('');
-    const [address, setAddress] = useState<string>('');
-    const [owner, setOwner] = useState<string>('');
-    const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
-    const [companyRule, setCompanyRule] = useState<string>('');
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
+    
+    const {loginUserRole} = useUserStore();
+
+    const [cookies] = useCookies();
+    
+    const [owner, setOwner] = useState<string>('');
+    const [address, setAddress] = useState<string>('');
+    const [rentCompany, setRentCompany] = useState<string>('');
+    const [companyRule, setCompanyRule] = useState<string>('');
+    const [companyCode, setCompanyCode] = useState<number | string>('');
+    const [companyTelnumber, setCompanyTelnumber] = useState<string>('');
 
     //                    function                     //
     const navigator = useNavigate();
@@ -104,9 +107,9 @@ export default function CompanyRegist() {
     //                    Render                        //
     return (
         <div id="admin-detail-wrapper">
-        <div className="my-info-title">업체 정보 등록</div>
-            <div className='admin-detail-main-box company'>
-                <div className='admin-datail-contents'>
+            <div className="my-info-title">업체 정보 등록</div>
+                <div className='admin-detail-main-box company'>
+                    <div className='admin-datail-contents'>
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 고유번호</div>
@@ -119,7 +122,6 @@ export default function CompanyRegist() {
                                 />
                             </div>
                         </div>
-                        
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체명</div>
@@ -132,7 +134,6 @@ export default function CompanyRegist() {
                                 />
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 주소</div>
@@ -143,10 +144,8 @@ export default function CompanyRegist() {
                                 value={address} 
                                 onChangeHandler={onAddressChangeHandler} 
                             />
-
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>담당자명</div>
@@ -157,10 +156,8 @@ export default function CompanyRegist() {
                                 value={owner} 
                                 onChangeHandler={onOwnerChangeHandler} 
                             />
-
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap'>
                             <div className='admin-title-wrap'>
                                 <div className='admin-detail-title'>업체 전화번호</div>
@@ -171,10 +168,8 @@ export default function CompanyRegist() {
                                 value={companyTelnumber} 
                                 onChangeHandler={onCompanyTelnumberChangeHandler} 
                             />
-                            
                             </div>
                         </div>
-
                         <div className='admin-contents-wrap rule'>
                             <div className='admin-title-wrap rule'>
                                 <div className='admin-detail-title'>영업 방침</div>
@@ -193,10 +188,9 @@ export default function CompanyRegist() {
                             </div>
                         </div>
                     </div>
-            </div>
-            
-            <div className="company-update-button-box">
-            <div className="primary-button comup" onClick={onRegistButtonClickHandler}>등록</div>
+                </div>
+                <div className="company-update-button-box">
+                <div className="primary-button comup" onClick={onRegistButtonClickHandler}>등록</div>
             </div>
         </div>
     );
