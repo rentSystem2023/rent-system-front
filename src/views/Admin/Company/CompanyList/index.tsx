@@ -3,7 +3,7 @@ import './style.css'
 import { CompanyListItem } from 'src/types';
 import { useNavigate } from 'react-router';
 import { ADMIN_COMPANY_DETAIL_ABSOLUTE_PATH, ADMIN_COMPANY_REGIST_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import { useUserStore } from 'src/stores/car.reservation.store';
 import { useCookies } from 'react-cookie';
 import { GetSearchCompanyListResponseDto } from 'src/apis/company/dto/response';
 import ResponseDto from 'src/apis/response.dto';

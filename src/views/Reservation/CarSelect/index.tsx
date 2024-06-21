@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import SelectContainer from 'src/layouts/SelectContainer';
 import { getSearchReservationCarListRequest } from 'src/apis/reservation';
@@ -7,13 +7,15 @@ import ResponseDto from 'src/apis/response.dto';
 import { ReservationCarViewListItem } from 'src/types';
 import { COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, RESERVATION_CAR_ABSOLUTE_PATH, RESERVATION_COMPANY_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
-import { useReservationStore } from 'src/stores/';
+import { useReservationStore } from 'src/stores/car.reservation.store';
 import { usePagination } from 'src/hooks';
 
 //                    component                    //
 function ListItem (props: ReservationCarViewListItem) {
 
     //                      state                      //
+    const { setSelectedCar, setSelectedInsurance, reservationStart, reservationEnd } = useReservationStore();
+
     const {
         carName,
         carImageUrl,
@@ -24,23 +26,9 @@ function ListItem (props: ReservationCarViewListItem) {
         lowNormalPrice,
         lowSuperPrice
     } = props;
-    
-    const { setSelectedCar, setSelectedInsurance, reservationStart, reservationEnd } = useReservationStore();
 
     //                    function                     //
     const navigator = useNavigate();
-
-    const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
-
-    const calculateDateDifference = (start: string, end: string) => {
-        const startDate = new Date(start);
-        const endDate = new Date(end);
-        const timeDifference = endDate.getTime() - startDate.getTime();
-        const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // 밀리초를 일(day)로 변환
-        return dayDifference;
-    };
-
-    const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
 
     //                event handler                    //
     const onClickHandler = (insurance: string) => {
@@ -50,6 +38,18 @@ function ListItem (props: ReservationCarViewListItem) {
     };
 
     //                    Render                       //
+    const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
+
+    const calculateDateDifference = (start: string, end: string) => {
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        const timeDifference = endDate.getTime() - startDate.getTime();
+        const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+        return dayDifference;
+    };
+
+    const daysDifference = calculateDateDifference(reservationStart, reservationEnd);
+
     return(
         <>
         <div className='car-list-card'>
@@ -100,7 +100,7 @@ export default function CarSelect() {
         onNextSectionClickHandler
     } = usePagination<ReservationCarViewListItem>(COUNT_RESERVATION_PAGE, COUNT_PER_SECTION);
 
-    const [searchWord, setSearchWord] = useState<string>('');   
+    const [searchWord, setSearchWord] = useState<string>('');
 
     //                    function                    //
     const navigator = useNavigate();
@@ -165,13 +165,11 @@ export default function CarSelect() {
     }, [address, reservationStart, reservationEnd]);
 
     //                    Render                       //
-
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
 
     return (
         <div id="user-page-wrapper">
             <div className='reservation-select-container'>{<SelectContainer/>}</div>
-            
             <div className='car-select-wrap'>
                 <div className='option-container'>
                     <div className='table-list-search-box'>
@@ -181,11 +179,9 @@ export default function CarSelect() {
                         <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
                     </div>
                 </div>
-
                 <div className='car-list-wrap'>
                     {viewList.map(item => <ListItem {...item} />)}
                 </div>
-
                 <div className='table-list-pagenation'>
                     <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
                     <div className='table-list-page-box'>

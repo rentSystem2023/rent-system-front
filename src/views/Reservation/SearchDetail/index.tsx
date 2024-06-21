@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
-import { useReservationStore, useUserStore } from 'src/stores/';
+import { useReservationStore, useUserStore } from 'src/stores/car.reservation.store';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetSearchDetailListResponseDto, PostReservationResponseDto } from 'src/apis/reservation/dto/response';

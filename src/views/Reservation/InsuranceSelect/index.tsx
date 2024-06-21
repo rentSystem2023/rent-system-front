@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './style.css'
 import SelectContainer from 'src/layouts/SelectContainer';
 import { ReservationCarPriceListItem } from 'src/types';
 import { GetSearchReservationCarPriceListResponseDto } from 'src/apis/reservation/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { useNavigate } from 'react-router';
-import { useReservationStore } from 'src/stores/';
+import { useReservationStore } from 'src/stores/car.reservation.store';
 import { getSearchReservationCarPriceListRequest } from 'src/apis/reservation';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, COUNT_RESERVATION_PAGE, MAIN_ABSOLUTE_PATH, RESERVATION_REQUEST_ABSOLUTE_PATH } from 'src/constant';
 
@@ -28,13 +28,14 @@ function ListItem ({
 
   const onClickHandler = () => navigator(RESERVATION_REQUEST_ABSOLUTE_PATH(rentCompany));
 
+  //                    Render                       //
   const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
 
   const calculateDateDifference = (start: string, end: string) => {
     const startDate = new Date(start);
     const endDate = new Date(end);
     const timeDifference = endDate.getTime() - startDate.getTime();
-    const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // 밀리초를 일(day)로 변환
+    const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
     return dayDifference;
   };
 
@@ -45,7 +46,6 @@ function ListItem ({
   selectedInsurance === 'luxury' && luxuryPrice ? `${krw(luxuryPrice * daysDifference)}` :
   selectedInsurance === 'super' && superPrice ? `${krw(superPrice * daysDifference)}` : '';
 
-  //                    Render                       //
   return(
     <>
     <div className='insurance-list-container' onClick={onClickHandler}>
@@ -55,23 +55,19 @@ function ListItem ({
           <div className='qna-detail-info-divider'>{'\|'}</div>
           <div className='insurance-info-contents'>{rentCompany}</div>
         </div>
-
         <div className='insurance-info-title-container'>
           <div className='insurance-info-title'>연식</div>
           <div className='qna-detail-info-divider'>{'\|'}</div>
           <div className='insurance-info-contents'>{carYear}</div>
         </div>
       </div>
-      
       <div style={{border: '1px solid rgba(238, 238, 238, 1)'}}></div>
-
       <div className='insurance-info-wrap'>                
         <div className='insurance-info-title-container'>
           <div className='insurance-info-title'>주소</div>
           <div className='qna-detail-info-divider'>{'\|'}</div>
           <div className='insurance-info-contents'>{address}</div>
         </div>
-
         <div className='insurance-info-title-container'>
           <div className='insurance-info-title'>가격</div>
           <div className='qna-detail-info-divider'>{'\|'}</div>
@@ -80,7 +76,7 @@ function ListItem ({
       </div>
     </div>
     </>
-);
+  );
 }
 
 //                    component                    //
