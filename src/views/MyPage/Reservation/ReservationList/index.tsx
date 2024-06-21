@@ -28,12 +28,12 @@ function ListItem ({
     //                event handler                    //
     const onClickHandler = () => navigator(USER_RESERVATION_DETAIL_ABSOLUTE_PATH(reservationCode));
 
-    const reservationStateWord =
-        reservationState === 'reservationComplete' ? '예약 완료' :
-        reservationState === 'watingCancel' ? '예약 취소 대기' :
-        reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
-
     //                    Render                       //
+    const reservationStateWord =
+    reservationState === 'reservationComplete' ? '예약 완료' :
+    reservationState === 'waitingCancel' ? '예약 취소 대기' :
+    reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
+
     return (
         <div className='my-reservation-list-table' onClick={onClickHandler}>
             <div className='my-reservation-state'>{reservationStateWord}</div>

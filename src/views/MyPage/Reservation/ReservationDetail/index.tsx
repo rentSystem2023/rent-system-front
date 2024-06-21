@@ -101,7 +101,7 @@ export default function MyReservationDetail() {
         if (!isConfirm) return;
 
         const requestBody: PatchReservationRequestDto = { 
-            reservationState: 'watingCancel'
+            reservationState: 'waitingCancel'
         };
         
         patchReservationRequest(reservationCode, requestBody, cookies.accessToken)
@@ -121,14 +121,14 @@ export default function MyReservationDetail() {
         getReservationDetailMyListRequest(reservationCode, cookies.accessToken).then(GetMyReservationDetailResponse);
     }, []);
 
+    //                    Render                       //
     const insuranceTypes =
     insuranceType === 'normal' ? '완전자차' : 
     insuranceType === 'luxury' ? '고급자차' :
     insuranceType === 'super' ? '슈퍼자차' : '';
 
     const krw = (price: number) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
-    
-    //                    Render                       //
+
     return (
         <div id='information-wrapper'>
             <div className='information-main'>

@@ -14,11 +14,11 @@ import { PatchReservationCancelRequestDto} from 'src/apis/reservation/dto/reques
 export default function ReservationDetail() {
     
     //                      state                      //
-    const { loginUserRole } = useUserStore();
     const { reservationCode } = useParams();
+    const { loginUserRole } = useUserStore();
 
     const [cookies] = useCookies();
-    
+
     const [userId, setUserId] = useState<string>('');
     const [carName, setCarName] = useState<string>('');
     const [carNumber, setCarNumber] = useState<string>('');
@@ -95,7 +95,7 @@ export default function ReservationDetail() {
 
     const onReservationCancelClickHandler = () => {
         if (!reservationCode || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
-        if (reservationState !== 'watingCancel') {
+        if (reservationState !== 'waitingCancel') {
             alert('예약 취소 대기 상태에서만 예약 취소할 수 있습니다.')
             return;
         }
@@ -126,7 +126,7 @@ export default function ReservationDetail() {
     //                    render                    //
     const reservationStateWord =
     reservationState === 'reservationComplete' ? '예약 완료' :
-    reservationState === 'watingCancel' ? '예약 취소 대기' :
+    reservationState === 'waitingCancel' ? '예약 취소 대기' :
     reservationState === 'cancelComplete' ? '예약 취소 완료' : '';
 
     const insuranceTypes =
