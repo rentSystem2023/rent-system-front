@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import "./style.css";
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
@@ -10,12 +10,13 @@ import { getDetailUserListRequest, deleteUserRequest } from 'src/apis/userList';
     //                    component                    //
 export default function DetailUserList() {
     //                      state                      //
-    const [cookies] = useCookies();
     const { userId } = useParams();
 
-    const [userEmail, setUserEmail] = useState<string>('');
+    const [cookies] = useCookies();
+
     const [nickName, setNickName] = useState<string>('');
     const [joinDate, setJoinDate] = useState<string>('');
+    const [userEmail, setUserEmail] = useState<string>('');
 
     //                    function                     //
     const navigator = useNavigate();
@@ -58,9 +59,7 @@ export default function DetailUserList() {
     };
 
     //                event handler                    //
-    const onListClickHandler = () => {
-        navigator(ADMIN_USER_LIST_ABSOLUTE_PATH);
-    };
+    const onListClickHandler = () => { navigator(ADMIN_USER_LIST_ABSOLUTE_PATH); };
 
     const onDeleteClickHandler = () => {
         if (!userId || !cookies.accessToken) return;
@@ -92,7 +91,6 @@ export default function DetailUserList() {
                             <div className='admin-detail-content'>{userId}</div>
                         </div>
                     </div>
-                    
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>닉네임</div>
@@ -101,7 +99,6 @@ export default function DetailUserList() {
                             <div className='admin-detail-content'>{nickName}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>이메일</div>
@@ -110,7 +107,6 @@ export default function DetailUserList() {
                             <div className='admin-detail-content'>{userEmail}</div>
                         </div>
                     </div>
-
                     <div className='admin-contents-wrap date'>
                         <div className='admin-title-wrap'>
                             <div className='admin-detail-title'>가입날짜</div>
@@ -121,7 +117,6 @@ export default function DetailUserList() {
                     </div>
                 </div>
             </div>
-
             <div className='admin-button-box'>
                     <div className='primary-button list' onClick={onListClickHandler}>목록</div>
                     <div className='error-button delete' onClick={onDeleteClickHandler}>회원삭제</div>

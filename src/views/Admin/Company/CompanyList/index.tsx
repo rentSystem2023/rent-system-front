@@ -62,6 +62,7 @@ export default function CompanyList() {
         onPreSectionClickHandler,
         onNextSectionClickHandler
     } = usePagination<CompanyListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
+    
     const [searchWord, setSearchWord] = useState<string>('');
 
     //                    function                     //
