@@ -31,7 +31,7 @@ export const NickNameCheckRequest = async (requestBody: NickNameCheckRequestDto)
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 이메일 인증 API 함수
 export const emailAuthRequest = async (requestBody: EmailAuthRequestDto) => {
@@ -69,7 +69,7 @@ export const findIdRequest = async (requestBody: FindIdRequestDto) => {
         .then(requestHandler<FindIdResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 비밀번호 찾기 API 함수
 export const findPasswordRequest = async (requestBody: FindPasswordRequestDto) => {
@@ -78,7 +78,7 @@ export const findPasswordRequest = async (requestBody: FindPasswordRequestDto) =
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 비밀번호 찾기 비밀번호 재설정 API 함수
 export const findPwResetRequest = async (userId: string, requestBody: FindPasswordResetRequestDto) => {
@@ -87,4 +87,4 @@ export const findPwResetRequest = async (userId: string, requestBody: FindPasswo
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};

@@ -1,5 +1,3 @@
-import ResponseDto from "src/apis/response.dto";
-
 // description: 업체 등록하기 Resquest Body DTO
 export interface PostCompanyRequestDto {
     companyCode : number | string;

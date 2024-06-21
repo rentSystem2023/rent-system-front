@@ -5,7 +5,6 @@ import ResponseDto from "../response.dto";
 import { EmailAuthRequestDto, PatchReservationRequestDto, PutMyInfoEmailRequestDto, PutMyInfoPwRequestDto } from "./dto/request";
 import { GetMyInfoQnaListResponseDto, GetMyInfoResponseDto, GetMyReservationDetailResponseDto, GetMyReservationListResponseDto, GetSignInUserResponseDto } from "./dto/response";
 
-
 // function: 로그인 유저 정보 불러오기 API 함수
 export const getSignInUserRequest = async (accessToken: string) => {
     const result = await axios

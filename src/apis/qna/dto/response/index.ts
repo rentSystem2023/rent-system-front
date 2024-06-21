@@ -1,7 +1,6 @@
 import ResponseDto from "src/apis/response.dto";
 import { QnaListItem, QnaMyListItem } from "src/types";
 
-
 // description: 문의사항 전체 게시물 리스트 불러오기 Response Body DTO
 export interface GetQnaBoardListResponseDto extends ResponseDto {
     qnaList: QnaListItem[];
