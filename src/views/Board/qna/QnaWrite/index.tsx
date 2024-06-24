@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
 import { useUserStore } from 'src/stores/car.reservation.store';
 import { useNavigate } from 'react-router';
@@ -15,13 +15,15 @@ export default function QnAWrite() {
     //                      state                      //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserRole } = useUserStore();
+
     const [cookies] = useCookies();
+
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [category, setCategory] = useState<string>('문의');
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [publicState, setPublicState] = useState<boolean>(true);
-    const [category, setCategory] = useState<string>('문의');
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     //                    function                     //
     const navigator = useNavigate();
@@ -122,7 +124,6 @@ export default function QnAWrite() {
                     </div>
                     <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
                 </div>
-
                 <div className='qna-write-contents-box'>
                     <textarea ref={contentsRef} className='qna-write-contents-textarea' rows={10} placeholder='내용을 입력해주세요/ 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
                     

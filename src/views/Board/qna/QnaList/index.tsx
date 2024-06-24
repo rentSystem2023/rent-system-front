@@ -1,8 +1,8 @@
-    import React, { ChangeEvent, useEffect, useState } from 'react';
+    import { ChangeEvent, useEffect, useState } from 'react';
     import { useCookies } from 'react-cookie';
     import { useNavigate } from 'react-router-dom';
     import ResponseDto from 'src/apis/response.dto';
-    import { AUTH_SIGN_IN_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_REGIST_ABSOLUTE_PATH} from 'src/constant';
+    import { AUTH_SIGN_IN_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_DETAIL_ABSOLUTE_PATH, QNA_REGIST_ABSOLUTE_PATH} from 'src/constant';
     import { useUserStore } from 'src/stores/car.reservation.store';
     import { QnaListItem } from 'src/types';
     import './style.css';
@@ -38,9 +38,8 @@
             console.log(loginUserId);
             return;
         }
-        // 수정해야 됨
-        navigator(`/rentcar/qna/${receptionNumber}`, { state: { previousPage: 'ALL_QNA_LIST' } });
-    }
+        navigator(QNA_DETAIL_ABSOLUTE_PATH(receptionNumber), { state: { previousPage: 'ALL_QNA_LIST' } });
+    };
 
     //                    Render                       //
     const coverdWriterId = writerId !== '' && (writerId[0] + '*'.repeat(writerId.length - 1));

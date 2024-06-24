@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
 import { useUserStore } from 'src/stores/car.reservation.store';
 import { useCookies } from 'react-cookie';
@@ -17,21 +17,21 @@ export default function QnaUpdate() {
     //                      state                      //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserId, loginUserRole } = useUserStore();
+    const { receptionNumber } = useParams();
 
     const [cookies] = useCookies();
+
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
     const [category, setCategory] = useState<string>(''); 
     const [publicState, setPublicState] = useState<boolean>(true);  
-    const [selectedFile, setSelectedFile] = useState<File | null>(null); 
     const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null); 
     const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null); 
-
-    const { receptionNumber } = useParams();
-    const location = useLocation();
 
     //                    function                     //
     const navigator = useNavigate();
+    const location = useLocation();
 
     const getQnaResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
         const message =
@@ -173,7 +173,6 @@ export default function QnaUpdate() {
                 </div>
                 <div className='primary-button' onClick={onUpdateButtonClickHandler}>올리기</div>
             </div>
-
             <div className='qna-write-contents-box'>
                 <textarea ref={contentsRef} className='qna-write-contents-textarea' rows={10} placeholder='내용을 입력해주세요/ 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
                 <div className='dd'>파일첨부  <input type="file" onChange={onFileChangeHandler} />
