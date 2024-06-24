@@ -161,7 +161,7 @@ export const ADMIN_QNA_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${ADMIN_PATH}/${ADMIN_
 
 // constant : SERVER URL //
 // description : 도메인 URL
-export const SERVER_DOMAIN_URL = 'http://localhost:4000';
+export const SERVER_DOMAIN_URL = process.env.REACT_APP_REST_API_SERVER_DOMAIN;
 
 // description: API URL PATH 
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/rentcar`;
