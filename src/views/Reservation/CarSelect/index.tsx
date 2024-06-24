@@ -193,7 +193,6 @@ export default function CarSelect() {
                     </div>
                     <div className='table-list-page-right' onClick={onNextSectionClickHandler}></div>
                 </div>
-
             </div>           
         </div>    
     );

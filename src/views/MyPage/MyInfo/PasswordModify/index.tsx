@@ -81,7 +81,6 @@ export default function MyInfoPwModify() {
     };
 
     const onPwUpdateButtonClickHandler = () => {
-
         if(!cookies.accessToken || !isPwUpdateActive) return;
 
         if(!password || !passwordCheck) {
