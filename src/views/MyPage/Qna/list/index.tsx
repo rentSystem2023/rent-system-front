@@ -58,7 +58,6 @@ export default function MyInfoQnaList() {
     const {
         viewList,
         pageList,
-        totalPage,
         currentPage,
         totalLength,
         setCurrentPage,

@@ -71,7 +71,6 @@ export default function MyReservationDetail() {
     };
 
     const patchMyReservationResponse = (result: ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
@@ -90,7 +89,6 @@ export default function MyReservationDetail() {
     const onListClickHandler = () => navigator(USER_RESERVATION_ABSOLUTE_PATH);
 
     const onReservationCancelClickHandler = () => {
-
         if (!reservationCode || !cookies.accessToken || reservationState === '예약취소') return;
 
         if (reservationState !== 'reservationComplete') {

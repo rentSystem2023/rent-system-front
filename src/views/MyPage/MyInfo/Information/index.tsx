@@ -74,7 +74,6 @@ export default function MyInfo() {
     const onEmailModifyButtonClickHandler = () => navigator(USER_EMAIL_UPDATE_ABSOLUTE_PATH);
 
     const onDeleteButtonClickHandler = () => {
-
         if (!userId || !cookies.accessToken) return;
 
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
