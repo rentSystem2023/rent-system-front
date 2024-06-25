@@ -122,8 +122,7 @@ export default function MyInfoQnaList() {
                                 {viewList.map((item, index) => <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.receptionNumber} />)}
                             </div>
                         </div>
-                        <div className='table-list-bottom'>
-                            <div style={{ width: '299px' }}></div>
+                        <div className='table-list-bottom myqna'>
                             <div className='table-list-pagenation'>
                                 <div className='table-list-page-left' onClick={onPreSectionClickHandler}></div>
                                 <div className='table-list-page-box'>
